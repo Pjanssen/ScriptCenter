@@ -103,7 +103,6 @@ namespace ScriptCenter.Controls
             }
 
             ListViewItem i = new ListViewItem(args.Data.Name, imgKey);
-            i.SubItems.Add(args.Data.Version.ToString());
             i.SubItems.Add(args.Data.Info.Author);
             i.Tag = args.Data;
             listView1.Items.Add(i);
@@ -211,7 +210,7 @@ namespace ScriptCenter.Controls
             ScriptManifest m = new ScriptManifest();
             m.Id = "nl.threesixty.outliner";
             m.Name = "Outliner";
-            m.Version = new ScriptVersion(2, 0, 96);
+            m.Versions.Add(new ScriptVersion(2, 0, 96));
 
             InstallerConfiguration config = new InstallerConfiguration();
 

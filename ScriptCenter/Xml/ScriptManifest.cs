@@ -9,11 +9,6 @@ namespace ScriptCenter.Xml
     [XmlRoot("script_manifest")]
     public class ScriptManifest
     {
-        [XmlAttribute("manifest_online_uri")]
-        public String ManifestOnlineURI { get; set; }
-        [XmlAttribute("manifest_local_uri")]
-        public String ManifestLocalURI { get; set; }
-
         [XmlElement("id")]
         public String Id { get; set; }
         [XmlElement("name")]
@@ -38,25 +33,19 @@ namespace ScriptCenter.Xml
 
         [XmlElement("info")]
         public ScriptInfo Info { get; set; }
-        [XmlElement("version")]
-        public ScriptVersion Version { get; set; }
-        public List<ScriptVersion> Versions { get; set; }
-        [XmlElement("requirements")]
-        public ScriptRequirements Requirements { get; set; }
 
+        public List<ScriptVersion> Versions { get; set; }
+        
 
         public ScriptManifest()
         {
             this.Info = new ScriptInfo();
-            this.Version = new ScriptVersion();
-            this.Requirements = new ScriptRequirements();
+            this.Versions = new List<ScriptVersion>();
         }
     }
 
     public class ScriptInfo
     {
-        [XmlAttribute("category")]
-        public String Category { get; set; }
         [XmlAttribute("author")]
         public String Author { get; set; }
         [XmlAttribute("description")]
@@ -74,13 +63,9 @@ namespace ScriptCenter.Xml
         [XmlAttribute("revision")]
         public Int32 Revision { get; set; }
 
-        public float ToFloat()
-        {
-            float f = (float)this.Major;
-            f += this.Minor / 100f;
-            f += this.Revision / 10000f;
-            return f;
-        }
+        [XmlElement("requirements")]
+        public ScriptRequirements Requirements { get; set; }
+
         public override string ToString()
         {
             return this.Major.ToString() + "." + this.Minor.ToString() + "." + this.Revision.ToString();
@@ -99,6 +84,8 @@ namespace ScriptCenter.Xml
     {
         [XmlAttribute("min_3dsmax_version")]
         public Int32 Minimal3dsmaxVersion { get; set; }
+        [XmlAttribute("max_3dsmax_version")]
+        public Int32 Maximum3dsmaxVersion { get; set; }
         [XmlAttribute("min_dotnet_version")]
         public float MinimalDotNetVersion { get; set; }
     }
