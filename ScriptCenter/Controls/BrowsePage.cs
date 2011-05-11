@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ScriptCenter.Xml;
 using ScriptCenter.Installer;
+using ScriptCenter.Installer.Actions;
 
 namespace ScriptCenter.Controls
 {

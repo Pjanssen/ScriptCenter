@@ -19,7 +19,7 @@ namespace ScriptCenter.Installer.NewInstallerWizard
 
             ScriptManifest manifest = new ScriptManifest();
             manifest.Name = "Outliner";
-            manifest.Version = new ScriptVersion(2, 5, 21);
+            manifest.Versions.Add(new ScriptVersion(2, 5, 21));
 
             this.ShowPage(new ManifestEditor(manifest));
         }

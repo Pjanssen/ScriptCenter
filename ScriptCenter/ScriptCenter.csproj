@@ -80,11 +80,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Defaults.cs" />
-    <Compile Include="Installer\AssignHotkeyAction.cs" />
-    <Compile Include="Installer\CopyDirAction.cs" />
-    <Compile Include="Installer\CopyFileAction.cs" />
+    <Compile Include="Installer\Actions\AssignHotkeyAction.cs" />
+    <Compile Include="Installer\Actions\CopyDirAction.cs" />
+    <Compile Include="Installer\Actions\CopyFileAction.cs" />
     <Compile Include="Installer\Installer.cs" />
-    <Compile Include="Installer\InstallerAction.cs" />
+    <Compile Include="Installer\Actions\InstallerAction.cs" />
     <Compile Include="Installer\InstallerDialog\InstallerDialog.cs">
       <SubType>Form</SubType>
     </Compile>

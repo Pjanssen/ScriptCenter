@@ -20,7 +20,8 @@ namespace ScriptCenter.Controls
 
             this.manifest = manifest;
             this.scriptManifestBindingSource.DataSource = manifest;
-            this.scriptVersionBindingSource.DataSource = manifest.Version;
+            //TODO fix script version binding.
+            //this.scriptVersionBindingSource.DataSource = manifest.Version;
             this.scriptInfoBindingSource.DataSource = manifest.Info;
         }
     }

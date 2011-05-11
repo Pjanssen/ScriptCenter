@@ -3,10 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenter", "ScriptCenter\ScriptCenter.csproj", "{7D3D9640-E284-413C-8242-BEA3F7AE328C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenterTest", "ScriptCenterTest\ScriptCenterTest.csproj", "{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenterTestForm", "ScriptCenterTest\ScriptCenterTestForm.csproj", "{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFB06F19-F0D4-42AC-8EFB-7015F65D313E}"
 	ProjectSection(SolutionItems) = preProject
+		COPYING.txt = COPYING.txt
 		Ionic.Zip.dll = Ionic.Zip.dll
 		Newtonsoft.Json.Net35.dll = Newtonsoft.Json.Net35.dll
 	EndProjectSection

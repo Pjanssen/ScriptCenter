@@ -58,7 +58,7 @@ namespace ScriptCenter.Controls
             else
             {
                 i.Text = m.Name;
-                i.SubItems.Add(m.Version.ToString());
+                //i.SubItems.Add(m.Version.ToString());
             }
 
             this.listView1.Items.Add(i);

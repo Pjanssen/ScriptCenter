@@ -19,12 +19,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ScriptCenter
+namespace ScriptCenter.Installer.Actions
 {
-    public class Defaults
+    public abstract class InstallerAction
     {
-        public const String RepositoryList = "repositories.xml";
-        public const String InstalledScriptsRepository = "installed_scripts.repository";
-        public const String Repository = "scripts.repository";
+        public abstract Boolean Do(Installer installer);
+        public abstract Boolean Undo(Installer installer);
     }
 }

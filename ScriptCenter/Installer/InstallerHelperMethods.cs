@@ -1,4 +1,20 @@
-﻿using System;
+﻿//  Copyright 2011 P.J. Janssen
+//  This file is part of ScriptCenter.
+
+//  ScriptCenter is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+
+//  ScriptCenter is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+
+//  You should have received a copy of the GNU General Public License
+//  along with ScriptCenter.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,10 +39,11 @@ namespace ScriptCenter.Installer
 
             str = str.Replace(Id_Token, manifest.Id);
             str = str.Replace(Name_Token, manifest.Name);
-            str = str.Replace(Version_Token, manifest.Version.ToString());
-            str = str.Replace(VersionMajor_Token, manifest.Version.Major.ToString());
-            str = str.Replace(VersionMinor_Token, manifest.Version.Minor.ToString());
-            str = str.Replace(VersionRevision_Token, manifest.Version.Revision.ToString());
+            //TODO figure out how to get the right version (could be many in the manifest).
+            //str = str.Replace(Version_Token, manifest.Version.ToString());
+            //str = str.Replace(VersionMajor_Token, manifest.Version.Major.ToString());
+            //str = str.Replace(VersionMinor_Token, manifest.Version.Minor.ToString());
+            //str = str.Replace(VersionRevision_Token, manifest.Version.Revision.ToString());
 
             return str;
         }
