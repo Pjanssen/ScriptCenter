@@ -19,12 +19,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace ScriptCenter.Repository
 {
     [XmlRoot("script_repository_list")]
     public class ScriptRepositoryList
     {
+        [JsonProperty("repositories")]
         [XmlElement("repository")]
         public List<ScriptRepositoryReference> Repositories { get; set; }
 
@@ -36,8 +38,11 @@ namespace ScriptCenter.Repository
 
     public class ScriptRepositoryReference
     {
+        [JsonProperty("name")]
         [XmlAttribute("name")]
         public String Name { get; set; }
+
+        [JsonProperty("uri")]
         [XmlAttribute("uri")]
         public String URI { get; set; }
 
