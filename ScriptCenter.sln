@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenter", "ScriptCenter\ScriptCenter.csproj", "{7D3D9640-E284-413C-8242-BEA3F7AE328C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenterTestForm", "ScriptCenterTest\ScriptCenterTestForm.csproj", "{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFB06F19-F0D4-42AC-8EFB-7015F65D313E}"
 	ProjectSection(SolutionItems) = preProject
 		COPYING.txt = COPYING.txt
@@ -36,16 +34,6 @@ Global
 		{7D3D9640-E284-413C-8242-BEA3F7AE328C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7D3D9640-E284-413C-8242-BEA3F7AE328C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7D3D9640-E284-413C-8242-BEA3F7AE328C}.Release|x86.ActiveCfg = Release|Any CPU
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Debug|x86.ActiveCfg = Debug|x86
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Debug|x86.Build.0 = Debug|x86
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Release|Any CPU.ActiveCfg = Release|x86
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Release|Mixed Platforms.Build.0 = Release|x86
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Release|x86.ActiveCfg = Release|x86
-		{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
