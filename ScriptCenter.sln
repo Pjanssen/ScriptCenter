@@ -7,13 +7,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		COPYING.txt = COPYING.txt
 		Ionic.Zip.dll = Ionic.Zip.dll
+		Local.testsettings = Local.testsettings
 		Newtonsoft.Json.Net35.dll = Newtonsoft.Json.Net35.dll
+		ScriptCenter.vsmdi = ScriptCenter.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenterTest", "ScriptCenterTest\ScriptCenterTest.csproj", "{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
 		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = ScriptCenter.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +42,16 @@ Global
 		{7D3D9640-E284-413C-8242-BEA3F7AE328C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7D3D9640-E284-413C-8242-BEA3F7AE328C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7D3D9640-E284-413C-8242-BEA3F7AE328C}.Release|x86.ActiveCfg = Release|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{78EF160E-6CA7-4CF9-B655-CFF52F5FCC06}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
