@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace ScriptCenter.Xml
+namespace ScriptCenter.Repository
 {
     /// <summary>
     /// The ScriptManifest contains information about a script and its versions.

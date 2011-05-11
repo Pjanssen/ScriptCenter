@@ -20,31 +20,40 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace ScriptCenter.Xml
+namespace ScriptCenter.Repository
 {
-    [XmlRoot("script_repository_list")]
-    public class ScriptRepositoryList
+    [XmlRoot("script_repository")]
+    public class ScriptRepository
     {
-        [XmlElement("repository")]
-        public List<ScriptRepositoryReference> Repositories { get; set; }
+        [XmlElement("name")]
+        public String Name { get; set; }
 
-        public ScriptRepositoryList()
+        [XmlArray("scripts")]
+        [XmlArrayItem("script")]
+        public List<ScriptManifestReference> Scripts { get; set; }
+
+        public ScriptRepository()
         {
-            this.Repositories = new List<ScriptRepositoryReference>();
+            this.Scripts = new List<ScriptManifestReference>();
+        }
+        public ScriptRepository(String name)
+            : this()
+        {
+            this.Name = name;
         }
     }
 
-    public class ScriptRepositoryReference
+    public class ScriptManifestReference
     {
-        [XmlAttribute("name")]
-        public String Name { get; set; }
+        [XmlAttribute("id")]
+        public String Id { get; set; }
         [XmlAttribute("uri")]
         public String URI { get; set; }
 
-        public ScriptRepositoryReference() { }
-        public ScriptRepositoryReference(String name, String uri)
+        public ScriptManifestReference() { }
+        public ScriptManifestReference(String id, String uri)
         {
-            this.Name = name;
+            this.Id = id;
             this.URI = uri;
         }
     }

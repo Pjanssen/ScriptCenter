@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.ComponentModel;
-using ScriptCenter.Xml;
+using ScriptCenter.Repository;
 using System.Windows.Forms;
 using ScriptCenter.Installer.Actions;
 

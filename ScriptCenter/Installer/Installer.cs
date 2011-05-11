@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ScriptCenter.Xml;
+using ScriptCenter.Repository;
 using ScriptCenter.Installer.Actions;
 
 namespace ScriptCenter.Installer

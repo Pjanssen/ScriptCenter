@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ScriptCenter.Xml;
+using ScriptCenter.Repository;
 
 namespace ScriptCenter.Controls
 {

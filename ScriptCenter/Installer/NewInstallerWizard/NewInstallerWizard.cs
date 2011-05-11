@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ScriptCenter.Controls;
-using ScriptCenter.Xml;
+using ScriptCenter.Repository;
 
 namespace ScriptCenter.Installer.NewInstallerWizard
 {

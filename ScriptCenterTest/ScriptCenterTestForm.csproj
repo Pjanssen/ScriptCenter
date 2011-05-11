@@ -8,8 +8,8 @@
     <ProjectGuid>{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScriptCenterTest</RootNamespace>
-    <AssemblyName>ScriptCenterTest</AssemblyName>
+    <RootNamespace>ScriptCenterTestForm</RootNamespace>
+    <AssemblyName>ScriptCenterTestForm</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -66,6 +66,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -22,7 +22,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Net;
 
-namespace ScriptCenter.Xml
+namespace ScriptCenter.Repository
 {
     public class WebFileHandler<T>
     {

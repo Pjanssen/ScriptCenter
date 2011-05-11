@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ScriptCenter.Xml;
+using ScriptCenter.Repository;
 using ScriptCenter.Installer;
 
 namespace ScriptCenterTest

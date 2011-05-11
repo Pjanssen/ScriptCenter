@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using Ionic.Zip;
 using System.IO;
-using ScriptCenter.Xml;
+using ScriptCenter.Repository;
 
 namespace ScriptCenter.Installer.NewInstallerWizard
 {

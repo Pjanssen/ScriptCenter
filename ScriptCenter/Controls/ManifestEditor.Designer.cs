@@ -117,7 +117,7 @@
             // 
             // scriptInfoBindingSource
             // 
-            this.scriptInfoBindingSource.DataSource = typeof(ScriptCenter.Xml.ScriptInfo);
+            this.scriptInfoBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptInfo);
             // 
             // scriptAuthor
             // 
@@ -159,7 +159,7 @@
             // 
             // scriptManifestBindingSource
             // 
-            this.scriptManifestBindingSource.DataSource = typeof(ScriptCenter.Xml.ScriptManifest);
+            this.scriptManifestBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptManifest);
             // 
             // scriptId
             // 
@@ -197,7 +197,7 @@
             // 
             // scriptVersionBindingSource
             // 
-            this.scriptVersionBindingSource.DataSource = typeof(ScriptCenter.Xml.ScriptVersion);
+            this.scriptVersionBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptVersion);
             // 
             // label6
             // 

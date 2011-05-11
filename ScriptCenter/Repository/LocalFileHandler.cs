@@ -23,7 +23,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace ScriptCenter.Xml
+namespace ScriptCenter.Repository
 {
     public class LocalFileHandler<T>
     {
