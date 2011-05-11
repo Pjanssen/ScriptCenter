@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7D3D9640-E284-413C-8242-BEA3F7AE328C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ScriptCenter</RootNamespace>
+    <AssemblyName>ScriptCenter</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="ManagedServices">
+      <HintPath>..\..\..\Program Files\Autodesk\3ds Max 2010\ManagedServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Net35, Version=4.0.2.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Newtonsoft.Json.Net35.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppPaths.cs" />
+    <Compile Include="AppPaths3dsmax.cs" />
+    <Compile Include="AppPathsDebug.cs" />
+    <Compile Include="Controls\BrowsePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BrowsePage.Designer.cs">
+      <DependentUpon>BrowsePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstalledPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InstalledPage.Designer.cs">
+      <DependentUpon>InstalledPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ManifestEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ManifestEditor.Designer.cs">
+      <DependentUpon>ManifestEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextBoxDefaultText.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Wizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Defaults.cs" />
+    <Compile Include="Installer\AssignHotkeyAction.cs" />
+    <Compile Include="Installer\CopyDirAction.cs" />
+    <Compile Include="Installer\CopyFileAction.cs" />
+    <Compile Include="Installer\Installer.cs" />
+    <Compile Include="Installer\InstallerAction.cs" />
+    <Compile Include="Installer\InstallerDialog\InstallerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Installer\InstallerDialog\InstallerDialog.Designer.cs">
+      <DependentUpon>InstallerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Installer\InstallerConfiguration.cs" />
+    <Compile Include="Installer\InstallerHelperMethods.cs" />
+    <Compile Include="Installer\InstallerDialog\StartPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Installer\InstallerDialog\StartPage.Designer.cs">
+      <DependentUpon>StartPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Installer\InstallerDialog\InstallPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Installer\InstallerDialog\InstallPage.Designer.cs">
+      <DependentUpon>InstallPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Installer\InstallerDialog\UninstallPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Installer\InstallerDialog\UninstallPage.Designer.cs">
+      <DependentUpon>UninstallPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Installer\InstallerLog.cs" />
+    <Compile Include="Installer\NewInstallerWizard\InstallerCreator.cs" />
+    <Compile Include="Installer\NewInstallerWizard\InstallerEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Installer\NewInstallerWizard\InstallerEditor.Designer.cs">
+      <DependentUpon>InstallerEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Installer\NewInstallerWizard\NewInstallerWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Installer\NewInstallerWizard\NewInstallerWizard.Designer.cs">
+      <DependentUpon>NewInstallerWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Installer\NewInstallerWizard\InstallerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InstallerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Xml\LocalFileHandler.cs" />
+    <Compile Include="Xml\ScriptManifest.cs" />
+    <Compile Include="Xml\ScriptRepository.cs" />
+    <Compile Include="Xml\ScriptRepositoryList.cs" />
+    <Compile Include="Xml\WebFileHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\ScriptCenter.Xml.ScriptInfo.datasource" />
+    <None Include="Properties\DataSources\ScriptCenter.Xml.ScriptManifest.datasource" />
+    <None Include="Properties\DataSources\ScriptCenter.Xml.ScriptVersion.datasource" />
+    <EmbeddedResource Include="Resources\mzp.run" />
+    <EmbeddedResource Include="Resources\install.ms" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\BrowsePage.resx">
+      <DependentUpon>BrowsePage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InstalledPage.resx">
+      <DependentUpon>InstalledPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ManifestEditor.resx">
+      <DependentUpon>ManifestEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Installer\InstallerDialog\InstallerDialog.resx">
+      <DependentUpon>InstallerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Installer\InstallerDialog\StartPage.resx">
+      <DependentUpon>StartPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Installer\InstallerDialog\InstallPage.resx">
+      <DependentUpon>InstallPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Installer\InstallerDialog\UninstallPage.resx">
+      <DependentUpon>UninstallPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Installer\NewInstallerWizard\InstallerEditor.resx">
+      <DependentUpon>InstallerEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Installer\NewInstallerWizard\InstallerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InstallerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
