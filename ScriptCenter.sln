@@ -5,6 +5,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenter", "ScriptCente
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenterTest", "ScriptCenterTest\ScriptCenterTest.csproj", "{6A74F14F-8FBB-4A05-8D68-D6BC06D8EA22}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFB06F19-F0D4-42AC-8EFB-7015F65D313E}"
+	ProjectSection(SolutionItems) = preProject
+		Ionic.Zip.dll = Ionic.Zip.dll
+		Newtonsoft.Json.Net35.dll = Newtonsoft.Json.Net35.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
