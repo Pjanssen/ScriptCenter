@@ -58,6 +58,8 @@ namespace ScriptCenter.Repository
 
         public ScriptManifest()
         {
+            this.Id = String.Empty;
+            this.Name = String.Empty;
             this.Info = new ScriptInfo();
             this.Versions = new List<ScriptVersion>();
         }

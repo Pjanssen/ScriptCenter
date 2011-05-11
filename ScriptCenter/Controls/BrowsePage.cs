@@ -39,7 +39,7 @@ namespace ScriptCenter.Controls
             this.repositories = new List<ScriptRepository>();
 
             LocalFileHandler<ScriptRepositoryList> h = new LocalFileHandler<ScriptRepositoryList>();
-            this.repositoryList = h.Load(repositoryListFile);
+            this.repositoryList = h.Read(repositoryListFile);
             if (this.repositoryList != null)
             {
                 foreach (ScriptRepositoryReference r in this.repositoryList.Repositories)
@@ -191,10 +191,10 @@ namespace ScriptCenter.Controls
         {
 
             LocalFileHandler<ScriptManifest> handler = new LocalFileHandler<ScriptManifest>();
-            ScriptManifest manifest = handler.Load("C:/temp/scriptcenter/unpacked_installer/outliner.manifest.xml");
+            ScriptManifest manifest = handler.Read("C:/temp/scriptcenter/unpacked_installer/outliner.manifest.xml");
             
             LocalFileHandler<InstallerConfiguration> configHandler = new LocalFileHandler<InstallerConfiguration>();
-            InstallerConfiguration config = configHandler.Load("C:/temp/scriptcenter/unpacked_installer/config.installer.xml");
+            InstallerConfiguration config = configHandler.Read("C:/temp/scriptcenter/unpacked_installer/config.installer.xml");
 
             Installer.Installer installer = new Installer.Installer("C:/temp/scriptcenter/unpacked_installer", manifest, config);
 

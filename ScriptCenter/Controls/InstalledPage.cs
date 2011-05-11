@@ -32,7 +32,7 @@ namespace ScriptCenter.Controls
             this.listView1.ItemChecked += new ItemCheckedEventHandler(listView1_ItemChecked);
 
             LocalFileHandler<ScriptRepository> h = new LocalFileHandler<ScriptRepository>();
-            this.installedScripts = h.Load(installedScriptsFile);
+            this.installedScripts = h.Read(installedScriptsFile);
             if (installedScripts == null)
             {
                 MessageBox.Show("Error loading installed scripts xml:\n" + installedScriptsFile, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -50,7 +50,7 @@ namespace ScriptCenter.Controls
         private void LoadManifest(String address)
         {
             LocalFileHandler<ScriptManifest> h = new LocalFileHandler<ScriptManifest>();
-            ScriptManifest m = h.Load(address);
+            ScriptManifest m = h.Read(address);
 
             ListViewItem i = new ListViewItem();
             if (m == null)

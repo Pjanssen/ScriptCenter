@@ -39,7 +39,7 @@ namespace ScriptCenter.Repository
             
         }
 
-        public T Load(String address)
+        public T Read(String address)
         {
             T data = default(T);
 

@@ -47,9 +47,9 @@ namespace ScriptCenter.Installer
             this.InstallerDirectory = installerDirectory;
 
             LocalFileHandler<ScriptManifest> manifestHandler = new LocalFileHandler<ScriptManifest>();
-            this.Manifest = manifestHandler.Load(manifestFile);
+            this.Manifest = manifestHandler.Read(manifestFile);
             LocalFileHandler<InstallerConfiguration> configHandler = new LocalFileHandler<InstallerConfiguration>();
-            this.Configuration = configHandler.Load(configFile);
+            this.Configuration = configHandler.Read(configFile);
         }
 
         /// <summary>
