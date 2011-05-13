@@ -83,32 +83,34 @@
     <Compile Include="Installer\Actions\AssignHotkeyAction.cs" />
     <Compile Include="Installer\Actions\CopyDirAction.cs" />
     <Compile Include="Installer\Actions\CopyFileAction.cs" />
+    <Compile Include="Installer\Actions\RunMaxscriptAction.cs" />
     <Compile Include="Installer\Installer.cs" />
     <Compile Include="Installer\Actions\InstallerAction.cs" />
-    <Compile Include="Installer\InstallerDialog\InstallerDialog.cs">
+    <Compile Include="Installer\UI\InstallerDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Installer\InstallerDialog\InstallerDialog.Designer.cs">
+    <Compile Include="Installer\UI\InstallerDialog.Designer.cs">
       <DependentUpon>InstallerDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Installer\InstallerConfiguration.cs" />
+    <Compile Include="Installer\UI\InstallerUIConfiguration.cs" />
     <Compile Include="Installer\InstallerHelperMethods.cs" />
-    <Compile Include="Installer\InstallerDialog\StartPage.cs">
+    <Compile Include="Installer\UI\StartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Installer\InstallerDialog\StartPage.Designer.cs">
+    <Compile Include="Installer\UI\StartPage.Designer.cs">
       <DependentUpon>StartPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Installer\InstallerDialog\InstallPage.cs">
+    <Compile Include="Installer\UI\InstallPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Installer\InstallerDialog\InstallPage.Designer.cs">
+    <Compile Include="Installer\UI\InstallPage.Designer.cs">
       <DependentUpon>InstallPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Installer\InstallerDialog\UninstallPage.cs">
+    <Compile Include="Installer\UI\UninstallPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Installer\InstallerDialog\UninstallPage.Designer.cs">
+    <Compile Include="Installer\UI\UninstallPage.Designer.cs">
       <DependentUpon>UninstallPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Installer\InstallerLog.cs" />
@@ -160,16 +162,16 @@
     <EmbeddedResource Include="Controls\ManifestEditor.resx">
       <DependentUpon>ManifestEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\InstallerDialog\InstallerDialog.resx">
+    <EmbeddedResource Include="Installer\UI\InstallerDialog.resx">
       <DependentUpon>InstallerDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\InstallerDialog\StartPage.resx">
+    <EmbeddedResource Include="Installer\UI\StartPage.resx">
       <DependentUpon>StartPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\InstallerDialog\InstallPage.resx">
+    <EmbeddedResource Include="Installer\UI\InstallPage.resx">
       <DependentUpon>InstallPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\InstallerDialog\UninstallPage.resx">
+    <EmbeddedResource Include="Installer\UI\UninstallPage.resx">
       <DependentUpon>UninstallPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Installer\NewInstallerWizard\InstallerEditor.resx">

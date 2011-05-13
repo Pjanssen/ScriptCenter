@@ -1,4 +1,4 @@
-﻿namespace ScriptCenter.Installer
+﻿namespace ScriptCenter.Installer.UI
 {
     partial class InstallPage
     {

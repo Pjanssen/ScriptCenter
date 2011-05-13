@@ -23,7 +23,7 @@ namespace ScriptCenter
 {
     public class Defaults
     {
-        public const String RepositoryList = "repositories.xml";
+        public const String RepositoryList = "repositories.json";
         public const String InstalledScriptsRepository = "installed_scripts.repository";
         public const String Repository = "scripts.repository";
     }

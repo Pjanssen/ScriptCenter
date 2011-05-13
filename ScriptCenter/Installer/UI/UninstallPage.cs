@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ScriptCenter.Controls;
 
-namespace ScriptCenter.Installer
+namespace ScriptCenter.Installer.UI
 {
     public partial class UninstallPage : WizardPage
     {

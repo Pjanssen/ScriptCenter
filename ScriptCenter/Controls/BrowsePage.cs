@@ -26,12 +26,7 @@ namespace ScriptCenter.Controls
             if (this.DesignMode)
                 return;
 
-            this.comboBox1.BeginUpdate();
-
-            comboBox1.Format += new ListControlConvertEventHandler(comboBox1_Format);
-            comboBox1.KeyUp += new KeyEventHandler(comboBox1_KeyUp);
-            comboBox1.SelectedIndexChanged += new EventHandler(comboBox1_SelectedIndexChanged);
-            comboBox1.FormatString = "{0} - {1}";
+            this.repositoryTree.BeginUpdate();
 
             listView1.SelectedIndexChanged += new EventHandler(listView1_SelectedIndexChanged);
             listView1.ItemChecked += new ItemCheckedEventHandler(listView1_ItemChecked);
@@ -44,13 +39,11 @@ namespace ScriptCenter.Controls
             {
                 foreach (ScriptRepositoryReference r in this.repositoryList.Repositories)
                 {
-                    this.comboBox1.Items.Add(r);
+                    this.repositoryTree.Nodes.Add(String.Format("{0} - {1}", r.Name, r.URI));
                 }
-
-                this.comboBox1.SelectedIndex = 0;
             }
 
-            this.comboBox1.EndUpdate();
+            this.repositoryTree.EndUpdate();
         }
 
 
@@ -73,7 +66,9 @@ namespace ScriptCenter.Controls
         void manifest_handler_LoadCompleted(object sender, LoadCompleteEventArgs<ScriptManifest> args)
         {
             String id = args.Data.Id;
-            String imgKey = (args.Data.Info.IconURI == null) ? "default" : id;
+            
+            //TODO fix icon uri
+            String imgKey = (args.Data.Info.Description == null) ? "default" : id;
 
             if (imgKey != "default" && !this.imageList1.Images.ContainsKey(imgKey))
             {
@@ -148,7 +143,7 @@ namespace ScriptCenter.Controls
             if ((e.KeyData & Keys.Enter) == Keys.Enter)
             {
                 ScriptRepositoryReference rep = new ScriptRepositoryReference();
-                rep.URI = this.comboBox1.Text;
+                //rep.URI = this.comboBox1.Text;
                 this.repositoryList.Repositories.Add(rep);
                 LocalFileHandler<ScriptRepositoryList> h = new LocalFileHandler<ScriptRepositoryList>();
                 h.Write(this.repositoryListFile, this.repositoryList);
@@ -164,7 +159,7 @@ namespace ScriptCenter.Controls
             if (e.ListItem is ScriptRepositoryReference)
             {
                 ScriptRepositoryReference r = (ScriptRepositoryReference)e.ListItem;
-                e.Value = String.Format(comboBox1.FormatString, r.Name, r.URI);
+                //e.Value = String.Format(comboBox1.FormatString, r.Name, r.URI);
             }
             else
                 e.Value = e.ListItem.ToString();
@@ -173,9 +168,9 @@ namespace ScriptCenter.Controls
         void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             listView1.Items.Clear();
-            object selItem = this.comboBox1.SelectedItem;
-            if (selItem is ScriptRepositoryReference)
-                LoadRepository(((ScriptRepositoryReference)selItem).URI);
+            //object selItem = this.comboBox1.SelectedItem;
+            //if (selItem is ScriptRepositoryReference)
+             //   LoadRepository(((ScriptRepositoryReference)selItem).URI);
         }
 
         void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -198,7 +193,7 @@ namespace ScriptCenter.Controls
 
             Installer.Installer installer = new Installer.Installer("C:/temp/scriptcenter/unpacked_installer", manifest, config);
 
-            ScriptCenter.Installer.InstallerDialog d = new ScriptCenter.Installer.InstallerDialog();
+            ScriptCenter.Installer.UI.InstallerDialog d = new ScriptCenter.Installer.UI.InstallerDialog();
             d.Show(installer);
         }
 

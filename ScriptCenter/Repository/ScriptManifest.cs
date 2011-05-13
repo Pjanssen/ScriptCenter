@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace ScriptCenter.Repository
 {
@@ -28,12 +29,19 @@ namespace ScriptCenter.Repository
     [XmlRoot("script_manifest")]
     public class ScriptManifest
     {
+        [JsonProperty("id")]
         [XmlElement("id")]
         public String Id { get; set; }
+
+        [JsonProperty("name")]
         [XmlElement("name")]
         public String Name { get; set; }
+
+        [JsonProperty("icon_small")]
         [XmlElement("icon_small")]
         public String IconSmallRawData { get; set; }
+        
+        [JsonIgnore()]
         [XmlIgnore()]
         public System.Drawing.Image IconSmall
         {
@@ -50,9 +58,11 @@ namespace ScriptCenter.Repository
             }
         }
 
+        [JsonProperty("info")]
         [XmlElement("info")]
         public ScriptInfo Info { get; set; }
 
+        [JsonProperty("versions")]
         public List<ScriptVersion> Versions { get; set; }
         
 
@@ -67,33 +77,63 @@ namespace ScriptCenter.Repository
 
     public class ScriptInfo
     {
+        [JsonProperty("author")]
         [XmlAttribute("author")]
         public String Author { get; set; }
+
+        [JsonProperty("description")]
         [XmlAttribute("description")]
         public String Description { get; set; }
-        [XmlAttribute("icon_uri")]
-        public String IconURI { get; set; }
     }
 
     public class ScriptVersion
     {
-        [XmlAttribute("major")]
+        [JsonIgnore()]
+        [XmlIgnore()]
         public Int32 Major { get; set; }
-        [XmlAttribute("minor")]
+
+        [JsonIgnore()]
+        [XmlIgnore()]
         public Int32 Minor { get; set; }
-        [XmlAttribute("revision")]
+
+        [JsonIgnore()]
+        [XmlIgnore()]
         public Int32 Revision { get; set; }
 
+        [JsonProperty("requirements")]
         [XmlElement("requirements")]
         public ScriptRequirements Requirements { get; set; }
 
-        public override string ToString()
+        [JsonProperty("version")]
+        [XmlAttribute("version")]
+        public String Version
         {
-            return this.Major.ToString() + "." + this.Minor.ToString() + "." + this.Revision.ToString();
+            get { return this.Major.ToString() + "." + this.Minor.ToString() + "." + this.Revision.ToString(); }
+            set
+            {
+                try
+                {
+                    Int32 a = value.IndexOf('.');
+                    Int32 b = value.LastIndexOf('.');
+                    this.Major = Int32.Parse(value.Substring(0, a));
+                    this.Minor = Int32.Parse(value.Substring(a + 1, b - (a + 1)));
+                    this.Revision = Int32.Parse(value.Substring(b + 1));
+                }
+                catch (Exception e)
+                {
+                    this.Major = 0;
+                    this.Minor = 0;
+                    this.Revision = 0;
+                    Console.WriteLine(e.Message);
+                }
+            }
         }
 
-        public ScriptVersion() { }
-        public ScriptVersion(Int32 major, Int32 minor, Int32 revision)
+        public ScriptVersion() 
+        {
+            this.Requirements = new ScriptRequirements();
+        }
+        public ScriptVersion(Int32 major, Int32 minor, Int32 revision) : this()
         {
             this.Major = major;
             this.Minor = minor;

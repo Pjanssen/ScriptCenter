@@ -47,7 +47,7 @@ public class AssignHotkeyAction : InstallerAction
         {
             try
             {
-                this.Keys = (Keys)Enum.Parse(typeof(Keys), this.KeysString);
+                this.Keys = (Keys)Enum.Parse(typeof(Keys), value);
             }
             catch
             {

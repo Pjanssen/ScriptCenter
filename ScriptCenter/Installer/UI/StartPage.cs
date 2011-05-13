@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using ScriptCenter.Controls;
 using ScriptCenter.Repository;
 
-namespace ScriptCenter.Installer
+namespace ScriptCenter.Installer.UI
 {
     public partial class StartPage : WizardPage
     {
@@ -27,8 +27,9 @@ namespace ScriptCenter.Installer
                 ScriptManifest manifest = ((InstallerDialog)this.Wizard).Installer.Manifest;
                 InstallerConfiguration config = ((InstallerDialog)this.Wizard).Installer.Configuration;
 
-                this.titleTxt.Text = InstallerHelperMethods.ReplaceTokens(config.StartPageUI.Title, manifest);
-                this.mainTxt.Text = InstallerHelperMethods.ReplaceTokens(config.StartPageUI.Text, manifest);
+                //TODO fix
+                //this.titleTxt.Text = InstallerHelperMethods.ReplaceTokens(config.StartPageUI.Title, manifest);
+                //this.mainTxt.Text = InstallerHelperMethods.ReplaceTokens(config.StartPageUI.Text, manifest);
             }
         }
 
