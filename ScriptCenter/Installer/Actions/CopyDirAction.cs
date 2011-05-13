@@ -22,18 +22,32 @@ using System.Xml.Serialization;
 using System.IO;
 using System.ComponentModel;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace ScriptCenter.Installer.Actions
 {
+/// <summary>
+/// Copies an entire directory, including all files and subdirectories.
+/// </summary>
 public class CopyDirAction : InstallerAction
 {
+    /// <summary>
+    /// The source directory to copy. Relative to the installer path.
+    /// </summary>
+    [JsonProperty("source")]
     [XmlAttribute("source")]
     public String Source { get; set; }
 
+    /// <summary>
+    /// The target directory to copy to.
+    /// </summary>
+    [JsonProperty("target")]
     [XmlAttribute("target")]
     public AppPaths.Directory Target { get; set; }
 
+    /// <summary>
+    /// Create a directory with the script id in which to place the source directory.
+    /// Default value: true.
+    /// </summary>
     [XmlAttribute("use_script_id")]
     [DefaultValue(true)]
     public Boolean UseScriptId { get; set; }
