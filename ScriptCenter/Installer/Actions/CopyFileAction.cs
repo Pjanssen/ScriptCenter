@@ -21,21 +21,52 @@ using System.Text;
 using System.Xml.Serialization;
 using System.ComponentModel;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace ScriptCenter.Installer.Actions
 {
+    /// <summary>
+    /// Copies a single file to the specified target directory.
+    /// </summary>
     public class CopyFileAction : InstallerAction
     {
+        public CopyFileAction()
+        {
+            InstallerHelperMethods.SetDefaultValues(this);
+        }
+        public CopyFileAction(String source, AppPaths.Directory target) : this()
+        {
+            this.Source = source;
+            this.Target = target;
+        }
+
+
+        /// <summary>
+        /// The source directory to copy. Relative to the installer path.
+        /// </summary>
+        [JsonProperty("source")]
         [XmlAttribute("source")]
         public String Source { get; set; }
 
+        /// <summary>
+        /// The target directory to copy to.
+        /// </summary>
+        [JsonProperty("target")]
         [XmlAttribute("target")]
         public AppPaths.Directory Target { get; set; }
 
+        /// <summary>
+        /// Create a directory with the script id in which to place the source directory.
+        /// Default value: true.
+        /// </summary>
         [XmlAttribute("use_script_id")]
         [DefaultValue(true)]
         public Boolean UseScriptId { get; set; }
 
+
+        /// <summary>
+        /// Copies the source file to the target directory.
+        /// </summary>
         public override bool Do(Installer installer)
         {
             try
@@ -66,8 +97,12 @@ namespace ScriptCenter.Installer.Actions
             return true;
         }
 
+        /// <summary>
+        /// Removes the file from the target directory.
+        /// </summary>
         public override bool Undo(Installer installer)
         {
+            //TODO: implement
             throw new NotImplementedException();
         }
     }

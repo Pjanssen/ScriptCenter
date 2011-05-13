@@ -21,6 +21,9 @@ using System.Text;
 
 namespace ScriptCenter.Installer.Actions
 {
+    /// <summary>
+    /// Abstract base class for installer actions.
+    /// </summary>
     public abstract class InstallerAction
     {
         public abstract Boolean Do(Installer installer);

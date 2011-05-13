@@ -29,6 +29,13 @@ namespace ScriptCenter.Installer.Actions
     /// </summary>
     public class RunMaxscriptAction : InstallerAction
     {
+        public RunMaxscriptAction() { }
+        public RunMaxscriptAction(String source)
+        {
+            this.Source = source;
+        }
+
+
         /// <summary>
         /// The path to the maxscript file to execute. Relative to installer path.
         /// </summary>
@@ -36,7 +43,9 @@ namespace ScriptCenter.Installer.Actions
         [XmlAttribute("source")]
         public String Source { get; set; }
 
-
+        /// <summary>
+        /// Reads and executes the maxscript file.
+        /// </summary>
         public override bool Do(Installer installer)
         {
             try

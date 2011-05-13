@@ -26,10 +26,22 @@ using Newtonsoft.Json;
 namespace ScriptCenter.Installer.Actions
 {
 /// <summary>
-/// Copies an entire directory, including all files and subdirectories.
+/// Copies the contents of a directory to the specified target directory, including all files and subdirectories.
 /// </summary>
 public class CopyDirAction : InstallerAction
 {
+    public CopyDirAction()
+    {
+        InstallerHelperMethods.SetDefaultValues(this);
+    }
+    public CopyDirAction(String source, AppPaths.Directory target)
+        : this()
+    {
+        this.Source = source;
+        this.Target = target;
+    }
+
+
     /// <summary>
     /// The source directory to copy. Relative to the installer path.
     /// </summary>
@@ -52,17 +64,10 @@ public class CopyDirAction : InstallerAction
     [DefaultValue(true)]
     public Boolean UseScriptId { get; set; }
 
-    public CopyDirAction() 
-    {
-        InstallerHelperMethods.SetDefaultValues(this);
-    }
-    public CopyDirAction(String source, AppPaths.Directory target) : this()
-    {
-        this.Source = source;
-        this.Target = target;
-    }
 
-
+    /// <summary>
+    /// Copies the directory and all subdirectories.
+    /// </summary>
     public override bool Do(Installer installer)
     {
         try
@@ -97,11 +102,15 @@ public class CopyDirAction : InstallerAction
         return true;
     }
 
+    /// <summary>
+    /// Removes the directory from the target directory.
+    /// </summary>
     public override bool Undo(Installer installer)
     {
         try
         {
             String scriptPath = AppPaths.GetApplicationPaths().GetPath(AppPaths.Directory.Scripts);
+            //TODO add check for UseScriptId
             String targetPath = scriptPath + "/" + installer.Manifest.Id;
 
             if (Directory.Exists(targetPath))
