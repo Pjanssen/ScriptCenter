@@ -24,46 +24,77 @@ using Newtonsoft.Json;
 
 namespace ScriptCenter.Installer.Actions
 {
+/// <summary>
+/// Assigns a hotkey to a macscript.
+/// </summary>
 public class AssignHotkeyAction : InstallerAction
 {
-    [XmlAttribute("key")]
-    [JsonProperty(PropertyName="key")]
-    public String KeysString { get; set; }
-
-    [XmlIgnore()]
-    [JsonIgnore()]
-    public Keys Keys
-    {
-        get
-        {
-            try
-            {
-                return (Keys)Enum.Parse(typeof(Keys), this.KeysString);
-            }
-            catch
-            {
-                return Keys.None;
-            }
-        }
-        set
-        {
-            this.KeysString = value.ToString();
-        }
-    }
-
     public AssignHotkeyAction() { }
     public AssignHotkeyAction(Keys keys)
     {
         this.Keys = keys;
     }
 
+    /// <summary>
+    /// String representation of the 'Keys' property.
+    /// </summary>
+    [JsonProperty(PropertyName = "key")]
+    [XmlAttribute("key")]
+    public String KeysString 
+    {
+        get { return this.Keys.ToString(); }
+        set
+        {
+            try
+            {
+                this.Keys = (Keys)Enum.Parse(typeof(Keys), this.KeysString);
+            }
+            catch
+            {
+                this.Keys = Keys.None;
+            }
+        }
+    }
+
+    /// <summary>
+    /// The hotkey to assign.
+    /// </summary>
+    [JsonIgnore()]
+    [XmlIgnore()]
+    public Keys Keys { get; set; }
+
+
+    /// <summary>
+    /// The name of the macroscript.
+    /// </summary>
+    [JsonProperty("macro_name")]
+    [XmlAttribute("macro_name")]
+    public String MacroName { get; set; }
+
+    /// <summary>
+    /// The category of the macroscript.
+    /// </summary>
+    [JsonProperty("macro_category")]
+    [XmlAttribute("macro_category")]
+    public String MacroCategory { get; set; }
+
+
+
+    /// <summary>
+    /// Assigns the hotkey to the macroscript.
+    /// </summary>
     public override bool Do(Installer installer)
     {
+        //TODO: implement
         return true;
     }
 
+    /// <summary>
+    /// Removes the hotkey assignment.
+    /// </summary>
     public override bool Undo(Installer installer)
     {
+        //TODO: implement
         return true;
     }
 }
