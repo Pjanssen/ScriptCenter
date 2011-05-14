@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InstallerConfigurationTest.cs" />
+    <Compile Include="KeyboardActionsFileTest.cs" />
     <Compile Include="LocalFileHandlerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptManifestTest.cs" />
@@ -71,6 +72,9 @@
       <Project>{7D3D9640-E284-413C-8242-BEA3F7AE328C}</Project>
       <Name>ScriptCenter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="test_files\ame-light.kbd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

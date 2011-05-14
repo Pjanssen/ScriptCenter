@@ -23,9 +23,13 @@ using System.ComponentModel;
 using ScriptCenter.Repository;
 using System.Windows.Forms;
 using ScriptCenter.Installer.Actions;
+using Newtonsoft.Json;
 
 namespace ScriptCenter.Installer
 {
+    /// <summary>
+    /// Container for installer actions.
+    /// </summary>
     [XmlRoot("installer_configuration")]
     public class InstallerConfiguration
     {
@@ -34,6 +38,7 @@ namespace ScriptCenter.Installer
             this.InstallerActions = new List<InstallerAction>();
         }
 
+        [JsonProperty("installer_actions")]
         [XmlArray("installer_actions")]
         [XmlArrayItem("copy_dir", typeof(CopyDirAction))]
         [XmlArrayItem("assign_hotkey", typeof(AssignHotkeyAction))]

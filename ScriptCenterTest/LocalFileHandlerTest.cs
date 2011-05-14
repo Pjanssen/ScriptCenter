@@ -4,8 +4,6 @@ using System;
 
 namespace ScriptCenterTest
 {
-    
-    
     /// <summary>
     ///This is a test class for LocalFileHandlerTest and is intended
     ///to contain all LocalFileHandlerTest Unit Tests
@@ -13,60 +11,9 @@ namespace ScriptCenterTest
     [TestClass()]
     public class LocalFileHandlerTest
     {
-
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
+        private String getOutputDirectory()
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        #region Additional test attributes
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-        #endregion
-
-        private String GetTestOutputDir()
-        {
-            System.IO.FileInfo assemblyFile = new System.IO.FileInfo(System.Reflection.Assembly.GetCallingAssembly().Location);
-            return assemblyFile.DirectoryName + "/test_output/";
+            return System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\ScriptCenterTest\\test_output\\";
         }
 
         private class SimpleObject
@@ -86,8 +33,8 @@ namespace ScriptCenterTest
         public void WriteTest()
         {
             LocalFileHandler<SimpleObject> handler = new LocalFileHandler<SimpleObject>();
-            
-            Assert.IsTrue(handler.Write(this.GetTestOutputDir() + "/simple_object.json", this.obj));
+
+            Assert.IsTrue(handler.Write(this.getOutputDirectory() + "/simple_object.json", this.obj));
         }
 
         
@@ -108,7 +55,7 @@ namespace ScriptCenterTest
 
             // Read and compare manifest
             LocalFileHandler<SimpleObject> handler = new LocalFileHandler<SimpleObject>();
-            SimpleObject readObj = handler.Read(this.GetTestOutputDir() + "/simple_object.json");
+            SimpleObject readObj = handler.Read(this.getOutputDirectory() + "/simple_object.json");
             Assert.IsNotNull(readObj);
             Assert.AreEqual(this.obj.property, readObj.property);
         }
@@ -123,7 +70,7 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void ReadIncorrectFileTest()
         {
-            String file = this.GetTestOutputDir() + "incorrect_file.json";
+            String file = this.getOutputDirectory() + "incorrect_file.json";
             //Write syntactically incorrect file.
             System.IO.StreamWriter w = new System.IO.StreamWriter(file);
             w.Write("{\"incomplete fi..");

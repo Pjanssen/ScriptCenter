@@ -83,6 +83,7 @@
     <Compile Include="Installer\Actions\AssignHotkeyAction.cs" />
     <Compile Include="Installer\Actions\CopyDirAction.cs" />
     <Compile Include="Installer\Actions\CopyFileAction.cs" />
+    <Compile Include="Installer\Actions\KeyboardActionsFile.cs" />
     <Compile Include="Installer\Actions\RunMaxscriptAction.cs" />
     <Compile Include="Installer\Installer.cs" />
     <Compile Include="Installer\Actions\InstallerAction.cs" />

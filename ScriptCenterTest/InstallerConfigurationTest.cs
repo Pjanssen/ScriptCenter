@@ -13,60 +13,9 @@ namespace ScriptCenterTest
     [TestClass()]
     public class InstallerConfigurationTest
     {
-
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
+        private String getOutputDirectory()
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        #region Additional test attributes
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-        #endregion
-
-        private String GetTestOutputDir()
-        {
-            System.IO.FileInfo assemblyFile = new System.IO.FileInfo(System.Reflection.Assembly.GetCallingAssembly().Location);
-            return assemblyFile.DirectoryName + "/test_output/";
+            return System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\ScriptCenterTest\\test_output\\";
         }
 
         private InstallerConfiguration config;
@@ -84,7 +33,7 @@ namespace ScriptCenterTest
         public void WriteTest()
         {
             LocalFileHandler<InstallerConfiguration> handler = new LocalFileHandler<InstallerConfiguration>();
-            Assert.IsTrue(handler.Write(this.GetTestOutputDir() + "/installer.config.json", this.config));
+            Assert.IsTrue(handler.Write(this.getOutputDirectory() + "/installer.config.json", this.config));
         }
 
         [TestMethod()]
@@ -95,7 +44,7 @@ namespace ScriptCenterTest
 
             // Read and compare manifest
             LocalFileHandler<InstallerConfiguration> handler = new LocalFileHandler<InstallerConfiguration>();
-            InstallerConfiguration readConfig = handler.Read(this.GetTestOutputDir() + "/installer.config.json");
+            InstallerConfiguration readConfig = handler.Read(this.getOutputDirectory() + "/installer.config.json");
             Assert.IsNotNull(readConfig);
             Assert.AreEqual(config.InstallerActions.Count, readConfig.InstallerActions.Count);
             Assert.AreEqual(((CopyFileAction)config.InstallerActions[0]).Source, ((CopyFileAction)readConfig.InstallerActions[0]).Source);

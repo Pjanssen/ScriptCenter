@@ -78,14 +78,23 @@ public class AssignHotkeyAction : InstallerAction
     [XmlAttribute("macro_category")]
     public String MacroCategory { get; set; }
 
-
+    //TODO: test in 3dsmax.
 
     /// <summary>
     /// Assigns the hotkey to the macroscript.
     /// </summary>
     public override bool Do(Installer installer)
     {
-        //TODO: implement
+        KeyboardActionsFile kbd = new KeyboardActionsFile(KeyboardActionsFile.MaxGetActiveKbdFile());
+        if (!kbd.Read())
+            return false;
+        if (kbd.AddAction(this.MacroName, this.MacroCategory, this.Keys))
+        {
+            if (!kbd.Write())
+                return false;
+
+            kbd.MaxLoadKbdFile();
+        }
         return true;
     }
 
@@ -94,7 +103,16 @@ public class AssignHotkeyAction : InstallerAction
     /// </summary>
     public override bool Undo(Installer installer)
     {
-        //TODO: implement
+        KeyboardActionsFile kbd = new KeyboardActionsFile(KeyboardActionsFile.MaxGetActiveKbdFile());
+        if (!kbd.Read())
+            return false;
+
+        kbd.RemoveAction(this.MacroName, this.MacroCategory);
+
+        if (!kbd.Write())
+            return false;
+
+        kbd.MaxLoadKbdFile();
         return true;
     }
 }
