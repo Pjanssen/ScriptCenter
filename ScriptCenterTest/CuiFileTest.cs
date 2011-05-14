@@ -6,11 +6,11 @@ using System.IO;
 namespace ScriptCenterTest
 {
     /// <summary>
-    ///This is a test class for KeyboardActionsFileTest and is intended
-    ///to contain all KeyboardActionsFileTest Unit Tests
+    ///This is a test class for CuiFileTest and is intended
+    ///to contain all CuiFileTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class KeyboardActionsFileTest
+    public class CuiFileTest
     {
         private String getTestFilesDirectory()
         {
@@ -27,25 +27,25 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void ReadTest()
         {
-            String kbdFile = getTestFilesDirectory() + "ame-light.kbd";
-            Assert.IsTrue(System.IO.File.Exists(kbdFile));
-            KeyboardActionsFile kbd = new KeyboardActionsFile(kbdFile);
-            Assert.IsTrue(kbd.Read());
+            String cuiFile = this.getTestFilesDirectory() + "MaxStartUI.cui";
+            Assert.IsTrue(System.IO.File.Exists(cuiFile));
+            CuiFile cui = new CuiFile(cuiFile);
+            Assert.IsTrue(cui.Read());
         }
 
         [TestMethod()]
         public void WriteTest()
         {
-            String kbdFile = getTestFilesDirectory() + "ame-light.kbd";
-            Assert.IsTrue(System.IO.File.Exists(kbdFile));
-            KeyboardActionsFile kbd = new KeyboardActionsFile(kbdFile);
-            Assert.IsTrue(kbd.Read());
+            String cuiFile = getTestFilesDirectory() + "MaxStartUI.cui";
+            Assert.IsTrue(System.IO.File.Exists(cuiFile));
+            CuiFile cui = new CuiFile(cuiFile);
+            Assert.IsTrue(cui.Read());
 
-            kbd.File = getOutputDirectory() + "test.kbd";
-            Assert.IsTrue(kbd.Write());
+            cui.File = getOutputDirectory() + "test.cui";
+            Assert.IsTrue(cui.Write());
 
             Boolean compare_result = true;
-            using (StreamReader r_orig = new StreamReader(kbdFile), r_new = new StreamReader(kbd.File))
+            using (StreamReader r_orig = new StreamReader(cuiFile), r_new = new StreamReader(cui.File))
             {
                 while (!r_orig.EndOfStream)
                 {

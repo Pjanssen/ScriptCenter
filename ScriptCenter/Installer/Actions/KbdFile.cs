@@ -15,9 +15,9 @@ internal struct KeyboardAction
     public Int32 TableId;
     public Int32 PersistentId;
 }
-internal class KeyboardActionsFile
+internal class KbdFile
 {
-    public KeyboardActionsFile(String file)
+    public KbdFile(String file)
     {
         this.File = file;
         this.Actions = new List<KeyboardAction>();
@@ -220,36 +220,19 @@ internal class KeyboardActionsFile
                     if (action.TableId != prevTableId)
                         table_index = 0;
 
-                    //Write index.
-                    w.Write(table_index);
-                    w.Write('=');
-
-                    //Write modifier keycode.
-                    w.Write(keysToModKeycode(action.Keys));
-                    w.Write(' ');
-                    
-                    //Write keycode.
-                    w.Write((Int32)(action.Keys & Keys.KeyCode));
-                    w.Write(' ');
-
-                    //Write persistent id or macro name and category.
+                    Int32 modKeyCode = keysToModKeycode(action.Keys);
+                    Int32 keyCode = (Int32)(action.Keys & Keys.KeyCode);
+                    String macro;
                     if (action.PersistentId == 0 && !action.MacroName.Equals(String.Empty))
                     {
-                        w.Write(action.MacroName);
+                        macro = action.MacroName;
                         if (!action.MacroCategory.Equals(String.Empty))
-                        {
-                            w.Write('`');
-                            w.Write(action.MacroCategory);
-                        }
+                            macro += "`" + action.MacroCategory;
                     }
                     else
-                        w.Write(action.PersistentId);
+                        macro = action.PersistentId.ToString();
 
-                    w.Write(' ');
-
-                    //Write table id.
-                    w.Write(action.TableId);
-                    w.Write(Environment.NewLine);
+                    w.WriteLine("{0}={1} {2} {3} {4}", table_index, modKeyCode, keyCode, macro, action.TableId);
                     
                     table_index++;
                     prevTableId = action.TableId;

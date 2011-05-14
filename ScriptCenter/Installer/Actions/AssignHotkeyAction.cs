@@ -85,7 +85,7 @@ public class AssignHotkeyAction : InstallerAction
     /// </summary>
     public override bool Do(Installer installer)
     {
-        KeyboardActionsFile kbd = new KeyboardActionsFile(KeyboardActionsFile.MaxGetActiveKbdFile());
+        KbdFile kbd = new KbdFile(KbdFile.MaxGetActiveKbdFile());
         if (!kbd.Read())
             return false;
         if (kbd.AddAction(this.MacroName, this.MacroCategory, this.Keys))
@@ -103,7 +103,7 @@ public class AssignHotkeyAction : InstallerAction
     /// </summary>
     public override bool Undo(Installer installer)
     {
-        KeyboardActionsFile kbd = new KeyboardActionsFile(KeyboardActionsFile.MaxGetActiveKbdFile());
+        KbdFile kbd = new KbdFile(KbdFile.MaxGetActiveKbdFile());
         if (!kbd.Read())
             return false;
 
