@@ -42,12 +42,6 @@ namespace ScriptCenterTest
             Assert.IsTrue(cui.Read());
 
             cui.File = getOutputDirectory() + "test.cui";
-            cui.RemoveToolbarButton("outlinerFreezeSelectionToggle", "Outliner Workflow Tools");
-            //cui.AddToolbar("Test");
-            //cui.AddToolbarButton("Dev Stuff", "toggleOutliner", "Outliner", "Open/Close Outliner");
-            //cui.AddToolbarSeparator("Test");
-            //cui.AddToolbarButton("Test", "createNewLayer", "Outliner Workflow Tools", "Create New Layer");
-            //cui.AddToolbarSeparator("Test");
             Assert.IsTrue(cui.Write());
 
             Boolean compare_result = true;
