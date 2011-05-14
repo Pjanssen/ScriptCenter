@@ -84,6 +84,8 @@
     <Compile Include="Installer\Actions\CopyDirAction.cs" />
     <Compile Include="Installer\Actions\CopyFileAction.cs" />
     <Compile Include="Installer\Actions\CreateToolbarAction.cs" />
+    <Compile Include="Installer\Actions\CreateToolbarButtonAction.cs" />
+    <Compile Include="Installer\Actions\CreateToolbarSeparatorAction.cs" />
     <Compile Include="Installer\Actions\CuiFile.cs" />
     <Compile Include="Installer\Actions\KbdFile.cs" />
     <Compile Include="Installer\Actions\RunMaxscriptAction.cs" />
