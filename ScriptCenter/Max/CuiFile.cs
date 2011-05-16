@@ -21,7 +21,7 @@ using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace ScriptCenter.Installer.Actions
+namespace ScriptCenter.Max
 {
     internal class CuiFile
     {

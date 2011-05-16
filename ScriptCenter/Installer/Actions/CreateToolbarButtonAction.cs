@@ -20,6 +20,8 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
+using ScriptCenter.Max;
+using System.ComponentModel;
 
 namespace ScriptCenter.Installer.Actions
 {
@@ -32,6 +34,7 @@ namespace ScriptCenter.Installer.Actions
         /// The name of the toolbar to add the item to.
         /// </summary>
         [JsonProperty("toolbar_name")]
+        [DisplayName("Toolbar Name")]
         public String ToolbarName { get; set; }
 
         /// <summary>
@@ -39,6 +42,7 @@ namespace ScriptCenter.Installer.Actions
         /// </summary>
         [JsonProperty("macro_name")]
         [XmlAttribute("macro_name")]
+        [DisplayName("Macroscript Name")]
         public String MacroName { get; set; }
 
         /// <summary>
@@ -46,6 +50,7 @@ namespace ScriptCenter.Installer.Actions
         /// </summary>
         [JsonProperty("macro_category")]
         [XmlAttribute("macro_category")]
+        [DisplayName("Macroscript Category")]
         public String MacroCategory { get; set; }
 
         /// <summary>
@@ -53,7 +58,17 @@ namespace ScriptCenter.Installer.Actions
         /// </summary>
         [JsonProperty("item_text")]
         [XmlAttribute("item_text")]
+        [DisplayName("Item Text")]
         public String ItemText { get; set; }
+
+
+        public CreateToolbarButtonAction() { }
+        public CreateToolbarButtonAction(String toolbarName, String macroName, String macroCategory)
+        {
+            this.ToolbarName = toolbarName;
+            this.MacroName = macroName;
+            this.MacroCategory = macroCategory;
+        }
 
         /// <summary>
         /// Create a button on a toolbar.
@@ -95,5 +110,8 @@ namespace ScriptCenter.Installer.Actions
 
             return true;
         }
+
+
+        public override string ActionName { get { return "Create Toolbar Button"; } }
     }
 }

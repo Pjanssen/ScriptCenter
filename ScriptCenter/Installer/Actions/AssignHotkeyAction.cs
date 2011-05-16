@@ -21,6 +21,8 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using ScriptCenter.Max;
+using System.ComponentModel;
 
 namespace ScriptCenter.Installer.Actions
 {
@@ -30,9 +32,11 @@ namespace ScriptCenter.Installer.Actions
 public class AssignHotkeyAction : InstallerAction
 {
     public AssignHotkeyAction() { }
-    public AssignHotkeyAction(Keys keys)
+    public AssignHotkeyAction(Keys keys, String macroName, String macroCategory)
     {
         this.Keys = keys;
+        this.MacroName = macroName;
+        this.MacroCategory = macroCategory;
     }
 
     /// <summary>
@@ -40,6 +44,7 @@ public class AssignHotkeyAction : InstallerAction
     /// </summary>
     [JsonProperty(PropertyName = "key")]
     [XmlAttribute("key")]
+    [Browsable(false)]
     public String KeysString 
     {
         get { return this.Keys.ToString(); }
@@ -69,6 +74,7 @@ public class AssignHotkeyAction : InstallerAction
     /// </summary>
     [JsonProperty("macro_name")]
     [XmlAttribute("macro_name")]
+    [DisplayName("Macroscript Name")]
     public String MacroName { get; set; }
 
     /// <summary>
@@ -76,6 +82,7 @@ public class AssignHotkeyAction : InstallerAction
     /// </summary>
     [JsonProperty("macro_category")]
     [XmlAttribute("macro_category")]
+    [DisplayName("Macroscript Category")]
     public String MacroCategory { get; set; }
 
     //TODO: test in 3dsmax.
@@ -114,6 +121,19 @@ public class AssignHotkeyAction : InstallerAction
 
         kbd.MaxLoadKbdFile();
         return true;
+    }
+
+    public override string ActionName { get { return "Assign Hotkey"; } }
+    public override string ActionImageKey { get { return "hotkey"; } }
+    public override string ActionDetails
+    {
+        get
+        {
+            if (this.Keys == System.Windows.Forms.Keys.None)
+                return "";
+            else
+                return this.KeysString;
+        }
     }
 }
 }

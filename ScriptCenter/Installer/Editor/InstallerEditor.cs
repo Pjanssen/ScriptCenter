@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ScriptCenter.Installer.NewInstallerWizard
+namespace ScriptCenter.Installer.Editor
 {
     public partial class InstallerEditor : Form
     {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.ComponentModel;
 using Newtonsoft.Json;
+using ScriptCenter.Repository;
 
 namespace ScriptCenter.Installer.UI
 {
@@ -13,6 +14,12 @@ namespace ScriptCenter.Installer.UI
         public InstallerUIConfiguration()
         {
             InstallerHelperMethods.SetDefaultValues(this);
+        }
+
+        public static InstallerUIConfiguration FromFile(String file)
+        {
+            LocalFileHandler<InstallerUIConfiguration> handler = new LocalFileHandler<InstallerUIConfiguration>();
+            return handler.Read(file);
         }
 
         [JsonProperty("title")]

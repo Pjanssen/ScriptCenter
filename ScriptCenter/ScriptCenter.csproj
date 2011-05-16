@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -53,7 +54,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppPaths.cs" />
-    <Compile Include="AppPaths3dsmax.cs" />
+    <Compile Include="Installer\Actions\CreateRibbonAction.cs" />
+    <Compile Include="Installer\Editor\InstallerActionsForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Installer\Editor\InstallerActionsForm.Designer.cs">
+      <DependentUpon>InstallerActionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Installer\InstallerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InstallerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Max\AppPaths3dsmax.cs" />
     <Compile Include="AppPathsDebug.cs" />
     <Compile Include="Controls\BrowsePage.cs">
       <SubType>UserControl</SubType>
@@ -67,10 +80,10 @@
     <Compile Include="Controls\InstalledPage.Designer.cs">
       <DependentUpon>InstalledPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ManifestEditor.cs">
+    <Compile Include="Installer\Editor\ManifestEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ManifestEditor.Designer.cs">
+    <Compile Include="Installer\Editor\ManifestEditor.Designer.cs">
       <DependentUpon>ManifestEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextBoxDefaultText.cs">
@@ -86,8 +99,8 @@
     <Compile Include="Installer\Actions\CreateToolbarAction.cs" />
     <Compile Include="Installer\Actions\CreateToolbarButtonAction.cs" />
     <Compile Include="Installer\Actions\CreateToolbarSeparatorAction.cs" />
-    <Compile Include="Installer\Actions\CuiFile.cs" />
-    <Compile Include="Installer\Actions\KbdFile.cs" />
+    <Compile Include="Max\CuiFile.cs" />
+    <Compile Include="Max\KbdFile.cs" />
     <Compile Include="Installer\Actions\RunMaxscriptAction.cs" />
     <Compile Include="Installer\Installer.cs" />
     <Compile Include="Installer\Actions\InstallerAction.cs" />
@@ -119,23 +132,12 @@
       <DependentUpon>UninstallPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Installer\InstallerLog.cs" />
-    <Compile Include="Installer\NewInstallerWizard\InstallerCreator.cs" />
-    <Compile Include="Installer\NewInstallerWizard\InstallerEditor.cs">
+    <Compile Include="Installer\Editor\InstallerCreator.cs" />
+    <Compile Include="Installer\Editor\InstallerEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Installer\NewInstallerWizard\InstallerEditor.Designer.cs">
+    <Compile Include="Installer\Editor\InstallerEditor.Designer.cs">
       <DependentUpon>InstallerEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Installer\NewInstallerWizard\NewInstallerWizard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Installer\NewInstallerWizard\NewInstallerWizard.Designer.cs">
-      <DependentUpon>NewInstallerWizard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Installer\NewInstallerWizard\InstallerResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InstallerResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -150,9 +152,13 @@
     <Compile Include="Repository\WebFileHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptVersion.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Xml.ScriptInfo.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Xml.ScriptManifest.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Xml.ScriptVersion.datasource" />
+    <EmbeddedResource Include="Installer\Editor\InstallerActionsForm.resx">
+      <DependentUpon>InstallerActionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\mzp.run" />
     <EmbeddedResource Include="Resources\install.ms" />
   </ItemGroup>
@@ -164,7 +170,7 @@
     <EmbeddedResource Include="Controls\InstalledPage.resx">
       <DependentUpon>InstalledPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ManifestEditor.resx">
+    <EmbeddedResource Include="Installer\Editor\ManifestEditor.resx">
       <DependentUpon>ManifestEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Installer\UI\InstallerDialog.resx">
@@ -179,10 +185,10 @@
     <EmbeddedResource Include="Installer\UI\UninstallPage.resx">
       <DependentUpon>UninstallPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\NewInstallerWizard\InstallerEditor.resx">
+    <EmbeddedResource Include="Installer\Editor\InstallerEditor.resx">
       <DependentUpon>InstallerEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\NewInstallerWizard\InstallerResources.resx">
+    <EmbeddedResource Include="Installer\InstallerResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>InstallerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -190,6 +196,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\icons\copy_file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\icons\copy_dir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\icons\hotkey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\icons\action.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

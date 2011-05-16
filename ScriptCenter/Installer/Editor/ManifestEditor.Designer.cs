@@ -1,4 +1,5 @@
-﻿namespace ScriptCenter.Controls
+﻿using ScriptCenter.Controls;
+namespace ScriptCenter.Installer.Editor
 {
     partial class ManifestEditor
     {
@@ -39,7 +40,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.scriptName = new System.Windows.Forms.TextBox();
             this.scriptManifestBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.scriptId = new ScriptCenter.Controls.TextBoxDefaultText();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.scriptVersionMajor = new System.Windows.Forms.NumericUpDown();
             this.scriptVersionBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -53,6 +53,9 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.scriptId = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scriptInfoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scriptManifestBindingSource)).BeginInit();
@@ -63,6 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.scriptVersionRevision)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -72,33 +76,33 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.scriptDescription, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.scriptAuthor, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.scriptAuthor, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.scriptName, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.scriptId, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 109F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 97F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(329, 286);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 223);
+            this.label8.Location = new System.Drawing.Point(3, 231);
             this.label8.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(28, 13);
@@ -109,10 +113,10 @@
             // 
             this.scriptDescription.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptInfoBindingSource, "Description", true));
             this.scriptDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptDescription.Location = new System.Drawing.Point(77, 114);
+            this.scriptDescription.Location = new System.Drawing.Point(77, 134);
             this.scriptDescription.Multiline = true;
             this.scriptDescription.Name = "scriptDescription";
-            this.scriptDescription.Size = new System.Drawing.Size(249, 103);
+            this.scriptDescription.Size = new System.Drawing.Size(249, 91);
             this.scriptDescription.TabIndex = 8;
             // 
             // scriptInfoBindingSource
@@ -123,15 +127,16 @@
             // 
             this.scriptAuthor.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptInfoBindingSource, "Author", true));
             this.scriptAuthor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptAuthor.Location = new System.Drawing.Point(77, 88);
+            this.scriptAuthor.Location = new System.Drawing.Point(77, 28);
             this.scriptAuthor.Name = "scriptAuthor";
             this.scriptAuthor.Size = new System.Drawing.Size(249, 20);
             this.scriptAuthor.TabIndex = 6;
+            this.scriptAuthor.Validated += new System.EventHandler(this.scriptAuthor_Validated);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 28);
+            this.label2.Location = new System.Drawing.Point(3, 54);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
@@ -156,22 +161,11 @@
             this.scriptName.Name = "scriptName";
             this.scriptName.Size = new System.Drawing.Size(249, 20);
             this.scriptName.TabIndex = 1;
+            this.scriptName.Validated += new System.EventHandler(this.scriptName_Validated);
             // 
             // scriptManifestBindingSource
             // 
             this.scriptManifestBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptManifest);
-            // 
-            // scriptId
-            // 
-            this.scriptId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptManifestBindingSource, "Id", true));
-            this.scriptId.DefaultText = "com.yourwebsite.scriptname";
-            this.scriptId.DefaultTextForeColor = System.Drawing.SystemColors.GrayText;
-            this.scriptId.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptId.ForeColor = System.Drawing.Color.Black;
-            this.scriptId.Location = new System.Drawing.Point(77, 28);
-            this.scriptId.Name = "scriptId";
-            this.scriptId.Size = new System.Drawing.Size(249, 20);
-            this.scriptId.TabIndex = 4;
             // 
             // flowLayoutPanel1
             // 
@@ -181,10 +175,10 @@
             this.flowLayoutPanel1.Controls.Add(this.label7);
             this.flowLayoutPanel1.Controls.Add(this.scriptVersionRevision);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(74, 51);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(74, 102);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(255, 34);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(255, 29);
             this.flowLayoutPanel1.TabIndex = 11;
             // 
             // scriptVersionMajor
@@ -240,7 +234,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 88);
+            this.label3.Location = new System.Drawing.Point(3, 28);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 13);
@@ -250,7 +244,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 54);
+            this.label5.Location = new System.Drawing.Point(3, 105);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(42, 13);
@@ -260,7 +254,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 114);
+            this.label4.Location = new System.Drawing.Point(3, 134);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
@@ -272,10 +266,10 @@
             this.flowLayoutPanel2.Controls.Add(this.pictureBox1);
             this.flowLayoutPanel2.Controls.Add(this.button1);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(74, 220);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(74, 228);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(255, 66);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(255, 58);
             this.flowLayoutPanel2.TabIndex = 13;
             // 
             // pictureBox1
@@ -298,6 +292,35 @@
             this.button1.Text = "Browse";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.scriptId);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(77, 54);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(249, 45);
+            this.panel1.TabIndex = 14;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Enabled = false;
+            this.label9.Location = new System.Drawing.Point(-3, 23);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(137, 13);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Example: author.scriptname";
+            // 
+            // scriptId
+            // 
+            this.scriptId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptInfoBindingSource, "Author", true));
+            this.scriptId.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scriptId.Location = new System.Drawing.Point(0, 0);
+            this.scriptId.Name = "scriptId";
+            this.scriptId.Size = new System.Drawing.Size(249, 20);
+            this.scriptId.TabIndex = 7;
+            // 
             // ManifestEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,6 +341,8 @@
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -328,10 +353,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox scriptName;
-        private TextBoxDefaultText scriptId;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox scriptDescription;
-        private System.Windows.Forms.TextBox scriptAuthor;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown scriptVersionMajor;
@@ -347,5 +370,9 @@
         private System.Windows.Forms.BindingSource scriptInfoBindingSource;
         private System.Windows.Forms.BindingSource scriptManifestBindingSource;
         private System.Windows.Forms.BindingSource scriptVersionBindingSource;
+        private System.Windows.Forms.TextBox scriptAuthor;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox scriptId;
     }
 }

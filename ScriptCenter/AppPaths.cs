@@ -36,7 +36,7 @@ namespace ScriptCenter
             Root,
             Scripts,
             StartupScripts,
-            Macros,
+            MacroScripts,
             Icons
         }
     }

@@ -66,6 +66,9 @@ namespace ScriptCenter.Installer
             float numActions = (float)this.Configuration.InstallerActions.Count;
             foreach (InstallerAction action in this.Configuration.InstallerActions)
             {
+                if (!action.RunAtInstall)
+                    continue;
+
                 //TODO: Check if this might have to be done on a separate thread to allow UI updates.
                 if (!(success = action.Do(this)))
                     break;
@@ -103,6 +106,9 @@ namespace ScriptCenter.Installer
             float numActions = (float)this.Configuration.InstallerActions.Count;
             foreach (InstallerAction action in this.Configuration.InstallerActions)
             {
+                if (!action.RunAtUninstall)
+                    continue;
+
                 if (!action.Undo(this))
                     success = false;
 

@@ -21,7 +21,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 
-namespace ScriptCenter.Installer.Actions
+namespace ScriptCenter.Max
 {
 internal struct KeyboardAction
 {

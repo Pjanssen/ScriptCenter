@@ -25,11 +25,10 @@ namespace ScriptCenter.Installer.UI
             if (this.Wizard is InstallerDialog)
             {
                 ScriptManifest manifest = ((InstallerDialog)this.Wizard).Installer.Manifest;
-                InstallerConfiguration config = ((InstallerDialog)this.Wizard).Installer.Configuration;
+                InstallerUIConfiguration uiConfig = ((InstallerDialog)this.Wizard).UIConfig;
 
-                //TODO fix
-                //this.titleTxt.Text = InstallerHelperMethods.ReplaceTokens(config.StartPageUI.Title, manifest);
-                //this.mainTxt.Text = InstallerHelperMethods.ReplaceTokens(config.StartPageUI.Text, manifest);
+                this.titleTxt.Text = InstallerHelperMethods.ReplaceTokens(uiConfig.Title, manifest);
+                this.mainTxt.Text = InstallerHelperMethods.ReplaceTokens(uiConfig.StartPageText, manifest);
             }
         }
 

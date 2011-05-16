@@ -46,6 +46,9 @@ namespace ScriptCenter.Installer.Actions
         /// </summary>
         [JsonProperty("source")]
         [XmlAttribute("source")]
+        [DefaultValue("")]
+        [DisplayName("Source File")]
+        [Editor(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public String Source { get; set; }
 
         /// <summary>
@@ -53,6 +56,8 @@ namespace ScriptCenter.Installer.Actions
         /// </summary>
         [JsonProperty("target")]
         [XmlAttribute("target")]
+        [DefaultValue(AppPaths.Directory.MacroScripts)]
+        [DisplayName("Target Directory")]
         public AppPaths.Directory Target { get; set; }
 
         /// <summary>
@@ -104,6 +109,20 @@ namespace ScriptCenter.Installer.Actions
         {
             //TODO: implement
             throw new NotImplementedException();
+        }
+
+
+        public override string ActionName { get { return "Copy File"; } }
+        public override string ActionImageKey { get { return "copy_file"; } }
+        public override string ActionDetails
+        {
+            get
+            {
+                if (this.Source == String.Empty)
+                    return "";
+                else
+                    return (this.Source + " -> $" + this.Target.ToString());
+            }
         }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScriptCenter.Installer.NewInstallerWizard {
+namespace ScriptCenter.Installer {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ScriptCenter.Installer.NewInstallerWizard {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScriptCenter.Installer.NewInstallerWizard.InstallerResources", typeof(InstallerResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScriptCenter.Installer.InstallerResources", typeof(InstallerResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -74,10 +74,7 @@ namespace ScriptCenter.Installer.NewInstallerWizard {
         ///		(
         ///			success = registry.openkey HKEY_LOCAL_MACHINE &quot;SOFTWARE\Microsoft\NET Framework Setup\NDP\v4&quot; key:&amp;rKey accessright:#readonly;
         ///			if (success) do
-        ///				registry.closeKey rKey;
-        ///		)
-        ///		
-        ///		 [rest of string was truncated]&quot;;.
+        ///				registry.closeKey rKe [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string install {
             get {
@@ -87,7 +84,7 @@ namespace ScriptCenter.Installer.NewInstallerWizard {
         
         /// <summary>
         ///   Looks up a localized string similar to name &quot;{script_id}&quot;
-        ///version {script_version_float}
+        ///version {script_version_major}.{script_version_minor}{script_version_revision}
         ///
         ///extract to &quot;$temp/{script_id}&quot;
         ///

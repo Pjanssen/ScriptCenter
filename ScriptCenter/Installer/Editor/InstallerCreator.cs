@@ -21,8 +21,9 @@ using System.Text;
 using Ionic.Zip;
 using System.IO;
 using ScriptCenter.Repository;
+using ScriptCenter.Installer.UI;
 
-namespace ScriptCenter.Installer.NewInstallerWizard
+namespace ScriptCenter.Installer.Editor
 {
     public class InstallerCreator
     {
@@ -33,7 +34,7 @@ namespace ScriptCenter.Installer.NewInstallerWizard
         /// <param name="output">The location to write the .mzp file.</param>
         /// <param name="manifest">The manifest to include.</param>
         /// <param name="config">The installer configuration to include.</param>
-        public void Pack(String dir, String output, ScriptManifest manifest, InstallerConfiguration config)
+        public void Pack(String dir, String output, ScriptManifest manifest, InstallerConfiguration config, InstallerUIConfiguration uiConfig)
         {
             String[] filesToDelete = {"._*", ".DS_Store", "Thumbs.db"};
             
@@ -51,6 +52,13 @@ namespace ScriptCenter.Installer.NewInstallerWizard
                 if (File.Exists(output))
                     File.Delete(output);
             } catch { }
+
+            LocalFileHandler<ScriptManifest> manifestHandler = new LocalFileHandler<ScriptManifest>();
+            manifestHandler.Write(dir + "/script.manifest.json", manifest);
+            LocalFileHandler<InstallerConfiguration> configHandler = new LocalFileHandler<InstallerConfiguration>();
+            configHandler.Write(dir + "/installer.config.json", config);
+            LocalFileHandler<InstallerUIConfiguration> uiConfigHandler = new LocalFileHandler<InstallerUIConfiguration>();
+            uiConfigHandler.Write(dir + "installer.uiconfig.json", uiConfig);
 
             String str = InstallerHelperMethods.ReplaceTokens(InstallerResources.mzp, manifest);
             StreamWriter wr = new StreamWriter(dir + "/mzp.run");

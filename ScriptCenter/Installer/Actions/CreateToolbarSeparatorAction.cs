@@ -20,6 +20,8 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
+using ScriptCenter.Max;
+using System.ComponentModel;
 
 namespace ScriptCenter.Installer.Actions
 {
@@ -32,6 +34,7 @@ namespace ScriptCenter.Installer.Actions
         /// The name of the toolbar to add the item to.
         /// </summary>
         [JsonProperty("toolbar_name")]
+        [DisplayName("Toolbar Name")]
         public String ToolbarName { get; set; }
 
 
@@ -63,5 +66,9 @@ namespace ScriptCenter.Installer.Actions
         {
             return true;
         }
+
+
+        public override string ActionName { get { return "Create Toolbar Separator"; } }
+        public override string ActionDetails { get { return this.ToolbarName; } }
     }
 }

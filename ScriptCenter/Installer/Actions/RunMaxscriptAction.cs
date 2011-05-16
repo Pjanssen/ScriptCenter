@@ -21,6 +21,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
 using System.IO;
+using System.ComponentModel;
 
 namespace ScriptCenter.Installer.Actions
 {
@@ -41,6 +42,7 @@ namespace ScriptCenter.Installer.Actions
         /// </summary>
         [JsonProperty("source")]
         [XmlAttribute("source")]
+        [DisplayName("Source File")]
         public String Source { get; set; }
 
         /// <summary>
@@ -70,5 +72,8 @@ namespace ScriptCenter.Installer.Actions
         /// Not implemented for this action.
         /// </summary>
         public override bool Undo(Installer installer) { return true; }
+
+
+        public override string ActionName { get { return "Run Maxscript"; } }
     }
 }

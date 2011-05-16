@@ -25,7 +25,7 @@ namespace ScriptCenterTest
             this.config = new InstallerConfiguration();
             this.config.InstallerActions.Add(new CopyFileAction("testFile", ScriptCenter.AppPaths.Directory.Icons));
             this.config.InstallerActions.Add(new CopyDirAction("testDir/", ScriptCenter.AppPaths.Directory.Scripts));
-            this.config.InstallerActions.Add(new AssignHotkeyAction(System.Windows.Forms.Keys.H | System.Windows.Forms.Keys.Control));
+            this.config.InstallerActions.Add(new AssignHotkeyAction(System.Windows.Forms.Keys.H | System.Windows.Forms.Keys.Control, "toggleOutliner", "Outliner"));
             this.config.InstallerActions.Add(new RunMaxscriptAction("test.ms"));
         }
 

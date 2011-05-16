@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using ScriptCenter.Max;
 
 namespace ScriptCenter.Installer.Actions
 {
@@ -30,6 +31,12 @@ namespace ScriptCenter.Installer.Actions
         [JsonProperty("name")]
         public String Name { get; set; }
 
+
+        public CreateToolbarAction() { }
+        public CreateToolbarAction(String name)
+        {
+            this.Name = name;
+        }
 
 
         /// <summary>
@@ -71,5 +78,8 @@ namespace ScriptCenter.Installer.Actions
 
             return true;
         }
+
+        public override string ActionName { get { return "Create Toolbar"; } }
+        public override string ActionDetails { get { return this.Name; } }
     }
 }

@@ -13,36 +13,39 @@ namespace ScriptCenter.Installer.UI
 {
     public partial class InstallerDialog : Wizard
     {
-        public Installer Installer { get; private set; }
+        public Installer Installer { get; set; }
+        public InstallerUIConfiguration UIConfig { get; set; }
 
-        public InstallerDialog()
+        public InstallerDialog(Installer installer, InstallerUIConfiguration uiConfig)
         {
             InitializeComponent();
         }
 
-        new public void Show() { throw new InvalidOperationException("Use Show(Installer) instead."); }
-        new public void Show(IWin32Window owner) { throw new InvalidOperationException("Use Show(Installer) instead."); }
-        new public void ShowDialog() { throw new InvalidOperationException("Use ShowDialog(Installer) instead."); }
-        new public void ShowDialog(IWin32Window owner) { throw new InvalidOperationException("Use ShowDialog(Installer) instead."); }
-
-        public void Show(Installer installer)
+        private void setStartPage()
         {
-            this.Installer = installer;
-
             StartPage startPage = new StartPage();
             this.ShowPage(startPage);
-
-            base.Show();
         }
 
-        public void ShowDialog(Installer installer)
+        new public void Show() 
         {
-            this.Installer = installer;
-
-            StartPage startPage = new StartPage();
-            this.ShowPage(startPage);
-
+            this.setStartPage();
+            base.Show();
+        }
+        new public void Show(IWin32Window owner) 
+        {
+            this.setStartPage();
+            base.Show(owner);
+        }
+        new public void ShowDialog() 
+        {
+            this.setStartPage();
             base.ShowDialog();
+        }
+        new public void ShowDialog(IWin32Window owner) 
+        {
+            this.setStartPage();
+            base.ShowDialog(owner);
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ScriptCenter.Repository;
 using ScriptCenter.Installer;
 using ScriptCenter.Installer.Actions;
+using ScriptCenter.Installer.UI;
 
 namespace ScriptCenter.Controls
 {
@@ -192,9 +193,10 @@ namespace ScriptCenter.Controls
             InstallerConfiguration config = configHandler.Read("C:/temp/scriptcenter/unpacked_installer/config.installer.xml");
 
             Installer.Installer installer = new Installer.Installer("C:/temp/scriptcenter/unpacked_installer", manifest, config);
+            InstallerUIConfiguration uiConfig = new InstallerUIConfiguration();
 
-            ScriptCenter.Installer.UI.InstallerDialog d = new ScriptCenter.Installer.UI.InstallerDialog();
-            d.Show(installer);
+            ScriptCenter.Installer.UI.InstallerDialog d = new ScriptCenter.Installer.UI.InstallerDialog(installer, uiConfig);
+            d.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -209,9 +211,7 @@ namespace ScriptCenter.Controls
             m.Versions.Add(new ScriptVersion(2, 0, 96));
 
             InstallerConfiguration config = new InstallerConfiguration();
-
-            Installer.NewInstallerWizard.InstallerCreator c = new Installer.NewInstallerWizard.InstallerCreator();
-            c.Pack("C:/temp/scriptcenter/unpacked_installer", "C:/temp/scriptcenter/test.mzp", m, config);
+            InstallerUIConfiguration uiConfig = new InstallerUIConfiguration();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -219,7 +219,7 @@ namespace ScriptCenter.Controls
             InstallerConfiguration config = new InstallerConfiguration();
             config.InstallerActions.Add(new CopyDirAction("scripts", AppPaths.Directory.Scripts));
             config.InstallerActions.Add(new CopyDirAction("startupscripts", AppPaths.Directory.StartupScripts));
-            config.InstallerActions.Add(new AssignHotkeyAction(Keys.H | Keys.Alt));
+            config.InstallerActions.Add(new AssignHotkeyAction(Keys.H | Keys.Alt, "", ""));
 
             LocalFileHandler<InstallerConfiguration> handler = new LocalFileHandler<InstallerConfiguration>();
             handler.Write("C:/temp/scriptcenter/config.installer", config);

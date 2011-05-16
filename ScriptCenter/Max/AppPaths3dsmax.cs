@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ScriptCenter
+namespace ScriptCenter.Max
 {
     public class AppPaths3dsmax : AppPaths
     {
@@ -37,7 +37,7 @@ namespace ScriptCenter
                 case Directory.StartupScripts :
                     dirId = ManagedServices.PathSDK.DirectoryID.UserStartupScripts;
                     break;
-                case Directory.Macros :
+                case Directory.MacroScripts :
                     dirId = ManagedServices.PathSDK.DirectoryID.UserMacros;
                     break;
                 case Directory.Icons :

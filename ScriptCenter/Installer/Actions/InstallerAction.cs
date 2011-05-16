@@ -18,6 +18,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
+using System.Xml.Serialization;
+using System.ComponentModel;
 
 namespace ScriptCenter.Installer.Actions
 {
@@ -26,7 +29,39 @@ namespace ScriptCenter.Installer.Actions
     /// </summary>
     public abstract class InstallerAction
     {
+        public InstallerAction()
+        {
+            InstallerHelperMethods.SetDefaultValues(this);
+        }
+
         public abstract Boolean Do(Installer installer);
         public abstract Boolean Undo(Installer installer);
+
+        [JsonProperty("run_at_install")]
+        [XmlAttribute("run_at_install")]
+        [DefaultValue(true)]
+        [DisplayName("Install")]
+        public Boolean RunAtInstall { get; set; }
+
+        [JsonProperty("run_at_uninstall")]
+        [XmlAttribute("run_at_uninstall")]
+        [DefaultValue(true)]
+        [DisplayName("Uninstall")]
+        public Boolean RunAtUninstall { get; set; }
+
+        [JsonIgnore()]
+        [XmlIgnore()]
+        [Browsable(false)]
+        public virtual String ActionName { get { return ""; } }
+
+        [JsonIgnore()]
+        [XmlIgnore()]
+        [Browsable(false)]
+        public virtual String ActionImageKey { get { return "action"; } }
+
+        [JsonIgnore()]
+        [XmlIgnore()]
+        [Browsable(false)]
+        public virtual String ActionDetails { get { return ""; } }
     }
 }

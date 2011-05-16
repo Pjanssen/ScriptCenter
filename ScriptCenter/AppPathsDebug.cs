@@ -37,7 +37,7 @@ namespace ScriptCenter
                 case Directory.StartupScripts:
                     path = "C:/temp/scriptcenter/install_test/startup_scripts";
                     break;
-                case Directory.Macros:
+                case Directory.MacroScripts:
                     path = "C:/temp/scriptcenter/install_test/macros";
                     break;
                 case Directory.Icons:

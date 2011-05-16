@@ -47,6 +47,9 @@ public class CopyDirAction : InstallerAction
     /// </summary>
     [JsonProperty("source")]
     [XmlAttribute("source")]
+    [DefaultValue("")]
+    [DisplayName("Source Directory")]
+    [Editor(typeof(System.Windows.Forms.Design.FolderNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
     public String Source { get; set; }
 
     /// <summary>
@@ -54,6 +57,8 @@ public class CopyDirAction : InstallerAction
     /// </summary>
     [JsonProperty("target")]
     [XmlAttribute("target")]
+    [DefaultValue(AppPaths.Directory.MacroScripts)]
+    [DisplayName("Target Directory")]
     public AppPaths.Directory Target { get; set; }
 
     /// <summary>
@@ -62,7 +67,9 @@ public class CopyDirAction : InstallerAction
     /// </summary>
     [XmlAttribute("use_script_id")]
     [DefaultValue(true)]
+    [DisplayName("Use Script ID")]
     public Boolean UseScriptId { get; set; }
+
 
 
     /// <summary>
@@ -127,6 +134,20 @@ public class CopyDirAction : InstallerAction
         }
 
         return true;
+    }
+
+
+    public override string ActionName { get { return "Copy Directory"; } }
+    public override string ActionImageKey { get { return "copy_dir"; } }
+    public override string ActionDetails
+    {
+        get
+        {
+            if (this.Source == String.Empty)
+                return "";
+            else
+                return (this.Source + " -> $" + this.Target.ToString());
+        }
     }
 }
 }
