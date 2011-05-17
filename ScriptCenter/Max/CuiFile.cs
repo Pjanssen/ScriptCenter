@@ -348,12 +348,17 @@ namespace ScriptCenter.Max
         /// </summary>
         public Boolean Write()
         {
-            //Create backup.
-            if (System.IO.File.Exists(this.File))
-                System.IO.File.Copy(this.File, this.File + ".bak", true);
-
             try
             {
+                //Create directory for output.
+                String dir = new FileInfo(this.File).DirectoryName;
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+
+                //Create backup.
+                if (System.IO.File.Exists(this.File))
+                    System.IO.File.Copy(this.File, this.File + ".bak", true);
+
                 using (StreamWriter w = new StreamWriter(this.File, false))
                 {
                     foreach (CuiSection section in this.Sections)
