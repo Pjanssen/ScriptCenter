@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace ScriptCenter.Installer.Editor
 {
-    public partial class InstallerEditor : Form
+    public partial class InstallerEditor_old : Form
     {
-        public InstallerEditor()
+        public InstallerEditor_old()
         {
             InitializeComponent();
         }

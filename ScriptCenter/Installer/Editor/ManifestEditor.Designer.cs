@@ -54,8 +54,8 @@ namespace ScriptCenter.Installer.Editor
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
             this.scriptId = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scriptInfoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scriptManifestBindingSource)).BeginInit();
@@ -102,8 +102,8 @@ namespace ScriptCenter.Installer.Editor
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 231);
-            this.label8.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label8.Location = new System.Drawing.Point(3, 234);
+            this.label8.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(28, 13);
             this.label8.TabIndex = 12;
@@ -136,8 +136,8 @@ namespace ScriptCenter.Installer.Editor
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 54);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label2.Location = new System.Drawing.Point(3, 56);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 3;
@@ -146,12 +146,12 @@ namespace ScriptCenter.Installer.Editor
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 3);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Name";
+            this.label1.Text = "Script Name";
             // 
             // scriptName
             // 
@@ -234,8 +234,8 @@ namespace ScriptCenter.Installer.Editor
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 28);
-            this.label3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label3.Location = new System.Drawing.Point(3, 31);
+            this.label3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 5;
@@ -244,8 +244,8 @@ namespace ScriptCenter.Installer.Editor
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 105);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label5.Location = new System.Drawing.Point(3, 107);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(42, 13);
             this.label5.TabIndex = 9;
@@ -254,8 +254,8 @@ namespace ScriptCenter.Installer.Editor
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 134);
-            this.label4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label4.Location = new System.Drawing.Point(3, 137);
+            this.label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
             this.label4.TabIndex = 7;
@@ -302,6 +302,15 @@ namespace ScriptCenter.Installer.Editor
             this.panel1.Size = new System.Drawing.Size(249, 45);
             this.panel1.TabIndex = 14;
             // 
+            // scriptId
+            // 
+            this.scriptId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptInfoBindingSource, "Author", true));
+            this.scriptId.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scriptId.Location = new System.Drawing.Point(0, 0);
+            this.scriptId.Name = "scriptId";
+            this.scriptId.Size = new System.Drawing.Size(249, 20);
+            this.scriptId.TabIndex = 7;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -311,15 +320,6 @@ namespace ScriptCenter.Installer.Editor
             this.label9.Size = new System.Drawing.Size(137, 13);
             this.label9.TabIndex = 6;
             this.label9.Text = "Example: author.scriptname";
-            // 
-            // scriptId
-            // 
-            this.scriptId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptInfoBindingSource, "Author", true));
-            this.scriptId.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptId.Location = new System.Drawing.Point(0, 0);
-            this.scriptId.Name = "scriptId";
-            this.scriptId.Size = new System.Drawing.Size(249, 20);
-            this.scriptId.TabIndex = 7;
             // 
             // ManifestEditor
             // 

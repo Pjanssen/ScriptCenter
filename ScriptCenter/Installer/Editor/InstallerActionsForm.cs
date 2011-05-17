@@ -135,9 +135,9 @@ namespace ScriptCenter.Installer.Editor
             moveSelectedAction(1);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void actionsListView_SizeChanged(object sender, EventArgs e)
         {
-            Console.Write("breakpoint");
+            columnHeader2.Width = actionsListView.Width - columnHeader1.Width - 4;
         }
 
     }
