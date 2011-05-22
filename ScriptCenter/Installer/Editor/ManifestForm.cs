@@ -41,9 +41,10 @@ namespace ScriptCenter.Installer.Editor
                 {
                     this.scriptManifestBindingSource.Clear();
                     this.scriptManifestBindingSource.Add(value.Manifest);
-                    //TODO fix script version binding.
-                    //this.scriptVersionBindingSource.DataSource = manifest.Versions[0];
-                    //this.scriptRequirementsBindingSource.DataSource = manifest.Versions[0].Requirements;
+                    this.scriptVersionBindingSource.Clear();
+                    this.scriptVersionBindingSource.Add(value.Manifest.Version);
+                    this.scriptRequirementsBindingSource.Clear();
+                    this.scriptRequirementsBindingSource.Add(value.Manifest.Version.Requirements);
                 }
             }
         }

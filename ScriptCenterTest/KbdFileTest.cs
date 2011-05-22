@@ -60,5 +60,16 @@ namespace ScriptCenterTest
 
             Assert.IsTrue(compare_result);
         }
+
+        [TestMethod()]
+        public void RemoveActionTest()
+        {
+            String kbdFile = getTestFilesDirectory() + "ame-light.kbd";
+            Assert.IsTrue(System.IO.File.Exists(kbdFile));
+            KbdFile kbd = new KbdFile(kbdFile);
+            Assert.IsTrue(kbd.Read());
+
+            Assert.AreEqual(1, kbd.RemoveAction("toggleOutliner", "Outliner"));
+        }
     }
 }

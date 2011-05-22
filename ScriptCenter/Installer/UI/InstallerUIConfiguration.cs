@@ -26,12 +26,12 @@ namespace ScriptCenter.Installer.UI
 
         [JsonProperty("title")]
         [XmlElement("title")]
-        [DefaultValue("{script_name} {script_version}")]
+        [DefaultValue(InstallerHelperMethods.Name_Token + " "+ InstallerHelperMethods.Version_Token)]
         public String Title { get; set; }
 
         [JsonProperty("start_page_text")]
         [XmlElement("start_page_text")]
-        [DefaultValue("This script will install the {script_name} {script_version}. Any previous installations will automatically be uninstalled.")]
+        [DefaultValue("This script will install the " + InstallerHelperMethods.Name_Token + " " + InstallerHelperMethods.Version_Token +  ". Any previous installations will automatically be uninstalled.")]
         public String StartPageText { get; set; }
 
         [JsonProperty("icon")]

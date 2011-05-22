@@ -125,7 +125,9 @@ namespace ScriptCenter.Installer
 
             ZipFile zip = new ZipFile();
             zip.AddDirectory(tempPath);
-            zip.AddFile(System.Reflection.Assembly.GetCallingAssembly().Location, "");
+            String scAssemblyPath = System.Reflection.Assembly.GetCallingAssembly().Location;
+            zip.AddFile(scAssemblyPath, "");
+            zip.AddFile(Path.GetDirectoryName(scAssemblyPath) + "\\Newtonsoft.Json.Net35.dll", "");
             zip.Save(GetAbsolutePath(output, projectData.RootPath));
 
             //Remove temp dir

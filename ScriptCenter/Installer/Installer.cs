@@ -26,6 +26,7 @@ namespace ScriptCenter.Installer
     public class Installer
     {
         public String InstallerDirectory { get; private set; }
+        public String ResourcesDirectory { get; private set; }
         public Exception InstallerException { get; internal set; }
 
         public ScriptManifest Manifest { get; private set; }
@@ -45,6 +46,7 @@ namespace ScriptCenter.Installer
         public Installer(String installerDirectory, String manifestFile, String configFile) : this() 
         {
             this.InstallerDirectory = installerDirectory;
+            this.ResourcesDirectory = this.InstallerDirectory + "\\resources\\";
 
             LocalFileHandler<ScriptManifest> manifestHandler = new LocalFileHandler<ScriptManifest>();
             this.Manifest = manifestHandler.Read(manifestFile);

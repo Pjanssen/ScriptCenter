@@ -19,6 +19,9 @@ namespace ScriptCenter.Installer.UI
         public InstallerDialog(Installer installer, InstallerUIConfiguration uiConfig)
         {
             InitializeComponent();
+
+            this.Installer = installer;
+            this.UIConfig = uiConfig;
         }
 
         private void setStartPage()

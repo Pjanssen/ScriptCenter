@@ -27,8 +27,8 @@ namespace ScriptCenter
 
         public static AppPaths GetApplicationPaths()
         {
-            return new AppPathsDebug();
-            //return new AppPaths3dsmax();
+            //return new AppPathsDebug();
+            return new ScriptCenter.Max.AppPaths3dsmax();
         }
 
         public enum Directory

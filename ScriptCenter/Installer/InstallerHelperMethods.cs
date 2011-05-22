@@ -39,11 +39,10 @@ namespace ScriptCenter.Installer
 
             str = str.Replace(Id_Token, manifest.Id);
             str = str.Replace(Name_Token, manifest.Name);
-            //TODO figure out how to get the right version (could be many in the manifest).
-            //str = str.Replace(Version_Token, manifest.Version.ToString());
-            //str = str.Replace(VersionMajor_Token, manifest.Version.Major.ToString());
-            //str = str.Replace(VersionMinor_Token, manifest.Version.Minor.ToString());
-            //str = str.Replace(VersionRevision_Token, manifest.Version.Revision.ToString());
+            str = str.Replace(Version_Token, manifest.Version.Version);
+            str = str.Replace(VersionMajor_Token, manifest.Version.Major.ToString());
+            str = str.Replace(VersionMinor_Token, manifest.Version.Minor.ToString());
+            str = str.Replace(VersionRevision_Token, manifest.Version.Revision.ToString());
 
             return str;
         }

@@ -23,13 +23,20 @@ using System.Windows.Forms;
 
 namespace ScriptCenter.Max
 {
-internal struct KeyboardAction
+internal class KeyboardAction
 {
     public String MacroName;
     public String MacroCategory;
     public Keys Keys;
     public Int32 TableId;
     public Int32 PersistentId;
+
+    public KeyboardAction()
+    {
+        this.MacroName = "";
+        this.MacroCategory = "";
+        this.Keys = System.Windows.Forms.Keys.None;
+    }
 }
 internal class KbdFile
 {

@@ -76,7 +76,7 @@ namespace ScriptCenter.Installer.Actions
         {
             try
             {
-                String sourceFile = installer.InstallerDirectory + "/" + this.Source;
+                String sourceFile = installer.ResourcesDirectory + this.Source;
                 String targetFile = AppPaths.GetApplicationPaths().GetPath(this.Target);
                 if (this.UseScriptId)
                     targetFile += "/" + installer.Manifest.Id;

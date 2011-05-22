@@ -27,11 +27,12 @@
 			dotnet.loadassembly (tempDir + "/scriptcenter.dll");
 			local installer = dotNetObject "ScriptCenter.Installer.Installer" tempDir (tempDir + "/script.scmanifest") (tempDir + "/script.scinstaller");
 			local uiConfig = (dotNetClass "ScriptCenter.Installer.UI.InstallerUIConfiguration").FromFile (tempDir + "/script.scinstallerui");
-			local installerDialog = dotNetObject "ScriptCenter.Installer.InstallerDialog" installer uiConfig;
+			local installerDialog = dotNetObject "ScriptCenter.Installer.UI.InstallerDialog" installer uiConfig;
 			installerDialog.ShowDialog();
 		)
 		catch
 		(
+			print (getCurrentException());
 			messagebox "Error starting installer." title:"Installer error";
 		)
 	)

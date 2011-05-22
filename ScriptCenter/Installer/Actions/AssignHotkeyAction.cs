@@ -42,7 +42,7 @@ public class AssignHotkeyAction : InstallerAction
     /// <summary>
     /// String representation of the 'Keys' property.
     /// </summary>
-    [JsonProperty(PropertyName = "key")]
+    [JsonProperty("key")]
     [XmlAttribute("key")]
     [Browsable(false)]
     public String KeysString 

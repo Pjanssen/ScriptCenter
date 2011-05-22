@@ -85,7 +85,7 @@ public class CopyDirAction : InstallerAction
     {
         try
         {
-            String sourcePath = installer.InstallerDirectory + "/" + this.Source;
+            String sourcePath = installer.ResourcesDirectory + this.Source;
             String targetPath = AppPaths.GetApplicationPaths().GetPath(this.Target);
             if (this.UseScriptId)
                 targetPath += "/" + installer.Manifest.Id;

@@ -81,6 +81,9 @@ namespace ScriptCenter.Repository
             }
         }
 
+        [JsonProperty("version")]
+        public ScriptVersion Version { get; set; }
+
         [JsonProperty("versions")]
         public List<ScriptVersion> Versions { get; set; }
         
@@ -90,6 +93,7 @@ namespace ScriptCenter.Repository
             this.Id = String.Empty;
             this.Name = String.Empty;
             this.Versions = new List<ScriptVersion>();
+            this.Version = new ScriptVersion();
         }
 
         #region INotifyPropertyChanged Members
