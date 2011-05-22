@@ -1,7 +1,7 @@
-name "{script_id}"
-version {script_version_major}.{script_version_minor}{script_version_revision}
+name "{id}"
+version {version_major}.{version_minor}{version_revision}
 
-extract to "$temp/{script_id}"
+extract to "$temp/{id}"
 
 run "install.ms"
 drop "install.ms"

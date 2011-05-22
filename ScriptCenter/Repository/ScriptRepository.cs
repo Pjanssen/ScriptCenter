@@ -26,6 +26,8 @@ namespace ScriptCenter.Repository
     [XmlRoot("script_repository")]
     public class ScriptRepository
     {
+        public const String DefaultExtension = ".screpo";
+
         [JsonProperty("name")]
         [XmlElement("name")]
         public String Name { get; set; }

@@ -33,7 +33,7 @@ namespace ScriptCenterTest
         public void WriteTest()
         {
             LocalFileHandler<InstallerConfiguration> handler = new LocalFileHandler<InstallerConfiguration>();
-            Assert.IsTrue(handler.Write(this.getOutputDirectory() + "/installer.config.json", this.config));
+            Assert.IsTrue(handler.Write(this.getOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension, this.config));
         }
 
         [TestMethod()]
@@ -44,7 +44,7 @@ namespace ScriptCenterTest
 
             // Read and compare manifest
             LocalFileHandler<InstallerConfiguration> handler = new LocalFileHandler<InstallerConfiguration>();
-            InstallerConfiguration readConfig = handler.Read(this.getOutputDirectory() + "/installer.config.json");
+            InstallerConfiguration readConfig = handler.Read(this.getOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension);
             Assert.IsNotNull(readConfig);
             Assert.AreEqual(config.InstallerActions.Count, readConfig.InstallerActions.Count);
             Assert.AreEqual(((CopyFileAction)config.InstallerActions[0]).Source, ((CopyFileAction)readConfig.InstallerActions[0]).Source);

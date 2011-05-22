@@ -69,14 +69,12 @@ namespace ScriptCenter.Controls
             String id = args.Data.Id;
             
             //TODO fix icon uri
-            String imgKey = (args.Data.Info.Description == null) ? "default" : id;
+            String imgKey = (args.Data.Description == null) ? "default" : id;
 
             if (imgKey != "default" && !this.imageList1.Images.ContainsKey(imgKey))
             {
                 try
                 {
-                    if (args.Data.IconSmallRawData != null)
-                        this.imageList1.Images.Add(imgKey, args.Data.IconSmall);
                     /*
                     System.Net.WebRequest r = System.Net.WebRequest.Create(args.Data.Info.IconURI);
                     System.Net.WebResponse resp = r.GetResponse();
@@ -100,7 +98,7 @@ namespace ScriptCenter.Controls
             }
 
             ListViewItem i = new ListViewItem(args.Data.Name, imgKey);
-            i.SubItems.Add(args.Data.Info.Author);
+            i.SubItems.Add(args.Data.Author);
             i.Tag = args.Data;
             listView1.Items.Add(i);
         }

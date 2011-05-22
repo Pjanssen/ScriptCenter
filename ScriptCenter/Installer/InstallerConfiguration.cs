@@ -33,10 +33,16 @@ namespace ScriptCenter.Installer
     [XmlRoot("installer_configuration")]
     public class InstallerConfiguration
     {
+        public const String DefaultExtension = ".scinstaller";
+
         public InstallerConfiguration()
         {
             this.InstallerActions = new List<InstallerAction>();
         }
+
+        [JsonProperty("manifest_uri")]
+        [XmlElement("manifest_uri")]
+        public String ManifestUri { get; set; }
 
         [JsonProperty("installer_actions")]
         [XmlArray("installer_actions")]

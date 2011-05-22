@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace ScriptCenter.Repository
 {
@@ -27,40 +28,58 @@ namespace ScriptCenter.Repository
     /// The ScriptManifest contains information about a script and its versions.
     /// </summary>
     [XmlRoot("script_manifest")]
-    public class ScriptManifest
+    public class ScriptManifest : INotifyPropertyChanged
     {
+        public const String DefaultExtension = ".scmanifest";
+
+        private String id;
         [JsonProperty("id")]
-        [XmlElement("id")]
-        public String Id { get; set; }
-
-        [JsonProperty("name")]
-        [XmlElement("name")]
-        public String Name { get; set; }
-
-        [JsonProperty("icon_small")]
-        [XmlElement("icon_small")]
-        public String IconSmallRawData { get; set; }
-        
-        [JsonIgnore()]
-        [XmlIgnore()]
-        public System.Drawing.Image IconSmall
+        public String Id
         {
-            get
+            get { return this.id; }
+            set
             {
-                if (this.IconSmallRawData == null)
-                    return null;
-                else
-                {
-                    Byte[] iconBytes = Convert.FromBase64String(this.IconSmallRawData);
-                    System.IO.MemoryStream ms = new System.IO.MemoryStream(iconBytes, false);
-                    return System.Drawing.Image.FromStream(ms);
-                }
+                this.id = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Id"));
             }
         }
 
-        [JsonProperty("info")]
-        [XmlElement("info")]
-        public ScriptInfo Info { get; set; }
+        private String name;
+        [JsonProperty("name")]
+        public String Name
+        {
+            get { return this.name; }
+            set
+            {
+                this.name = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Name"));
+            }
+        }
+
+
+        private String author;
+        [JsonProperty("author")]
+        public String Author
+        {
+            get { return this.author; }
+            set
+            {
+                this.author = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Author"));
+            }
+        }
+
+        private String description;
+        [JsonProperty("description")]
+        public String Description
+        {
+            get { return this.description; }
+            set
+            {
+                this.description = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Descriptions"));
+            }
+        }
 
         [JsonProperty("versions")]
         public List<ScriptVersion> Versions { get; set; }
@@ -70,21 +89,21 @@ namespace ScriptCenter.Repository
         {
             this.Id = String.Empty;
             this.Name = String.Empty;
-            this.Info = new ScriptInfo();
             this.Versions = new List<ScriptVersion>();
         }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, e);
+        }
+
+        #endregion
     }
 
-    public class ScriptInfo
-    {
-        [JsonProperty("author")]
-        [XmlAttribute("author")]
-        public String Author { get; set; }
-
-        [JsonProperty("description")]
-        [XmlAttribute("description")]
-        public String Description { get; set; }
-    }
 
     public class ScriptVersion
     {

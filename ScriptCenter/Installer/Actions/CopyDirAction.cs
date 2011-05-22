@@ -72,6 +72,12 @@ public class CopyDirAction : InstallerAction
 
 
 
+    [JsonProperty("exclude")]
+    [DefaultValue(@"._*; Thumbs.db; .DS_Store;")]
+    [DisplayName("Exclude files")]
+    public String ExcludeFiles { get; set; }
+
+
     /// <summary>
     /// Copies the directory and all subdirectories.
     /// </summary>

@@ -24,9 +24,8 @@ namespace ScriptCenterTest
             this.manifest = new ScriptManifest();
             this.manifest.Id = "pier.janssen.outliner";
             this.manifest.Name = "Outliner";
-            this.manifest.Info = new ScriptInfo();
-            this.manifest.Info.Author = "Pier Janssen";
-            this.manifest.Info.Description = "descr";
+            this.manifest.Author = "Pier Janssen";
+            this.manifest.Description = "descr";
             this.manifest.Versions.Add(new ScriptVersion(2, 0, 96));
             this.manifest.Versions.Add(new ScriptVersion(2, 0, 95));
             this.manifest.Versions.Add(new ScriptVersion(2, 0, 94));
@@ -52,9 +51,8 @@ namespace ScriptCenterTest
             Assert.IsNotNull(readManifest);
             Assert.AreEqual(this.manifest.Id, readManifest.Id);
             Assert.AreEqual(this.manifest.Name, readManifest.Name);
-            Assert.IsNotNull(readManifest.Info);
-            Assert.AreEqual(this.manifest.Info.Author, readManifest.Info.Author);
-            Assert.AreEqual(this.manifest.Info.Description, readManifest.Info.Description);
+            Assert.AreEqual(this.manifest.Author, readManifest.Author);
+            Assert.AreEqual(this.manifest.Description, readManifest.Description);
             Assert.AreEqual(this.manifest.Versions.Count, readManifest.Versions.Count);
             Assert.AreEqual(this.manifest.Versions[0].Major, readManifest.Versions[0].Major);
             Assert.AreEqual(this.manifest.Versions[0].Minor, readManifest.Versions[0].Minor);

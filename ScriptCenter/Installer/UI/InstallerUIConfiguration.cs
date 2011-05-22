@@ -11,6 +11,8 @@ namespace ScriptCenter.Installer.UI
 {
     public class InstallerUIConfiguration
     {
+        public const String DefaultExtension = ".scinstallerui";
+
         public InstallerUIConfiguration()
         {
             InstallerHelperMethods.SetDefaultValues(this);

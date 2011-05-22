@@ -11,21 +11,29 @@ using ScriptCenter.Installer.Actions;
 
 namespace ScriptCenter.Installer.Editor
 {
-    public partial class InstallerActionsForm : UserControl
+    public partial class InstallerActionsForm : InstallerEditorPage
     {
-        private InstallerConfiguration config;
-
         public InstallerActionsForm()
         {
             InitializeComponent();
-
-            //TODO Remove temporary installerconfig.
-            config = new InstallerConfiguration();
 
             actionsComboBox.Format += new ListControlConvertEventHandler(actionsComboBox_Format);
             actionPropertyGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(actionPropertyGrid_PropertyValueChanged);
 
             fillActionsCombobox();
+        }
+
+        public override ScriptProjectData ProjectData
+        {
+            get
+            {
+                return base.ProjectData;
+            }
+            set
+            {
+                base.ProjectData = value;
+                fillActionsListView();
+            }
         }
 
 
@@ -60,19 +68,39 @@ namespace ScriptCenter.Installer.Editor
             actionsComboBox.SelectedIndex = 0;
         }
 
-        private void addActionButton_Click(object sender, EventArgs e)
+        private ListViewItem addActionToListView(InstallerAction action)
         {
-            ActionComboBoxItem item = (ActionComboBoxItem)actionsComboBox.SelectedItem;
-            InstallerAction action = (InstallerAction)Activator.CreateInstance(item.ActionType);
-            config.InstallerActions.Add(action);
-
             ListViewItem lvItem = new ListViewItem();
-            lvItem.Text = item.ActionName;
+            lvItem.Text = action.ActionName;
             lvItem.Tag = action;
             lvItem.ImageKey = action.ActionImageKey;
             lvItem.SubItems.Add(new ListViewItem.ListViewSubItem(lvItem, action.ActionDetails));
 
             actionsListView.Items.Add(lvItem);
+
+            return lvItem;
+        }
+
+        private void fillActionsListView()
+        {
+            this.actionsListView.BeginUpdate();
+
+            this.actionsListView.Items.Clear();
+            foreach (InstallerAction action in this.ProjectData.InstallerConfig.InstallerActions)
+            {
+                addActionToListView(action);
+            }
+
+            this.actionsListView.EndUpdate();
+        }
+
+        private void addActionButton_Click(object sender, EventArgs e)
+        {
+            ActionComboBoxItem item = (ActionComboBoxItem)actionsComboBox.SelectedItem;
+            InstallerAction action = (InstallerAction)Activator.CreateInstance(item.ActionType);
+            this.ProjectData.InstallerConfig.InstallerActions.Add(action);
+
+            ListViewItem lvItem = addActionToListView(action);
             lvItem.Selected = true;
         }
 
@@ -83,7 +111,7 @@ namespace ScriptCenter.Installer.Editor
                 return;
 
             InstallerAction action = (InstallerAction)actionsListView.SelectedItems[0].Tag;
-            config.InstallerActions.Remove(action);
+            this.ProjectData.InstallerConfig.InstallerActions.Remove(action);
 
             actionsListView.Items.Remove(actionsListView.SelectedItems[0]);
         }
@@ -117,10 +145,10 @@ namespace ScriptCenter.Installer.Editor
             ListViewItem selItem = actionsListView.SelectedItems[0];
             InstallerAction action = (InstallerAction)selItem.Tag;
             Int32 actionPos = selItem.Index;
-            if ((actionPos + direction) >= 0 && (actionPos + direction) < config.InstallerActions.Count)
+            if ((actionPos + direction) >= 0 && (actionPos + direction) < this.ProjectData.InstallerConfig.InstallerActions.Count)
             {
-                config.InstallerActions.Remove(action);
-                config.InstallerActions.Insert(actionPos + direction, action);
+                this.ProjectData.InstallerConfig.InstallerActions.Remove(action);
+                this.ProjectData.InstallerConfig.InstallerActions.Insert(actionPos + direction, action);
                 actionsListView.Items.Remove(selItem);
                 actionsListView.Items.Insert(actionPos + direction, selItem);
             }

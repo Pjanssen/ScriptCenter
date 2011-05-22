@@ -25,12 +25,12 @@ namespace ScriptCenter.Installer
 {
     internal class InstallerHelperMethods
     {
-        internal const String Id_Token              = "{script_id}";
-        internal const String Name_Token            = "{script_name}";
-        internal const String Version_Token         = "{script_version}";
-        internal const String VersionMajor_Token    = "{script_version_major}";
-        internal const String VersionMinor_Token    = "{script_version_minor}";
-        internal const String VersionRevision_Token = "{script_version_revision}";
+        internal const String Id_Token              = "{id}";
+        internal const String Name_Token            = "{name}";
+        internal const String Version_Token         = "{version}";
+        internal const String VersionMajor_Token    = "{version_major}";
+        internal const String VersionMinor_Token    = "{version_minor}";
+        internal const String VersionRevision_Token = "{version_revision}";
 
         internal static String ReplaceTokens(String str, ScriptManifest manifest)
         {
