@@ -115,7 +115,8 @@ internal class KbdFile
         while (removedAction)
         {
             KeyboardAction action = this.Actions.Find(a => a.MacroName.Equals(macroName) && a.MacroCategory.Equals(macroCategory));
-            numActionsRemoved += this.RemoveAction(action);
+            if (removedAction = (this.RemoveAction(action) == 1))
+                numActionsRemoved++;
         }
 
         return numActionsRemoved;
@@ -127,7 +128,8 @@ internal class KbdFile
         while (removedAction)
         {
             KeyboardAction action = this.Actions.Find(a => a.PersistentId == persistentId);
-            numActionsRemoved += this.RemoveAction(action);
+            if (removedAction = (this.RemoveAction(action) == 1))
+                numActionsRemoved++;
         }
 
         return numActionsRemoved;
