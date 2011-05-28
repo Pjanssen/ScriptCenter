@@ -99,11 +99,11 @@ namespace ScriptCenter.Installer
 
 
             //Write manifest, installer configuration and ui configuration.
-            LocalFileHandler<ScriptManifest> manifestHandler = new LocalFileHandler<ScriptManifest>();
+            FileHandler<ScriptManifest> manifestHandler = new FileHandler<ScriptManifest>();
             manifestHandler.Write(tempPath + "script.scmanifest", projectData.Manifest);
-            LocalFileHandler<InstallerConfiguration> configHandler = new LocalFileHandler<InstallerConfiguration>();
+            FileHandler<InstallerConfiguration> configHandler = new FileHandler<InstallerConfiguration>();
             configHandler.Write(tempPath + "/script.scinstaller", projectData.InstallerConfig);
-            LocalFileHandler<InstallerUIConfiguration> uiConfigHandler = new LocalFileHandler<InstallerUIConfiguration>();
+            FileHandler<InstallerUIConfiguration> uiConfigHandler = new FileHandler<InstallerUIConfiguration>();
             uiConfigHandler.Write(tempPath + "script.scinstallerui", projectData.UIConfig);
 
             //Write mzp.run and install.ms

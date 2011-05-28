@@ -29,6 +29,7 @@ namespace ScriptCenter.Installer.UI
 
                 this.titleTxt.Text = InstallerHelperMethods.ReplaceTokens(uiConfig.Title, manifest);
                 this.mainTxt.Text = InstallerHelperMethods.ReplaceTokens(uiConfig.StartPageText, manifest);
+
             }
         }
 

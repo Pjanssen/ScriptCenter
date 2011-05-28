@@ -13,11 +13,6 @@ namespace ScriptCenterTest
     [TestClass()]
     public class InstallerConfigurationTest
     {
-        private String getOutputDirectory()
-        {
-            return System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\ScriptCenterTest\\test_output\\";
-        }
-
         private InstallerConfiguration config;
         [TestInitialize()]
         public void testInitialize()
@@ -32,8 +27,15 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void WriteTest()
         {
-            LocalFileHandler<InstallerConfiguration> handler = new LocalFileHandler<InstallerConfiguration>();
-            Assert.IsTrue(handler.Write(this.getOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension, this.config));
+            FileHandler<InstallerConfiguration> handler = new FileHandler<InstallerConfiguration>();
+            try
+            {
+                handler.Write(TestHelperMethods.GetOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension, this.config);
+            }
+            catch (Exception e) 
+            {
+                Assert.Fail(e.Message);
+            }
         }
 
         [TestMethod()]
@@ -43,8 +45,8 @@ namespace ScriptCenterTest
             this.WriteTest();
 
             // Read and compare manifest
-            LocalFileHandler<InstallerConfiguration> handler = new LocalFileHandler<InstallerConfiguration>();
-            InstallerConfiguration readConfig = handler.Read(this.getOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension);
+            FileHandler<InstallerConfiguration> handler = new FileHandler<InstallerConfiguration>();
+            InstallerConfiguration readConfig = handler.Read(TestHelperMethods.GetOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension);
             Assert.IsNotNull(readConfig);
             Assert.AreEqual(config.InstallerActions.Count, readConfig.InstallerActions.Count);
             Assert.AreEqual(((CopyFileAction)config.InstallerActions[0]).Source, ((CopyFileAction)readConfig.InstallerActions[0]).Source);

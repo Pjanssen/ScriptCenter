@@ -34,7 +34,7 @@ namespace ScriptCenter.Controls
             
             this.repositories = new List<ScriptRepository>();
 
-            LocalFileHandler<ScriptRepositoryList> h = new LocalFileHandler<ScriptRepositoryList>();
+            FileHandler<ScriptRepositoryList> h = new FileHandler<ScriptRepositoryList>();
             this.repositoryList = h.Read(repositoryListFile);
             if (this.repositoryList != null)
             {
@@ -55,16 +55,16 @@ namespace ScriptCenter.Controls
 
         private void LoadManifest(String address)
         {
-            WebFileHandler<ScriptManifest> manifest_handler = new WebFileHandler<ScriptManifest>();
-            manifest_handler.LoadCompleted += new WebFileHandler<ScriptManifest>.LoadCompletedEventHandler(manifest_handler_LoadCompleted);
-            manifest_handler.LoadError += new WebFileHandler<ScriptManifest>.LoadErrorEventHandler(manifest_handler_LoadError);
-            manifest_handler.Load(address);
+            FileHandler<ScriptManifest> manifest_handler = new FileHandler<ScriptManifest>();
+            manifest_handler.LoadComplete += manifest_handler_LoadComplete;
+            manifest_handler.LoadError += manifest_handler_LoadError;
+            manifest_handler.ReadAsync(address);
         }
-        void manifest_handler_LoadError(object sender, LoadErrorEventArgs args)
+        void manifest_handler_LoadError(object sender, ErrorEventArgs args)
         {
-            MessageBox.Show("Could not load manifest:\n" + args.Error.Message);
+            MessageBox.Show("Could not load manifest:\n" + args.Exception.Message);
         }
-        void manifest_handler_LoadCompleted(object sender, LoadCompleteEventArgs<ScriptManifest> args)
+        void manifest_handler_LoadComplete(object sender, LoadCompleteEventArgs<ScriptManifest> args)
         {
             String id = args.Data.Id;
             
@@ -113,21 +113,21 @@ namespace ScriptCenter.Controls
             if (!address.EndsWith(".repository"))
                 address += "/" + Defaults.Repository;
 
-            WebFileHandler<ScriptRepository> repository_handler = new WebFileHandler<ScriptRepository>();
-            repository_handler.LoadCompleted += new WebFileHandler<ScriptRepository>.LoadCompletedEventHandler(repository_handler_LoadCompleted);
-            repository_handler.LoadError += new WebFileHandler<ScriptRepository>.LoadErrorEventHandler(repository_handler_LoadError);
-            repository_handler.Load(address);
+            FileHandler<ScriptRepository> repository_handler = new FileHandler<ScriptRepository>();
+            repository_handler.LoadComplete += repository_handler_LoadComplete;
+            repository_handler.LoadError += repository_handler_LoadError;
+            repository_handler.ReadAsync(address);
         }
-        void repository_handler_LoadError(object sender, LoadErrorEventArgs args)
+        void repository_handler_LoadError(object sender, ErrorEventArgs args)
         {
-            String msg = "Could not load repository.\n" + args.Error.Message + "\n\nRemove repository from list?";
+            String msg = "Could not load repository.\n" + args.Exception.Message + "\n\nRemove repository from list?";
             DialogResult r = MessageBox.Show(msg, "Load Error", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (r == System.Windows.Forms.DialogResult.Yes)
             {
 
             }
         }
-        void repository_handler_LoadCompleted(object sender, LoadCompleteEventArgs<ScriptRepository> args)
+        void repository_handler_LoadComplete(object sender, LoadCompleteEventArgs<ScriptRepository> args)
         {
             foreach (ScriptManifestReference scriptRef in args.Data.Scripts)
             {
@@ -144,7 +144,7 @@ namespace ScriptCenter.Controls
                 ScriptRepositoryReference rep = new ScriptRepositoryReference();
                 //rep.URI = this.comboBox1.Text;
                 this.repositoryList.Repositories.Add(rep);
-                LocalFileHandler<ScriptRepositoryList> h = new LocalFileHandler<ScriptRepositoryList>();
+                FileHandler<ScriptRepositoryList> h = new FileHandler<ScriptRepositoryList>();
                 h.Write(this.repositoryListFile, this.repositoryList);
                 this.LoadRepository(rep.URI);
             }
@@ -184,10 +184,10 @@ namespace ScriptCenter.Controls
         private void button1_Click(object sender, EventArgs e)
         {
 
-            LocalFileHandler<ScriptManifest> handler = new LocalFileHandler<ScriptManifest>();
+            FileHandler<ScriptManifest> handler = new FileHandler<ScriptManifest>();
             ScriptManifest manifest = handler.Read("C:/temp/scriptcenter/unpacked_installer/outliner.manifest.xml");
             
-            LocalFileHandler<InstallerConfiguration> configHandler = new LocalFileHandler<InstallerConfiguration>();
+            FileHandler<InstallerConfiguration> configHandler = new FileHandler<InstallerConfiguration>();
             InstallerConfiguration config = configHandler.Read("C:/temp/scriptcenter/unpacked_installer/config.installer.xml");
 
             Installer.Installer installer = new Installer.Installer("C:/temp/scriptcenter/unpacked_installer", manifest, config);
@@ -219,7 +219,7 @@ namespace ScriptCenter.Controls
             config.InstallerActions.Add(new CopyDirAction("startupscripts", AppPaths.Directory.StartupScripts));
             config.InstallerActions.Add(new AssignHotkeyAction(Keys.H | Keys.Alt, "", ""));
 
-            LocalFileHandler<InstallerConfiguration> handler = new LocalFileHandler<InstallerConfiguration>();
+            FileHandler<InstallerConfiguration> handler = new FileHandler<InstallerConfiguration>();
             handler.Write("C:/temp/scriptcenter/config.installer", config);
         }
     }

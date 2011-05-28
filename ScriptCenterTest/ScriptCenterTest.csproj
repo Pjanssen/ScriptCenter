@@ -62,12 +62,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CuiFileTest.cs" />
+    <Compile Include="FileHandlerTest.cs" />
     <Compile Include="InstallerConfigurationTest.cs" />
     <Compile Include="KbdFileTest.cs" />
-    <Compile Include="LocalFileHandlerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptManifestTest.cs" />
     <Compile Include="ScriptRepositoryListTest.cs" />
+    <Compile Include="TestHelperMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScriptCenter\ScriptCenter.csproj">
@@ -77,7 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="test_files\ame-light.kbd" />
+    <None Include="test_files\SimpleBrokenTestObject.json" />
     <None Include="test_files\MaxStartUI.cui" />
+    <None Include="test_files\SimpleTestObject.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

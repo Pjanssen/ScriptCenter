@@ -34,9 +34,16 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void WriteTest()
         {
-            LocalFileHandler<ScriptManifest> handler = new LocalFileHandler<ScriptManifest>();
+            FileHandler<ScriptManifest> handler = new FileHandler<ScriptManifest>();
 
-            Assert.IsTrue(handler.Write(this.getOutputDirectory() + "/outliner.manifest.json", this.manifest));
+            try
+            {
+                handler.Write(this.getOutputDirectory() + "/outliner.manifest.json", this.manifest);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
         }
 
         [TestMethod()]
@@ -46,7 +53,7 @@ namespace ScriptCenterTest
             this.WriteTest();
 
             // Read and compare manifest
-            LocalFileHandler<ScriptManifest> handler = new LocalFileHandler<ScriptManifest>();
+            FileHandler<ScriptManifest> handler = new FileHandler<ScriptManifest>();
             ScriptManifest readManifest = handler.Read(this.getOutputDirectory() + "/outliner.manifest.json");
             Assert.IsNotNull(readManifest);
             Assert.AreEqual(this.manifest.Id, readManifest.Id);

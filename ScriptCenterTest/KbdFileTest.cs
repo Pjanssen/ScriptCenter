@@ -13,22 +13,10 @@ namespace ScriptCenterTest
     [TestClass()]
     public class KbdFileTest
     {
-        private String getTestFilesDirectory()
-        {
-            return System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\ScriptCenterTest\\test_files\\";
-        }
-        private String getOutputDirectory()
-        {
-            return System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\ScriptCenterTest\\test_output\\";
-        }
-
-        /// <summary>
-        ///A test for Read
-        ///</summary>
         [TestMethod()]
         public void ReadTest()
         {
-            String kbdFile = getTestFilesDirectory() + "ame-light.kbd";
+            String kbdFile = TestHelperMethods.GetTestFilesDirectory() + "ame-light.kbd";
             Assert.IsTrue(System.IO.File.Exists(kbdFile));
             KbdFile kbd = new KbdFile(kbdFile);
             Assert.IsTrue(kbd.Read());
@@ -37,12 +25,12 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void WriteTest()
         {
-            String kbdFile = getTestFilesDirectory() + "ame-light.kbd";
+            String kbdFile = TestHelperMethods.GetTestFilesDirectory() + "ame-light.kbd";
             Assert.IsTrue(System.IO.File.Exists(kbdFile));
             KbdFile kbd = new KbdFile(kbdFile);
             Assert.IsTrue(kbd.Read());
 
-            kbd.File = getOutputDirectory() + "test.kbd";
+            kbd.File = TestHelperMethods.GetOutputDirectory() + "test.kbd";
             Assert.IsTrue(kbd.Write());
 
             Boolean compare_result = true;
@@ -64,7 +52,7 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void RemoveActionTest()
         {
-            String kbdFile = getTestFilesDirectory() + "ame-light.kbd";
+            String kbdFile = TestHelperMethods.GetTestFilesDirectory() + "ame-light.kbd";
             Assert.IsTrue(System.IO.File.Exists(kbdFile));
             KbdFile kbd = new KbdFile(kbdFile);
             Assert.IsTrue(kbd.Read());

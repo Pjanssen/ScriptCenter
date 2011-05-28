@@ -91,6 +91,10 @@ namespace ScriptCenter.Installer.Actions
                 }
 
                 File.Copy(sourceFile, targetFile, true);
+
+                if (this.Target == AppPaths.Directory.MacroScripts)
+                    ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
+
                 installer.Log.Append("Copied file " + targetFile);
             }
             catch (Exception e)

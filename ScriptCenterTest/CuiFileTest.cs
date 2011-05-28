@@ -13,22 +13,10 @@ namespace ScriptCenterTest
     [TestClass()]
     public class CuiFileTest
     {
-        private String getTestFilesDirectory()
-        {
-            return System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\ScriptCenterTest\\test_files\\";
-        }
-        private String getOutputDirectory()
-        {
-            return System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\ScriptCenterTest\\test_output\\";
-        }
-
-        /// <summary>
-        ///A test for Read
-        ///</summary>
         [TestMethod()]
         public void ReadTest()
         {
-            String cuiFile = this.getTestFilesDirectory() + "MaxStartUI.cui";
+            String cuiFile = TestHelperMethods.GetTestFilesDirectory() + "MaxStartUI.cui";
             Assert.IsTrue(System.IO.File.Exists(cuiFile));
             CuiFile cui = new CuiFile(cuiFile);
             Assert.IsTrue(cui.Read());
@@ -37,12 +25,12 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void WriteTest()
         {
-            String cuiFile = getTestFilesDirectory() + "MaxStartUI.cui";
+            String cuiFile = TestHelperMethods.GetTestFilesDirectory() + "MaxStartUI.cui";
             Assert.IsTrue(System.IO.File.Exists(cuiFile));
             CuiFile cui = new CuiFile(cuiFile);
             Assert.IsTrue(cui.Read());
 
-            cui.File = getOutputDirectory() + "test.cui";
+            cui.File = TestHelperMethods.GetOutputDirectory() + "test.cui";
             Assert.IsTrue(cui.Write());
 
             Boolean compare_result = true;

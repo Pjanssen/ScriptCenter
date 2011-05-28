@@ -59,7 +59,7 @@ namespace ScriptCenter.Installer.Editor
             DialogResult result = openInstallerConfigDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                LocalFileHandler<ScriptProjectData> handler = new LocalFileHandler<ScriptProjectData>();
+                FileHandler<ScriptProjectData> handler = new FileHandler<ScriptProjectData>();
                 this.projectData = handler.Read(openInstallerConfigDialog.FileName);
                 
                 if (this.page != null && this.projectData != null)
@@ -95,9 +95,15 @@ namespace ScriptCenter.Installer.Editor
                 this.projectDataPath = this.saveInstallerConfigDialog.FileName;
             }
 
-            LocalFileHandler<ScriptProjectData> handler = new LocalFileHandler<ScriptProjectData>();
-            if (!handler.Write(this.projectDataPath, this.projectData))
-                MessageBox.Show("Failed to write file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            FileHandler<ScriptProjectData> handler = new FileHandler<ScriptProjectData>();
+            try
+            {
+                handler.Write(this.projectDataPath, this.projectData);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Failed to write file:\n" + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void exportButton_Click(object sender, EventArgs e)

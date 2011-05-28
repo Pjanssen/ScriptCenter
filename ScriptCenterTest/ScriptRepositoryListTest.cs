@@ -29,8 +29,15 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void WriteRepositoryListTest()
         {
-            LocalFileHandler<ScriptRepositoryList> handler = new LocalFileHandler<ScriptRepositoryList>();
-            Assert.IsTrue(handler.Write(this.getOutputDirectory() + "repositoryList.json", this.repoList));
+            FileHandler<ScriptRepositoryList> handler = new FileHandler<ScriptRepositoryList>();
+            try
+            {
+                handler.Write(this.getOutputDirectory() + "repositoryList.json", this.repoList);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
         }
 
         [TestMethod()]
@@ -38,7 +45,7 @@ namespace ScriptCenterTest
         {
             this.WriteRepositoryListTest();
 
-            LocalFileHandler<ScriptRepositoryList> handler = new LocalFileHandler<ScriptRepositoryList>();
+            FileHandler<ScriptRepositoryList> handler = new FileHandler<ScriptRepositoryList>();
             ScriptRepositoryList readList = handler.Read(this.getOutputDirectory() + "repositoryList.json");
             Assert.IsNotNull(readList);
             Assert.IsNotNull(readList.Repositories);

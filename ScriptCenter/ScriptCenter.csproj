@@ -158,11 +158,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Repository\LocalFileHandler.cs" />
+    <Compile Include="Repository\FileHandler.cs" />
     <Compile Include="Repository\ScriptManifest.cs" />
     <Compile Include="Repository\ScriptRepository.cs" />
     <Compile Include="Repository\ScriptRepositoryList.cs" />
-    <Compile Include="Repository\WebFileHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\ScriptCenter.Installer.ScriptProjectData.datasource" />

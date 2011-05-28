@@ -101,6 +101,9 @@ public class CopyDirAction : InstallerAction
                 }
 
                 File.Copy(file, targetFile, true);
+
+                if (this.Target == AppPaths.Directory.MacroScripts)
+                    ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
             }
 
             installer.Log.Append("Copied directory " + targetPath);

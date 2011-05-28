@@ -31,7 +31,7 @@ namespace ScriptCenter.Controls
             this.listView1.SelectedIndexChanged += new EventHandler(listView1_SelectedIndexChanged);
             this.listView1.ItemChecked += new ItemCheckedEventHandler(listView1_ItemChecked);
 
-            LocalFileHandler<ScriptRepository> h = new LocalFileHandler<ScriptRepository>();
+            FileHandler<ScriptRepository> h = new FileHandler<ScriptRepository>();
             this.installedScripts = h.Read(installedScriptsFile);
             if (installedScripts == null)
             {
@@ -49,7 +49,7 @@ namespace ScriptCenter.Controls
 
         private void LoadManifest(String address)
         {
-            LocalFileHandler<ScriptManifest> h = new LocalFileHandler<ScriptManifest>();
+            FileHandler<ScriptManifest> h = new FileHandler<ScriptManifest>();
             ScriptManifest m = h.Read(address);
 
             ListViewItem i = new ListViewItem();

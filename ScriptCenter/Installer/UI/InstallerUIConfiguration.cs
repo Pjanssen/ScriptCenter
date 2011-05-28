@@ -20,7 +20,7 @@ namespace ScriptCenter.Installer.UI
 
         public static InstallerUIConfiguration FromFile(String file)
         {
-            LocalFileHandler<InstallerUIConfiguration> handler = new LocalFileHandler<InstallerUIConfiguration>();
+            FileHandler<InstallerUIConfiguration> handler = new FileHandler<InstallerUIConfiguration>();
             return handler.Read(file);
         }
 
