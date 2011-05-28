@@ -22,6 +22,22 @@ namespace ScriptCenterTest
         {
             return Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\ScriptCenterTest\\test_output\\";
         }
+
+        public static Boolean CompareFiles(String path1, String path2)
+        {
+            using (StreamReader r_orig = new StreamReader(path1), r_new = new StreamReader(path2))
+            {
+                while (!r_orig.EndOfStream)
+                {
+                    if (r_new.EndOfStream || !r_orig.ReadLine().Equals(r_new.ReadLine()))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 
     internal class SimpleTestObject

@@ -33,20 +33,7 @@ namespace ScriptCenterTest
             cui.File = TestHelperMethods.GetOutputDirectory() + "test.cui";
             Assert.IsTrue(cui.Write());
 
-            Boolean compare_result = true;
-            using (StreamReader r_orig = new StreamReader(cuiFile), r_new = new StreamReader(cui.File))
-            {
-                while (!r_orig.EndOfStream)
-                {
-                    if (r_new.EndOfStream || !r_orig.ReadLine().Equals(r_new.ReadLine()))
-                    {
-                        compare_result = false;
-                        break;
-                    }
-                }
-            }
-
-            Assert.IsTrue(compare_result);
+            Assert.IsTrue(TestHelperMethods.CompareFiles(cuiFile, cui.File));
         }
     }
 }

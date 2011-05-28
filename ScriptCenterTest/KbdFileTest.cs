@@ -32,21 +32,7 @@ namespace ScriptCenterTest
 
             kbd.File = TestHelperMethods.GetOutputDirectory() + "test.kbd";
             Assert.IsTrue(kbd.Write());
-
-            Boolean compare_result = true;
-            using (StreamReader r_orig = new StreamReader(kbdFile), r_new = new StreamReader(kbd.File))
-            {
-                while (!r_orig.EndOfStream)
-                {
-                    if (r_new.EndOfStream || !r_orig.ReadLine().Equals(r_new.ReadLine()))
-                    {
-                        compare_result = false;
-                        break;
-                    }
-                }
-            }
-
-            Assert.IsTrue(compare_result);
+            Assert.IsTrue(TestHelperMethods.CompareFiles(kbdFile, kbd.File));
         }
 
         [TestMethod()]
