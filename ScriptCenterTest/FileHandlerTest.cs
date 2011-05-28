@@ -160,7 +160,7 @@ namespace ScriptCenterTest
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             SimpleTestObject obj = null;
-            handler.LoadComplete += delegate(object sender, LoadCompleteEventArgs<SimpleTestObject> e)
+            handler.ReadComplete += delegate(object sender, ReadCompleteEventArgs<SimpleTestObject> e)
             {
                 obj = e.Data;
                 manualEvent.Set();
@@ -178,7 +178,7 @@ namespace ScriptCenterTest
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             SimpleTestObject obj = null;
-            handler.LoadComplete += delegate(object sender, LoadCompleteEventArgs<SimpleTestObject> e)
+            handler.ReadComplete += delegate(object sender, ReadCompleteEventArgs<SimpleTestObject> e)
             {
                 obj = e.Data;
                 manualEvent.Set();
@@ -197,7 +197,7 @@ namespace ScriptCenterTest
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             Exception exception = null;
-            handler.LoadComplete += delegate(object sender, LoadCompleteEventArgs<SimpleTestObject> e)
+            handler.ReadComplete += delegate(object sender, ReadCompleteEventArgs<SimpleTestObject> e)
             {
                 Assert.Fail("LoadComplete event should not fire when parsing broken file.");
             };
@@ -217,11 +217,11 @@ namespace ScriptCenterTest
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             Exception exception = null;
-            handler.LoadComplete += delegate(object sender, LoadCompleteEventArgs<SimpleTestObject> e)
+            handler.ReadComplete += delegate(object sender, ReadCompleteEventArgs<SimpleTestObject> e)
             {
                 Assert.Fail("LoadComplete event should not fire when trying to read non-existing file.");
             };
-            handler.LoadError += delegate(object sender, ErrorEventArgs e)
+            handler.ReadError += delegate(object sender, ErrorEventArgs e)
             {
                 exception = e.Exception;
                 manualEvent.Set();
@@ -236,11 +236,11 @@ namespace ScriptCenterTest
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             Exception exception = null;
-            handler.LoadComplete += delegate(object sender, LoadCompleteEventArgs<SimpleTestObject> e)
+            handler.ReadComplete += delegate(object sender, ReadCompleteEventArgs<SimpleTestObject> e)
             {
                 Assert.Fail("LoadComplete event should not fire when trying to read null file.");
             };
-            handler.LoadError += delegate(object sender, ErrorEventArgs e)
+            handler.ReadError += delegate(object sender, ErrorEventArgs e)
             {
                 exception = e.Exception;
                 manualEvent.Set();
@@ -255,11 +255,11 @@ namespace ScriptCenterTest
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             Exception exception = null;
-            handler.LoadComplete += delegate(object sender, LoadCompleteEventArgs<SimpleTestObject> e)
+            handler.ReadComplete += delegate(object sender, ReadCompleteEventArgs<SimpleTestObject> e)
             {
                 Assert.Fail("LoadComplete event should not fire when trying to read null file.");
             };
-            handler.LoadError += delegate(object sender, ErrorEventArgs e)
+            handler.ReadError += delegate(object sender, ErrorEventArgs e)
             {
                 exception = e.Exception;
                 manualEvent.Set();

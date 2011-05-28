@@ -11,16 +11,14 @@ namespace ScriptCenterTest
     [TestClass()]
     public class ScriptManifestTest
     {
-        private String getOutputDirectory()
-        {
-            return System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\ScriptCenterTest\\test_output\\";
-        }
-
         private ScriptManifest manifest;
+        private String outputFile;
 
         [TestInitialize()]
         public void testInitialize()
         {
+            this.outputFile = TestHelperMethods.GetOutputDirectory() + "/outliner" + ScriptManifest.DefaultExtension;
+
             this.manifest = new ScriptManifest();
             this.manifest.Id = "pier.janssen.outliner";
             this.manifest.Name = "Outliner";
@@ -36,14 +34,13 @@ namespace ScriptCenterTest
         {
             FileHandler<ScriptManifest> handler = new FileHandler<ScriptManifest>();
 
-            try
-            {
-                handler.Write(this.getOutputDirectory() + "/outliner.manifest.json", this.manifest);
-            }
-            catch (Exception e)
-            {
-                Assert.Fail(e.Message);
-            }
+            //Remove the file if it already exists, so we test that it actually writes a file.
+            if (System.IO.File.Exists(outputFile))
+                System.IO.File.Delete(outputFile);
+
+            handler.Write(outputFile, this.manifest);
+
+            Assert.IsTrue(System.IO.File.Exists(outputFile));
         }
 
         [TestMethod()]
@@ -54,7 +51,7 @@ namespace ScriptCenterTest
 
             // Read and compare manifest
             FileHandler<ScriptManifest> handler = new FileHandler<ScriptManifest>();
-            ScriptManifest readManifest = handler.Read(this.getOutputDirectory() + "/outliner.manifest.json");
+            ScriptManifest readManifest = handler.Read(outputFile);
             Assert.IsNotNull(readManifest);
             Assert.AreEqual(this.manifest.Id, readManifest.Id);
             Assert.AreEqual(this.manifest.Name, readManifest.Name);

@@ -60,19 +60,53 @@ internal class KbdFile
     /// </summary>
     public List<KeyboardAction> Actions { get; set; }
 
-    public Boolean AddAction(String macroName, String macroCategory, Keys keys)
+    /// <summary>
+    /// Adds a hotkey assignment to the kbd file.
+    /// </summary>
+    /// <param name="macroName">The name of the macroscript to be called.</param>
+    /// <param name="macroCategory">The category of the macroscript to be called.</param>
+    /// <param name="keys">The keys associated with the hotkey assignment.</param>
+    /// <param name="replace">Whether to replace an assignment with the same keys if it already exists.</param>
+    /// <returns>True if the hotkey assignment was added, false if the exact assignment already existed or if it should not be replaced.</returns>
+    public Boolean AddAction(String macroName, String macroCategory, Keys keys, Boolean replace)
     {
-        if (this.Actions.Exists(a => a.MacroName.Equals(macroName) && a.MacroCategory.Equals(macroCategory) && a.Keys == keys))
-            return false;
+        KeyboardAction existingAction = this.Actions.Find(a => a.TableId == MacroTableId && a.Keys == keys);
+        if (existingAction != null)
+        {
+            if (!replace || (existingAction.MacroName == macroName && existingAction.MacroCategory == macroCategory))
+                return false;
+            else
+                this.Actions.Remove(existingAction);
+        }
 
         KeyboardAction action = new KeyboardAction { MacroName = macroName, MacroCategory = macroCategory, Keys = keys, TableId = MacroTableId };
-        this.Actions.Add(action);
+        Int32 insertLocation = this.Actions.FindLastIndex(a => a.TableId == MacroTableId) + 1;
+        if (insertLocation == 0)
+            insertLocation = this.Actions.Count;
+
+        this.Actions.Insert(insertLocation, action);
+        
         return true;
     }
 
-    public Boolean RemoveAction(KeyboardAction action)
+    /// <summary>
+    /// Adds a hotkey assignment to the kbd file, replacing an action with the same keys if it already exists.
+    /// </summary>
+    /// <param name="macroName">The name of the macroscript to be called.</param>
+    /// <param name="macroCategory">The category of the macroscript to be called.</param>
+    /// <param name="keys">The keys associated with the hotkey assignment.</param>
+    /// <returns>True if the hotkey assignment was added, false if the exact assignment already existed.</returns>
+    public Boolean AddAction(String macroName, String macroCategory, Keys keys)
     {
-        return this.Actions.Remove(action);
+        return AddAction(macroName, macroCategory, keys, true);
+    }
+
+    public Int32 RemoveAction(KeyboardAction action)
+    {
+        if (this.Actions.Remove(action))
+            return 1;
+        else
+            return 0;
     }
     public Int32 RemoveAction(String macroName, String macroCategory)
     {
@@ -81,9 +115,7 @@ internal class KbdFile
         while (removedAction)
         {
             KeyboardAction action = this.Actions.Find(a => a.MacroName.Equals(macroName) && a.MacroCategory.Equals(macroCategory));
-            removedAction = this.RemoveAction(action);
-            if (removedAction)
-                numActionsRemoved++;
+            numActionsRemoved += this.RemoveAction(action);
         }
 
         return numActionsRemoved;
@@ -95,9 +127,7 @@ internal class KbdFile
         while (removedAction)
         {
             KeyboardAction action = this.Actions.Find(a => a.PersistentId == persistentId);
-            removedAction = this.RemoveAction(action);
-            if (removedAction)
-                numActionsRemoved++;
+            numActionsRemoved += this.RemoveAction(action);
         }
 
         return numActionsRemoved;

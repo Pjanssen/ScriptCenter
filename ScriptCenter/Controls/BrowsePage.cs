@@ -56,15 +56,15 @@ namespace ScriptCenter.Controls
         private void LoadManifest(String address)
         {
             FileHandler<ScriptManifest> manifest_handler = new FileHandler<ScriptManifest>();
-            manifest_handler.LoadComplete += manifest_handler_LoadComplete;
-            manifest_handler.LoadError += manifest_handler_LoadError;
+            manifest_handler.ReadComplete += manifest_handler_LoadComplete;
+            manifest_handler.ReadError += manifest_handler_LoadError;
             manifest_handler.ReadAsync(address);
         }
         void manifest_handler_LoadError(object sender, ErrorEventArgs args)
         {
             MessageBox.Show("Could not load manifest:\n" + args.Exception.Message);
         }
-        void manifest_handler_LoadComplete(object sender, LoadCompleteEventArgs<ScriptManifest> args)
+        void manifest_handler_LoadComplete(object sender, ReadCompleteEventArgs<ScriptManifest> args)
         {
             String id = args.Data.Id;
             
@@ -114,8 +114,8 @@ namespace ScriptCenter.Controls
                 address += "/" + Defaults.Repository;
 
             FileHandler<ScriptRepository> repository_handler = new FileHandler<ScriptRepository>();
-            repository_handler.LoadComplete += repository_handler_LoadComplete;
-            repository_handler.LoadError += repository_handler_LoadError;
+            repository_handler.ReadComplete += repository_handler_LoadComplete;
+            repository_handler.ReadError += repository_handler_LoadError;
             repository_handler.ReadAsync(address);
         }
         void repository_handler_LoadError(object sender, ErrorEventArgs args)
@@ -127,7 +127,7 @@ namespace ScriptCenter.Controls
 
             }
         }
-        void repository_handler_LoadComplete(object sender, LoadCompleteEventArgs<ScriptRepository> args)
+        void repository_handler_LoadComplete(object sender, ReadCompleteEventArgs<ScriptRepository> args)
         {
             foreach (ScriptManifestReference scriptRef in args.Data.Scripts)
             {

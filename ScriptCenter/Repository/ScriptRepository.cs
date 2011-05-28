@@ -23,38 +23,30 @@ using Newtonsoft.Json;
 
 namespace ScriptCenter.Repository
 {
-    [XmlRoot("script_repository")]
     public class ScriptRepository
     {
         public const String DefaultExtension = ".screpo";
 
         [JsonProperty("name")]
-        [XmlElement("name")]
         public String Name { get; set; }
 
         [JsonProperty("scripts")]
-        [XmlArray("scripts")]
-        [XmlArrayItem("script")]
         public List<ScriptManifestReference> Scripts { get; set; }
 
-        public ScriptRepository()
-        {
-            this.Scripts = new List<ScriptManifestReference>();
-        }
-        public ScriptRepository(String name) : this()
+        public ScriptRepository() : this("") { }
+        public ScriptRepository(String name)
         {
             this.Name = name;
+            this.Scripts = new List<ScriptManifestReference>();
         }
     }
 
     public class ScriptManifestReference
     {
         [JsonProperty("id")]
-        [XmlAttribute("id")]
         public String Id { get; set; }
 
         [JsonProperty("uri")]
-        [XmlAttribute("uri")]
         public String URI { get; set; }
 
         public ScriptManifestReference() { }

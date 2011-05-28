@@ -17,20 +17,20 @@ namespace ScriptCenter.Repository
     {
         private JsonSerializer serializer;
 
-        public event LoadCompletedEventHandler LoadComplete;
-        public delegate void LoadCompletedEventHandler(object sender, LoadCompleteEventArgs<T> e);
-        protected void OnLoadComplete(LoadCompleteEventArgs<T> args)
+        public event ReadCompleteEventHandler ReadComplete;
+        public delegate void ReadCompleteEventHandler(object sender, ReadCompleteEventArgs<T> e);
+        protected void OnReadComplete(ReadCompleteEventArgs<T> args)
         {
-            if (this.LoadComplete != null)
-                this.LoadComplete(this, args);
+            if (this.ReadComplete != null)
+                this.ReadComplete(this, args);
         }
 
-        public event ErrorEventHandler LoadError;
+        public event ErrorEventHandler ReadError;
         public delegate void ErrorEventHandler(object sender, ErrorEventArgs e);
-        protected void OnLoadError(ErrorEventArgs args)
+        protected void OnReadError(ErrorEventArgs args)
         {
-            if (this.LoadError != null)
-                this.LoadError(this, args);
+            if (this.ReadError != null)
+                this.ReadError(this, args);
         }
 
         public event ErrorEventHandler SerializationError;
@@ -81,14 +81,14 @@ namespace ScriptCenter.Repository
             }
             catch (Exception e)
             {
-                this.OnLoadError(new ErrorEventArgs(e));
+                this.OnReadError(new ErrorEventArgs(e));
             }
         }
         private void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error != null)
             {
-                this.OnLoadError(new ErrorEventArgs(e.Error));
+                this.OnReadError(new ErrorEventArgs(e.Error));
                 return;
             }
 
@@ -96,7 +96,7 @@ namespace ScriptCenter.Repository
             try
             {
                 T data = (T)this.serializer.Deserialize(str, typeof(T));
-                this.OnLoadComplete(new LoadCompleteEventArgs<T>(data));
+                this.OnReadComplete(new ReadCompleteEventArgs<T>(data));
             }
             catch (Exception exception)
             {
@@ -128,10 +128,10 @@ namespace ScriptCenter.Repository
         }
     }
 
-    public class LoadCompleteEventArgs<T> : EventArgs
+    public class ReadCompleteEventArgs<T> : EventArgs
     {
         public T Data { get; private set; }
-        public LoadCompleteEventArgs(T data)
+        public ReadCompleteEventArgs(T data)
         {
             this.Data = data;
         }

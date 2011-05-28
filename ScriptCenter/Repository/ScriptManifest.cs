@@ -27,7 +27,6 @@ namespace ScriptCenter.Repository
     /// <summary>
     /// The ScriptManifest contains information about a script and its versions.
     /// </summary>
-    [XmlRoot("script_manifest")]
     public class ScriptManifest : INotifyPropertyChanged
     {
         public const String DefaultExtension = ".scmanifest";
@@ -112,23 +111,18 @@ namespace ScriptCenter.Repository
     public class ScriptVersion
     {
         [JsonIgnore()]
-        [XmlIgnore()]
         public Int32 Major { get; set; }
 
         [JsonIgnore()]
-        [XmlIgnore()]
         public Int32 Minor { get; set; }
 
         [JsonIgnore()]
-        [XmlIgnore()]
         public Int32 Revision { get; set; }
 
         [JsonProperty("requirements")]
-        [XmlElement("requirements")]
         public ScriptRequirements Requirements { get; set; }
 
         [JsonProperty("version")]
-        [XmlAttribute("version")]
         public String Version
         {
             get { return this.Major.ToString() + "." + this.Minor.ToString() + "." + this.Revision.ToString(); }
@@ -166,11 +160,11 @@ namespace ScriptCenter.Repository
 
     public class ScriptRequirements
     {
-        [XmlAttribute("min_3dsmax_version")]
+        [JsonProperty("min_3dsmax_version")]
         public Int32 Minimal3dsmaxVersion { get; set; }
-        [XmlAttribute("max_3dsmax_version")]
+        [JsonProperty("max_3dsmax_version")]
         public Int32 Maximum3dsmaxVersion { get; set; }
-        [XmlAttribute("min_dotnet_version")]
+        [JsonProperty("min_dotnet_version")]
         public float MinimalDotNetVersion { get; set; }
     }
 }
