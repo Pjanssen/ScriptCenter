@@ -29,10 +29,16 @@ namespace ScriptCenterTest
             {
                 while (!r_orig.EndOfStream)
                 {
-                    if (r_new.EndOfStream || !r_orig.ReadLine().Equals(r_new.ReadLine()))
-                    {
+                    if (r_new.EndOfStream)
                         return false;
-                    }
+
+                    String origLine = r_orig.ReadLine();
+                    if (origLine == String.Empty)
+                        continue;
+
+                    String newLine = r_new.ReadLine();
+                    if (origLine != newLine)
+                        return false;
                 }
             }
 

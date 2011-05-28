@@ -77,9 +77,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="test_files\ame-light.CUI" />
     <None Include="test_files\ame-light.kbd" />
     <None Include="test_files\SimpleBrokenTestObject.json" />
-    <None Include="test_files\MaxStartUI.cui" />
     <None Include="test_files\SimpleTestObject.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

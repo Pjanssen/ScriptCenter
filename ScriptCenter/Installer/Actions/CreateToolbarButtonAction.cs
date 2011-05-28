@@ -100,7 +100,7 @@ namespace ScriptCenter.Installer.Actions
             if (!cui.Read())
                 return false;
 
-            if (cui.RemoveToolbarButton(this.MacroName, this.MacroCategory))
+            if (cui.RemoveItem(this.MacroName, this.MacroCategory))
             {
                 if (!cui.Write())
                     return false;

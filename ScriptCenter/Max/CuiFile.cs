@@ -172,17 +172,19 @@ namespace ScriptCenter.Max
         }
 
 
-        private void AddItem(CuiSection toolbar, String value)
+        private Boolean AddItem(CuiSection toolbar, String value)
         {
             CuiItem itemCountProp = toolbar.Items.Find(p => p.Key == KeyItemCount);
             if (itemCountProp == null)
-                return;
+                return false;
 
             Int32 itemCount = Int32.Parse(itemCountProp.Value) + 1;
             itemCountProp.Value = itemCount.ToString();
 
             String itemKey = "Item" + (itemCount - 1).ToString();
             toolbar.AddItem(itemKey, value);
+
+            return true;
         }
         /// <summary>
         /// Adds an item to a toolbar.
@@ -216,12 +218,11 @@ namespace ScriptCenter.Max
 
             String buttonFormat = "2|0|0|31|3|647394|{0}`{1}|0|0|\"{2}\"|\"{2}\"|-1|";
             String itemValue = String.Format(buttonFormat, macroName, macroCategory, itemText);
+
             if (toolbarSection.Items.Exists(i => i.Value == itemValue))
                 return false;
-            
-            this.AddItem(toolbarSection, itemValue);
 
-            return true;
+            return this.AddItem(toolbarSection, itemValue);
         }
         /// <summary>
         /// Adds a separator to the toolbar.
@@ -241,9 +242,7 @@ namespace ScriptCenter.Max
             if (toolbarSection == null)
                 return false;
 
-            this.AddItem(toolbarSection, "3|6|16|31|1");
-
-            return true;
+            return this.AddItem(toolbarSection, "3|6|16|31|1");
         }
         /// <summary>
         /// Not implemented yet.
@@ -281,25 +280,40 @@ namespace ScriptCenter.Max
             toolbar.Items.Remove(item);
         }
         /// <summary>
-        /// Removes any item assigned to the given macroscript on any toolbar.
+        /// Removes any item assigned to the given macroscript from the given toolbar.
         /// </summary>
-        public Boolean RemoveToolbarButton(String macroName, String macroCategory)
+        public Boolean RemoveItem(String toolbarName, String macroName, String macroCategory)
+        {
+            CuiSection toolbarSection = this.Sections.Find(s => s.Name == toolbarName);
+            if (toolbarSection == null)
+                return false;
+
+            Boolean itemRemoved = false;
+            List<CuiItem> itemsToRemove = new List<CuiItem>();
+            foreach (CuiItem item in toolbarSection.Items)
+            {
+                if (Regex.IsMatch(item.Value, (macroName + "`" + macroCategory)))
+                {
+                    itemRemoved = true;
+                    itemsToRemove.Add(item);
+                }
+            }
+
+            foreach (CuiItem item in itemsToRemove)
+                this.RemoveItem(toolbarSection, item);
+
+            return itemRemoved;
+        }
+        /// <summary>
+        /// Removes any item assigned to the given macroscript from any toolbar.
+        /// </summary>
+        public Boolean RemoveItem(String macroName, String macroCategory)
         {
             Boolean itemRemoved = false;
             foreach (CuiSection section in this.Sections)
             {
-                List<CuiItem> itemsToRemove = new List<CuiItem>();
-                foreach (CuiItem item in section.Items)
-                {
-                    if (Regex.IsMatch(item.Value, (macroName + "`" + macroCategory)))
-                    {
-                        itemRemoved = true;
-                        itemsToRemove.Add(item);
-                    }
-                }
-
-                foreach(CuiItem item in itemsToRemove)
-                    this.RemoveItem(section, item);
+                if (this.RemoveItem(section.Name, macroName, macroCategory))
+                    itemRemoved = true;
             }
             return itemRemoved;
         }
@@ -321,6 +335,9 @@ namespace ScriptCenter.Max
                 while (!r.EndOfStream)
                 {
                     String line = r.ReadLine();
+                    if (line == String.Empty)
+                        continue;
+
                     // Check if line is a new section "[section title]"
                     if (Regex.IsMatch(line, @"^\[[\w ]+\]"))
                     {
@@ -397,8 +414,7 @@ namespace ScriptCenter.Max
         {
             this.Items = new List<CuiItem>();
         }
-        public CuiSection(String name)
-            : this()
+        public CuiSection(String name) : this()
         {
             this.Name = name;
         }
