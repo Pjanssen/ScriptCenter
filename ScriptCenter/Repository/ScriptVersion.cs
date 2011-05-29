@@ -134,6 +134,13 @@ namespace ScriptCenter.Repository
 
             return 0;
         }
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ScriptVersionNumber))
+                return false;
+
+            return this.CompareTo((ScriptVersionNumber)obj) == 0;
+        }
 
         public static bool operator <(ScriptVersionNumber versionA, ScriptVersionNumber versionB)
         {
@@ -153,11 +160,11 @@ namespace ScriptCenter.Repository
         }
         public static bool operator ==(ScriptVersionNumber versionA, ScriptVersionNumber versionB)
         {
-            return versionA.CompareTo(versionB) == 0;
+            return versionA.Equals(versionB);
         }
         public static bool operator !=(ScriptVersionNumber versionA, ScriptVersionNumber versionB)
         {
-            return versionA.CompareTo(versionB) != 0;
+            return !versionA.Equals(versionB);
         }
     }
 

@@ -86,6 +86,18 @@ namespace ScriptCenterTest
         }
 
         [TestMethod]
+        public void EqualsTest()
+        {
+            ScriptVersionNumber a = new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta);
+            Assert.IsTrue(a.Equals(new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta)));
+            Assert.IsFalse(a.Equals(new ScriptVersionNumber()));
+            Assert.IsFalse(a.Equals(new ScriptVersionNumber(3, 3, 6, ScriptReleaseStage.Beta)));
+            Assert.IsFalse(a.Equals(new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Release)));
+            Assert.IsFalse(a.Equals(2));
+            Assert.IsFalse(a.Equals("2.3.6 beta"));
+        }
+
+        [TestMethod]
         public void OperatorsTest()
         {
             ScriptVersionNumber a = new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta);
