@@ -48,7 +48,7 @@ namespace ScriptCenter.Repository
 
 
     [TypeConverter(typeof(ScriptVersionConverter))]
-    public class ScriptVersionNumber
+    public class ScriptVersionNumber : IComparable<ScriptVersionNumber>
     {
         [JsonIgnore()]
         public Int32 Major { get; set; }
@@ -64,13 +64,14 @@ namespace ScriptCenter.Repository
         [JsonIgnore()]
         public ScriptReleaseStage ReleaseStage { get; set; }
 
-        public ScriptVersionNumber() : this(1, 0, 0) { }
-        public ScriptVersionNumber(Int32 major, Int32 minor, Int32 revision)
+        public ScriptVersionNumber() : this(1, 0, 0, ScriptReleaseStage.Release) { }
+        public ScriptVersionNumber(Int32 major, Int32 minor, Int32 revision) : this(major, minor, revision, ScriptReleaseStage.Release) { }
+        public ScriptVersionNumber(Int32 major, Int32 minor, Int32 revision, ScriptReleaseStage releaseStage)
         {
             this.Major = major;
             this.Minor = minor;
             this.Revision = revision;
-            this.ReleaseStage = ScriptReleaseStage.Release;
+            this.ReleaseStage = releaseStage;
         }
         public ScriptVersionNumber(String version)
         {
@@ -107,6 +108,56 @@ namespace ScriptCenter.Repository
                 versionStr += " " + Enum.GetName(typeof(ScriptReleaseStage), this.ReleaseStage).ToLower();
 
             return versionStr;
+        }
+
+        public Int32 CompareTo(ScriptVersionNumber versionB)
+        {
+            if (this.Major < versionB.Major)
+                return -1;
+            else if (this.Major > versionB.Major)
+                return 1;
+
+            if (this.Minor < versionB.Minor)
+                return -1;
+            else if (this.Minor > versionB.Minor)
+                return 1;
+
+            if (this.Revision < versionB.Revision)
+                return -1;
+            else if (this.Revision > versionB.Revision)
+                return 1;
+
+            if (this.ReleaseStage < versionB.ReleaseStage)
+                return -1;
+            else if (this.ReleaseStage > versionB.ReleaseStage)
+                return 1;
+
+            return 0;
+        }
+
+        public static bool operator <(ScriptVersionNumber versionA, ScriptVersionNumber versionB)
+        {
+            return versionA.CompareTo(versionB) == -1;
+        }
+        public static bool operator <=(ScriptVersionNumber versionA, ScriptVersionNumber versionB)
+        {
+            return versionA.CompareTo(versionB) <= 0;
+        }
+        public static bool operator >(ScriptVersionNumber versionA, ScriptVersionNumber versionB)
+        {
+            return versionA.CompareTo(versionB) == 1;
+        }
+        public static bool operator >=(ScriptVersionNumber versionA, ScriptVersionNumber versionB)
+        {
+            return versionA.CompareTo(versionB) >= 0;
+        }
+        public static bool operator ==(ScriptVersionNumber versionA, ScriptVersionNumber versionB)
+        {
+            return versionA.CompareTo(versionB) == 0;
+        }
+        public static bool operator !=(ScriptVersionNumber versionA, ScriptVersionNumber versionB)
+        {
+            return versionA.CompareTo(versionB) != 0;
         }
     }
 

@@ -65,5 +65,64 @@ namespace ScriptCenterTest
             }
             catch (ArgumentException e) { }
         }
+
+        [TestMethod]
+        public void CompareToTest()
+        {
+            ScriptVersionNumber a = new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta);
+
+            Assert.AreEqual(0, a.CompareTo(new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta)));
+            Assert.AreEqual(1, a.CompareTo(new ScriptVersionNumber(1, 3, 6, ScriptReleaseStage.Beta)));
+            Assert.AreEqual(-1, a.CompareTo(new ScriptVersionNumber(3, 3, 6, ScriptReleaseStage.Beta)));
+
+            Assert.AreEqual(1, a.CompareTo(new ScriptVersionNumber(2, 2, 6, ScriptReleaseStage.Beta)));
+            Assert.AreEqual(-1, a.CompareTo(new ScriptVersionNumber(2, 4, 6, ScriptReleaseStage.Beta)));
+
+            Assert.AreEqual(1, a.CompareTo(new ScriptVersionNumber(2, 3, 5, ScriptReleaseStage.Beta)));
+            Assert.AreEqual(-1, a.CompareTo(new ScriptVersionNumber(2, 3, 7, ScriptReleaseStage.Beta)));
+
+            Assert.AreEqual(1, a.CompareTo(new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Alpha)));
+            Assert.AreEqual(-1, a.CompareTo(new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Release)));
+        }
+
+        [TestMethod]
+        public void OperatorsTest()
+        {
+            ScriptVersionNumber a = new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta);
+
+            //Smaller than operator.
+            Assert.IsTrue(a < new ScriptVersionNumber(3, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsTrue(a < new ScriptVersionNumber(2, 4, 6, ScriptReleaseStage.Beta));
+            Assert.IsTrue(a < new ScriptVersionNumber(2, 3, 7, ScriptReleaseStage.Beta));
+            Assert.IsTrue(a < new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Release));
+            Assert.IsFalse(a < new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsFalse(a < new ScriptVersionNumber(1, 3, 6, ScriptReleaseStage.Beta));
+
+            //Smaller than / equals operator.
+            Assert.IsTrue(a <= new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsTrue(a <= new ScriptVersionNumber(3, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsFalse(a <= new ScriptVersionNumber(1, 3, 6, ScriptReleaseStage.Beta));
+
+            //Larger than operator.
+            Assert.IsTrue(a > new ScriptVersionNumber(1, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsTrue(a > new ScriptVersionNumber(2, 2, 6, ScriptReleaseStage.Beta));
+            Assert.IsTrue(a > new ScriptVersionNumber(2, 3, 5, ScriptReleaseStage.Beta));
+            Assert.IsTrue(a > new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Alpha));
+            Assert.IsFalse(a > new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsFalse(a > new ScriptVersionNumber(3, 3, 6, ScriptReleaseStage.Beta));
+
+            //Larger than / equals operator.
+            Assert.IsTrue(a >= new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsTrue(a >= new ScriptVersionNumber(1, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsFalse(a >= new ScriptVersionNumber(3, 3, 6, ScriptReleaseStage.Beta));
+
+            //Equality operator.
+            Assert.IsTrue(a == new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsFalse(a == new ScriptVersionNumber(1, 3, 6, ScriptReleaseStage.Beta));
+
+            //Inequality operator.
+            Assert.IsTrue(a != new ScriptVersionNumber(1, 3, 6, ScriptReleaseStage.Beta));
+            Assert.IsFalse(a != new ScriptVersionNumber(2, 3, 6, ScriptReleaseStage.Beta));
+        }
     }
 }
