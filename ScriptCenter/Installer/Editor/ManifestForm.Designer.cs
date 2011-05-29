@@ -31,108 +31,144 @@ namespace ScriptCenter.Installer.Editor
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.scriptDescription = new System.Windows.Forms.TextBox();
-            this.scriptManifestBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.addVersionButton = new System.Windows.Forms.Button();
+            this.removeVersionButton = new System.Windows.Forms.Button();
+            this.versionPropertyGrid = new System.Windows.Forms.PropertyGrid();
+            this.versionsListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.scriptAuthor = new System.Windows.Forms.TextBox();
+            this.scriptManifestBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.scriptName = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.scriptVersionMajor = new System.Windows.Forms.NumericUpDown();
-            this.scriptVersionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.scriptVersionMinor = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.scriptVersionRevision = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.scriptId = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.scriptRequirementsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scriptManifestBindingSource)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptVersionMajor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptVersionBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptVersionMinor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptVersionRevision)).BeginInit();
             this.panel1.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptRequirementsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.scriptDescription, 1, 5);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.versionPropertyGrid, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.versionsListView, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.scriptAuthor, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.scriptName, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 95F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 122F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 112F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(334, 336);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(471, 373);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // label10
+            // flowLayoutPanel2
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 136);
-            this.label10.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(85, 13);
-            this.label10.TabIndex = 20;
-            this.label10.Text = "3dsmax versions";
+            this.flowLayoutPanel2.Controls.Add(this.addVersionButton);
+            this.flowLayoutPanel2.Controls.Add(this.removeVersionButton);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(390, 96);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(81, 122);
+            this.flowLayoutPanel2.TabIndex = 24;
             // 
-            // scriptDescription
+            // addVersionButton
             // 
-            this.scriptDescription.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptManifestBindingSource, "Description", true));
-            this.scriptDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptDescription.Location = new System.Drawing.Point(94, 173);
-            this.scriptDescription.Multiline = true;
-            this.scriptDescription.Name = "scriptDescription";
-            this.scriptDescription.Size = new System.Drawing.Size(237, 89);
-            this.scriptDescription.TabIndex = 10;
+            this.addVersionButton.Location = new System.Drawing.Point(3, 3);
+            this.addVersionButton.Name = "addVersionButton";
+            this.addVersionButton.Size = new System.Drawing.Size(75, 23);
+            this.addVersionButton.TabIndex = 5;
+            this.addVersionButton.Text = "Add";
+            this.addVersionButton.UseVisualStyleBackColor = true;
+            this.addVersionButton.Click += new System.EventHandler(this.addVersionButton_Click);
             // 
-            // scriptManifestBindingSource
+            // removeVersionButton
             // 
-            this.scriptManifestBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptManifest);
+            this.removeVersionButton.Location = new System.Drawing.Point(3, 32);
+            this.removeVersionButton.Name = "removeVersionButton";
+            this.removeVersionButton.Size = new System.Drawing.Size(75, 23);
+            this.removeVersionButton.TabIndex = 3;
+            this.removeVersionButton.Text = "Remove";
+            this.removeVersionButton.UseVisualStyleBackColor = true;
+            this.removeVersionButton.Click += new System.EventHandler(this.removeVersionButton_Click);
+            // 
+            // versionPropertyGrid
+            // 
+            this.versionPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.versionPropertyGrid.HelpVisible = false;
+            this.versionPropertyGrid.Location = new System.Drawing.Point(78, 221);
+            this.versionPropertyGrid.Name = "versionPropertyGrid";
+            this.versionPropertyGrid.PropertySort = System.Windows.Forms.PropertySort.NoSort;
+            this.versionPropertyGrid.Size = new System.Drawing.Size(309, 149);
+            this.versionPropertyGrid.TabIndex = 23;
+            this.versionPropertyGrid.ToolbarVisible = false;
+            // 
+            // versionsListView
+            // 
+            this.versionsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.versionsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.versionsListView.FullRowSelect = true;
+            this.versionsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.versionsListView.HideSelection = false;
+            this.versionsListView.Location = new System.Drawing.Point(78, 99);
+            this.versionsListView.MultiSelect = false;
+            this.versionsListView.Name = "versionsListView";
+            this.versionsListView.ShowItemToolTips = true;
+            this.versionsListView.Size = new System.Drawing.Size(309, 116);
+            this.versionsListView.Sorting = System.Windows.Forms.SortOrder.Descending;
+            this.versionsListView.TabIndex = 22;
+            this.versionsListView.UseCompatibleStateImageBehavior = false;
+            this.versionsListView.View = System.Windows.Forms.View.Details;
+            this.versionsListView.SelectedIndexChanged += new System.EventHandler(this.versionsListView_SelectedIndexChanged);
+            this.versionsListView.Resize += new System.EventHandler(this.versionsListView_Resize);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Version";
+            this.columnHeader1.Width = 81;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Script Path";
+            this.columnHeader2.Width = 180;
             // 
             // scriptAuthor
             // 
             this.scriptAuthor.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptManifestBindingSource, "Author", true));
             this.scriptAuthor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptAuthor.Location = new System.Drawing.Point(94, 28);
+            this.scriptAuthor.Location = new System.Drawing.Point(78, 28);
             this.scriptAuthor.Name = "scriptAuthor";
-            this.scriptAuthor.Size = new System.Drawing.Size(237, 20);
+            this.scriptAuthor.Size = new System.Drawing.Size(309, 20);
             this.scriptAuthor.TabIndex = 2;
             this.scriptAuthor.Validated += new System.EventHandler(this.scriptAuthor_Validated);
+            // 
+            // scriptManifestBindingSource
+            // 
+            this.scriptManifestBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptManifest);
             // 
             // label2
             // 
@@ -158,76 +194,11 @@ namespace ScriptCenter.Installer.Editor
             // 
             this.scriptName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptManifestBindingSource, "Name", true));
             this.scriptName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptName.Location = new System.Drawing.Point(94, 3);
+            this.scriptName.Location = new System.Drawing.Point(78, 3);
             this.scriptName.Name = "scriptName";
-            this.scriptName.Size = new System.Drawing.Size(237, 20);
+            this.scriptName.Size = new System.Drawing.Size(309, 20);
             this.scriptName.TabIndex = 1;
             this.scriptName.Validated += new System.EventHandler(this.scriptName_Validated);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.scriptVersionMajor);
-            this.flowLayoutPanel1.Controls.Add(this.label6);
-            this.flowLayoutPanel1.Controls.Add(this.scriptVersionMinor);
-            this.flowLayoutPanel1.Controls.Add(this.label7);
-            this.flowLayoutPanel1.Controls.Add(this.scriptVersionRevision);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(91, 102);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(243, 29);
-            this.flowLayoutPanel1.TabIndex = 4;
-            this.flowLayoutPanel1.TabStop = true;
-            // 
-            // scriptVersionMajor
-            // 
-            this.scriptVersionMajor.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.scriptVersionBindingSource, "Major", true));
-            this.scriptVersionMajor.Location = new System.Drawing.Point(3, 3);
-            this.scriptVersionMajor.Name = "scriptVersionMajor";
-            this.scriptVersionMajor.Size = new System.Drawing.Size(55, 20);
-            this.scriptVersionMajor.TabIndex = 4;
-            // 
-            // scriptVersionBindingSource
-            // 
-            this.scriptVersionBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptVersion);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(61, 7);
-            this.label6.Margin = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(11, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = ".";
-            // 
-            // scriptVersionMinor
-            // 
-            this.scriptVersionMinor.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.scriptVersionBindingSource, "Minor", true));
-            this.scriptVersionMinor.Location = new System.Drawing.Point(75, 3);
-            this.scriptVersionMinor.Name = "scriptVersionMinor";
-            this.scriptVersionMinor.Size = new System.Drawing.Size(55, 20);
-            this.scriptVersionMinor.TabIndex = 5;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(133, 7);
-            this.label7.Margin = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(11, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = ".";
-            // 
-            // scriptVersionRevision
-            // 
-            this.scriptVersionRevision.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.scriptVersionBindingSource, "Revision", true));
-            this.scriptVersionRevision.Location = new System.Drawing.Point(147, 3);
-            this.scriptVersionRevision.Name = "scriptVersionRevision";
-            this.scriptVersionRevision.Size = new System.Drawing.Size(55, 20);
-            this.scriptVersionRevision.TabIndex = 6;
             // 
             // label3
             // 
@@ -239,34 +210,14 @@ namespace ScriptCenter.Installer.Editor
             this.label3.TabIndex = 20;
             this.label3.Text = "Author";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 107);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 13);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Version";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 176);
-            this.label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Description";
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.scriptId);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(94, 54);
+            this.panel1.Location = new System.Drawing.Point(78, 54);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(237, 45);
+            this.panel1.Size = new System.Drawing.Size(309, 39);
             this.panel1.TabIndex = 3;
             this.panel1.TabStop = true;
             // 
@@ -276,7 +227,7 @@ namespace ScriptCenter.Installer.Editor
             this.scriptId.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scriptId.Location = new System.Drawing.Point(0, 0);
             this.scriptId.Name = "scriptId";
-            this.scriptId.Size = new System.Drawing.Size(237, 20);
+            this.scriptId.Size = new System.Drawing.Size(309, 20);
             this.scriptId.TabIndex = 3;
             // 
             // label9
@@ -289,55 +240,15 @@ namespace ScriptCenter.Installer.Editor
             this.label9.TabIndex = 20;
             this.label9.Text = "Recommended: author.scriptname";
             // 
-            // flowLayoutPanel3
+            // label8
             // 
-            this.flowLayoutPanel3.Controls.Add(this.comboBox1);
-            this.flowLayoutPanel3.Controls.Add(this.label11);
-            this.flowLayoutPanel3.Controls.Add(this.comboBox2);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(91, 131);
-            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(243, 39);
-            this.flowLayoutPanel3.TabIndex = 5;
-            this.flowLayoutPanel3.TabStop = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.scriptRequirementsBindingSource, "Minimal3dsmaxVersion", true));
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(3, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(55, 21);
-            this.comboBox1.TabIndex = 8;
-            this.comboBox1.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.comboBox1_Format);
-            // 
-            // scriptRequirementsBindingSource
-            // 
-            this.scriptRequirementsBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptRequirements);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(61, 7);
-            this.label11.Margin = new System.Windows.Forms.Padding(0, 7, 0, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(11, 13);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "-";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.scriptRequirementsBindingSource, "Maximum3dsmaxVersion", true));
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(75, 3);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(55, 21);
-            this.comboBox2.TabIndex = 9;
-            this.comboBox2.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.comboBox1_Format);
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 101);
+            this.label8.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Versions";
             // 
             // ManifestForm
             // 
@@ -345,21 +256,13 @@ namespace ScriptCenter.Installer.Editor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ManifestForm";
-            this.Size = new System.Drawing.Size(334, 336);
+            this.Size = new System.Drawing.Size(471, 373);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scriptManifestBindingSource)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptVersionMajor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptVersionBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptVersionMinor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptVersionRevision)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptRequirementsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -371,26 +274,18 @@ namespace ScriptCenter.Installer.Editor
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox scriptName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox scriptDescription;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown scriptVersionMajor;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown scriptVersionMinor;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown scriptVersionRevision;
         private System.Windows.Forms.BindingSource scriptManifestBindingSource;
-        private System.Windows.Forms.BindingSource scriptVersionBindingSource;
         private System.Windows.Forms.TextBox scriptAuthor;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox scriptId;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.BindingSource scriptRequirementsBindingSource;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListView versionsListView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.PropertyGrid versionPropertyGrid;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Button addVersionButton;
+        private System.Windows.Forms.Button removeVersionButton;
     }
 }

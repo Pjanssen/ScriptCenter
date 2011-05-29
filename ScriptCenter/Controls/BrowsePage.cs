@@ -69,7 +69,7 @@ namespace ScriptCenter.Controls
             String id = args.Data.Id;
             
             //TODO fix icon uri
-            String imgKey = (args.Data.Description == null) ? "default" : id;
+            String imgKey = "default";
 
             if (imgKey != "default" && !this.imageList1.Images.ContainsKey(imgKey))
             {

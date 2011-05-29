@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptManifestTest.cs" />
     <Compile Include="ScriptRepositoryListTest.cs" />
+    <Compile Include="ScriptVersionNumberTest.cs" />
     <Compile Include="TestHelperMethods.cs" />
   </ItemGroup>
   <ItemGroup>

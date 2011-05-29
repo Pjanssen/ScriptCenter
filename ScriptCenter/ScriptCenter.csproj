@@ -162,6 +162,8 @@
     <Compile Include="Repository\ScriptManifest.cs" />
     <Compile Include="Repository\ScriptRepository.cs" />
     <Compile Include="Repository\ScriptRepositoryList.cs" />
+    <Compile Include="Repository\ScriptVersion.cs" />
+    <Compile Include="Repository\ScriptVersionConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\ScriptCenter.Installer.ScriptProjectData.datasource" />

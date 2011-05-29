@@ -33,7 +33,7 @@ namespace ScriptCenter.Repository
 
         private String id;
         [JsonProperty("id")]
-        public String Id
+        public String Id 
         {
             get { return this.id; }
             set
@@ -45,7 +45,7 @@ namespace ScriptCenter.Repository
 
         private String name;
         [JsonProperty("name")]
-        public String Name
+        public String Name 
         {
             get { return this.name; }
             set
@@ -55,10 +55,9 @@ namespace ScriptCenter.Repository
             }
         }
 
-
         private String author;
         [JsonProperty("author")]
-        public String Author
+        public String Author 
         {
             get { return this.author; }
             set
@@ -67,33 +66,23 @@ namespace ScriptCenter.Repository
                 this.OnPropertyChanged(new PropertyChangedEventArgs("Author"));
             }
         }
-
-        private String description;
-        [JsonProperty("description")]
-        public String Description
-        {
-            get { return this.description; }
-            set
-            {
-                this.description = value;
-                this.OnPropertyChanged(new PropertyChangedEventArgs("Descriptions"));
-            }
-        }
-
-        [JsonProperty("version")]
-        public ScriptVersion Version { get; set; }
-
+        
         [JsonProperty("versions")]
         public List<ScriptVersion> Versions { get; set; }
-        
 
-        public ScriptManifest()
+
+        [JsonProperty("metadata")]
+        public Dictionary<String, String> Metadata { get; set; }
+
+
+        public ScriptManifest() 
         {
             this.Id = String.Empty;
             this.Name = String.Empty;
             this.Versions = new List<ScriptVersion>();
-            this.Version = new ScriptVersion();
+            this.Metadata = new Dictionary<String, String>();
         }
+
 
         #region INotifyPropertyChanged Members
 
@@ -105,66 +94,5 @@ namespace ScriptCenter.Repository
         }
 
         #endregion
-    }
-
-
-    public class ScriptVersion
-    {
-        [JsonIgnore()]
-        public Int32 Major { get; set; }
-
-        [JsonIgnore()]
-        public Int32 Minor { get; set; }
-
-        [JsonIgnore()]
-        public Int32 Revision { get; set; }
-
-        [JsonProperty("requirements")]
-        public ScriptRequirements Requirements { get; set; }
-
-        [JsonProperty("version")]
-        public String Version
-        {
-            get { return this.Major.ToString() + "." + this.Minor.ToString() + "." + this.Revision.ToString(); }
-            set
-            {
-                try
-                {
-                    Int32 a = value.IndexOf('.');
-                    Int32 b = value.LastIndexOf('.');
-                    this.Major = Int32.Parse(value.Substring(0, a));
-                    this.Minor = Int32.Parse(value.Substring(a + 1, b - (a + 1)));
-                    this.Revision = Int32.Parse(value.Substring(b + 1));
-                }
-                catch (Exception e)
-                {
-                    this.Major = 0;
-                    this.Minor = 0;
-                    this.Revision = 0;
-                    Console.WriteLine(e.Message);
-                }
-            }
-        }
-
-        public ScriptVersion() 
-        {
-            this.Requirements = new ScriptRequirements();
-        }
-        public ScriptVersion(Int32 major, Int32 minor, Int32 revision) : this()
-        {
-            this.Major = major;
-            this.Minor = minor;
-            this.Revision = revision;
-        }
-    }
-
-    public class ScriptRequirements
-    {
-        [JsonProperty("min_3dsmax_version")]
-        public Int32 Minimal3dsmaxVersion { get; set; }
-        [JsonProperty("max_3dsmax_version")]
-        public Int32 Maximum3dsmaxVersion { get; set; }
-        [JsonProperty("min_dotnet_version")]
-        public float MinimalDotNetVersion { get; set; }
     }
 }
