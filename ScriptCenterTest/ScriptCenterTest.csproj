@@ -64,6 +64,7 @@
     <Compile Include="CuiFileTest.cs" />
     <Compile Include="FileHandlerTest.cs" />
     <Compile Include="InstallerConfigurationTest.cs" />
+    <Compile Include="InstallerHelperMethodsTest.cs" />
     <Compile Include="KbdFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptManifestTest.cs" />

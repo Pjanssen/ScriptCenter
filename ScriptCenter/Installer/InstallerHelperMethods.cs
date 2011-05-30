@@ -27,24 +27,32 @@ namespace ScriptCenter.Installer
     {
         internal const String Id_Token              = "{id}";
         internal const String Name_Token            = "{name}";
+        internal const String Author_Token          = "{author}";
         internal const String Version_Token         = "{version}";
         internal const String VersionMajor_Token    = "{version_major}";
         internal const String VersionMinor_Token    = "{version_minor}";
         internal const String VersionRevision_Token = "{version_revision}";
+        internal const String VersionStage_Token    = "{version_stage}";
 
         internal static String ReplaceTokens(String str, ScriptManifest manifest)
         {
             if (str == null || manifest == null)
-                return null;
+                return String.Empty;
 
-            str = str.Replace(Id_Token, manifest.Id);
-            str = str.Replace(Name_Token, manifest.Name);
-            str = str.Replace(Version_Token, manifest.Versions[0].VersionNumber.ToString());
-            str = str.Replace(VersionMajor_Token, manifest.Versions[0].VersionNumber.Major.ToString());
-            str = str.Replace(VersionMinor_Token, manifest.Versions[0].VersionNumber.Minor.ToString());
-            str = str.Replace(VersionRevision_Token, manifest.Versions[0].VersionNumber.Revision.ToString());
+            StringBuilder newString = new StringBuilder(str);
 
-            return str;
+            newString.Replace(Id_Token, manifest.Id);
+            newString.Replace(Name_Token, manifest.Name);
+            newString.Replace(Author_Token, manifest.Author);
+
+            //TODO: find a solution for getting the actual version, not just the first one.
+            newString.Replace(Version_Token, manifest.Versions[0].VersionNumber.ToString());
+            newString.Replace(VersionMajor_Token, manifest.Versions[0].VersionNumber.Major.ToString());
+            newString.Replace(VersionMinor_Token, manifest.Versions[0].VersionNumber.Minor.ToString());
+            newString.Replace(VersionRevision_Token, manifest.Versions[0].VersionNumber.Revision.ToString());
+            newString.Replace(VersionStage_Token, manifest.Versions[0].VersionNumber.ReleaseStage.ToString().ToLower());
+            
+            return newString.ToString();
         }
 
         internal static void SetDefaultValues(Object obj)
