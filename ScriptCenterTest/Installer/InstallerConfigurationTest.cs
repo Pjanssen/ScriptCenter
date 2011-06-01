@@ -4,7 +4,7 @@ using System;
 using ScriptCenter.Repository;
 using ScriptCenter.Installer.Actions;
 
-namespace ScriptCenterTest
+namespace ScriptCenterTest.Installer
 {
     /// <summary>
     ///This is a test class for InstallerConfigurationTest and is intended
@@ -27,7 +27,7 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void WriteTest()
         {
-            FileHandler<InstallerConfiguration> handler = new FileHandler<InstallerConfiguration>();
+            JsonFileHandler<InstallerConfiguration> handler = new JsonFileHandler<InstallerConfiguration>();
             try
             {
                 handler.Write(TestHelperMethods.GetOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension, this.config);
@@ -45,7 +45,7 @@ namespace ScriptCenterTest
             this.WriteTest();
 
             // Read and compare manifest
-            FileHandler<InstallerConfiguration> handler = new FileHandler<InstallerConfiguration>();
+            JsonFileHandler<InstallerConfiguration> handler = new JsonFileHandler<InstallerConfiguration>();
             InstallerConfiguration readConfig = handler.Read(TestHelperMethods.GetOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension);
             Assert.IsNotNull(readConfig);
             Assert.AreEqual(config.InstallerActions.Count, readConfig.InstallerActions.Count);

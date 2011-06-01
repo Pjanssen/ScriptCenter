@@ -35,6 +35,7 @@ namespace ScriptCenter.Installer.Actions
         /// </summary>
         [JsonProperty("toolbar_name")]
         [DisplayName("Toolbar Name")]
+        [TypeConverter(typeof(ToolbarNameConverter))]
         public String ToolbarName { get; set; }
 
         /// <summary>
@@ -113,5 +114,20 @@ namespace ScriptCenter.Installer.Actions
 
 
         public override string ActionName { get { return "Create Toolbar Button"; } }
+        public override string ActionDetails
+        {
+            get
+            {
+                String formatStr = String.Empty;
+                if (this.ToolbarName != null)
+                {
+                    if (this.MacroName != null & this.MacroCategory != null)
+                        formatStr = "{0} -> {1}::{2}";
+                    else
+                        formatStr = "{0}";
+                }
+                return String.Format(formatStr, this.ToolbarName, this.MacroCategory, this.MacroName);
+            }
+        }
     }
 }

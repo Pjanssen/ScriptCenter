@@ -1,4 +1,4 @@
-﻿namespace ScriptCenter.Installer.Editor
+﻿namespace ScriptCenter.Project.Forms
 {
     partial class InstallerActionsForm
     {
@@ -41,7 +41,7 @@
             this.removeActionButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.actionPropertyGrid = new System.Windows.Forms.PropertyGrid();
+            this.actionPropertyGrid = new ScriptCenter.Controls.CustomPropertyGrid();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +59,7 @@
             this.actionsListView.MultiSelect = false;
             this.actionsListView.Name = "actionsListView";
             this.actionsListView.ShowItemToolTips = true;
-            this.actionsListView.Size = new System.Drawing.Size(411, 238);
+            this.actionsListView.Size = new System.Drawing.Size(411, 185);
             this.actionsListView.SmallImageList = this.imageList1;
             this.actionsListView.TabIndex = 0;
             this.actionsListView.UseCompatibleStateImageBehavior = false;
@@ -154,7 +154,7 @@
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 123F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 176F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(497, 396);
             this.tableLayoutPanel1.TabIndex = 6;
@@ -168,17 +168,18 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(417, 29);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(80, 244);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(80, 191);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // actionPropertyGrid
             // 
+            this.actionPropertyGrid.DescriptionAreaHeight = 50;
             this.actionPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.actionPropertyGrid.HelpVisible = false;
-            this.actionPropertyGrid.Location = new System.Drawing.Point(3, 276);
+            this.actionPropertyGrid.Location = new System.Drawing.Point(3, 223);
             this.actionPropertyGrid.Name = "actionPropertyGrid";
+            this.actionPropertyGrid.PropertyNameColumnWidth = 150;
             this.actionPropertyGrid.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.actionPropertyGrid.Size = new System.Drawing.Size(411, 117);
+            this.actionPropertyGrid.Size = new System.Drawing.Size(411, 170);
             this.actionPropertyGrid.TabIndex = 5;
             this.actionPropertyGrid.ToolbarVisible = false;
             // 
@@ -208,7 +209,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.PropertyGrid actionPropertyGrid;
+        private ScriptCenter.Controls.CustomPropertyGrid actionPropertyGrid;
         private System.Windows.Forms.ImageList imageList1;
     }
 }

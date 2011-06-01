@@ -8,33 +8,30 @@ using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 using ScriptCenter.Installer.Actions;
+using ScriptCenter.Installer;
 
-namespace ScriptCenter.Installer.Editor
+namespace ScriptCenter.Project.Forms
 {
-    public partial class InstallerActionsForm : InstallerEditorPage
+    public partial class InstallerActionsForm : UserControl
     {
-        public InstallerActionsForm()
+        private InstallerConfiguration installerConfig;
+
+        public InstallerActionsForm(InstallerConfiguration installerConfig)
         {
             InitializeComponent();
+
+            if (installerConfig == null)
+                throw new ArgumentNullException("InstallerConfig argument cannot be null");
+
+            this.installerConfig = installerConfig;
 
             actionsComboBox.Format += new ListControlConvertEventHandler(actionsComboBox_Format);
             actionPropertyGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(actionPropertyGrid_PropertyValueChanged);
 
             fillActionsCombobox();
+            fillActionsListView();
         }
 
-        public override ScriptProjectData ProjectData
-        {
-            get
-            {
-                return base.ProjectData;
-            }
-            set
-            {
-                base.ProjectData = value;
-                fillActionsListView();
-            }
-        }
 
 
         private class ActionComboBoxItem
@@ -86,7 +83,7 @@ namespace ScriptCenter.Installer.Editor
             this.actionsListView.BeginUpdate();
 
             this.actionsListView.Items.Clear();
-            foreach (InstallerAction action in this.ProjectData.InstallerConfig.InstallerActions)
+            foreach (InstallerAction action in this.installerConfig.InstallerActions)
             {
                 addActionToListView(action);
             }
@@ -98,7 +95,7 @@ namespace ScriptCenter.Installer.Editor
         {
             ActionComboBoxItem item = (ActionComboBoxItem)actionsComboBox.SelectedItem;
             InstallerAction action = (InstallerAction)Activator.CreateInstance(item.ActionType);
-            this.ProjectData.InstallerConfig.InstallerActions.Add(action);
+            this.installerConfig.InstallerActions.Add(action);
 
             ListViewItem lvItem = addActionToListView(action);
             lvItem.Selected = true;
@@ -111,7 +108,7 @@ namespace ScriptCenter.Installer.Editor
                 return;
 
             InstallerAction action = (InstallerAction)actionsListView.SelectedItems[0].Tag;
-            this.ProjectData.InstallerConfig.InstallerActions.Remove(action);
+            this.installerConfig.InstallerActions.Remove(action);
 
             actionsListView.Items.Remove(actionsListView.SelectedItems[0]);
         }
@@ -145,10 +142,10 @@ namespace ScriptCenter.Installer.Editor
             ListViewItem selItem = actionsListView.SelectedItems[0];
             InstallerAction action = (InstallerAction)selItem.Tag;
             Int32 actionPos = selItem.Index;
-            if ((actionPos + direction) >= 0 && (actionPos + direction) < this.ProjectData.InstallerConfig.InstallerActions.Count)
+            if ((actionPos + direction) >= 0 && (actionPos + direction) < this.installerConfig.InstallerActions.Count)
             {
-                this.ProjectData.InstallerConfig.InstallerActions.Remove(action);
-                this.ProjectData.InstallerConfig.InstallerActions.Insert(actionPos + direction, action);
+                this.installerConfig.InstallerActions.Remove(action);
+                this.installerConfig.InstallerActions.Insert(actionPos + direction, action);
                 actionsListView.Items.Remove(selItem);
                 actionsListView.Items.Insert(actionPos + direction, selItem);
             }

@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ScriptCenterTest
+namespace ScriptCenterTest.Repository
 {
     /// <summary>
     ///This is a test class for ScriptManifestTest and is intended
@@ -32,7 +32,7 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void WriteTest()
         {
-            FileHandler<ScriptManifest> handler = new FileHandler<ScriptManifest>();
+            JsonFileHandler<ScriptManifest> handler = new JsonFileHandler<ScriptManifest>();
 
             //Remove the file if it already exists, so we test that it actually writes a file.
             if (System.IO.File.Exists(outputFile))
@@ -50,7 +50,7 @@ namespace ScriptCenterTest
             this.WriteTest();
 
             // Read and compare manifest
-            FileHandler<ScriptManifest> handler = new FileHandler<ScriptManifest>();
+            JsonFileHandler<ScriptManifest> handler = new JsonFileHandler<ScriptManifest>();
             ScriptManifest readManifest = handler.Read(outputFile);
             Assert.IsNotNull(readManifest);
             Assert.AreEqual(this.manifest.Id, readManifest.Id);

@@ -1,4 +1,4 @@
-﻿namespace ScriptCenter.Installer.Editor
+﻿namespace ScriptCenter.Project.Forms
 {
     partial class InstallerPathsForm
     {
@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstallerPathsForm));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.icon64 = new System.Windows.Forms.TextBox();
-            this.scriptProjectDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.icon64PictureBox = new System.Windows.Forms.PictureBox();
             this.icon64Label = new System.Windows.Forms.Label();
             this.browseIcon32 = new System.Windows.Forms.Button();
@@ -58,7 +56,6 @@
             this.exportMzpDialog = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptProjectDataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.icon64PictureBox)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icon32PictureBox)).BeginInit();
@@ -120,17 +117,11 @@
             // icon64
             // 
             this.icon64.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.icon64.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptProjectDataBindingSource, "Icon64", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.icon64.Location = new System.Drawing.Point(3, 20);
             this.icon64.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.icon64.Name = "icon64";
             this.icon64.Size = new System.Drawing.Size(305, 20);
             this.icon64.TabIndex = 9;
-            // 
-            // scriptProjectDataBindingSource
-            // 
-            this.scriptProjectDataBindingSource.DataSource = typeof(ScriptCenter.Installer.ScriptProjectData);
-            this.scriptProjectDataBindingSource.CurrentItemChanged += new System.EventHandler(this.scriptProjectDataBindingSource_CurrentItemChanged);
             // 
             // icon64PictureBox
             // 
@@ -185,7 +176,6 @@
             // icon32
             // 
             this.icon32.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.icon32.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptProjectDataBindingSource, "Icon32", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.icon32.Location = new System.Drawing.Point(3, 15);
             this.icon32.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.icon32.Name = "icon32";
@@ -238,7 +228,6 @@
             // 
             // rootPath
             // 
-            this.rootPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptProjectDataBindingSource, "RootPath", true));
             this.rootPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rootPath.Location = new System.Drawing.Point(94, 4);
             this.rootPath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
@@ -298,7 +287,6 @@
             // icon16
             // 
             this.icon16.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.icon16.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptProjectDataBindingSource, "Icon16", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.icon16.Location = new System.Drawing.Point(3, 10);
             this.icon16.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.icon16.Name = "icon16";
@@ -329,7 +317,6 @@
             // 
             // exportTarget
             // 
-            this.exportTarget.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.scriptProjectDataBindingSource, "ExportTarget", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.exportTarget.Dock = System.Windows.Forms.DockStyle.Fill;
             this.exportTarget.Location = new System.Drawing.Point(94, 33);
             this.exportTarget.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
@@ -366,7 +353,6 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptProjectDataBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.icon64PictureBox)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
@@ -405,7 +391,6 @@
         private System.Windows.Forms.TextBox icon16;
         private System.Windows.Forms.SaveFileDialog exportMzpDialog;
         private System.Windows.Forms.TextBox exportTarget;
-        private System.Windows.Forms.BindingSource scriptProjectDataBindingSource;
 
     }
 }

@@ -43,7 +43,6 @@ public class AssignHotkeyAction : InstallerAction
     /// String representation of the 'Keys' property.
     /// </summary>
     [JsonProperty("key")]
-    [XmlAttribute("key")]
     [Browsable(false)]
     public String KeysString 
     {
@@ -65,7 +64,6 @@ public class AssignHotkeyAction : InstallerAction
     /// The hotkey to assign.
     /// </summary>
     [JsonIgnore()]
-    [XmlIgnore()]
     public Keys Keys { get; set; }
 
 
@@ -73,16 +71,16 @@ public class AssignHotkeyAction : InstallerAction
     /// The name of the macroscript.
     /// </summary>
     [JsonProperty("macro_name")]
-    [XmlAttribute("macro_name")]
     [DisplayName("Macroscript Name")]
+    [Description("The name of the macroscript the hotkey will be assigned to.")]
     public String MacroName { get; set; }
 
     /// <summary>
     /// The category of the macroscript.
     /// </summary>
     [JsonProperty("macro_category")]
-    [XmlAttribute("macro_category")]
     [DisplayName("Macroscript Category")]
+    [Description("The category of the macroscript the hotkey will be assigned to.")]
     public String MacroCategory { get; set; }
 
     //TODO: test in 3dsmax.
@@ -129,10 +127,15 @@ public class AssignHotkeyAction : InstallerAction
     {
         get
         {
-            if (this.Keys == System.Windows.Forms.Keys.None)
-                return "";
-            else
-                return this.KeysString;
+            String formatStr = String.Empty;
+            if (this.Keys != System.Windows.Forms.Keys.None)
+            {
+                if (this.MacroName != null & this.MacroCategory != null)
+                    formatStr = "{0} -> {1}::{2}";
+                else
+                    formatStr = "{0}";
+            }
+            return String.Format(formatStr, this.KeysString, this.MacroCategory, this.MacroName);
         }
     }
 }

@@ -7,10 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using ScriptCenter.Installer;
 
-namespace ScriptCenter.Installer.Editor
+namespace ScriptCenter.Project.Forms
 {
-    public partial class InstallerPathsForm : InstallerEditorPage
+    // OLD FILE! FOR REFERENCE ONLY.
+
+    public partial class InstallerPathsForm : UserControl
     {
         public InstallerPathsForm()
         {
@@ -18,24 +21,10 @@ namespace ScriptCenter.Installer.Editor
             enableControls();
         }
 
-        public override ScriptProjectData ProjectData
-        {
-            get
-            {
-                return base.ProjectData;
-            }
-            set
-            {
-                base.ProjectData = value;
-                this.scriptProjectDataBindingSource.Clear();
-                this.scriptProjectDataBindingSource.Add(value);
-
-                loadIcons();
-            }
-        }
 
         private void enableControls()
         {
+            /*
             ValidationResult validationResult = InstallerCreator.Validate(this.ProjectData);
             Boolean enabled = ((validationResult & ValidationResult.RootPathEmpty) != ValidationResult.RootPathEmpty) && ((validationResult & ValidationResult.RootPathNonExisting) != ValidationResult.RootPathNonExisting);
             this.exportTargetLabel.Enabled = enabled;
@@ -53,29 +42,35 @@ namespace ScriptCenter.Installer.Editor
             this.icon64.Enabled = enabled;
             this.icon64PictureBox.Enabled = enabled;
             this.browseIcon64.Enabled = enabled;
+             */
         }
 
         private void browseRootPath_Click(object sender, EventArgs e)
         {
+            /*
             this.exportMzpDialog.InitialDirectory = this.ProjectData.RootPath;
             DialogResult result = rootPathBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 this.ProjectData.RootPath = rootPathBrowserDialog.SelectedPath + Path.DirectorySeparatorChar;
             }
+            */
         }
         private void browseExportLocation_Click(object sender, EventArgs e)
         {
+            /*
             this.exportMzpDialog.InitialDirectory = this.ProjectData.RootPath;
             DialogResult result = this.exportMzpDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 this.ProjectData.ExportTarget = InstallerCreator.GetRelativePath(exportMzpDialog.FileName, this.ProjectData.RootPath);
             }
+            */
         }
 
         private void loadIcons()
         {
+            /*
             if (this.ProjectData == null)
                 return;
             if (this.ProjectData.Icon16 != null)
@@ -86,14 +81,15 @@ namespace ScriptCenter.Installer.Editor
 
             if (this.ProjectData.Icon64 != null)
                 this.icon64PictureBox.Image = Image.FromFile(InstallerCreator.GetAbsolutePath(this.ProjectData.Icon64, this.ProjectData.RootPath));
+            */
         }
         private String browseIcon()
         {
-            selectIconDialog.InitialDirectory = this.ProjectData.RootPath;
+            //selectIconDialog.InitialDirectory = this.ProjectData.RootPath;
             DialogResult result = selectIconDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                return InstallerCreator.GetRelativePath(selectIconDialog.FileName, this.ProjectData.RootPath);
+                //return InstallerCreator.GetRelativePath(selectIconDialog.FileName, this.ProjectData.RootPath);
             }
 
             return String.Empty;
@@ -104,7 +100,7 @@ namespace ScriptCenter.Installer.Editor
             if (iconFile == String.Empty)
                 return;
             
-            this.ProjectData.Icon16 = iconFile;
+            //this.ProjectData.Icon16 = iconFile;
             loadIcons();
         }
         private void browseIcon32_Click(object sender, EventArgs e)
@@ -113,7 +109,7 @@ namespace ScriptCenter.Installer.Editor
             if (iconFile == String.Empty)
                 return;
 
-            this.ProjectData.Icon32 = iconFile;
+            //this.ProjectData.Icon32 = iconFile;
             loadIcons();
         }
         private void browseIcon64_Click(object sender, EventArgs e)
@@ -122,7 +118,7 @@ namespace ScriptCenter.Installer.Editor
             if (iconFile == String.Empty)
                 return;
 
-            this.ProjectData.Icon64 = iconFile;
+            //this.ProjectData.Icon64 = iconFile;
             loadIcons();
         }
 

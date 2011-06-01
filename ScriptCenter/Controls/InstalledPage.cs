@@ -31,7 +31,7 @@ namespace ScriptCenter.Controls
             this.listView1.SelectedIndexChanged += new EventHandler(listView1_SelectedIndexChanged);
             this.listView1.ItemChecked += new ItemCheckedEventHandler(listView1_ItemChecked);
 
-            FileHandler<ScriptRepository> h = new FileHandler<ScriptRepository>();
+            JsonFileHandler<ScriptRepository> h = new JsonFileHandler<ScriptRepository>();
             this.installedScripts = h.Read(installedScriptsFile);
             if (installedScripts == null)
             {
@@ -49,7 +49,7 @@ namespace ScriptCenter.Controls
 
         private void LoadManifest(String address)
         {
-            FileHandler<ScriptManifest> h = new FileHandler<ScriptManifest>();
+            JsonFileHandler<ScriptManifest> h = new JsonFileHandler<ScriptManifest>();
             ScriptManifest m = h.Read(address);
 
             ListViewItem i = new ListViewItem();

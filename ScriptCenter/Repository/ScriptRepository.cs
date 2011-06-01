@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace ScriptCenter.Repository
 {
@@ -43,11 +44,15 @@ namespace ScriptCenter.Repository
 
     public class ScriptManifestReference
     {
-        [JsonProperty("id")]
-        public String Id { get; set; }
-
         [JsonProperty("uri")]
+        [DisplayName("Script Manifest Path")]
+        [Description("The path to the script manifest. This can be either a full url (for example http://domain/example.scmanifest), or a uri relative to the repository location.")]
         public String URI { get; set; }
+
+        [JsonProperty("id")]
+        [DisplayName("Script Identifier")]
+        [Description("The identifier for this referenced manifest. Make sure it conforms to the identifier  in the manifest!")]
+        public String Id { get; set; }
 
         public ScriptManifestReference() { }
         public ScriptManifestReference(String id, String uri)

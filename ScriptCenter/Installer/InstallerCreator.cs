@@ -36,10 +36,11 @@ namespace ScriptCenter.Installer
         /// <param name="output">The location to write the .mzp file.</param>
         /// <param name="manifest">The manifest to include.</param>
         /// <param name="config">The installer configuration to include.</param>
-        public static void Pack(ScriptProjectData projectData)
+        
+        //TODO: refactor
+        /*
+        public static void Pack(legacy_ScriptProjectData projectData)
         {
-            //TODO: refactor
-
             if (Validate(projectData) != ValidationResult.Valid)
                 throw new Exception("Invalid project data");
 
@@ -99,11 +100,11 @@ namespace ScriptCenter.Installer
 
 
             //Write manifest, installer configuration and ui configuration.
-            FileHandler<ScriptManifest> manifestHandler = new FileHandler<ScriptManifest>();
+            JsonFileHandler<ScriptManifest> manifestHandler = new JsonFileHandler<ScriptManifest>();
             manifestHandler.Write(tempPath + "script.scmanifest", projectData.Manifest);
-            FileHandler<InstallerConfiguration> configHandler = new FileHandler<InstallerConfiguration>();
+            JsonFileHandler<InstallerConfiguration> configHandler = new JsonFileHandler<InstallerConfiguration>();
             configHandler.Write(tempPath + "/script.scinstaller", projectData.InstallerConfig);
-            FileHandler<InstallerUIConfiguration> uiConfigHandler = new FileHandler<InstallerUIConfiguration>();
+            JsonFileHandler<InstallerUIConfiguration> uiConfigHandler = new JsonFileHandler<InstallerUIConfiguration>();
             uiConfigHandler.Write(tempPath + "script.scinstallerui", projectData.UIConfig);
 
             //Write mzp.run and install.ms
@@ -133,7 +134,7 @@ namespace ScriptCenter.Installer
             //Remove temp dir
             Directory.Delete(tempPath, true);
         }
-
+        */
         public static void UnPack(String file, String targetDir)
         {
             ZipFile zip = new ZipFile(file);
@@ -145,8 +146,10 @@ namespace ScriptCenter.Installer
 
         //Matches all characters that are non-alphanumeric and not a dash or space.
         private const String special_characters_filter = @"[^\w\- ]";
-
-        public static ValidationResult Validate(ScriptProjectData projectData)
+        
+        //TODO: find solution for validate
+        /*
+        public static ValidationResult Validate(legacy_ScriptProjectData projectData)
         {
             ValidationResult result = ValidationResult.Valid;
 
@@ -188,7 +191,7 @@ namespace ScriptCenter.Installer
 
             return result;
         }
-
+        */
 
         public static string GetRelativePath(string absolutePath, string relativeTo)
         {

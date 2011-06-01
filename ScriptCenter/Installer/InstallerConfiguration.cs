@@ -41,13 +41,9 @@ namespace ScriptCenter.Installer
         }
 
         [JsonProperty("manifest_uri")]
-        [XmlElement("manifest_uri")]
         public String ManifestUri { get; set; }
 
         [JsonProperty("installer_actions")]
-        [XmlArray("installer_actions")]
-        [XmlArrayItem("copy_dir", typeof(CopyDirAction))]
-        [XmlArrayItem("assign_hotkey", typeof(AssignHotkeyAction))]
         public List<InstallerAction> InstallerActions { get; set; }
     }
 }

@@ -38,29 +38,26 @@ namespace ScriptCenter.Installer.Actions
         public abstract Boolean Undo(Installer installer);
 
         [JsonProperty("run_at_install")]
-        [XmlAttribute("run_at_install")]
         [DefaultValue(true)]
         [DisplayName("Install")]
+        [Description("When set to true this action will be performed when installing the script.")]
         public Boolean RunAtInstall { get; set; }
 
         [JsonProperty("run_at_uninstall")]
-        [XmlAttribute("run_at_uninstall")]
         [DefaultValue(true)]
         [DisplayName("Uninstall")]
+        [Description("When set to true this action will be undone when uninstalling the script.")]
         public Boolean RunAtUninstall { get; set; }
 
         [JsonIgnore()]
-        [XmlIgnore()]
         [Browsable(false)]
         public virtual String ActionName { get { return ""; } }
 
         [JsonIgnore()]
-        [XmlIgnore()]
         [Browsable(false)]
         public virtual String ActionImageKey { get { return "action"; } }
 
         [JsonIgnore()]
-        [XmlIgnore()]
         [Browsable(false)]
         public virtual String ActionDetails { get { return ""; } }
     }

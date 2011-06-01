@@ -9,38 +9,32 @@ using System.Windows.Forms;
 using ScriptCenter.Repository;
 using ScriptCenter.Controls;
 
-namespace ScriptCenter.Installer.Editor
+namespace ScriptCenter.Project.Forms
 {
-    public partial class ManifestForm : InstallerEditorPage
+    public partial class ManifestForm : UserControl
     {
-        public ManifestForm()
+        private ScriptManifest manifest;
+
+        public ManifestForm(ScriptManifest manifest)
         {
             InitializeComponent();
+
+            if (manifest == null)
+                throw new ArgumentNullException("Manifest cannot be null");
+
+            this.manifest = manifest;
+
             this.versionPropertyGrid.PropertyValueChanged += versionPropertyGrid_PropertyValueChanged;
+
+
+            this.scriptManifestBindingSource.Add(manifest);
+
+            this.versionsListView.BeginUpdate();
+            foreach (ScriptVersion version in manifest.Versions)
+                this.addVersionToListView(version);
+            this.versionsListView.EndUpdate();
         }
 
-        public override ScriptProjectData ProjectData
-        {
-            get
-            {
-                return base.ProjectData;
-            }
-            set
-            {
-                base.ProjectData = value;
-                if (value != null && value.Manifest != null)
-                {
-                    this.scriptManifestBindingSource.Clear();
-                    this.scriptManifestBindingSource.Add(value.Manifest);
-
-                    this.versionsListView.BeginUpdate();
-                    this.versionsListView.Items.Clear();
-                    foreach (ScriptVersion version in value.Manifest.Versions)
-                        this.addVersionToListView(version);
-                    this.versionsListView.EndUpdate();
-                }
-            }
-        }
 
         private void scriptAuthor_Validated(object sender, EventArgs e)
         {
@@ -52,13 +46,14 @@ namespace ScriptCenter.Installer.Editor
         }
         private void setDefaultID()
         {
-            //TODO: Use manifest instead of textfields
-            if (this.scriptName.Text != String.Empty && this.scriptAuthor.Text != String.Empty && this.scriptId.Text == String.Empty)
-            {
-                this.scriptId.Text = System.Text.RegularExpressions.Regex.Replace(this.scriptAuthor.Text.ToLower(), @"\s", "");
-                this.scriptId.Text += ".";
-                this.scriptId.Text += System.Text.RegularExpressions.Regex.Replace(this.scriptName.Text.ToLower(), @"\s", "");
-            }
+            if (this.scriptName.Text == String.Empty || this.scriptAuthor.Text == String.Empty || (this.manifest.Id != null && this.manifest.Id != String.Empty))
+                return;
+
+            String defaultId = System.Text.RegularExpressions.Regex.Replace(this.scriptAuthor.Text.ToLower(), @"\s", "");
+            defaultId += ".";
+            defaultId += System.Text.RegularExpressions.Regex.Replace(this.scriptName.Text.ToLower(), @"\s", "");
+            
+            this.manifest.Id = defaultId;
         }
 
 
@@ -88,7 +83,7 @@ namespace ScriptCenter.Installer.Editor
         private void addVersionButton_Click(object sender, EventArgs e)
         {
             ScriptVersion version = new ScriptVersion();
-            this.ProjectData.Manifest.Versions.Add(version);
+            this.manifest.Versions.Add(version);
 
             ListViewItem item = this.addVersionToListView(version);
             item.Selected = true;
@@ -101,10 +96,10 @@ namespace ScriptCenter.Installer.Editor
             ListViewItem selItem = this.versionsListView.SelectedItems[0];
             this.versionsListView.Items.Remove(selItem);
 
-            if (this.ProjectData == null || this.ProjectData.Manifest == null || selItem.Tag == null || !(selItem.Tag is ScriptVersion))
+            if (selItem.Tag == null || !(selItem.Tag is ScriptVersion))
                 return;
 
-            this.ProjectData.Manifest.Versions.Remove((ScriptVersion)selItem.Tag);
+            this.manifest.Versions.Remove((ScriptVersion)selItem.Tag);
         }
 
 
@@ -141,5 +136,7 @@ namespace ScriptCenter.Installer.Editor
         {
             this.versionsListView.Columns[1].Width = this.versionsListView.Width - this.versionsListView.Columns[0].Width - 24;
         }
+
+
     }
 }

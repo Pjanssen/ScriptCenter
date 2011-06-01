@@ -13,7 +13,7 @@ namespace ScriptCenter.Repository
     /// A generic file handler class to read and write JSON files.
     /// </summary>
     /// <typeparam name="T">The type of object to read/write.</typeparam>
-    public class FileHandler<T>
+    public class JsonFileHandler<T>
     {
         private JsonSerializer serializer;
 
@@ -40,7 +40,7 @@ namespace ScriptCenter.Repository
                 this.SerializationError(this, args);
         }
 
-        public FileHandler()
+        public JsonFileHandler()
         {
             this.serializer = new JsonSerializer();
             this.serializer.Converters.Add(new StringEnumConverter());

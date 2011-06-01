@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScriptCenter.Repository;
 using ScriptCenter.Installer;
 
-namespace ScriptCenterTest
+namespace ScriptCenterTest.Installer
 {
     [TestClass]
     public class InstallerHelperMethodsTest

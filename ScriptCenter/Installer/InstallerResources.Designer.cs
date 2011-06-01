@@ -83,10 +83,10 @@ namespace ScriptCenter.Installer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to name &quot;{script_id}&quot;
-        ///version {script_version_major}.{script_version_minor}{script_version_revision}
+        ///   Looks up a localized string similar to name &quot;{id}&quot;
+        ///version {version_major}.{version_minor}{version_revision}
         ///
-        ///extract to &quot;$temp/{script_id}&quot;
+        ///extract to &quot;$temp/{id}&quot;
         ///
         ///run &quot;install.ms&quot;
         ///drop &quot;install.ms&quot;.

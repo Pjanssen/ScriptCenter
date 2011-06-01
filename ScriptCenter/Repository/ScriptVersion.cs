@@ -14,22 +14,22 @@ namespace ScriptCenter.Repository
     public class ScriptVersion
     {
         [DisplayName("Version")]
-        [JsonProperty("version_number")]
+        [JsonProperty("version")]
         public ScriptVersionNumber VersionNumber { get; set; }
 
 
         [DisplayName("Script Path")]
-        [JsonProperty("script_path")]
+        [JsonProperty("uri")]
         public String ScriptPath { get; set; }
 
 
-        [JsonProperty("min_3dsmax_version")]
+        [JsonProperty("min_3dsmax")]
         [DisplayName("Minimal 3dsmax version")]
         [DefaultValue(0)]
         [TypeConverter(typeof(RequiredMaxVersionConverter))]
         public Int32 Minimal3dsmaxVersion { get; set; }
 
-        [JsonProperty("max_3dsmax_version")]
+        [JsonProperty("max_3dsmax")]
         [DisplayName("Maximum 3dsmax version")]
         [DefaultValue(0)]
         [TypeConverter(typeof(RequiredMaxVersionConverter))]
@@ -140,6 +140,10 @@ namespace ScriptCenter.Repository
                 return false;
 
             return this.CompareTo((ScriptVersionNumber)obj) == 0;
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public static bool operator <(ScriptVersionNumber versionA, ScriptVersionNumber versionB)

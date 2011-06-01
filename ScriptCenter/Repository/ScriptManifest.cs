@@ -70,7 +70,6 @@ namespace ScriptCenter.Repository
         [JsonProperty("versions")]
         public List<ScriptVersion> Versions { get; set; }
 
-
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }
 

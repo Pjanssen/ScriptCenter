@@ -1,5 +1,5 @@
 ﻿using ScriptCenter.Controls;
-namespace ScriptCenter.Installer.Editor
+namespace ScriptCenter.Project.Forms
 {
     partial class ManifestForm
     {

@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using ScriptCenter.Max;
+using System.ComponentModel;
 
 namespace ScriptCenter.Installer.Actions
 {

@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ScriptCenterTest
+namespace ScriptCenterTest.Repository
 {
     /// <summary>
     ///This is a test class for ScriptRepositoryListTest and is intended
@@ -29,7 +29,7 @@ namespace ScriptCenterTest
         [TestMethod()]
         public void WriteRepositoryListTest()
         {
-            FileHandler<ScriptRepositoryList> handler = new FileHandler<ScriptRepositoryList>();
+            JsonFileHandler<ScriptRepositoryList> handler = new JsonFileHandler<ScriptRepositoryList>();
             try
             {
                 handler.Write(this.getOutputDirectory() + "repositoryList.json", this.repoList);
@@ -45,7 +45,7 @@ namespace ScriptCenterTest
         {
             this.WriteRepositoryListTest();
 
-            FileHandler<ScriptRepositoryList> handler = new FileHandler<ScriptRepositoryList>();
+            JsonFileHandler<ScriptRepositoryList> handler = new JsonFileHandler<ScriptRepositoryList>();
             ScriptRepositoryList readList = handler.Read(this.getOutputDirectory() + "repositoryList.json");
             Assert.IsNotNull(readList);
             Assert.IsNotNull(readList.Repositories);

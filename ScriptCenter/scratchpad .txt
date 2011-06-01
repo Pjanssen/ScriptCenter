@@ -1,2 +1,3 @@
 ﻿- Look into possibility of using Installer.Actions.ToolbarNameConverter to fetch toolbar names from other actions.
 - Create package filetype for mzp's instead of installerconfiguration?
+- Refactor installer log to take any stream instead of always writing to file?

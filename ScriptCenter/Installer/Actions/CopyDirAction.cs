@@ -155,7 +155,7 @@ public class CopyDirAction : InstallerAction
             if (this.Source == String.Empty)
                 return "";
             else
-                return (this.Source + " -> $" + this.Target.ToString());
+                return String.Format("{0} -> ${1}", this.Source, this.Target.ToString());
         }
     }
 }

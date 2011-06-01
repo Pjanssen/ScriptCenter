@@ -20,7 +20,7 @@ namespace ScriptCenter.Installer.UI
 
         public static InstallerUIConfiguration FromFile(String file)
         {
-            FileHandler<InstallerUIConfiguration> handler = new FileHandler<InstallerUIConfiguration>();
+            JsonFileHandler<InstallerUIConfiguration> handler = new JsonFileHandler<InstallerUIConfiguration>();
             return handler.Read(file);
         }
 

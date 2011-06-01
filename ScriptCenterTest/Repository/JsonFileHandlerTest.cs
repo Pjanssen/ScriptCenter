@@ -7,17 +7,17 @@ using ScriptCenter.Repository;
 using Newtonsoft.Json;
 using System.Threading;
 
-namespace ScriptCenterTest
+namespace ScriptCenterTest.Repository
 {
     [TestClass]
-    public class FileHandlerTest
+    public class JsonFileHandlerTest
     {
-        private FileHandler<SimpleTestObject> handler;
-
+        private JsonFileHandler<SimpleTestObject> handler;
+        
         [TestInitialize]
         public void Init()
         {
-            handler = new FileHandler<SimpleTestObject>();
+            handler = new JsonFileHandler<SimpleTestObject>();
         }
         [TestCleanup]
         public void Cleanup()

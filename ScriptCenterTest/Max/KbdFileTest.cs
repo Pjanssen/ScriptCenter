@@ -5,7 +5,7 @@ using System.IO;
 using ScriptCenter.Max;
 using System.Windows.Forms;
 
-namespace ScriptCenterTest
+namespace ScriptCenterTest.Max
 {
     /// <summary>
     ///This is a test class for KeyboardActionsFileTest and is intended

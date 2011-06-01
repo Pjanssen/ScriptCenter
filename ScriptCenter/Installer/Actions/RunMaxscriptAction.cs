@@ -75,5 +75,16 @@ namespace ScriptCenter.Installer.Actions
 
 
         public override string ActionName { get { return "Run Maxscript"; } }
+        public override string ActionDetails
+        {
+            get
+            {
+                String formatStr = String.Empty;
+                if (this.Source != null)
+                    formatStr = "{0}";
+
+                return String.Format(formatStr, this.Source);
+            }
+        }
     }
 }

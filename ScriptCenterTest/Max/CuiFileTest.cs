@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using ScriptCenter.Max;
 
-namespace ScriptCenterTest
+namespace ScriptCenterTest.Max
 {
     /// <summary>
     ///This is a test class for CuiFileTest and is intended

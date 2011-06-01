@@ -57,34 +57,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppPaths.cs" />
+    <Compile Include="Controls\CustomPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ImageBeforeTextLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Installer\Actions\CreateRibbonAction.cs" />
-    <Compile Include="Installer\Editor\InstallerActionsForm.cs">
+    <Compile Include="Installer\Actions\ToolbarNameConverter.cs" />
+    <Compile Include="Project\Forms\InstallerPathsForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Installer\Editor\InstallerActionsForm.Designer.cs">
+    <Compile Include="Project\Forms\InstallerPathsForm.Designer.cs">
+      <DependentUpon>InstallerPathsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Forms\InstallerActionsForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\Forms\InstallerActionsForm.Designer.cs">
       <DependentUpon>InstallerActionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Installer\Editor\InstallerEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Installer\Editor\InstallerEditor.Designer.cs">
-      <DependentUpon>InstallerEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Installer\Editor\InstallerEditorPage.cs">
+    <Compile Include="Project\Forms\RepositoryForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Installer\Editor\InstallerPathsForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Installer\Editor\InstallerPathsForm.Designer.cs">
-      <DependentUpon>InstallerPathsForm.cs</DependentUpon>
+    <Compile Include="Project\Forms\RepositoryForm.Designer.cs">
+      <DependentUpon>RepositoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Installer\InstallerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InstallerResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Installer\ScriptProjectData.cs" />
     <Compile Include="Max\AppPaths3dsmax.cs" />
     <Compile Include="AppPathsDebug.cs" />
     <Compile Include="Controls\BrowsePage.cs">
@@ -98,12 +101,6 @@
     </Compile>
     <Compile Include="Controls\InstalledPage.Designer.cs">
       <DependentUpon>InstalledPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Installer\Editor\ManifestForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Installer\Editor\ManifestForm.Designer.cs">
-      <DependentUpon>ManifestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextBoxDefaultText.cs">
       <SubType>Component</SubType>
@@ -152,13 +149,33 @@
     </Compile>
     <Compile Include="Installer\InstallerLog.cs" />
     <Compile Include="Installer\InstallerCreator.cs" />
+    <Compile Include="Project\Forms\ManifestForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\Forms\ManifestForm.Designer.cs">
+      <DependentUpon>ManifestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Forms\ManifestMetadataForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\Forms\ManifestMetadataForm.Designer.cs">
+      <DependentUpon>ManifestMetadataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ProjectEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\ProjectEditor.Designer.cs">
+      <DependentUpon>ProjectEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ScriptCenterProject.cs" />
+    <Compile Include="Project\TreeNodeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Repository\FileHandler.cs" />
+    <Compile Include="Repository\JsonFileHandler.cs" />
     <Compile Include="Repository\ScriptManifest.cs" />
     <Compile Include="Repository\ScriptRepository.cs" />
     <Compile Include="Repository\ScriptRepositoryList.cs" />
@@ -168,16 +185,26 @@
   <ItemGroup>
     <None Include="Properties\DataSources\ScriptCenter.Installer.ScriptProjectData.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptManifest.datasource" />
+    <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptRepository.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptRequirements.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptVersion.datasource" />
-    <EmbeddedResource Include="Installer\Editor\InstallerActionsForm.resx">
+    <EmbeddedResource Include="Project\Forms\InstallerPathsForm.resx">
+      <DependentUpon>InstallerPathsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\Forms\InstallerActionsForm.resx">
       <DependentUpon>InstallerActionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\Editor\InstallerEditor.resx">
-      <DependentUpon>InstallerEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Project\Forms\RepositoryForm.resx">
+      <DependentUpon>RepositoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\Editor\InstallerPathsForm.resx">
-      <DependentUpon>InstallerPathsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Project\Forms\ManifestForm.resx">
+      <DependentUpon>ManifestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\Forms\ManifestMetadataForm.resx">
+      <DependentUpon>ManifestMetadataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ProjectEditor.resx">
+      <DependentUpon>ProjectEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\mzp.run" />
     <EmbeddedResource Include="Resources\install.ms" />
@@ -189,9 +216,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InstalledPage.resx">
       <DependentUpon>InstalledPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Installer\Editor\ManifestForm.resx">
-      <DependentUpon>ManifestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Installer\UI\InstallerDialog.resx">
       <DependentUpon>InstallerDialog.cs</DependentUpon>
@@ -229,7 +253,9 @@
     <Content Include="Resources\icons\package_16.png" />
     <Content Include="Resources\icons\package_32.png" />
     <Content Include="Resources\icons\package_64.png" />
+    <Content Include="scratchpad .txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

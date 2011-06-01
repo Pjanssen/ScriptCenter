@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScriptCenter.Repository;
 
-namespace ScriptCenterTest
+namespace ScriptCenterTest.Repository
 {
     [TestClass]
     public class ScriptVersionNumberTest

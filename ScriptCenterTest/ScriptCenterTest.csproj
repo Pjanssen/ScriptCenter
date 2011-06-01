@@ -61,15 +61,16 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CuiFileTest.cs" />
-    <Compile Include="FileHandlerTest.cs" />
-    <Compile Include="InstallerConfigurationTest.cs" />
-    <Compile Include="InstallerHelperMethodsTest.cs" />
-    <Compile Include="KbdFileTest.cs" />
+    <Compile Include="Max\CuiFileTest.cs" />
+    <Compile Include="Repository\JsonFileHandlerTest.cs" />
+    <Compile Include="Installer\InstallerConfigurationTest.cs" />
+    <Compile Include="Installer\InstallerHelperMethodsTest.cs" />
+    <Compile Include="Max\KbdFileTest.cs" />
+    <Compile Include="Project\ScriptCenterProjectTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScriptManifestTest.cs" />
-    <Compile Include="ScriptRepositoryListTest.cs" />
-    <Compile Include="ScriptVersionNumberTest.cs" />
+    <Compile Include="Repository\ScriptManifestTest.cs" />
+    <Compile Include="Repository\ScriptRepositoryListTest.cs" />
+    <Compile Include="Repository\ScriptVersionNumberTest.cs" />
     <Compile Include="TestHelperMethods.cs" />
   </ItemGroup>
   <ItemGroup>
