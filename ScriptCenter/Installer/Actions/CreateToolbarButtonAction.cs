@@ -34,33 +34,48 @@ namespace ScriptCenter.Installer.Actions
         /// The name of the toolbar to add the item to.
         /// </summary>
         [JsonProperty("toolbar_name")]
+        [Category("1. Action Properties")]
         [DisplayName("Toolbar Name")]
+        [Description("The name of the toolbar to add the button to.")]
         [TypeConverter(typeof(ToolbarNameConverter))]
         public String ToolbarName { get; set; }
-
-        /// <summary>
-        /// The name of the macroscript.
-        /// </summary>
-        [JsonProperty("macro_name")]
-        [XmlAttribute("macro_name")]
-        [DisplayName("Macroscript Name")]
-        public String MacroName { get; set; }
 
         /// <summary>
         /// The category of the macroscript.
         /// </summary>
         [JsonProperty("macro_category")]
-        [XmlAttribute("macro_category")]
+        [Category("1. Action Properties")]
         [DisplayName("Macroscript Category")]
+        [Description("The category of the macroscript associated with the button.")]
         public String MacroCategory { get; set; }
 
         /// <summary>
-        /// The text displayed for the item.
+        /// The name of the macroscript.
         /// </summary>
-        [JsonProperty("item_text")]
-        [XmlAttribute("item_text")]
-        [DisplayName("Item Text")]
-        public String ItemText { get; set; }
+        [JsonProperty("macro_name")]
+        [Category("1. Action Properties")]
+        [DisplayName("Macroscript Name")]
+        [Description("The name of the macroscript associated with the button.")]
+        public String MacroName { get; set; }
+
+
+        /// <summary>
+        /// The text displayed for the button.
+        /// </summary>
+        [JsonProperty("button_text")]
+        [Category("1. Action Properties")]
+        [DisplayName("Button Text")]
+        [Description("The text displayed on the button when not using an image.")]
+        public String ButtonText { get; set; }
+
+        /// <summary>
+        /// The tooltip text of the button.
+        /// </summary>
+        [JsonProperty("tooltip_text")]
+        [Category("1. Action Properties")]
+        [DisplayName("Tooltip Text")]
+        [Description("The text for the tooltip of the button.")]
+        public String TooltipText { get; set; }
 
 
         public CreateToolbarButtonAction() { }
@@ -80,7 +95,7 @@ namespace ScriptCenter.Installer.Actions
             if (!cui.Read())
                 return false;
 
-            if (cui.AddToolbarButton(this.ToolbarName, this.MacroName, this.MacroCategory, this.ItemText))
+            if (cui.AddToolbarButton(this.ToolbarName, this.MacroName, this.MacroCategory, this.ButtonText, this.TooltipText))
             {
                 if (!cui.Write())
                     return false;
@@ -114,19 +129,15 @@ namespace ScriptCenter.Installer.Actions
 
 
         public override string ActionName { get { return "Create Toolbar Button"; } }
+        public override string ActionImageKey { get { return "toolbar_button"; } }
         public override string ActionDetails
         {
             get
             {
-                String formatStr = String.Empty;
-                if (this.ToolbarName != null)
-                {
-                    if (this.MacroName != null & this.MacroCategory != null)
-                        formatStr = "{0} -> {1}::{2}";
-                    else
-                        formatStr = "{0}";
-                }
-                return String.Format(formatStr, this.ToolbarName, this.MacroCategory, this.MacroName);
+                if (this.ToolbarName != null && this.MacroName != null && this.MacroCategory != null)
+                    return String.Format("{0} -> {1}::{2}", this.ToolbarName, this.MacroCategory, this.MacroName);
+                else
+                    return String.Empty;
             }
         }
     }

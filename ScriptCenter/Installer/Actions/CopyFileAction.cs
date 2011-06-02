@@ -25,108 +25,112 @@ using Newtonsoft.Json;
 
 namespace ScriptCenter.Installer.Actions
 {
-    /// <summary>
-    /// Copies a single file to the specified target directory.
-    /// </summary>
-    public class CopyFileAction : InstallerAction
+/// <summary>
+/// Copies a single file to the specified target directory.
+/// </summary>
+public class CopyFileAction : InstallerAction
+{
+    public CopyFileAction()
     {
-        public CopyFileAction()
+        InstallerHelperMethods.SetDefaultValues(this);
+    }
+    public CopyFileAction(String source, AppPaths.Directory target) : this()
+    {
+        this.Source = source;
+        this.Target = target;
+    }
+
+
+    /// <summary>
+    /// The source directory to copy. Relative to the installer path.
+    /// </summary>
+    [JsonProperty("source")]
+    [DefaultValue("")]
+    [Category("1. Action Properties")]
+    [DisplayName("Source File")]
+    [Description("The file to be included in the package and to copy from.")]
+    [Editor(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
+    public String Source { get; set; }
+
+    /// <summary>
+    /// The target directory to copy to.
+    /// </summary>
+    [JsonProperty("target")]
+    [DefaultValue(AppPaths.Directory.MacroScripts)]
+    [Category("1. Action Properties")]
+    [DisplayName("Target Directory")]
+    [Description("The 3dsmax directory to copy the file to.")]
+    public AppPaths.Directory Target { get; set; }
+
+    /// <summary>
+    /// Create a directory with the script id in which to place the source directory.
+    /// Default value: true.
+    /// </summary>
+    [JsonProperty("use_script_id")]
+    [Category("1. Action Properties")]
+    [DefaultValue(true)]
+    [Description("When set to true, the script identifier will be included in the output path of the copied file. This is recommended.")]
+    public Boolean UseScriptId { get; set; }
+
+
+    /// <summary>
+    /// Copies the source file to the target directory.
+    /// </summary>
+    public override bool Do(Installer installer)
+    {
+        try
         {
-            InstallerHelperMethods.SetDefaultValues(this);
-        }
-        public CopyFileAction(String source, AppPaths.Directory target) : this()
-        {
-            this.Source = source;
-            this.Target = target;
-        }
+            String sourceFile = installer.ResourcesDirectory + this.Source;
+            String targetFile = AppPaths.GetApplicationPaths().GetPath(this.Target);
+            if (this.UseScriptId)
+                targetFile += "/" + installer.Manifest.Id;
 
-
-        /// <summary>
-        /// The source directory to copy. Relative to the installer path.
-        /// </summary>
-        [JsonProperty("source")]
-        [XmlAttribute("source")]
-        [DefaultValue("")]
-        [DisplayName("Source File")]
-        [Editor(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
-        public String Source { get; set; }
-
-        /// <summary>
-        /// The target directory to copy to.
-        /// </summary>
-        [JsonProperty("target")]
-        [XmlAttribute("target")]
-        [DefaultValue(AppPaths.Directory.MacroScripts)]
-        [DisplayName("Target Directory")]
-        public AppPaths.Directory Target { get; set; }
-
-        /// <summary>
-        /// Create a directory with the script id in which to place the source directory.
-        /// Default value: true.
-        /// </summary>
-        [XmlAttribute("use_script_id")]
-        [DefaultValue(true)]
-        public Boolean UseScriptId { get; set; }
-
-
-        /// <summary>
-        /// Copies the source file to the target directory.
-        /// </summary>
-        public override bool Do(Installer installer)
-        {
-            try
+            FileInfo sourceFileInfo = new FileInfo(sourceFile);
+            targetFile += "/" + sourceFileInfo.Name;
+            FileInfo targetFileInfo = new FileInfo(targetFile);
+            if (!targetFileInfo.Directory.Exists)
             {
-                String sourceFile = installer.ResourcesDirectory + this.Source;
-                String targetFile = AppPaths.GetApplicationPaths().GetPath(this.Target);
-                if (this.UseScriptId)
-                    targetFile += "/" + installer.Manifest.Id;
-
-                FileInfo sourceFileInfo = new FileInfo(sourceFile);
-                targetFile += "/" + sourceFileInfo.Name;
-                FileInfo targetFileInfo = new FileInfo(targetFile);
-                if (!targetFileInfo.Directory.Exists)
-                {
-                    targetFileInfo.Directory.Create();
-                    installer.Log.Append("Created directory " + targetFileInfo.DirectoryName);
-                }
-
-                File.Copy(sourceFile, targetFile, true);
-
-                if (this.Target == AppPaths.Directory.MacroScripts)
-                    ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
-
-                installer.Log.Append("Copied file " + targetFile);
-            }
-            catch (Exception e)
-            {
-                installer.InstallerException = e;
-                return false;
+                targetFileInfo.Directory.Create();
+                installer.Log.Append("Created directory " + targetFileInfo.DirectoryName);
             }
 
-            return true;
+            File.Copy(sourceFile, targetFile, true);
+
+            if (this.Target == AppPaths.Directory.MacroScripts)
+                ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
+
+            installer.Log.Append("Copied file " + targetFile);
+        }
+        catch (Exception e)
+        {
+            installer.InstallerException = e;
+            return false;
         }
 
-        /// <summary>
-        /// Removes the file from the target directory.
-        /// </summary>
-        public override bool Undo(Installer installer)
-        {
-            //TODO: implement
-            throw new NotImplementedException();
-        }
+        return true;
+    }
+
+    /// <summary>
+    /// Removes the file from the target directory.
+    /// </summary>
+    public override bool Undo(Installer installer)
+    {
+        //TODO: implement
+        throw new NotImplementedException();
+    }
 
 
-        public override string ActionName { get { return "Copy File"; } }
-        public override string ActionImageKey { get { return "copy_file"; } }
-        public override string ActionDetails
+    public override string ActionName { get { return "Copy File"; } }
+    public override string ActionImageKey { get { return "copy_file"; } }
+    public override string ActionDetails
+    {
+        get
         {
-            get
-            {
-                if (this.Source == String.Empty)
-                    return "";
-                else
-                    return String.Format("{0} -> ${1}", this.Source, this.Target.ToString());
-            }
+            if (this.Source == String.Empty)
+                return "";
+            else
+                return String.Format("{0} -> ${1}", this.Source, this.Target.ToString());
         }
     }
+}
 }

@@ -20,7 +20,18 @@ namespace ScriptCenter.Installer.Actions
 
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            return new StandardValuesCollection(new List<String>() { "Main Toolbar" });
+            List<String> toolbarNames = new List<String>();
+            if (context.Instance is InstallerAction && ((InstallerAction)context.Instance).Configuration != null)
+            {
+                InstallerAction action = (InstallerAction)context.Instance;
+                foreach (InstallerAction a in action.Configuration.Actions)
+                {
+                    if (a is CreateToolbarAction)
+                        toolbarNames.Add(((CreateToolbarAction)a).Name);
+                }
+            }
+            toolbarNames.Add("Main Toolbar");
+            return new StandardValuesCollection(toolbarNames);
         }
     }
 }

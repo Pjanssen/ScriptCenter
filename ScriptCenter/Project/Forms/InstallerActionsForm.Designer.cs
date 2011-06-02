@@ -33,7 +33,7 @@
             this.actionsListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.icons = new System.Windows.Forms.ImageList(this.components);
             this.actionsComboBox = new System.Windows.Forms.ComboBox();
             this.addActionButton = new System.Windows.Forms.Button();
             this.moveActionUpButton = new System.Windows.Forms.Button();
@@ -59,8 +59,8 @@
             this.actionsListView.MultiSelect = false;
             this.actionsListView.Name = "actionsListView";
             this.actionsListView.ShowItemToolTips = true;
-            this.actionsListView.Size = new System.Drawing.Size(411, 188);
-            this.actionsListView.SmallImageList = this.imageList1;
+            this.actionsListView.Size = new System.Drawing.Size(411, 160);
+            this.actionsListView.SmallImageList = this.icons;
             this.actionsListView.TabIndex = 0;
             this.actionsListView.UseCompatibleStateImageBehavior = false;
             this.actionsListView.View = System.Windows.Forms.View.Details;
@@ -77,14 +77,16 @@
             this.columnHeader2.Text = "Details";
             this.columnHeader2.Width = 225;
             // 
-            // imageList1
+            // icons
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "action");
-            this.imageList1.Images.SetKeyName(1, "copy_dir");
-            this.imageList1.Images.SetKeyName(2, "copy_file");
-            this.imageList1.Images.SetKeyName(3, "hotkey");
+            this.icons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("icons.ImageStream")));
+            this.icons.TransparentColor = System.Drawing.Color.Transparent;
+            this.icons.Images.SetKeyName(0, "action");
+            this.icons.Images.SetKeyName(1, "copy_dir");
+            this.icons.Images.SetKeyName(2, "copy_file");
+            this.icons.Images.SetKeyName(3, "hotkey");
+            this.icons.Images.SetKeyName(4, "toolbar");
+            this.icons.Images.SetKeyName(5, "toolbar_button");
             // 
             // actionsComboBox
             // 
@@ -157,8 +159,8 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 176F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(497, 396);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
@@ -171,16 +173,16 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(417, 26);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(80, 194);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(80, 166);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // actionPropertyGrid
             // 
             this.actionPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.actionPropertyGrid.Location = new System.Drawing.Point(3, 223);
+            this.actionPropertyGrid.Location = new System.Drawing.Point(3, 195);
             this.actionPropertyGrid.Name = "actionPropertyGrid";
-            this.actionPropertyGrid.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.actionPropertyGrid.Size = new System.Drawing.Size(411, 170);
+            this.actionPropertyGrid.PropertySort = System.Windows.Forms.PropertySort.Categorized;
+            this.actionPropertyGrid.Size = new System.Drawing.Size(411, 198);
             this.actionPropertyGrid.TabIndex = 5;
             this.actionPropertyGrid.ToolbarVisible = false;
             // 
@@ -211,6 +213,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private ScriptCenter.Controls.CustomPropertyGrid actionPropertyGrid;
-        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ImageList icons;
     }
 }

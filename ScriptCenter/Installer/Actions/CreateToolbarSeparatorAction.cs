@@ -34,7 +34,10 @@ namespace ScriptCenter.Installer.Actions
         /// The name of the toolbar to add the item to.
         /// </summary>
         [JsonProperty("toolbar_name")]
+        [Category("1. Action Properties")]
         [DisplayName("Toolbar Name")]
+        [Description("The name of the toolbar to add the separator to.")]
+        [TypeConverter(typeof(ToolbarNameConverter))]
         public String ToolbarName { get; set; }
 
 

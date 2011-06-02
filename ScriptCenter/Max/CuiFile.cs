@@ -194,7 +194,7 @@ namespace ScriptCenter.Max
         /// <param name="macroCategory">The cateogry of the macroscript for this item.</param>
         /// <param name="itemText">The text to show on the item.</param>
         /// <returns>True if an item was added, false if it failed or already exists.</returns>
-        public Boolean AddToolbarButton(String toolbarName, String macroName, String macroCategory, String itemText)
+        public Boolean AddToolbarButton(String toolbarName, String macroName, String macroCategory, String itemText, String tooltipText)
         {
             //Button item format
             //Item0=2|0|0|31|3|647394|createOutlinerInstaller`Outliner Dev|0|0|"Create Outliner Installer"|"Create Outliner Installer"|-1|
@@ -216,8 +216,8 @@ namespace ScriptCenter.Max
             if (toolbarSection == null)
                 return false;
 
-            String buttonFormat = "2|0|0|31|3|647394|{0}`{1}|0|0|\"{2}\"|\"{2}\"|-1|";
-            String itemValue = String.Format(buttonFormat, macroName, macroCategory, itemText);
+            String buttonFormat = "2|0|0|31|3|647394|{0}`{1}|0|0|\"{2}\"|\"{3}\"|-1|";
+            String itemValue = String.Format(buttonFormat, macroName, macroCategory, tooltipText, itemText);
 
             if (toolbarSection.Items.Exists(i => i.Value == itemValue))
                 return false;

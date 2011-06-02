@@ -95,17 +95,18 @@ namespace ScriptCenterTest.Max
             String macroName = "toggleOutliner";
             String macroCategory = "Outliner";
             String itemText = "Toggle Outliner";
+            String tooltipText = "Toggle Outliner";
 
             CuiSection toolbarSection = cui.Sections.Find(s => s.Name == toolbarName);
             Assert.IsNotNull(toolbarSection);
             Int32 numItems = toolbarSection.Items.Count;
 
             //Try adding the button.
-            Assert.IsTrue(cui.AddToolbarButton(toolbarName, macroName, macroCategory, itemText));
+            Assert.IsTrue(cui.AddToolbarButton(toolbarName, macroName, macroCategory, itemText, tooltipText));
             Assert.AreEqual(numItems + 1, toolbarSection.Items.Count);
             
             //Try adding it again, should return false.
-            Assert.IsFalse(cui.AddToolbarButton(toolbarName, macroName, macroCategory, itemText));
+            Assert.IsFalse(cui.AddToolbarButton(toolbarName, macroName, macroCategory, itemText, tooltipText));
             Assert.AreEqual(numItems + 1, toolbarSection.Items.Count);
 
             //Try removing it.

@@ -34,8 +34,7 @@ public class CopyDirAction : InstallerAction
     {
         InstallerHelperMethods.SetDefaultValues(this);
     }
-    public CopyDirAction(String source, AppPaths.Directory target)
-        : this()
+    public CopyDirAction(String source, AppPaths.Directory target) : this()
     {
         this.Source = source;
         this.Target = target;
@@ -46,9 +45,10 @@ public class CopyDirAction : InstallerAction
     /// The source directory to copy. Relative to the installer path.
     /// </summary>
     [JsonProperty("source")]
-    [XmlAttribute("source")]
     [DefaultValue("")]
+    [Category("1. Action Properties")]
     [DisplayName("Source Directory")]
+    [Description("The directory to be included in the package and to copy from.")]
     [Editor(typeof(System.Windows.Forms.Design.FolderNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
     public String Source { get; set; }
 
@@ -56,25 +56,33 @@ public class CopyDirAction : InstallerAction
     /// The target directory to copy to.
     /// </summary>
     [JsonProperty("target")]
-    [XmlAttribute("target")]
     [DefaultValue(AppPaths.Directory.MacroScripts)]
+    [Category("1. Action Properties")]
     [DisplayName("Target Directory")]
+    [Description("The 3dsmax directory to copy the directory to.")]
     public AppPaths.Directory Target { get; set; }
 
     /// <summary>
     /// Create a directory with the script id in which to place the source directory.
     /// Default value: true.
     /// </summary>
-    [XmlAttribute("use_script_id")]
+    [JsonProperty("use_script_id")]
     [DefaultValue(true)]
+    [Category("1. Action Properties")]
     [DisplayName("Use Script ID")]
+    [Description("When set to true, the script identifier will be included in the output path of the copied directory. This is recommended.")]
     public Boolean UseScriptId { get; set; }
 
 
-
+    /// <summary>
+    /// A semicolon separated list of files to exclude when packing files.
+    /// </summary>
     [JsonProperty("exclude")]
     [DefaultValue(@"._*; Thumbs.db; .DS_Store;")]
+    [Category("1. Action Properties")]
     [DisplayName("Exclude files")]
+    [Description("A semicolon separated list of files that will be ignored when creating the package.")]
+    //TODO check if there is a nice editor for this list.
     public String ExcludeFiles { get; set; }
 
 

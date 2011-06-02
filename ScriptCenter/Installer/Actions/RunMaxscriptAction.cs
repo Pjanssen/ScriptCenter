@@ -41,8 +41,10 @@ namespace ScriptCenter.Installer.Actions
         /// The path to the maxscript file to execute. Relative to installer path.
         /// </summary>
         [JsonProperty("source")]
-        [XmlAttribute("source")]
+        [Category("1. Action Properties")]
         [DisplayName("Source File")]
+        [Description("The maxscript file to run. Do not use this to run macroscripts.")]
+        [Editor(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public String Source { get; set; }
 
         /// <summary>

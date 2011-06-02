@@ -30,6 +30,9 @@ namespace ScriptCenter.Installer.Actions
         /// The name of the toolbar to create.
         /// </summary>
         [JsonProperty("name")]
+        [Category("1. Action Properties")]
+        [DisplayName("Toolbar Name")]
+        [Description("The name of the toolbar to create.")]
         public String Name { get; set; }
 
 
@@ -81,6 +84,7 @@ namespace ScriptCenter.Installer.Actions
         }
 
         public override string ActionName { get { return "Create Toolbar"; } }
+        public override string ActionImageKey { get { return "toolbar"; } }
         public override string ActionDetails { get { return this.Name; } }
     }
 }

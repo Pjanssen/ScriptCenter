@@ -64,6 +64,10 @@ public class AssignHotkeyAction : InstallerAction
     /// The hotkey to assign.
     /// </summary>
     [JsonIgnore()]
+    [Category("1. Action Properties")]
+    [DisplayName("Hotkey")]
+    [Description("The hotkey the macroscript will be assigned to.")]
+    [Editor(typeof(System.Windows.Forms.Design.ShortcutKeysEditor), typeof(System.Drawing.Design.UITypeEditor))]
     public Keys Keys { get; set; }
 
 
@@ -71,16 +75,18 @@ public class AssignHotkeyAction : InstallerAction
     /// The name of the macroscript.
     /// </summary>
     [JsonProperty("macro_name")]
+    [Category("1. Action Properties")]
     [DisplayName("Macroscript Name")]
-    [Description("The name of the macroscript the hotkey will be assigned to.")]
+    [Description("The name of the macroscript that will be assigned to the hotkey.")]
     public String MacroName { get; set; }
 
     /// <summary>
     /// The category of the macroscript.
     /// </summary>
     [JsonProperty("macro_category")]
+    [Category("1. Action Properties")]
     [DisplayName("Macroscript Category")]
-    [Description("The category of the macroscript the hotkey will be assigned to.")]
+    [Description("The category of the macroscript that will be assigned to the hotkey.")]
     public String MacroCategory { get; set; }
 
     //TODO: test in 3dsmax.
