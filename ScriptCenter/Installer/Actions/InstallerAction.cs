@@ -34,6 +34,9 @@ namespace ScriptCenter.Installer.Actions
             InstallerHelperMethods.SetDefaultValues(this);
         }
 
+        [JsonIgnore]
+        public InstallerConfiguration Configuration { get; set; }
+
         public abstract Boolean Do(Installer installer);
         public abstract Boolean Undo(Installer installer);
 
@@ -42,6 +45,12 @@ namespace ScriptCenter.Installer.Actions
         [DisplayName("Install")]
         [Description("When set to true this action will be performed when installing the script.")]
         public Boolean RunAtInstall { get; set; }
+
+        [JsonProperty("run_at_update")]
+        [DefaultValue(true)]
+        [DisplayName("Update")]
+        [Description("When set to true this action will be undone when uninstalling the script prior to updating it.")]
+        public Boolean RunAtUpdate { get; set; }
 
         [JsonProperty("run_at_uninstall")]
         [DefaultValue(true)]

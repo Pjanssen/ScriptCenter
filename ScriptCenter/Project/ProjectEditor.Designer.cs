@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectEditor));
             System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectEditor));
             this.mainToolStrip = new System.Windows.Forms.ToolStrip();
             this.newButton = new System.Windows.Forms.ToolStripButton();
             this.openButton = new System.Windows.Forms.ToolStripButton();
@@ -41,15 +41,20 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sectionPanel = new System.Windows.Forms.Panel();
             this.titlePanel = new System.Windows.Forms.Panel();
+            this.icons = new System.Windows.Forms.ImageList(this.components);
             this.horizontalLine = new System.Windows.Forms.Label();
             this.filesTree = new System.Windows.Forms.TreeView();
-            this.icons = new System.Windows.Forms.ImageList(this.components);
             this.sectionTitle = new ScriptCenter.Controls.ImageBeforeTextLabel();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mainToolStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.titlePanel.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 26);
             // 
             // mainToolStrip
             // 
@@ -100,11 +105,6 @@
             this.saveButton.Text = "&Save";
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 26);
-            // 
             // newManifestButton
             // 
             this.newManifestButton.Image = ((System.Drawing.Image)(resources.GetObject("newManifestButton.Image")));
@@ -148,7 +148,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(689, 443);
             this.tableLayoutPanel1.TabIndex = 2;
@@ -156,10 +156,10 @@
             // sectionPanel
             // 
             this.sectionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sectionPanel.Location = new System.Drawing.Point(171, 35);
+            this.sectionPanel.Location = new System.Drawing.Point(171, 39);
             this.sectionPanel.Margin = new System.Windows.Forms.Padding(0);
             this.sectionPanel.Name = "sectionPanel";
-            this.sectionPanel.Size = new System.Drawing.Size(515, 405);
+            this.sectionPanel.Size = new System.Drawing.Size(515, 401);
             this.sectionPanel.TabIndex = 2;
             // 
             // titlePanel
@@ -167,19 +167,31 @@
             this.titlePanel.Controls.Add(this.sectionTitle);
             this.titlePanel.Controls.Add(this.horizontalLine);
             this.titlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.titlePanel.Location = new System.Drawing.Point(171, 5);
-            this.titlePanel.Margin = new System.Windows.Forms.Padding(0);
+            this.titlePanel.Location = new System.Drawing.Point(174, 5);
+            this.titlePanel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
             this.titlePanel.Name = "titlePanel";
-            this.titlePanel.Size = new System.Drawing.Size(515, 30);
+            this.titlePanel.Size = new System.Drawing.Size(509, 29);
             this.titlePanel.TabIndex = 4;
+            // 
+            // icons
+            // 
+            this.icons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("icons.ImageStream")));
+            this.icons.TransparentColor = System.Drawing.Color.Transparent;
+            this.icons.Images.SetKeyName(0, "manifest");
+            this.icons.Images.SetKeyName(1, "manifest_metadata");
+            this.icons.Images.SetKeyName(2, "manifest_version");
+            this.icons.Images.SetKeyName(3, "package");
+            this.icons.Images.SetKeyName(4, "repository");
+            this.icons.Images.SetKeyName(5, "action");
+            this.icons.Images.SetKeyName(6, "dialog");
             // 
             // horizontalLine
             // 
             this.horizontalLine.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.horizontalLine.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.horizontalLine.Location = new System.Drawing.Point(0, 28);
+            this.horizontalLine.Location = new System.Drawing.Point(0, 27);
             this.horizontalLine.Name = "horizontalLine";
-            this.horizontalLine.Size = new System.Drawing.Size(515, 2);
+            this.horizontalLine.Size = new System.Drawing.Size(509, 2);
             this.horizontalLine.TabIndex = 3;
             // 
             // filesTree
@@ -196,17 +208,6 @@
             this.filesTree.SelectedImageIndex = 0;
             this.filesTree.Size = new System.Drawing.Size(162, 429);
             this.filesTree.TabIndex = 5;
-            // 
-            // icons
-            // 
-            this.icons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("icons.ImageStream")));
-            this.icons.TransparentColor = System.Drawing.Color.Transparent;
-            this.icons.Images.SetKeyName(0, "manifest");
-            this.icons.Images.SetKeyName(1, "manifest_metadata");
-            this.icons.Images.SetKeyName(2, "package");
-            this.icons.Images.SetKeyName(3, "repository");
-            this.icons.Images.SetKeyName(4, "action");
-            this.icons.Images.SetKeyName(5, "dialog");
             // 
             // sectionTitle
             // 

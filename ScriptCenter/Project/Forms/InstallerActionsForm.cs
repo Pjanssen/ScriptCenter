@@ -83,7 +83,7 @@ namespace ScriptCenter.Project.Forms
             this.actionsListView.BeginUpdate();
 
             this.actionsListView.Items.Clear();
-            foreach (InstallerAction action in this.installerConfig.InstallerActions)
+            foreach (InstallerAction action in this.installerConfig.Actions)
             {
                 addActionToListView(action);
             }
@@ -95,7 +95,7 @@ namespace ScriptCenter.Project.Forms
         {
             ActionComboBoxItem item = (ActionComboBoxItem)actionsComboBox.SelectedItem;
             InstallerAction action = (InstallerAction)Activator.CreateInstance(item.ActionType);
-            this.installerConfig.InstallerActions.Add(action);
+            this.installerConfig.AddAction(action);
 
             ListViewItem lvItem = addActionToListView(action);
             lvItem.Selected = true;
@@ -108,7 +108,7 @@ namespace ScriptCenter.Project.Forms
                 return;
 
             InstallerAction action = (InstallerAction)actionsListView.SelectedItems[0].Tag;
-            this.installerConfig.InstallerActions.Remove(action);
+            this.installerConfig.RemoveAction(action);
 
             actionsListView.Items.Remove(actionsListView.SelectedItems[0]);
         }
@@ -142,10 +142,10 @@ namespace ScriptCenter.Project.Forms
             ListViewItem selItem = actionsListView.SelectedItems[0];
             InstallerAction action = (InstallerAction)selItem.Tag;
             Int32 actionPos = selItem.Index;
-            if ((actionPos + direction) >= 0 && (actionPos + direction) < this.installerConfig.InstallerActions.Count)
+            InstallerConfiguration.MoveActionDirection moveDirection = (direction == -1) ? InstallerConfiguration.MoveActionDirection.Down : InstallerConfiguration.MoveActionDirection.Up;
+            if ((actionPos + direction) >= 0 && (actionPos + direction) < this.installerConfig.Actions.Count)
             {
-                this.installerConfig.InstallerActions.Remove(action);
-                this.installerConfig.InstallerActions.Insert(actionPos + direction, action);
+                this.installerConfig.MoveAction(action, moveDirection);
                 actionsListView.Items.Remove(selItem);
                 actionsListView.Items.Insert(actionPos + direction, selItem);
             }

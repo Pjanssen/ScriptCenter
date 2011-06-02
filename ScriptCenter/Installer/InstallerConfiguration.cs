@@ -37,13 +37,89 @@ namespace ScriptCenter.Installer
 
         public InstallerConfiguration()
         {
-            this.InstallerActions = new List<InstallerAction>();
+            this.installerActions = new List<InstallerAction>();
         }
 
         [JsonProperty("manifest_uri")]
         public String ManifestUri { get; set; }
 
+        [JsonIgnore]
+        private List<InstallerAction> _installerActions;
         [JsonProperty("installer_actions")]
-        public List<InstallerAction> InstallerActions { get; set; }
+        private List<InstallerAction> installerActions 
+        {
+            get { return _installerActions; }
+            set
+            {
+                foreach (InstallerAction action in value)
+                {
+                    action.Configuration = this;
+                }
+                _installerActions = value;
+            }
+        }
+
+        [JsonIgnore]
+        public IList<InstallerAction> Actions
+        {
+            get
+            {
+                //Return a readonly IList to avoid addition outside of this class.
+                return this.installerActions.AsReadOnly();
+            }
+        }
+
+        /// <summary>
+        /// Adds an installer action to the configuration.
+        /// </summary>
+        /// <param name="action">The action to add.</param>
+        public void AddAction(InstallerAction action) 
+        {
+            if (this.installerActions.Contains(action))
+                return;
+
+            this.installerActions.Add(action);
+            action.Configuration = this;
+        }
+
+        /// <summary>
+        /// Removes an action from the configuration.
+        /// </summary>
+        /// <param name="action">The action to remove.</param>
+        public void RemoveAction(InstallerAction action)
+        {
+            this.installerActions.Remove(action);
+            action.Configuration = null;
+        }
+
+        /// <summary>
+        /// Moves an action up or down in the installer action collection.
+        /// </summary>
+        /// <param name="action">The action to move.</param>
+        /// <param name="direction">The direction to move the action in.</param>
+        public void MoveAction(InstallerAction action, MoveActionDirection direction)
+        {
+            if (!this.installerActions.Contains(action))
+                throw new ArgumentException("The action to move is not contained in the configuration.");
+
+            Int32 index = this.installerActions.IndexOf(action);
+            if (direction == MoveActionDirection.Up && index == 0)
+                return;
+            if (direction == MoveActionDirection.Down && index == this.installerActions.Count - 1)
+                return;
+
+            this.installerActions.Remove(action);
+
+            if (direction == MoveActionDirection.Up)
+                this.installerActions.Insert(index - 1, action);
+            else if (direction == MoveActionDirection.Down)
+                this.installerActions.Insert(index + 1, action);
+        }
+
+        public enum MoveActionDirection
+        {
+            Up,
+            Down
+        }
     }
 }

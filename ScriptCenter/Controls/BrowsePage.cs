@@ -217,9 +217,9 @@ namespace ScriptCenter.Controls
         private void button3_Click(object sender, EventArgs e)
         {
             InstallerConfiguration config = new InstallerConfiguration();
-            config.InstallerActions.Add(new CopyDirAction("scripts", AppPaths.Directory.Scripts));
-            config.InstallerActions.Add(new CopyDirAction("startupscripts", AppPaths.Directory.StartupScripts));
-            config.InstallerActions.Add(new AssignHotkeyAction(Keys.H | Keys.Alt, "", ""));
+            config.AddAction(new CopyDirAction("scripts", AppPaths.Directory.Scripts));
+            config.AddAction(new CopyDirAction("startupscripts", AppPaths.Directory.StartupScripts));
+            config.AddAction(new AssignHotkeyAction(Keys.H | Keys.Alt, "", ""));
 
             JsonFileHandler<InstallerConfiguration> handler = new JsonFileHandler<InstallerConfiguration>();
             handler.Write("C:/temp/scriptcenter/config.installer", config);

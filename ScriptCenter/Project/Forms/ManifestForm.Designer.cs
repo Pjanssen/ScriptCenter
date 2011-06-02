@@ -278,13 +278,13 @@ namespace ScriptCenter.Project.Forms
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox scriptId;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ListView versionsListView;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private ScriptCenter.Controls.CustomPropertyGrid versionPropertyGrid;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button addVersionButton;
         private System.Windows.Forms.Button removeVersionButton;
+        private CustomPropertyGrid versionPropertyGrid;
+        private System.Windows.Forms.ListView versionsListView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Label label8;
     }
 }

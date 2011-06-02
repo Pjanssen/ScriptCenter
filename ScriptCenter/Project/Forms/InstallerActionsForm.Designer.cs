@@ -55,11 +55,11 @@
             this.actionsListView.FullRowSelect = true;
             this.actionsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.actionsListView.HideSelection = false;
-            this.actionsListView.Location = new System.Drawing.Point(3, 32);
+            this.actionsListView.Location = new System.Drawing.Point(3, 29);
             this.actionsListView.MultiSelect = false;
             this.actionsListView.Name = "actionsListView";
             this.actionsListView.ShowItemToolTips = true;
-            this.actionsListView.Size = new System.Drawing.Size(411, 185);
+            this.actionsListView.Size = new System.Drawing.Size(411, 188);
             this.actionsListView.SmallImageList = this.imageList1;
             this.actionsListView.TabIndex = 0;
             this.actionsListView.UseCompatibleStateImageBehavior = false;
@@ -99,7 +99,8 @@
             // 
             // addActionButton
             // 
-            this.addActionButton.Location = new System.Drawing.Point(420, 3);
+            this.addActionButton.Location = new System.Drawing.Point(420, 2);
+            this.addActionButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 0);
             this.addActionButton.Name = "addActionButton";
             this.addActionButton.Size = new System.Drawing.Size(74, 23);
             this.addActionButton.TabIndex = 2;
@@ -109,7 +110,8 @@
             // 
             // moveActionUpButton
             // 
-            this.moveActionUpButton.Location = new System.Drawing.Point(3, 32);
+            this.moveActionUpButton.Location = new System.Drawing.Point(3, 29);
+            this.moveActionUpButton.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.moveActionUpButton.Name = "moveActionUpButton";
             this.moveActionUpButton.Size = new System.Drawing.Size(75, 23);
             this.moveActionUpButton.TabIndex = 3;
@@ -119,7 +121,8 @@
             // 
             // moveActionDownButton
             // 
-            this.moveActionDownButton.Location = new System.Drawing.Point(3, 61);
+            this.moveActionDownButton.Location = new System.Drawing.Point(3, 55);
+            this.moveActionDownButton.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.moveActionDownButton.Name = "moveActionDownButton";
             this.moveActionDownButton.Size = new System.Drawing.Size(75, 23);
             this.moveActionDownButton.TabIndex = 4;
@@ -130,6 +133,7 @@
             // removeActionButton
             // 
             this.removeActionButton.Location = new System.Drawing.Point(3, 3);
+            this.removeActionButton.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.removeActionButton.Name = "removeActionButton";
             this.removeActionButton.Size = new System.Drawing.Size(75, 23);
             this.removeActionButton.TabIndex = 5;
@@ -152,10 +156,9 @@
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(497, 396);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
@@ -165,19 +168,17 @@
             this.flowLayoutPanel1.Controls.Add(this.moveActionUpButton);
             this.flowLayoutPanel1.Controls.Add(this.moveActionDownButton);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(417, 29);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(417, 26);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(80, 191);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(80, 194);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // actionPropertyGrid
             // 
-            this.actionPropertyGrid.DescriptionAreaHeight = 50;
             this.actionPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.actionPropertyGrid.Location = new System.Drawing.Point(3, 223);
             this.actionPropertyGrid.Name = "actionPropertyGrid";
-            this.actionPropertyGrid.PropertyNameColumnWidth = 150;
             this.actionPropertyGrid.PropertySort = System.Windows.Forms.PropertySort.NoSort;
             this.actionPropertyGrid.Size = new System.Drawing.Size(411, 170);
             this.actionPropertyGrid.TabIndex = 5;

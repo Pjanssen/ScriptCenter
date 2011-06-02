@@ -18,8 +18,7 @@ namespace ScriptCenter.Project
         {
             InitializeComponent();
 
-            this.sectionTitle.Visible = false;
-            this.horizontalLine.Visible = false;
+            this.titlePanel.Visible = false;
 
             this.filesTree.AfterSelect += new TreeViewEventHandler(filesTree_AfterSelect);
         }
@@ -38,8 +37,7 @@ namespace ScriptCenter.Project
 
         private void setSectionPanel(String title, String imageKey, Control c)
         {
-            this.sectionTitle.Visible = true;
-            this.horizontalLine.Visible = true;
+            this.titlePanel.Visible = true;
 
             this.sectionTitle.Text = title;
             this.sectionTitle.ImageKey = imageKey;
@@ -55,9 +53,9 @@ namespace ScriptCenter.Project
             tn.ImageKey = tn.SelectedImageKey = "manifest";
             tn.Tag = new TreeNodeData(manifest, typeof(ManifestForm));
 
-            TreeNode manifestTn = new TreeNode("Manifest");
-            manifestTn.ImageKey = manifestTn.SelectedImageKey = "manifest";
-            manifestTn.Tag = new TreeNodeData(manifest, typeof(ManifestForm));
+            TreeNode manifestTn = new TreeNode("Versions");
+            manifestTn.ImageKey = manifestTn.SelectedImageKey = "manifest_version";
+            manifestTn.Tag = new TreeNodeData(manifest, typeof(ManifestVersionsForm));
             tn.Nodes.Add(manifestTn);
 
             TreeNode metadataTn = new TreeNode("Metadata");
@@ -112,7 +110,7 @@ namespace ScriptCenter.Project
 
         private void newManifestButton_Click(object sender, EventArgs e)
         {
-            ScriptManifest m = new ScriptManifest() { Name = "Outliner" };
+            ScriptManifest m = new ScriptManifest() { Name = "New Script" };
             TreeNode tn = addManifestToTree(m);
             tn.Expand();
             this.filesTree.SelectedNode = tn;
@@ -126,7 +124,7 @@ namespace ScriptCenter.Project
         }
         private void newRepositoryButton_Click(object sender, EventArgs e)
         {
-            ScriptRepository r = new ScriptRepository("Pier's repo");
+            ScriptRepository r = new ScriptRepository("New Repository");
             TreeNode tn = addRepositoryToTree(r);
             tn.Expand();
             this.filesTree.SelectedNode = tn;

@@ -65,8 +65,8 @@ namespace ScriptCenter.Installer
             this.Log.Append("Installing " + this.Manifest.Id, 1);
 
             Int32 i = 0;
-            float numActions = (float)this.Configuration.InstallerActions.Count;
-            foreach (InstallerAction action in this.Configuration.InstallerActions)
+            float numActions = (float)this.Configuration.Actions.Count; //type is float to avoid having to cast it each time when calculating progress.
+            foreach (InstallerAction action in this.Configuration.Actions)
             {
                 if (!action.RunAtInstall)
                     continue;
@@ -105,8 +105,8 @@ namespace ScriptCenter.Installer
             this.Log.Append("Uninstalling " + this.Manifest.Id, 1);
 
             Int32 i = 0;
-            float numActions = (float)this.Configuration.InstallerActions.Count;
-            foreach (InstallerAction action in this.Configuration.InstallerActions)
+            float numActions = (float)this.Configuration.Actions.Count; //type is float to avoid having to cast it each time when calculating progress.
+            foreach (InstallerAction action in this.Configuration.Actions)
             {
                 if (!action.RunAtUninstall)
                     continue;

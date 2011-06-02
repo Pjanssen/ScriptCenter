@@ -63,7 +63,6 @@
     <Compile Include="Controls\ImageBeforeTextLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Installer\Actions\CreateRibbonAction.cs" />
     <Compile Include="Installer\Actions\ToolbarNameConverter.cs" />
     <Compile Include="Project\Forms\InstallerPathsForm.cs">
       <SubType>UserControl</SubType>
@@ -76,6 +75,12 @@
     </Compile>
     <Compile Include="Project\Forms\InstallerActionsForm.Designer.cs">
       <DependentUpon>InstallerActionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Forms\ManifestVersionsForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\Forms\ManifestVersionsForm.Designer.cs">
+      <DependentUpon>ManifestVersionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\Forms\RepositoryForm.cs">
       <SubType>UserControl</SubType>
@@ -193,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Project\Forms\InstallerActionsForm.resx">
       <DependentUpon>InstallerActionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\Forms\ManifestVersionsForm.resx">
+      <DependentUpon>ManifestVersionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\Forms\RepositoryForm.resx">
       <DependentUpon>RepositoryForm.cs</DependentUpon>

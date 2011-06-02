@@ -24,121 +24,106 @@ namespace ScriptCenter.Project.Forms
             this.repository = repository;
 
             this.scriptRepositoryBindingSource.Add(repository);
-            //this.fillScriptRefsListView();
+
+            this.fillScriptsTreeView();
         }
 
-        /*
-        private ListViewItem addScriptRefToListView(ScriptManifestReference r)
+        private void fillScriptsTreeView()
         {
-            ListViewItem item = new ListViewItem();
-            item.SubItems.Add(new ListViewItem.ListViewSubItem());
-            item.Tag = r;
-            this.setScriptRefListViewItemText(r, item);
-
-            this.scriptRefsListView.Items.Add(item);
-
-            return item;
-        }
-        private void setScriptRefListViewItemText(ScriptManifestReference r, ListViewItem item)
-        {
-            if (r == null || item == null)
+            if (this.repository == null)
                 return;
 
-            item.Text = r.Id;
-            item.SubItems[1].Text = r.URI;
-        }
+            this.scriptsTreeView.BeginUpdate();
 
-        private void fillScriptRefsListView()
-        {
-            this.scriptRefsListView.Items.Clear();
-            foreach (ScriptManifestReference r in this.repository.Scripts)
+            foreach (ScriptRepositoryCategory c in repository.Categories)
             {
-                this.addScriptRefToListView(r);
+                this.addCategoryToTreeView(c);
             }
-        }
-
-        private void addScriptRefButton_Click(object sender, EventArgs e)
-        {
-            ScriptManifestReference r = new ScriptManifestReference();
-            //this.repository.Scripts.Add(r);
-
-            ListViewItem item = this.addScriptRefToListView(r);
-            item.Selected = true;
-        }
-        private void removeScriptRefButton_Click(object sender, EventArgs e)
-        {
-            if (this.scriptRefsListView.SelectedItems.Count != 1)
-                return;
-
-            ListViewItem item = this.scriptRefsListView.SelectedItems[0];
-            if (!(item.Tag is ScriptManifestReference))
-                return;
-
-            //this.repository.Scripts.Remove((ScriptManifestReference)item.Tag);
-            this.scriptRefsListView.Items.Remove(item);
-            this.scriptRefPropertyGrid.SelectedObject = null;
-        }
-        private void moveSelectedScriptRef(Int32 direction)
-        {
-            if (scriptRefsListView.SelectedItems.Count == 0)
-                return;
-
-            ListViewItem selItem = scriptRefsListView.SelectedItems[0];
-            if (!(selItem.Tag is ScriptManifestReference))
-                return;
-
-            ScriptManifestReference r = (ScriptManifestReference)selItem.Tag;
-            Int32 refPos = selItem.Index;
-            if ((refPos + direction) >= 0 && (refPos + direction) < this.repository.Scripts.Count)
+            foreach (String s in this.repository.Scripts)
             {
-                this.repository.Scripts.Remove(r);
-                this.repository.Scripts.Insert(refPos + direction, r);
-                scriptRefsListView.Items.Remove(selItem);
-                scriptRefsListView.Items.Insert(refPos + direction, selItem);
-            }
-        }
-        private void moveScriptRefUpButton_Click(object sender, EventArgs e)
-        {
-            this.moveSelectedScriptRef(-1);
-        }
-        private void moveScriptRefDownButton_Click(object sender, EventArgs e)
-        {
-            this.moveSelectedScriptRef(1);
-        }
-
-        private void scriptRefsListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.scriptRefsListView.SelectedItems.Count != 1)
-            {
-                this.scriptRefPropertyGrid.SelectedObject = null;
-                return;
+                this.addScriptToTreeView(s, this.scriptsTreeView.Nodes);
             }
 
-            ListViewItem item = this.scriptRefsListView.SelectedItems[0];
-            if (!(item.Tag is ScriptManifestReference))
-                return;
-
-            this.scriptRefPropertyGrid.SelectedObject = this.scriptRefsListView.SelectedItems[0].Tag;
+            this.scriptsTreeView.EndUpdate();
         }
-        private void scriptRefPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        private TreeNode addScriptToTreeView(String script, TreeNodeCollection parentNodeCollection)
         {
-            if (this.scriptRefsListView.SelectedItems.Count != 1)
-                return;
+            TreeNode tn = new TreeNode(script);
+            tn.ImageKey = tn.SelectedImageKey = "manifest_link";
+            tn.Tag = script;
+            parentNodeCollection.Add(tn);
 
-            ListViewItem item = this.scriptRefsListView.SelectedItems[0];
-            if (!(item.Tag is ScriptManifestReference))
-                return;
-
-            this.setScriptRefListViewItemText((ScriptManifestReference)item.Tag, item);
+            return tn;
         }
-
-        private void scriptRefsListView_Resize(object sender, EventArgs e)
+        private TreeNode addCategoryToTreeView(ScriptRepositoryCategory cat)
         {
-            columnHeader2.Width = scriptRefsListView.Width - columnHeader1.Width - 4;
-        }
-        */
-        
+            TreeNode tn = new TreeNode(cat.Name);
+            tn.ImageKey = tn.SelectedImageKey = "repository_category";
+            tn.Tag = cat;
+            foreach (String s in cat.Scripts)
+            {
+                this.addScriptToTreeView(s, tn.Nodes);
+            }
 
-        
+            this.scriptsTreeView.Nodes.Add(tn);
+
+            return tn;
+        }
+
+        private void addScriptButton_Click(object sender, EventArgs e)
+        {
+            String newScriptRef = "new script reference";
+
+            TreeNode selNode = this.scriptsTreeView.SelectedNode;
+            TreeNodeCollection targetNodeCollection = this.scriptsTreeView.Nodes;
+            ScriptRepositoryCategory targetCat = this.repository.DefaultCategory;
+            if (selNode != null)
+            {
+                if (selNode.Tag is ScriptRepositoryCategory)
+                {
+                    targetNodeCollection =selNode.Nodes;
+                    targetCat = (ScriptRepositoryCategory)selNode.Tag;
+                }
+                else if (selNode.Parent != null && selNode.Parent.Tag is ScriptRepositoryCategory)
+                {
+                    targetNodeCollection = selNode.Parent.Nodes;
+                    targetCat = (ScriptRepositoryCategory)selNode.Parent.Tag;
+                }
+            }
+            
+            targetCat.Scripts.Add(newScriptRef);
+            TreeNode tn = this.addScriptToTreeView(newScriptRef, targetNodeCollection);
+            this.scriptsTreeView.SelectedNode = tn;
+        }
+        private void addCategoryButton_Click(object sender, EventArgs e)
+        {
+            ScriptRepositoryCategory newCat = new ScriptRepositoryCategory("new category");
+            this.repository.Categories.Add(newCat);
+            TreeNode tn = this.addCategoryToTreeView(newCat);
+            this.scriptsTreeView.SelectedNode = tn;
+        }
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            TreeNode selNode = this.scriptsTreeView.SelectedNode;
+            if (selNode == null)
+                return;
+
+            if (selNode.Tag is ScriptRepositoryCategory)
+                this.repository.Categories.Remove((ScriptRepositoryCategory)selNode.Tag);
+            else if (selNode.Tag is String)
+            {
+                if (selNode.Parent != null)
+                {
+                    if (selNode.Parent.Tag is ScriptRepositoryCategory)
+                        ((ScriptRepositoryCategory)selNode.Parent.Tag).Scripts.Remove((String)selNode.Tag);
+                }
+                else
+                    this.repository.Scripts.Remove((String)selNode.Tag);
+
+            }
+
+            selNode.Remove();
+        }
+
     }
 }
