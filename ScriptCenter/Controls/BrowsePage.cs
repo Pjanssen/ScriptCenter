@@ -129,10 +129,12 @@ namespace ScriptCenter.Controls
         }
         void repository_handler_LoadComplete(object sender, ReadCompleteEventArgs<ScriptRepository> args)
         {
+            /*
             foreach (ScriptManifestReference scriptRef in args.Data.Scripts)
             {
                 LoadManifest(scriptRef.URI);
             }
+             */
         }
 
 

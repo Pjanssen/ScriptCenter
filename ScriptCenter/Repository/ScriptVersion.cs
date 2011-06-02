@@ -13,24 +13,27 @@ namespace ScriptCenter.Repository
     /// </summary>
     public class ScriptVersion
     {
-        [DisplayName("Version")]
         [JsonProperty("version")]
+        [DisplayName("Version")]
         public ScriptVersionNumber VersionNumber { get; set; }
 
 
-        [DisplayName("Script Path")]
         [JsonProperty("uri")]
+        [DisplayName("Script Path")]
+        [Description("The path to the script or package associated with this manifest. This can be an absolute path or be relative to the manifest's path.")]
         public String ScriptPath { get; set; }
 
 
         [JsonProperty("min_3dsmax")]
         [DisplayName("Minimal 3dsmax version")]
+        [Description("The 3dsmax version required to install the script. Set to 0 for all versions.")]
         [DefaultValue(0)]
         [TypeConverter(typeof(RequiredMaxVersionConverter))]
         public Int32 Minimal3dsmaxVersion { get; set; }
 
         [JsonProperty("max_3dsmax")]
         [DisplayName("Maximum 3dsmax version")]
+        [Description("Use this property to limit the script up to a specific 3dsmax version. Set to 0 for all versions.")]
         [DefaultValue(0)]
         [TypeConverter(typeof(RequiredMaxVersionConverter))]
         public Int32 Maximum3dsmaxVersion { get; set; }
@@ -51,17 +54,21 @@ namespace ScriptCenter.Repository
     public class ScriptVersionNumber : IComparable<ScriptVersionNumber>
     {
         [JsonIgnore()]
+        [Description("The major component of the version.")]
         public Int32 Major { get; set; }
 
         [JsonIgnore()]
+        [Description("The minor component of the version.")]
         public Int32 Minor { get; set; }
 
         [JsonIgnore()]
+        [Description("The revision component of the version.")]
         public Int32 Revision { get; set; }
 
-        [DisplayName("Release Stage")]
-        [DefaultValue(ScriptReleaseStage.Release)]
         [JsonIgnore()]
+        [DisplayName("Release Stage")]
+        [Description("The stage of this version indicating the stability of the script.")]
+        [DefaultValue(ScriptReleaseStage.Release)]
         public ScriptReleaseStage ReleaseStage { get; set; }
 
         public ScriptVersionNumber() : this(1, 0, 0, ScriptReleaseStage.Release) { }

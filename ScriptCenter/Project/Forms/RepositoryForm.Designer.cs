@@ -87,8 +87,6 @@
             this.scriptRefsListView.TabIndex = 0;
             this.scriptRefsListView.UseCompatibleStateImageBehavior = false;
             this.scriptRefsListView.View = System.Windows.Forms.View.Details;
-            this.scriptRefsListView.SelectedIndexChanged += new System.EventHandler(this.scriptRefsListView_SelectedIndexChanged);
-            this.scriptRefsListView.Resize += new System.EventHandler(this.scriptRefsListView_Resize);
             // 
             // columnHeader1
             // 
@@ -121,7 +119,6 @@
             this.addScriptRefButton.TabIndex = 2;
             this.addScriptRefButton.Text = "Add";
             this.addScriptRefButton.UseVisualStyleBackColor = true;
-            this.addScriptRefButton.Click += new System.EventHandler(this.addScriptRefButton_Click);
             // 
             // removeScriptRefButton
             // 
@@ -131,7 +128,6 @@
             this.removeScriptRefButton.TabIndex = 5;
             this.removeScriptRefButton.Text = "Remove";
             this.removeScriptRefButton.UseVisualStyleBackColor = true;
-            this.removeScriptRefButton.Click += new System.EventHandler(this.removeScriptRefButton_Click);
             // 
             // moveScriptRefUpButton
             // 
@@ -141,7 +137,6 @@
             this.moveScriptRefUpButton.TabIndex = 3;
             this.moveScriptRefUpButton.Text = "Move Up";
             this.moveScriptRefUpButton.UseVisualStyleBackColor = true;
-            this.moveScriptRefUpButton.Click += new System.EventHandler(this.moveScriptRefUpButton_Click);
             // 
             // moveScriptRefDownButton
             // 
@@ -151,7 +146,6 @@
             this.moveScriptRefDownButton.TabIndex = 4;
             this.moveScriptRefDownButton.Text = "Move Down";
             this.moveScriptRefDownButton.UseVisualStyleBackColor = true;
-            this.moveScriptRefDownButton.Click += new System.EventHandler(this.moveScriptRefDownButton_Click);
             // 
             // scriptRefPropertyGrid
             // 
@@ -164,7 +158,6 @@
             this.scriptRefPropertyGrid.Size = new System.Drawing.Size(383, 117);
             this.scriptRefPropertyGrid.TabIndex = 5;
             this.scriptRefPropertyGrid.ToolbarVisible = false;
-            this.scriptRefPropertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.scriptRefPropertyGrid_PropertyValueChanged);
             // 
             // label1
             // 

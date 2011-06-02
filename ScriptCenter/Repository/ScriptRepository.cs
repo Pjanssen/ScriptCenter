@@ -30,35 +30,62 @@ namespace ScriptCenter.Repository
 
         [JsonProperty("name")]
         public String Name { get; set; }
+        
+        [JsonProperty("categories")]
+        public List<ScriptRepositoryCategory> Categories { get; private set; }
+
+        [JsonIgnore()]
+        public ScriptRepositoryCategory DefaultCategory { get; private set; }
 
         [JsonProperty("scripts")]
-        public List<ScriptManifestReference> Scripts { get; set; }
+        public List<String> Scripts 
+        { 
+            get { return this.DefaultCategory.Scripts; }
+            private set
+            {
+                this.DefaultCategory.Scripts = value;
+            }
+        }
+
+        [JsonIgnore()]
+        public List<String> AllScripts
+        {
+            get
+            {
+                List<String> scripts = new List<string>(this.Scripts);
+
+                foreach (ScriptRepositoryCategory cat in this.Categories)
+                    scripts.AddRange(cat.Scripts);
+
+                return scripts;
+            }
+        }
 
         public ScriptRepository() : this("") { }
         public ScriptRepository(String name)
         {
             this.Name = name;
-            this.Scripts = new List<ScriptManifestReference>();
+            this.DefaultCategory = new ScriptRepositoryCategory("__default__");
+            this.Categories = new List<ScriptRepositoryCategory>();
         }
     }
 
-    public class ScriptManifestReference
+    public class ScriptRepositoryCategory
     {
-        [JsonProperty("uri")]
-        [DisplayName("Script Manifest Path")]
-        [Description("The path to the script manifest. This can be either a full url (for example http://domain/example.scmanifest), or a uri relative to the repository location.")]
-        public String URI { get; set; }
+        [JsonProperty("name")]
+        public String Name { get; set; }
 
-        [JsonProperty("id")]
-        [DisplayName("Script Identifier")]
-        [Description("The identifier for this referenced manifest. Make sure it conforms to the identifier  in the manifest!")]
-        public String Id { get; set; }
+        [JsonProperty("scripts")]
+        public List<String> Scripts { get; set; }
 
-        public ScriptManifestReference() { }
-        public ScriptManifestReference(String id, String uri)
+        public ScriptRepositoryCategory() : this("") { }
+        public ScriptRepositoryCategory(String name)
         {
-            this.Id = id;
-            this.URI = uri;
+            this.Name = name;
+            this.Scripts = new List<String>();
         }
     }
+
+    //TMP description of script manifest reference.
+    //The path to the script manifest. This can be either a full url (for example http://domain/example.scmanifest), or a uri relative to the repository location."
 }

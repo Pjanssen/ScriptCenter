@@ -41,7 +41,11 @@ namespace ScriptCenter.Repository
 
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            return new StandardValuesCollection(new List<Int32>() { 0, 2008, 2009, 2010, 2011, 2012 });
+            List<Int32> versions = new List<Int32>() { 0 };
+            for (int i = 2008; i < DateTime.Today.Year + 2; i++)
+                versions.Add(i);
+
+            return new StandardValuesCollection(versions);
         }
     }
 }

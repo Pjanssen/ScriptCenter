@@ -24,9 +24,10 @@ namespace ScriptCenter.Project.Forms
             this.repository = repository;
 
             this.scriptRepositoryBindingSource.Add(repository);
-            this.fillScriptRefsListView();
+            //this.fillScriptRefsListView();
         }
 
+        /*
         private ListViewItem addScriptRefToListView(ScriptManifestReference r)
         {
             ListViewItem item = new ListViewItem();
@@ -59,7 +60,7 @@ namespace ScriptCenter.Project.Forms
         private void addScriptRefButton_Click(object sender, EventArgs e)
         {
             ScriptManifestReference r = new ScriptManifestReference();
-            this.repository.Scripts.Add(r);
+            //this.repository.Scripts.Add(r);
 
             ListViewItem item = this.addScriptRefToListView(r);
             item.Selected = true;
@@ -73,7 +74,7 @@ namespace ScriptCenter.Project.Forms
             if (!(item.Tag is ScriptManifestReference))
                 return;
 
-            this.repository.Scripts.Remove((ScriptManifestReference)item.Tag);
+            //this.repository.Scripts.Remove((ScriptManifestReference)item.Tag);
             this.scriptRefsListView.Items.Remove(item);
             this.scriptRefPropertyGrid.SelectedObject = null;
         }
@@ -135,7 +136,7 @@ namespace ScriptCenter.Project.Forms
         {
             columnHeader2.Width = scriptRefsListView.Width - columnHeader1.Width - 4;
         }
-
+        */
         
 
         

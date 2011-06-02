@@ -34,7 +34,7 @@ namespace ScriptCenter.Project.Forms
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.addVersionButton = new System.Windows.Forms.Button();
             this.removeVersionButton = new System.Windows.Forms.Button();
-            this.versionPropertyGrid = new System.Windows.Forms.PropertyGrid();
+            this.versionPropertyGrid = new ScriptCenter.Controls.CustomPropertyGrid();
             this.versionsListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -117,7 +117,6 @@ namespace ScriptCenter.Project.Forms
             // versionPropertyGrid
             // 
             this.versionPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.versionPropertyGrid.HelpVisible = false;
             this.versionPropertyGrid.Location = new System.Drawing.Point(78, 221);
             this.versionPropertyGrid.Name = "versionPropertyGrid";
             this.versionPropertyGrid.PropertySort = System.Windows.Forms.PropertySort.NoSort;
@@ -283,7 +282,7 @@ namespace ScriptCenter.Project.Forms
         private System.Windows.Forms.ListView versionsListView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.PropertyGrid versionPropertyGrid;
+        private ScriptCenter.Controls.CustomPropertyGrid versionPropertyGrid;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button addVersionButton;
         private System.Windows.Forms.Button removeVersionButton;

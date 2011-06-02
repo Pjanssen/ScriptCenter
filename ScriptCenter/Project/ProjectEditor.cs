@@ -18,6 +18,9 @@ namespace ScriptCenter.Project
         {
             InitializeComponent();
 
+            this.sectionTitle.Visible = false;
+            this.horizontalLine.Visible = false;
+
             this.filesTree.AfterSelect += new TreeViewEventHandler(filesTree_AfterSelect);
         }
 
@@ -35,6 +38,9 @@ namespace ScriptCenter.Project
 
         private void setSectionPanel(String title, String imageKey, Control c)
         {
+            this.sectionTitle.Visible = true;
+            this.horizontalLine.Visible = true;
+
             this.sectionTitle.Text = title;
             this.sectionTitle.ImageKey = imageKey;
             this.sectionPanel.Controls.Clear();
@@ -43,7 +49,7 @@ namespace ScriptCenter.Project
         }
 
 
-        private void addManifestToTree(ScriptManifest manifest)
+        private TreeNode addManifestToTree(ScriptManifest manifest)
         {
             TreeNode tn = new TreeNode(manifest.Name);
             tn.ImageKey = tn.SelectedImageKey = "manifest";
@@ -60,8 +66,9 @@ namespace ScriptCenter.Project
             tn.Nodes.Add(metadataTn);
 
             this.filesTree.Nodes.Add(tn);
+            return tn;
         }
-        private void addPackageToTree(InstallerConfiguration config)
+        private TreeNode addPackageToTree(InstallerConfiguration config)
         {
             TreeNode tn = new TreeNode("Test");
             tn.ImageKey = tn.SelectedImageKey = "package";
@@ -78,14 +85,16 @@ namespace ScriptCenter.Project
             tn.Nodes.Add(uiTn);
 
             this.filesTree.Nodes.Add(tn);
+            return tn;
         }
-        private void addRepositoryToTree(ScriptRepository repo)
+        private TreeNode addRepositoryToTree(ScriptRepository repo)
         {
             TreeNode tn = new TreeNode(repo.Name);
             tn.ImageKey = tn.SelectedImageKey = "repository";
             tn.Tag = new TreeNodeData(repo, typeof(RepositoryForm));
 
             this.filesTree.Nodes.Add(tn);
+            return tn;
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -104,17 +113,23 @@ namespace ScriptCenter.Project
         private void newManifestButton_Click(object sender, EventArgs e)
         {
             ScriptManifest m = new ScriptManifest() { Name = "Outliner" };
-            addManifestToTree(m);
+            TreeNode tn = addManifestToTree(m);
+            tn.Expand();
+            this.filesTree.SelectedNode = tn;
         }
         private void newPackageButton_Click(object sender, EventArgs e)
         {
             InstallerConfiguration c = new InstallerConfiguration();
-            addPackageToTree(c);
+            TreeNode tn = addPackageToTree(c);
+            tn.Expand();
+            this.filesTree.SelectedNode = tn;
         }
         private void newRepositoryButton_Click(object sender, EventArgs e)
         {
             ScriptRepository r = new ScriptRepository("Pier's repo");
-            addRepositoryToTree(r);
+            TreeNode tn = addRepositoryToTree(r);
+            tn.Expand();
+            this.filesTree.SelectedNode = tn;
         }
     }
 }

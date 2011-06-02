@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectEditor));
             System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-            System.Windows.Forms.Label horizontalLine;
             this.mainToolStrip = new System.Windows.Forms.ToolStrip();
             this.newButton = new System.Windows.Forms.ToolStripButton();
             this.openButton = new System.Windows.Forms.ToolStripButton();
@@ -42,11 +41,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sectionPanel = new System.Windows.Forms.Panel();
             this.titlePanel = new System.Windows.Forms.Panel();
+            this.horizontalLine = new System.Windows.Forms.Label();
             this.filesTree = new System.Windows.Forms.TreeView();
             this.icons = new System.Windows.Forms.ImageList(this.components);
             this.sectionTitle = new ScriptCenter.Controls.ImageBeforeTextLabel();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            horizontalLine = new System.Windows.Forms.Label();
             this.mainToolStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.titlePanel.SuspendLayout();
@@ -139,7 +138,7 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 172F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 168F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.sectionPanel, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.titlePanel, 1, 0);
@@ -157,31 +156,31 @@
             // sectionPanel
             // 
             this.sectionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sectionPanel.Location = new System.Drawing.Point(175, 35);
+            this.sectionPanel.Location = new System.Drawing.Point(171, 35);
             this.sectionPanel.Margin = new System.Windows.Forms.Padding(0);
             this.sectionPanel.Name = "sectionPanel";
-            this.sectionPanel.Size = new System.Drawing.Size(511, 405);
+            this.sectionPanel.Size = new System.Drawing.Size(515, 405);
             this.sectionPanel.TabIndex = 2;
             // 
             // titlePanel
             // 
             this.titlePanel.Controls.Add(this.sectionTitle);
-            this.titlePanel.Controls.Add(horizontalLine);
+            this.titlePanel.Controls.Add(this.horizontalLine);
             this.titlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.titlePanel.Location = new System.Drawing.Point(175, 5);
+            this.titlePanel.Location = new System.Drawing.Point(171, 5);
             this.titlePanel.Margin = new System.Windows.Forms.Padding(0);
             this.titlePanel.Name = "titlePanel";
-            this.titlePanel.Size = new System.Drawing.Size(511, 30);
+            this.titlePanel.Size = new System.Drawing.Size(515, 30);
             this.titlePanel.TabIndex = 4;
             // 
             // horizontalLine
             // 
-            horizontalLine.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            horizontalLine.Dock = System.Windows.Forms.DockStyle.Bottom;
-            horizontalLine.Location = new System.Drawing.Point(0, 28);
-            horizontalLine.Name = "horizontalLine";
-            horizontalLine.Size = new System.Drawing.Size(511, 2);
-            horizontalLine.TabIndex = 3;
+            this.horizontalLine.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.horizontalLine.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.horizontalLine.Location = new System.Drawing.Point(0, 28);
+            this.horizontalLine.Name = "horizontalLine";
+            this.horizontalLine.Size = new System.Drawing.Size(515, 2);
+            this.horizontalLine.TabIndex = 3;
             // 
             // filesTree
             // 
@@ -195,7 +194,7 @@
             this.filesTree.Name = "filesTree";
             this.tableLayoutPanel1.SetRowSpan(this.filesTree, 2);
             this.filesTree.SelectedImageIndex = 0;
-            this.filesTree.Size = new System.Drawing.Size(166, 429);
+            this.filesTree.Size = new System.Drawing.Size(162, 429);
             this.filesTree.TabIndex = 5;
             // 
             // icons
@@ -257,5 +256,6 @@
         private System.Windows.Forms.TreeView filesTree;
         private Controls.ImageBeforeTextLabel sectionTitle;
         private System.Windows.Forms.ImageList icons;
+        private System.Windows.Forms.Label horizontalLine;
     }
 }

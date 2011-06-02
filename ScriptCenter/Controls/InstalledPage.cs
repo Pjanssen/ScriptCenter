@@ -39,10 +39,12 @@ namespace ScriptCenter.Controls
                 return;
             }
 
+            /*
             foreach (ScriptManifestReference r in this.installedScripts.Scripts)
             {
                 this.LoadManifest(r.URI);
             }
+            */
         }
 
 
