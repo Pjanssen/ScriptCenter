@@ -11,6 +11,18 @@ namespace ScriptCenterTest.Repository
     [TestClass]
     public class ScriptRepositoryTest
     {
+        private ScriptRepository repo;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            repo = new ScriptRepository("testRepo");
+            repo.Scripts.Add("test.scmanifest");
+            ScriptRepositoryCategory cat = new ScriptRepositoryCategory("testCategory");
+            cat.Scripts.Add("outliner.scmanifest");
+            repo.Categories.Add(cat);
+        }
+
         [TestMethod]
         public void ConstructorCreatesDefaultCategoryTest()
         {
@@ -26,18 +38,12 @@ namespace ScriptCenterTest.Repository
         {
             ScriptRepositoryCategory cat = new ScriptRepositoryCategory();
             Assert.IsNotNull(cat.Name);
-            Assert.IsNotNull(cat.Scripts, ".Scripts should not be null");
+            Assert.IsNotNull(cat.Scripts, "Scripts should not be null");
         }
 
         [TestMethod]
         public void AllScriptsTest()
         {
-            ScriptRepository repo = new ScriptRepository();
-            repo.Scripts.Add("test.scmanifest");
-            ScriptRepositoryCategory cat = new ScriptRepositoryCategory("testCategory");
-            cat.Scripts.Add("outliner.scmanifest");
-            repo.Categories.Add(cat);
-
             Assert.IsNotNull(repo.Scripts);
             Assert.AreEqual(2, repo.AllScripts.Count);
         }
@@ -45,12 +51,6 @@ namespace ScriptCenterTest.Repository
         [TestMethod]
         public void WriteTest()
         {
-            ScriptRepository repo = new ScriptRepository();
-            repo.Scripts.Add("test.scmanifest");
-            ScriptRepositoryCategory cat = new ScriptRepositoryCategory("testCategory");
-            cat.Scripts.Add("outliner.scmanifest");
-            repo.Categories.Add(cat);
-
             String outputFile = TestHelperMethods.GetOutputDirectory() + "repo" + ScriptRepository.DefaultExtension;
             if (File.Exists(outputFile))
                 File.Delete(outputFile);
@@ -71,10 +71,13 @@ namespace ScriptCenterTest.Repository
             Assert.IsTrue(File.Exists(inputFile), "File to read does not exist");
 
             JsonFileHandler<ScriptRepository> handler = new JsonFileHandler<ScriptRepository>();
-            ScriptRepository repo = handler.Read(inputFile);
+            ScriptRepository readRepo = handler.Read(inputFile);
 
-            Assert.IsNotNull(repo, "Repository should not be null");
-            Assert.AreEqual(1, repo.Scripts.Count, "Number of scripts in default category incorrect");
+            Assert.IsNotNull(readRepo, "Repository should not be null");
+            Assert.AreEqual(repo.Scripts.Count, readRepo.Scripts.Count, "Number of scripts in default category incorrect");
+            Assert.AreEqual(repo.Name, readRepo.Name, "Repository name incorrect");
+            Assert.AreEqual(repo.Categories.Count, readRepo.Categories.Count, "Category count incorrect");
+            Assert.AreEqual(repo.Categories[0].Scripts.Count, readRepo.Categories[0].Scripts.Count, "Category.Scripts count incorrect");
         }
     }
 }
