@@ -66,22 +66,27 @@ namespace ScriptCenterTest.Installer
         public void MoveActionTest()
         {
             InstallerAction action = config.Actions[2];
-            config.MoveAction(action, InstallerConfiguration.MoveActionDirection.Up);
+            Assert.AreEqual(1, config.MoveAction(action, InstallerConfiguration.MoveActionDirection.Up));
             Assert.AreEqual(1, config.Actions.IndexOf(action));
-            config.MoveAction(action, InstallerConfiguration.MoveActionDirection.Down);
+            Assert.AreEqual(2, config.MoveAction(action, InstallerConfiguration.MoveActionDirection.Down));
             Assert.AreEqual(2, config.Actions.IndexOf(action));
 
             //Check moving up when index is 0.
             action = config.Actions[0];
-            config.MoveAction(action, InstallerConfiguration.MoveActionDirection.Up);
+            Assert.AreEqual(0, config.MoveAction(action, InstallerConfiguration.MoveActionDirection.Up));
             Assert.AreEqual(0, config.Actions.IndexOf(action));
 
             //Check moving down when index is last.
             action = config.Actions[config.Actions.Count - 1];
-            config.MoveAction(action, InstallerConfiguration.MoveActionDirection.Down);
+            Assert.AreEqual(config.Actions.Count - 1, config.MoveAction(action, InstallerConfiguration.MoveActionDirection.Down));
             Assert.AreEqual(config.Actions.Count - 1, config.Actions.IndexOf(action));
 
-            //TODO: test action not contained in config.
+            try
+            {
+                config.MoveAction(new CopyDirAction(), InstallerConfiguration.MoveActionDirection.Up);
+                Assert.Fail("Moving an action that is not contained in the config should throw an exception");
+            }
+            catch (ArgumentException e) { }
         }
 
         [TestMethod()]

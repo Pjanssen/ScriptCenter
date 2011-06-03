@@ -30,15 +30,15 @@ namespace ScriptCenter.Installer.Actions
 /// </summary>
 public class CopyDirAction : InstallerAction
 {
-    public CopyDirAction()
+    public CopyDirAction() : this("", AppPaths.Directory.Scripts) { }
+    public CopyDirAction(String source, AppPaths.Directory target) 
     {
         InstallerHelperMethods.SetDefaultValues(this);
-        this.ExcludeFiles = new List<string>() { "._*", "Thumbs.db", ".DS_Store" };
-    }
-    public CopyDirAction(String source, AppPaths.Directory target) : this()
-    {
+        
         this.Source = source;
         this.Target = target;
+
+        this.ExcludeFiles = new List<string>() { "._*", "Thumbs.db", ".DS_Store", ".svn" };
     }
 
 
@@ -57,7 +57,7 @@ public class CopyDirAction : InstallerAction
     /// The target directory to copy to.
     /// </summary>
     [JsonProperty("target")]
-    [DefaultValue(AppPaths.Directory.MacroScripts)]
+    [DefaultValue(AppPaths.Directory.Scripts)]
     [Category("1. Action Properties")]
     [DisplayName("Target Directory")]
     [Description("The 3dsmax directory to copy the directory to.")]

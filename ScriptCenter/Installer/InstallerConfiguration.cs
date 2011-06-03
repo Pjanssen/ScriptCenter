@@ -97,23 +97,28 @@ namespace ScriptCenter.Installer
         /// </summary>
         /// <param name="action">The action to move.</param>
         /// <param name="direction">The direction to move the action in.</param>
-        public void MoveAction(InstallerAction action, MoveActionDirection direction)
+        /// <returns>The new index of the moved action.</returns>
+        public Int32 MoveAction(InstallerAction action, MoveActionDirection direction)
         {
             if (!this.installerActions.Contains(action))
                 throw new ArgumentException("The action to move is not contained in the configuration.");
 
             Int32 index = this.installerActions.IndexOf(action);
             if (direction == MoveActionDirection.Up && index == 0)
-                return;
+                return index;
             if (direction == MoveActionDirection.Down && index == this.installerActions.Count - 1)
-                return;
+                return index;
 
             this.installerActions.Remove(action);
 
+            Int32 newIndex = index;
             if (direction == MoveActionDirection.Up)
-                this.installerActions.Insert(index - 1, action);
+                newIndex = index - 1;
             else if (direction == MoveActionDirection.Down)
-                this.installerActions.Insert(index + 1, action);
+                newIndex = index + 1;
+
+            this.installerActions.Insert(newIndex, action);
+            return newIndex;
         }
 
         public enum MoveActionDirection

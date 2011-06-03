@@ -47,9 +47,9 @@ namespace ScriptCenter.Project.Forms
 
         private void fillActionsCombobox()
         {
-            Type actionType = typeof(InstallerAction);
-            Assembly assembly = Assembly.GetAssembly(actionType);
-            List<Type> types = assembly.GetTypes().Where(type => type.IsSubclassOf(actionType)).ToList();
+            Type actionBaseType = typeof(InstallerAction);
+            Assembly assembly = Assembly.GetAssembly(actionBaseType);
+            List<Type> types = assembly.GetTypes().Where(type => type.IsSubclassOf(actionBaseType)).ToList();
 
             foreach (Type t in types)
             {
@@ -134,30 +134,29 @@ namespace ScriptCenter.Project.Forms
             actionsListView.SelectedItems[0].SubItems[1].Text = action.ActionDetails;
         }
 
-        private void moveSelectedAction(Int32 direction)
+
+        private void moveSelectedAction(InstallerConfiguration.MoveActionDirection direction)
         {
             if (actionsListView.SelectedItems.Count == 0)
                 return;
 
             ListViewItem selItem = actionsListView.SelectedItems[0];
-            InstallerAction action = (InstallerAction)selItem.Tag;
-            Int32 actionPos = selItem.Index;
-            InstallerConfiguration.MoveActionDirection moveDirection = (direction == -1) ? InstallerConfiguration.MoveActionDirection.Down : InstallerConfiguration.MoveActionDirection.Up;
-            if ((actionPos + direction) >= 0 && (actionPos + direction) < this.installerConfig.Actions.Count)
+            Int32 oldIndex = selItem.Index;
+            Int32 newIndex = this.installerConfig.MoveAction((InstallerAction)selItem.Tag, direction);
+            if (oldIndex != newIndex)
             {
-                this.installerConfig.MoveAction(action, moveDirection);
                 actionsListView.Items.Remove(selItem);
-                actionsListView.Items.Insert(actionPos + direction, selItem);
+                actionsListView.Items.Insert(newIndex, selItem);
             }
         }
         private void moveActionUpButton_Click(object sender, EventArgs e)
         {
-            moveSelectedAction(-1);
+            moveSelectedAction(InstallerConfiguration.MoveActionDirection.Up);
         }
 
         private void moveActionDownButton_Click(object sender, EventArgs e)
         {
-            moveSelectedAction(1);
+            moveSelectedAction(InstallerConfiguration.MoveActionDirection.Down);
         }
 
         private void actionsListView_SizeChanged(object sender, EventArgs e)
