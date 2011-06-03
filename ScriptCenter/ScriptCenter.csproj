@@ -257,11 +257,31 @@
     <EmbeddedResource Include="Resources\icons\hotkey.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\icons\action.png" />
-    <Content Include="Resources\icons\error.png" />
-    <Content Include="Resources\icons\package_16.png" />
-    <Content Include="Resources\icons\package_32.png" />
-    <Content Include="Resources\icons\package_64.png" />
+    <EmbeddedResource Include="Resources\icons\action.png" />
+    <EmbeddedResource Include="Resources\icons\dialog.png" />
+    <EmbeddedResource Include="Resources\icons\error.png" />
+    <EmbeddedResource Include="Resources\icons\manifest.png" />
+    <EmbeddedResource Include="Resources\icons\manifest_add.png" />
+    <EmbeddedResource Include="Resources\icons\manifest_export.png" />
+    <EmbeddedResource Include="Resources\icons\manifest_link.png" />
+    <EmbeddedResource Include="Resources\icons\manifest_metadata.png" />
+    <EmbeddedResource Include="Resources\icons\manifest_new.png" />
+    <EmbeddedResource Include="Resources\icons\manifest_version.png" />
+    <EmbeddedResource Include="Resources\icons\manifest_warning.png" />
+    <EmbeddedResource Include="Resources\icons\package_16.png" />
+    <EmbeddedResource Include="Resources\icons\package_32.png" />
+    <EmbeddedResource Include="Resources\icons\package_64.png" />
+    <EmbeddedResource Include="Resources\icons\package_add.png" />
+    <EmbeddedResource Include="Resources\icons\package_export.png" />
+    <EmbeddedResource Include="Resources\icons\package_new.png" />
+    <EmbeddedResource Include="Resources\icons\repository.png" />
+    <EmbeddedResource Include="Resources\icons\repository_add.png" />
+    <EmbeddedResource Include="Resources\icons\repository_category.png" />
+    <EmbeddedResource Include="Resources\icons\repository_export.png" />
+    <EmbeddedResource Include="Resources\icons\repository_new.png" />
+    <EmbeddedResource Include="Resources\icons\toolbar.png" />
+    <EmbeddedResource Include="Resources\icons\toolbar_button.png" />
+    <EmbeddedResource Include="Resources\icons\toolbar_separator.png" />
     <Content Include="scratchpad .txt" />
   </ItemGroup>
   <ItemGroup />

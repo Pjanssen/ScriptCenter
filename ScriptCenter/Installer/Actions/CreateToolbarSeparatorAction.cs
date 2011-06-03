@@ -78,6 +78,39 @@ namespace ScriptCenter.Installer.Actions
 
 
         public override string ActionName { get { return "Create Toolbar Separator"; } }
+        public override string ActionImageKey { get { return "toolbar_separator"; } }
         public override string ActionDetails { get { return this.ToolbarName; } }
+
+        [DefaultValue(true)]
+        [Description("When set to true this action will be performed when installing the script. \r\nNote: this action cannot be undone.")]
+        public override bool RunAtInstall
+        {
+            get { return base.RunAtInstall; }
+            set { base.RunAtInstall = value; }
+        }
+
+        [DefaultValue(false)]
+        [Browsable(false)]
+        public override bool RunAtUpdate
+        {
+            get { return false; }
+            set
+            {
+                if (value != false)
+                    throw new NotSupportedException("The Create Toolbar Separator action cannot be undone.");
+            }
+        }
+
+        [DefaultValue(false)]
+        [Browsable(false)]
+        public override bool RunAtUninstall
+        {
+            get { return false; }
+            set
+            {
+                if (value != false)
+                    throw new NotSupportedException("The Create Toolbar Separator action cannot be undone.");
+            }
+        }
     }
 }

@@ -41,10 +41,10 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sectionPanel = new System.Windows.Forms.Panel();
             this.titlePanel = new System.Windows.Forms.Panel();
+            this.sectionTitle = new ScriptCenter.Controls.ImageBeforeTextLabel();
             this.icons = new System.Windows.Forms.ImageList(this.components);
             this.horizontalLine = new System.Windows.Forms.Label();
             this.filesTree = new System.Windows.Forms.TreeView();
-            this.sectionTitle = new ScriptCenter.Controls.ImageBeforeTextLabel();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mainToolStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -173,6 +173,21 @@
             this.titlePanel.Size = new System.Drawing.Size(509, 29);
             this.titlePanel.TabIndex = 4;
             // 
+            // sectionTitle
+            // 
+            this.sectionTitle.AutoSize = true;
+            this.sectionTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sectionTitle.Image = ((System.Drawing.Image)(resources.GetObject("sectionTitle.Image")));
+            this.sectionTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sectionTitle.ImageKey = "manifest";
+            this.sectionTitle.ImageList = this.icons;
+            this.sectionTitle.Location = new System.Drawing.Point(4, 3);
+            this.sectionTitle.Name = "sectionTitle";
+            this.sectionTitle.Size = new System.Drawing.Size(130, 20);
+            this.sectionTitle.TabIndex = 4;
+            this.sectionTitle.Text = "{section_title}";
+            this.sectionTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // icons
             // 
             this.icons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("icons.ImageStream")));
@@ -208,21 +223,6 @@
             this.filesTree.SelectedImageIndex = 0;
             this.filesTree.Size = new System.Drawing.Size(162, 429);
             this.filesTree.TabIndex = 5;
-            // 
-            // sectionTitle
-            // 
-            this.sectionTitle.AutoSize = true;
-            this.sectionTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sectionTitle.Image = ((System.Drawing.Image)(resources.GetObject("sectionTitle.Image")));
-            this.sectionTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.sectionTitle.ImageKey = "manifest";
-            this.sectionTitle.ImageList = this.icons;
-            this.sectionTitle.Location = new System.Drawing.Point(4, 3);
-            this.sectionTitle.Name = "sectionTitle";
-            this.sectionTitle.Size = new System.Drawing.Size(130, 20);
-            this.sectionTitle.TabIndex = 4;
-            this.sectionTitle.Text = "{section_title}";
-            this.sectionTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ProjectEditor
             // 

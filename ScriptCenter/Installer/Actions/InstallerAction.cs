@@ -46,21 +46,21 @@ namespace ScriptCenter.Installer.Actions
         [Category("2. Installer Properties")]
         [DisplayName("Install")]
         [Description("When set to true this action will be performed when installing the script.")]
-        public Boolean RunAtInstall { get; set; }
+        public virtual Boolean RunAtInstall { get; set; }
 
         [JsonProperty("run_at_update")]
         [DefaultValue(true)]
         [Category("2. Installer Properties")]
         [DisplayName("Update")]
         [Description("When set to true this action will be undone when uninstalling the script prior to updating it.")]
-        public Boolean RunAtUpdate { get; set; }
+        public virtual Boolean RunAtUpdate { get; set; }
 
         [JsonProperty("run_at_uninstall")]
         [DefaultValue(true)]
         [Category("2. Installer Properties")]
         [DisplayName("Uninstall")]
         [Description("When set to true this action will be undone when uninstalling the script.")]
-        public Boolean RunAtUninstall { get; set; }
+        public virtual Boolean RunAtUninstall { get; set; }
 
         [JsonIgnore()]
         [Browsable(false)]

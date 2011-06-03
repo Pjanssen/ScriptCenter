@@ -135,7 +135,7 @@ namespace ScriptCenter.Installer.Actions
         {
             get
             {
-                if (this.ToolbarName != null && this.MacroName != null && this.MacroCategory != null)
+                if (this.ToolbarName != String.Empty && this.MacroName != String.Empty && this.MacroCategory != String.Empty)
                     return String.Format("{0} -> {1}::{2}", this.ToolbarName, this.MacroCategory, this.MacroName);
                 else
                     return String.Empty;

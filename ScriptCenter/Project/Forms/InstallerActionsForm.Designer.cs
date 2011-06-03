@@ -87,6 +87,7 @@
             this.icons.Images.SetKeyName(3, "hotkey");
             this.icons.Images.SetKeyName(4, "toolbar");
             this.icons.Images.SetKeyName(5, "toolbar_button");
+            this.icons.Images.SetKeyName(6, "toolbar_separator");
             // 
             // actionsComboBox
             // 
