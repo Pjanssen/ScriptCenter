@@ -73,7 +73,7 @@ namespace ScriptCenter.Installer.Actions
         /// <summary>
         /// Not implemented for this action.
         /// </summary>
-        public override bool Undo(Installer installer) { return true; }
+        public override bool Undo(Installer installer) { return Do(installer); }
 
 
         public override string ActionName { get { return "Run Maxscript"; } }
@@ -87,6 +87,30 @@ namespace ScriptCenter.Installer.Actions
 
                 return String.Format(formatStr, this.Source);
             }
+        }
+
+        [DefaultValue(true)]
+        [Description("When set to true, the maxscript is executed when installing the script.")]
+        public override bool RunAtInstall
+        {
+            get { return base.RunAtInstall; }
+            set { base.RunAtInstall = value; }
+        }
+
+        [DefaultValue(false)]
+        [Description("When set to true, the maxscript is executed when updating the script.")]
+        public override bool RunAtUpdate
+        {
+            get { return base.RunAtUpdate; }
+            set { base.RunAtUpdate = value; }
+        }
+
+        [DefaultValue(false)]
+        [Description("When set to true, the maxscript is executed when uninstalling the script.")]
+        public override bool RunAtUninstall
+        {
+            get { return base.RunAtUninstall; }
+            set { base.RunAtUninstall = value; }
         }
     }
 }
