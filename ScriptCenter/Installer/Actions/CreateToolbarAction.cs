@@ -26,6 +26,13 @@ namespace ScriptCenter.Installer.Actions
 {
     public class CreateToolbarAction : InstallerAction
     {
+        public CreateToolbarAction() : this("") { }
+        public CreateToolbarAction(String name)
+        {
+            this.ToolbarName = name;
+        }
+
+
         /// <summary>
         /// The name of the toolbar to create.
         /// </summary>
@@ -33,14 +40,7 @@ namespace ScriptCenter.Installer.Actions
         [Category("1. Action Properties")]
         [DisplayName("Toolbar Name")]
         [Description("The name of the toolbar to create.")]
-        public String Name { get; set; }
-
-
-        public CreateToolbarAction() { }
-        public CreateToolbarAction(String name)
-        {
-            this.Name = name;
-        }
+        public String ToolbarName { get; set; }
 
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace ScriptCenter.Installer.Actions
             if (!cui.Read())
                 return false;
 
-            if (cui.AddToolbar(this.Name))
+            if (cui.AddToolbar(this.ToolbarName))
             {
                 if (!cui.Write())
                     return false;
@@ -72,7 +72,7 @@ namespace ScriptCenter.Installer.Actions
             if (!cui.Read())
                 return false;
 
-            if (cui.RemoveToolbar(this.Name))
+            if (cui.RemoveToolbar(this.ToolbarName))
             {
                 if (!cui.Write())
                     return false;
@@ -85,6 +85,6 @@ namespace ScriptCenter.Installer.Actions
 
         public override string ActionName { get { return "Create Toolbar"; } }
         public override string ActionImageKey { get { return "toolbar"; } }
-        public override string ActionDetails { get { return this.Name; } }
+        public override string ActionDetails { get { return this.ToolbarName; } }
     }
 }

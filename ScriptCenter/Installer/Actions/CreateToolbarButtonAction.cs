@@ -30,6 +30,15 @@ namespace ScriptCenter.Installer.Actions
     /// </summary>
     public class CreateToolbarButtonAction : InstallerAction
     {
+        public CreateToolbarButtonAction() : this("", "", "") { }
+        public CreateToolbarButtonAction(String toolbarName, String macroName, String macroCategory)
+        {
+            this.ToolbarName = toolbarName;
+            this.MacroName = macroName;
+            this.MacroCategory = macroCategory;
+        }
+
+
         /// <summary>
         /// The name of the toolbar to add the item to.
         /// </summary>
@@ -77,14 +86,6 @@ namespace ScriptCenter.Installer.Actions
         [Description("The text for the tooltip of the button.")]
         public String TooltipText { get; set; }
 
-
-        public CreateToolbarButtonAction() { }
-        public CreateToolbarButtonAction(String toolbarName, String macroName, String macroCategory)
-        {
-            this.ToolbarName = toolbarName;
-            this.MacroName = macroName;
-            this.MacroCategory = macroCategory;
-        }
 
         /// <summary>
         /// Create a button on a toolbar.

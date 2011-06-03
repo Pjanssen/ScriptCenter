@@ -31,7 +31,7 @@ namespace ScriptCenter.Installer.Actions
 /// </summary>
 public class AssignHotkeyAction : InstallerAction
 {
-    public AssignHotkeyAction() { }
+    public AssignHotkeyAction() : this(Keys.None, "", "") { }
     public AssignHotkeyAction(Keys keys, String macroName, String macroCategory)
     {
         this.Keys = keys;

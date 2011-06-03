@@ -30,12 +30,11 @@ namespace ScriptCenter.Installer.Actions
 /// </summary>
 public class CopyFileAction : InstallerAction
 {
-    public CopyFileAction()
+    public CopyFileAction() : this("", AppPaths.Directory.MacroScripts) { }
+    public CopyFileAction(String source, AppPaths.Directory target)
     {
         InstallerHelperMethods.SetDefaultValues(this);
-    }
-    public CopyFileAction(String source, AppPaths.Directory target) : this()
-    {
+
         this.Source = source;
         this.Target = target;
     }

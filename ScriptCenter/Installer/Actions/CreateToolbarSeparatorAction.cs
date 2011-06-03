@@ -30,6 +30,12 @@ namespace ScriptCenter.Installer.Actions
     /// </summary>
     public class CreateToolbarSeparatorAction : InstallerAction
     {
+        public CreateToolbarSeparatorAction() : this("") { }
+        public CreateToolbarSeparatorAction(String name)
+        {
+            this.ToolbarName = name;
+        }
+
         /// <summary>
         /// The name of the toolbar to add the item to.
         /// </summary>

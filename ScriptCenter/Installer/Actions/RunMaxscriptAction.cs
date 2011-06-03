@@ -30,7 +30,7 @@ namespace ScriptCenter.Installer.Actions
     /// </summary>
     public class RunMaxscriptAction : InstallerAction
     {
-        public RunMaxscriptAction() { }
+        public RunMaxscriptAction() : this("") { }
         public RunMaxscriptAction(String source)
         {
             this.Source = source;

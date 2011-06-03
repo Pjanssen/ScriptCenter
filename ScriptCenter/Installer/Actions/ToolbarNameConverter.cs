@@ -27,7 +27,7 @@ namespace ScriptCenter.Installer.Actions
                 foreach (InstallerAction a in action.Configuration.Actions)
                 {
                     if (a is CreateToolbarAction)
-                        toolbarNames.Add(((CreateToolbarAction)a).Name);
+                        toolbarNames.Add(((CreateToolbarAction)a).ToolbarName);
                 }
             }
             toolbarNames.Add("Main Toolbar");
