@@ -29,13 +29,16 @@ namespace ScriptCenter.Repository
             newString.Replace(Name_Token, manifest.Name);
             newString.Replace(Author_Token, manifest.Author);
 
-            //TODO: find a solution for getting the actual version, not just the first one.
-            newString.Replace(Version_Token, manifest.Versions[0].VersionNumber.ToString());
-            newString.Replace(Version_Token, manifest.Versions[0].VersionNumber.ToString(true));
-            newString.Replace(VersionMajor_Token, manifest.Versions[0].VersionNumber.Major.ToString());
-            newString.Replace(VersionMinor_Token, manifest.Versions[0].VersionNumber.Minor.ToString());
-            newString.Replace(VersionRevision_Token, manifest.Versions[0].VersionNumber.Revision.ToString());
-            newString.Replace(VersionStage_Token, manifest.Versions[0].VersionNumber.ReleaseStage.ToString().ToLower());
+            if (manifest.Versions.Count != 0)
+            {
+                //TODO: find a solution for getting the actual version, not just the first one.
+                newString.Replace(Version_Token, manifest.Versions[0].VersionNumber.ToString());
+                newString.Replace(Version_Token, manifest.Versions[0].VersionNumber.ToString(true));
+                newString.Replace(VersionMajor_Token, manifest.Versions[0].VersionNumber.Major.ToString());
+                newString.Replace(VersionMinor_Token, manifest.Versions[0].VersionNumber.Minor.ToString());
+                newString.Replace(VersionRevision_Token, manifest.Versions[0].VersionNumber.Revision.ToString());
+                newString.Replace(VersionStage_Token, manifest.Versions[0].VersionNumber.ReleaseStage.ToString().ToLower());
+            }
 
             return newString.ToString();
         }

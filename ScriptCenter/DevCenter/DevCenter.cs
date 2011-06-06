@@ -227,6 +227,7 @@ public partial class DevCenter : Form
         this.switchNewButtonImageText(sender, newPackageButton_Click);
 
         ScriptPackage p = new ScriptPackage("New Package");
+        p.Manifest.Versions.Add(new ScriptVersion());
         TreeNode tn = addPackageToTree(p, String.Empty);
         tn.Expand();
         this.filesTree.SelectedNode = tn;

@@ -68,7 +68,7 @@ namespace ScriptCenter.Repository
         [JsonIgnore]
         public String SourcePathAbsolute 
         {
-            get { return PathHelperMethods.GetAbsolutePath(this.SourcePathRelative, this.RootPath); }
+            get { return PathHelperMethods.GetAbsolutePath(ScriptManifestTokens.Replace(this.SourcePathRelative, this.Manifest), this.RootPath); }
             set { this.SourcePathRelative = PathHelperMethods.GetRelativePath(value, this.RootPath); }
         }
 
@@ -87,7 +87,7 @@ namespace ScriptCenter.Repository
         [JsonIgnore]
         public String OutputPathAbsolute 
         {
-            get { return PathHelperMethods.GetAbsolutePath(this.OutputPathRelative, this.RootPath); }
+            get { return PathHelperMethods.GetAbsolutePath(ScriptManifestTokens.Replace(this.OutputPathRelative, this.Manifest), this.RootPath); }
             set { this.OutputPathRelative = PathHelperMethods.GetRelativePath(value, this.RootPath); }
         }
 
@@ -106,7 +106,7 @@ namespace ScriptCenter.Repository
         [JsonIgnore]
         public String OutputFileAbsolute 
         {
-            get { return PathHelperMethods.GetAbsolutePath(this.OutputFileRelative, this.OutputPathAbsolute); }
+            get { return PathHelperMethods.GetAbsolutePath(ScriptManifestTokens.Replace(this.OutputFileRelative, this.Manifest), this.OutputPathAbsolute); }
             set { this.OutputFileRelative = PathHelperMethods.GetRelativePath(value, this.OutputPathAbsolute); }
         }
 
@@ -132,6 +132,7 @@ namespace ScriptCenter.Repository
         /// <param name="setRootPath">If true, the supplied new root path will be set as the root path of the package.</param>
         public void ReroutePaths(String newRootPath, Boolean setRootPath) 
         {
+            //TODO: verify that this does not overwrite manifest tokens!
             if (this.SourcePathRelative != String.Empty)
                 this.SourcePathRelative = PathHelperMethods.GetRelativePath(this.SourcePathAbsolute, newRootPath);
 

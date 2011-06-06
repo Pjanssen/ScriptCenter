@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CopyDirActionSourceEditor.cs" />
     <Compile Include="Controls\CopyFileActionSourceEditor.cs" />
     <Compile Include="Controls\VersionScriptPathEditor.cs" />
     <Compile Include="DevCenter\Forms\PackageRootPathWarning.cs">

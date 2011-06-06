@@ -87,7 +87,7 @@ namespace ScriptCenter.Utils
             }
 
             //Remove trailing slash if it wasn't in the supplied relative path.
-            if (PathHelperMethods.IsFilePath(absolutePath))
+            if (PathHelperMethods.IsFilePath(absolutePath) && newPath.Length > 0)
                 newPath.Remove(newPath.Length - 1, 1);
 
             return newPath.ToString();

@@ -10,14 +10,13 @@ using ScriptCenter.Utils;
 
 namespace ScriptCenter.Controls
 {
-    public class CopyFileActionSourceEditor : UITypeEditor
+    public class CopyDirActionSourceEditor : UITypeEditor
     {
-        private OpenFileDialog openFileDialog;
+        private FolderBrowserDialog folderBrowserDialog;
         protected virtual void InitializeDialog()
         {
-            this.openFileDialog = new OpenFileDialog();
-            this.openFileDialog.Filter = "Maxscript Files (*.ms; *.mcr)|*.ms;*.mcr|All Files (*.*)|*.*";
-            this.openFileDialog.Title = "Select the file to copy";
+            this.folderBrowserDialog = new FolderBrowserDialog();
+            this.folderBrowserDialog.Description = "Select directory to copy";
         }
 
         public override UITypeEditorEditStyle GetEditStyle(System.ComponentModel.ITypeDescriptorContext context)
@@ -32,7 +31,7 @@ namespace ScriptCenter.Controls
 
             InstallerAction action = (InstallerAction)context.Instance;
 
-            if (this.openFileDialog == null)
+            if (this.folderBrowserDialog == null)
             {
                 this.InitializeDialog();
             }
@@ -43,26 +42,18 @@ namespace ScriptCenter.Controls
                 {
                     String path = PathHelperMethods.GetAbsolutePath((string)value, action.Configuration.Package.SourcePathAbsolute);
                     path = path.Replace('/', '\\');
-                    if (PathHelperMethods.IsFilePath(path))
-                    {
-                        this.openFileDialog.FileName = path;
-                    }
-                    else
-                    {
-                        this.openFileDialog.FileName = "";
-                        this.openFileDialog.InitialDirectory = path;
-                    }
+                    this.folderBrowserDialog.SelectedPath = path;
                 }
                 else
-                    this.openFileDialog.FileName = (string)value;
+                    this.folderBrowserDialog.SelectedPath = (string)value;
             }
 
-            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
+            if (this.folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 if (action.Configuration != null && action.Configuration.Package != null)
-                    value = PathHelperMethods.GetRelativePath(this.openFileDialog.FileName, action.Configuration.Package.SourcePathAbsolute);
+                    value = PathHelperMethods.GetRelativePath(this.folderBrowserDialog.SelectedPath + "\\", action.Configuration.Package.SourcePathAbsolute);
                 else
-                    value = (new System.IO.FileInfo(this.openFileDialog.FileName)).Name;
+                    value = (new System.IO.DirectoryInfo(this.folderBrowserDialog.SelectedPath)).Name;
             }
             
             return value;

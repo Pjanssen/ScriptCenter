@@ -21,7 +21,6 @@ namespace ScriptCenter.Repository
         [JsonProperty("uri")]
         [DisplayName("Script/Package File")]
         [Description("The path to the script or package for this version. Make sure this reflects the situation on your (web)host!")]
-        //[Editor(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [Editor(typeof(ScriptCenter.Controls.VersionScriptPathEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public String ScriptPath { get; set; }
 

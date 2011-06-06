@@ -50,7 +50,7 @@ public class CopyDirAction : InstallerAction
     [Category("1. Action Properties")]
     [DisplayName("Source Directory")]
     [Description("The directory to be included in the package and to copy from.")]
-    [Editor(typeof(System.Windows.Forms.Design.FolderNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
+    [Editor(typeof(ScriptCenter.Controls.CopyDirActionSourceEditor), typeof(System.Drawing.Design.UITypeEditor))]
     public String Source { get; set; }
 
     /// <summary>
