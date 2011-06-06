@@ -10,6 +10,7 @@ using ScriptCenter.Repository;
 using ScriptCenter.Installer;
 using ScriptCenter.Installer.Actions;
 using ScriptCenter.Installer.UI;
+using ScriptCenter.Utils;
 
 namespace ScriptCenter.Controls
 {

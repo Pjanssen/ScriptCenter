@@ -24,12 +24,21 @@ using System.ComponentModel;
 
 namespace ScriptCenter.Repository
 {
-    public class ScriptRepository
+    public class ScriptRepository : INotifyPropertyChanged
     {
         public const String DefaultExtension = ".screpo";
 
+        private String _name;
         [JsonProperty("name")]
-        public String Name { get; set; }
+        public String Name 
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Name"));
+            }
+        }
         
         [JsonProperty("categories")]
         public List<ScriptRepositoryCategory> Categories { get; private set; }
@@ -38,7 +47,7 @@ namespace ScriptCenter.Repository
         public ScriptRepositoryCategory DefaultCategory { get; private set; }
 
         [JsonProperty("scripts")]
-        public List<String> Scripts 
+        public List<ScriptManifestReference> Scripts 
         { 
             get { return this.DefaultCategory.Scripts; }
             private set
@@ -48,11 +57,11 @@ namespace ScriptCenter.Repository
         }
 
         [JsonIgnore()]
-        public List<String> AllScripts
+        public List<ScriptManifestReference> AllScripts
         {
             get
             {
-                List<String> scripts = new List<string>(this.Scripts);
+                List<ScriptManifestReference> scripts = new List<ScriptManifestReference>(this.Scripts);
 
                 foreach (ScriptRepositoryCategory cat in this.Categories)
                     scripts.AddRange(cat.Scripts);
@@ -68,6 +77,14 @@ namespace ScriptCenter.Repository
             this.DefaultCategory = new ScriptRepositoryCategory("__default__");
             this.Categories = new List<ScriptRepositoryCategory>();
         }
+
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, e);
+        }
     }
 
     public class ScriptRepositoryCategory
@@ -76,13 +93,30 @@ namespace ScriptCenter.Repository
         public String Name { get; set; }
 
         [JsonProperty("scripts")]
-        public List<String> Scripts { get; set; }
+        public List<ScriptManifestReference> Scripts { get; set; }
 
         public ScriptRepositoryCategory() : this("") { }
         public ScriptRepositoryCategory(String name)
         {
             this.Name = name;
-            this.Scripts = new List<String>();
+            this.Scripts = new List<ScriptManifestReference>();
+        }
+    }
+
+    [JsonConverter(typeof(ScriptManifestReferenceConverter))]
+    public class ScriptManifestReference
+    {
+        public String Uri { get; set; }
+
+        public ScriptManifestReference() : this("") { }
+        public ScriptManifestReference(String uri)
+        {
+            this.Uri = uri;
+        }
+
+        public override string ToString()
+        {
+            return this.Uri;
         }
     }
 

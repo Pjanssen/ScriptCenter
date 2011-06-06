@@ -20,7 +20,7 @@ namespace ScriptCenter.Repository
 
         [JsonProperty("uri")]
         [DisplayName("Script Path")]
-        [Description("The path to the script or package associated with this manifest. This can be an absolute path or be relative to the manifest's path.")]
+        [Description("The path to the script or package for this version. Make sure this reflects the deployment situation! This can be an absolute path or be relative to the manifest's path.")]
         public String ScriptPath { get; set; }
 
 
@@ -108,11 +108,18 @@ namespace ScriptCenter.Repository
             }
         }
 
-        public override string ToString()
+        public override String ToString()
         {
-            String versionStr = this.Major.ToString() + "." + this.Minor.ToString() + "." + this.Revision.ToString();
+            return this.ToString(false);
+        }
+        public String ToString(Boolean useUnderscores)
+        {
+            Char numSeparatorChar = (useUnderscores) ? '_' : '.';
+            Char stageSeparatorChar = (useUnderscores) ? '_' : ' ';
+
+            String versionStr = this.Major.ToString() + numSeparatorChar + this.Minor.ToString() + numSeparatorChar + this.Revision.ToString();
             if (this.ReleaseStage != ScriptReleaseStage.Release)
-                versionStr += " " + Enum.GetName(typeof(ScriptReleaseStage), this.ReleaseStage).ToLower();
+                versionStr += stageSeparatorChar + Enum.GetName(typeof(ScriptReleaseStage), this.ReleaseStage).ToLower();
 
             return versionStr;
         }
@@ -141,14 +148,14 @@ namespace ScriptCenter.Repository
 
             return 0;
         }
-        public override bool Equals(object obj)
+        public override Boolean Equals(object obj)
         {
             if (!(obj is ScriptVersionNumber))
                 return false;
 
             return this.CompareTo((ScriptVersionNumber)obj) == 0;
         }
-        public override int GetHashCode()
+        public override Int32 GetHashCode()
         {
             return base.GetHashCode();
         }

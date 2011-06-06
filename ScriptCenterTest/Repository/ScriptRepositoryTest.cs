@@ -17,9 +17,10 @@ namespace ScriptCenterTest.Repository
         public void TestInit()
         {
             repo = new ScriptRepository("testRepo");
-            repo.Scripts.Add("test.scmanifest");
+            repo.Scripts.Add(new ScriptManifestReference("test.scmanifest"));
+            repo.Scripts.Add(new ScriptManifestReference("another_test.scmanifest"));
             ScriptRepositoryCategory cat = new ScriptRepositoryCategory("testCategory");
-            cat.Scripts.Add("outliner.scmanifest");
+            cat.Scripts.Add(new ScriptManifestReference("outliner.scmanifest"));
             repo.Categories.Add(cat);
         }
 
@@ -45,7 +46,7 @@ namespace ScriptCenterTest.Repository
         public void AllScriptsTest()
         {
             Assert.IsNotNull(repo.Scripts);
-            Assert.AreEqual(2, repo.AllScripts.Count);
+            Assert.AreEqual(3, repo.AllScripts.Count);
         }
 
         [TestMethod]

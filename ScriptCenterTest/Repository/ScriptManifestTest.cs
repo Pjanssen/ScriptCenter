@@ -20,7 +20,7 @@ namespace ScriptCenterTest.Repository
             this.outputFile = TestHelperMethods.GetOutputDirectory() + "/outliner" + ScriptManifest.DefaultExtension;
 
             this.manifest = new ScriptManifest();
-            this.manifest.Id = "pier.janssen.outliner";
+            this.manifest.Id = "pierjanssen.outliner";
             this.manifest.Name = "Outliner";
             this.manifest.Author = "Pier Janssen";
             this.manifest.Versions.Add(new ScriptVersion(2, 0, 96));

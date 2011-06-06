@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ScriptCenter.Controls;
 using ScriptCenter.Repository;
+using ScriptCenter.Utils;
 
 namespace ScriptCenter.Installer.UI
 {
@@ -27,8 +28,8 @@ namespace ScriptCenter.Installer.UI
                 ScriptManifest manifest = ((InstallerDialog)this.Wizard).Installer.Manifest;
                 InstallerUIConfiguration uiConfig = ((InstallerDialog)this.Wizard).UIConfig;
 
-                this.titleTxt.Text = InstallerHelperMethods.ReplaceTokens(uiConfig.Title, manifest);
-                this.mainTxt.Text = InstallerHelperMethods.ReplaceTokens(uiConfig.StartPageText, manifest);
+                this.titleTxt.Text = ScriptManifestTokens.Replace(uiConfig.Title, manifest);
+                this.mainTxt.Text = ScriptManifestTokens.Replace(uiConfig.StartPageText, manifest);
 
             }
         }

@@ -23,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -62,17 +64,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Max\CuiFileTest.cs" />
+    <Compile Include="Repository\ScriptPackageTest.cs" />
+    <Compile Include="Repository\ScriptManifestTokensTest.cs" />
+    <Compile Include="Utils\ObjectSetDefaultValuesTest.cs" />
     <Compile Include="Repository\JsonFileHandlerTest.cs" />
     <Compile Include="Installer\InstallerConfigurationTest.cs" />
-    <Compile Include="Installer\InstallerHelperMethodsTest.cs" />
     <Compile Include="Max\KbdFileTest.cs" />
-    <Compile Include="Project\ScriptCenterProjectTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ScriptManifestTest.cs" />
     <Compile Include="Repository\ScriptRepositoryListTest.cs" />
     <Compile Include="Repository\ScriptRepositoryTest.cs" />
     <Compile Include="Repository\ScriptVersionNumberTest.cs" />
     <Compile Include="TestHelperMethods.cs" />
+    <Compile Include="Utils\PathHelperMethodsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScriptCenter\ScriptCenter.csproj">
@@ -83,8 +87,12 @@
   <ItemGroup>
     <None Include="test_files\ame-light.CUI" />
     <None Include="test_files\ame-light.kbd" />
+    <None Include="test_files\outliner.scmanif" />
     <None Include="test_files\SimpleBrokenTestObject.json" />
     <None Include="test_files\SimpleTestObject.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Snippets\snippets.snippet" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

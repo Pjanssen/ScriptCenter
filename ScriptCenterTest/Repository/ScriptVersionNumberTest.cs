@@ -25,6 +25,20 @@ namespace ScriptCenterTest.Repository
         }
 
         [TestMethod]
+        public void ToStringUnderscoresTest()
+        {
+            ScriptVersionNumber version = new ScriptVersionNumber(2, 5, 3);
+            version.ReleaseStage = ScriptReleaseStage.Alpha;
+            Assert.AreEqual("2_5_3_alpha", version.ToString(true));
+
+            version.ReleaseStage = ScriptReleaseStage.Beta;
+            Assert.AreEqual("2_5_3_beta", version.ToString(true));
+
+            version.ReleaseStage = ScriptReleaseStage.Release;
+            Assert.AreEqual("2_5_3", version.ToString(true));
+        }
+
+        [TestMethod]
         public void FromStringTest()
         {
             ScriptVersionNumber version = new ScriptVersionNumber("2.5.3 alpha");
@@ -63,7 +77,10 @@ namespace ScriptCenterTest.Repository
                 version = new ScriptVersionNumber("2..something");
                 Assert.Fail("Supplying incorrect version string should throw exception.");
             }
-            catch (ArgumentException e) { }
+            catch (ArgumentException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
         }
 
         [TestMethod]

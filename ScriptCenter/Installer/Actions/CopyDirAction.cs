@@ -22,6 +22,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.ComponentModel;
 using Newtonsoft.Json;
+using ScriptCenter.Utils;
 
 namespace ScriptCenter.Installer.Actions
 {
@@ -33,8 +34,7 @@ public class CopyDirAction : InstallerAction
     public CopyDirAction() : this("", AppPaths.Directory.Scripts) { }
     public CopyDirAction(String source, AppPaths.Directory target) 
     {
-        InstallerHelperMethods.SetDefaultValues(this);
-        
+        //TODO: test if omission of SetDefaultValues here has indeed got no consequences (since its called in the baseclass).
         this.Source = source;
         this.Target = target;
 

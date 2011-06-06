@@ -18,9 +18,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
-using System.Xml.Serialization;
 using System.ComponentModel;
+using Newtonsoft.Json;
+using ScriptCenter.Utils;
 
 namespace ScriptCenter.Installer.Actions
 {
@@ -31,7 +31,7 @@ namespace ScriptCenter.Installer.Actions
     {
         public InstallerAction()
         {
-            InstallerHelperMethods.SetDefaultValues(this);
+            this.SetDefaultValues();
         }
 
         [JsonIgnore]

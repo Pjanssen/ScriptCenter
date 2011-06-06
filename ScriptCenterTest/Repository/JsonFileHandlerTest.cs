@@ -47,7 +47,10 @@ namespace ScriptCenterTest.Repository
                 readObj = handler.Read(TestHelperMethods.GetTestFilesDirectory() + "SimpleBrokenTestObject.json");
                 Assert.Fail("Read broken file did not throw an exception as expected");
             }
-            catch (JsonReaderException e) { }
+            catch (JsonReaderException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
             Assert.IsNull(readObj);
         }
         [TestMethod]
@@ -59,7 +62,10 @@ namespace ScriptCenterTest.Repository
                 readObj = handler.Read("C:/nonexistingfile.json");
                 Assert.Fail("Read non-existing file did not throw exception");
             }
-            catch (System.IO.FileNotFoundException e) { }
+            catch (System.IO.FileNotFoundException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
             Assert.IsNull(readObj);
         }
         [TestMethod]
@@ -71,7 +77,10 @@ namespace ScriptCenterTest.Repository
                 readObj = handler.Read(null);
                 Assert.Fail("Read null did not throw exception");
             }
-            catch (ArgumentNullException e) { }
+            catch (ArgumentNullException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
             Assert.IsNull(readObj);
         }
         [TestMethod]
@@ -83,7 +92,10 @@ namespace ScriptCenterTest.Repository
                 readObj = handler.Read(":non&existing^%$file.json");
                 Assert.Fail("Read incorrect uri did not throw exception");
             }
-            catch (ArgumentException e) { }
+            catch (ArgumentException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
             Assert.IsNull(readObj);
         }
         [TestMethod]
@@ -95,7 +107,10 @@ namespace ScriptCenterTest.Repository
                 readObj = handler.Read(TestHelperMethods.GetOnlineTestFilesDirectory() + "SimpleTestObject.json");
                 Assert.Fail("Read online uri did not throw exception");
             }
-            catch (ArgumentException e) { }
+            catch (ArgumentException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
             Assert.IsNull(readObj);
         }
 
@@ -127,7 +142,10 @@ namespace ScriptCenterTest.Repository
                 handler.Write(outputFile, null);
                 Assert.Fail("Write null did not throw exception as expected");
             }
-            catch (ArgumentNullException e) { }
+            catch (ArgumentNullException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
             Assert.IsFalse(System.IO.File.Exists(outputFile));
 
             SimpleTestObject obj = new SimpleTestObject() { Name = SimpleTestObject.DefaultName, Id = SimpleTestObject.DefaultId };
@@ -136,7 +154,10 @@ namespace ScriptCenterTest.Repository
                 handler.Write(null, obj);
                 Assert.Fail("Write null did not throw exception as expected");
             }
-            catch (ArgumentNullException e) { }
+            catch (ArgumentNullException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
         }
         [TestMethod]
         public void WriteIncorrectPathTest()
@@ -148,7 +169,10 @@ namespace ScriptCenterTest.Repository
                 handler.Write(outputFile, obj);
                 Assert.Fail("Write to incorrect path did not throw exception as expected");
             }
-            catch (ArgumentException e) { }
+            catch (ArgumentException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
             Assert.IsFalse(System.IO.File.Exists(outputFile));
         }
 

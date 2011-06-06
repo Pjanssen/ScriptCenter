@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace ScriptCenter.Utils
 {
@@ -11,13 +12,22 @@ namespace ScriptCenter.Utils
         public static void SetDefaultValues(this Object obj)
         {
             Type t = obj.GetType();
-            foreach (System.Reflection.PropertyInfo pi in t.GetProperties())
+            BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+
+            PropertyInfo[] properties = t.GetProperties(flags);
+            foreach (PropertyInfo pi in properties)
             {
                 Object[] defaultValueAttr = pi.GetCustomAttributes(typeof(DefaultValueAttribute), true);
                 if (defaultValueAttr.Length > 0)
-                {
                     pi.SetValue(obj, ((DefaultValueAttribute)defaultValueAttr[0]).Value, null);
-                }
+            }
+
+            FieldInfo[] fields = t.GetFields(flags);
+            foreach (FieldInfo fi in fields)
+            {
+                Object[] defaultValueAttr = fi.GetCustomAttributes(typeof(DefaultValueAttribute), true);
+                if (defaultValueAttr.Length > 0)
+                    fi.SetValue(obj, ((DefaultValueAttribute)defaultValueAttr[0]).Value);
             }
         }
     }

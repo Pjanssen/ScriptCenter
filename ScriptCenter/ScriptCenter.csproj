@@ -56,7 +56,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppPaths.cs" />
+    <Compile Include="DevCenter\Forms\PackageRootPathWarning.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DevCenter\Forms\PackageRootPathWarning.Designer.cs">
+      <DependentUpon>PackageRootPathWarning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SCResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\AppPaths.cs" />
     <Compile Include="Controls\CustomPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -65,28 +76,34 @@
     </Compile>
     <Compile Include="Installer\Actions\StringListConverter.cs" />
     <Compile Include="Installer\Actions\ToolbarNameConverter.cs" />
-    <Compile Include="Project\Forms\InstallerPathsForm.cs">
+    <Compile Include="DevCenter\Forms\InstallerUIForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\Forms\InstallerPathsForm.Designer.cs">
-      <DependentUpon>InstallerPathsForm.cs</DependentUpon>
+    <Compile Include="DevCenter\Forms\InstallerUIForm.Designer.cs">
+      <DependentUpon>InstallerUIForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\Forms\InstallerActionsForm.cs">
+    <Compile Include="DevCenter\Forms\InstallerActionsForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\Forms\InstallerActionsForm.Designer.cs">
+    <Compile Include="DevCenter\Forms\InstallerActionsForm.Designer.cs">
       <DependentUpon>InstallerActionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\Forms\ManifestVersionsForm.cs">
+    <Compile Include="DevCenter\Forms\ManifestVersionsForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\Forms\ManifestVersionsForm.Designer.cs">
+    <Compile Include="DevCenter\Forms\ManifestVersionsForm.Designer.cs">
       <DependentUpon>ManifestVersionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\Forms\RepositoryForm.cs">
+    <Compile Include="DevCenter\Forms\PackageForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\Forms\RepositoryForm.Designer.cs">
+    <Compile Include="DevCenter\Forms\PackageForm.Designer.cs">
+      <DependentUpon>PackageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DevCenter\Forms\RepositoryForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DevCenter\Forms\RepositoryForm.Designer.cs">
       <DependentUpon>RepositoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Installer\InstallerResources.Designer.cs">
@@ -95,7 +112,7 @@
       <DependentUpon>InstallerResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Max\AppPaths3dsmax.cs" />
-    <Compile Include="AppPathsDebug.cs" />
+    <Compile Include="Utils\AppPathsDebug.cs" />
     <Compile Include="Controls\BrowsePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -108,13 +125,10 @@
     <Compile Include="Controls\InstalledPage.Designer.cs">
       <DependentUpon>InstalledPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TextBoxDefaultText.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\Wizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Defaults.cs" />
+    <Compile Include="Utils\Defaults.cs" />
     <Compile Include="Installer\Actions\AssignHotkeyAction.cs" />
     <Compile Include="Installer\Actions\CopyDirAction.cs" />
     <Compile Include="Installer\Actions\CopyFileAction.cs" />
@@ -134,7 +148,6 @@
     </Compile>
     <Compile Include="Installer\InstallerConfiguration.cs" />
     <Compile Include="Installer\UI\InstallerUIConfiguration.cs" />
-    <Compile Include="Installer\InstallerHelperMethods.cs" />
     <Compile Include="Installer\UI\StartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,26 +168,25 @@
     </Compile>
     <Compile Include="Installer\InstallerLog.cs" />
     <Compile Include="Installer\InstallerCreator.cs" />
-    <Compile Include="Project\Forms\ManifestForm.cs">
+    <Compile Include="DevCenter\Forms\ManifestForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\Forms\ManifestForm.Designer.cs">
+    <Compile Include="DevCenter\Forms\ManifestForm.Designer.cs">
       <DependentUpon>ManifestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\Forms\ManifestMetadataForm.cs">
+    <Compile Include="DevCenter\Forms\ManifestMetadataForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\Forms\ManifestMetadataForm.Designer.cs">
+    <Compile Include="DevCenter\Forms\ManifestMetadataForm.Designer.cs">
       <DependentUpon>ManifestMetadataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\ProjectEditor.cs">
+    <Compile Include="DevCenter\DevCenter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Project\ProjectEditor.Designer.cs">
-      <DependentUpon>ProjectEditor.cs</DependentUpon>
+    <Compile Include="DevCenter\DevCenter.Designer.cs">
+      <DependentUpon>DevCenter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\ScriptCenterProject.cs" />
-    <Compile Include="Project\TreeNodeData.cs" />
+    <Compile Include="DevCenter\TreeNodeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -183,37 +195,54 @@
     </Compile>
     <Compile Include="Repository\JsonFileHandler.cs" />
     <Compile Include="Repository\ScriptManifest.cs" />
+    <Compile Include="Repository\ScriptManifestReferenceConverter.cs" />
+    <Compile Include="Repository\ScriptPackage.cs" />
     <Compile Include="Repository\ScriptRepository.cs" />
     <Compile Include="Repository\ScriptRepositoryList.cs" />
     <Compile Include="Repository\ScriptVersion.cs" />
     <Compile Include="Repository\ScriptVersionConverter.cs" />
+    <Compile Include="Repository\ScriptManifestTokens.cs" />
+    <Compile Include="Utils\ObjectSetDefaultValuesExtension.cs" />
+    <Compile Include="Utils\PathHelperMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\ScriptCenter.Installer.ScriptProjectData.datasource" />
+    <None Include="Properties\DataSources\ScriptCenter.Project.ScriptCenterProject.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptManifest.datasource" />
+    <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptPackage.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptRepository.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptRequirements.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptVersion.datasource" />
-    <EmbeddedResource Include="Project\Forms\InstallerPathsForm.resx">
-      <DependentUpon>InstallerPathsForm.cs</DependentUpon>
+    <EmbeddedResource Include="DevCenter\Forms\PackageRootPathWarning.resx">
+      <DependentUpon>PackageRootPathWarning.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\Forms\InstallerActionsForm.resx">
+    <EmbeddedResource Include="SCResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SCResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevCenter\Forms\InstallerUIForm.resx">
+      <DependentUpon>InstallerUIForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevCenter\Forms\InstallerActionsForm.resx">
       <DependentUpon>InstallerActionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\Forms\ManifestVersionsForm.resx">
+    <EmbeddedResource Include="DevCenter\Forms\ManifestVersionsForm.resx">
       <DependentUpon>ManifestVersionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\Forms\RepositoryForm.resx">
+    <EmbeddedResource Include="DevCenter\Forms\PackageForm.resx">
+      <DependentUpon>PackageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevCenter\Forms\RepositoryForm.resx">
       <DependentUpon>RepositoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\Forms\ManifestForm.resx">
+    <EmbeddedResource Include="DevCenter\Forms\ManifestForm.resx">
       <DependentUpon>ManifestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\Forms\ManifestMetadataForm.resx">
+    <EmbeddedResource Include="DevCenter\Forms\ManifestMetadataForm.resx">
       <DependentUpon>ManifestMetadataForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\ProjectEditor.resx">
-      <DependentUpon>ProjectEditor.cs</DependentUpon>
+    <EmbeddedResource Include="DevCenter\DevCenter.resx">
+      <DependentUpon>DevCenter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\mzp.run" />
     <EmbeddedResource Include="Resources\install.ms" />
@@ -261,7 +290,6 @@
     <EmbeddedResource Include="Resources\icons\dialog.png" />
     <EmbeddedResource Include="Resources\icons\error.png" />
     <EmbeddedResource Include="Resources\icons\manifest.png" />
-    <EmbeddedResource Include="Resources\icons\manifest_add.png" />
     <EmbeddedResource Include="Resources\icons\manifest_export.png" />
     <EmbeddedResource Include="Resources\icons\manifest_link.png" />
     <EmbeddedResource Include="Resources\icons\manifest_metadata.png" />
@@ -271,17 +299,16 @@
     <EmbeddedResource Include="Resources\icons\package_16.png" />
     <EmbeddedResource Include="Resources\icons\package_32.png" />
     <EmbeddedResource Include="Resources\icons\package_64.png" />
-    <EmbeddedResource Include="Resources\icons\package_add.png" />
     <EmbeddedResource Include="Resources\icons\package_export.png" />
     <EmbeddedResource Include="Resources\icons\package_new.png" />
     <EmbeddedResource Include="Resources\icons\repository.png" />
-    <EmbeddedResource Include="Resources\icons\repository_add.png" />
     <EmbeddedResource Include="Resources\icons\repository_category.png" />
     <EmbeddedResource Include="Resources\icons\repository_export.png" />
     <EmbeddedResource Include="Resources\icons\repository_new.png" />
     <EmbeddedResource Include="Resources\icons\toolbar.png" />
     <EmbeddedResource Include="Resources\icons\toolbar_button.png" />
     <EmbeddedResource Include="Resources\icons\toolbar_separator.png" />
+    <EmbeddedResource Include="Resources\icons\project.png" />
     <Content Include="scratchpad .txt" />
   </ItemGroup>
   <ItemGroup />

@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using ScriptCenter.Repository;
+using ScriptCenter.Utils;
 
 namespace ScriptCenter.Installer.UI
 {
@@ -15,7 +16,7 @@ namespace ScriptCenter.Installer.UI
 
         public InstallerUIConfiguration()
         {
-            InstallerHelperMethods.SetDefaultValues(this);
+            this.SetDefaultValues();
         }
 
         public static InstallerUIConfiguration FromFile(String file)
@@ -26,12 +27,12 @@ namespace ScriptCenter.Installer.UI
 
         [JsonProperty("title")]
         [XmlElement("title")]
-        [DefaultValue(InstallerHelperMethods.Name_Token + " "+ InstallerHelperMethods.Version_Token)]
+        [DefaultValue(ScriptManifestTokens.Name_Token + " " + ScriptManifestTokens.Version_Token)]
         public String Title { get; set; }
 
         [JsonProperty("start_page_text")]
         [XmlElement("start_page_text")]
-        [DefaultValue("This script will install the " + InstallerHelperMethods.Name_Token + " " + InstallerHelperMethods.Version_Token +  ". Any previous installations will automatically be uninstalled.")]
+        [DefaultValue("This script will install the " + ScriptManifestTokens.Name_Token + " " + ScriptManifestTokens.Version_Token + ". Any previous installations will automatically be uninstalled.")]
         public String StartPageText { get; set; }
 
         [JsonProperty("icon")]

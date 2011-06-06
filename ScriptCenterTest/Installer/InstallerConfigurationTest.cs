@@ -4,6 +4,7 @@ using System;
 using ScriptCenter.Repository;
 using ScriptCenter.Installer.Actions;
 using System.Collections.Generic;
+using ScriptCenter.Utils;
 
 namespace ScriptCenterTest.Installer
 {
@@ -19,8 +20,8 @@ namespace ScriptCenterTest.Installer
         public void testInitialize()
         {
             this.config = new InstallerConfiguration();
-            this.config.AddAction(new CopyFileAction("testFile", ScriptCenter.AppPaths.Directory.Icons));
-            this.config.AddAction(new CopyDirAction("testDir/", ScriptCenter.AppPaths.Directory.Scripts));
+            this.config.AddAction(new CopyFileAction("testFile", AppPaths.Directory.Icons));
+            this.config.AddAction(new CopyDirAction("testDir/", AppPaths.Directory.Scripts));
             this.config.AddAction(new AssignHotkeyAction(System.Windows.Forms.Keys.H | System.Windows.Forms.Keys.Control, "toggleOutliner", "Outliner"));
             this.config.AddAction(new RunMaxscriptAction("test.ms"));
         }
@@ -35,7 +36,10 @@ namespace ScriptCenterTest.Installer
                 actions.Add(new CopyFileAction());
                 Assert.Fail("Actions.Add should throw exception, since it should be readonly.");
             }
-            catch (Exception e) { }
+            catch (Exception e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
             Assert.AreEqual(4, actions.Count);
         }
 
@@ -86,7 +90,10 @@ namespace ScriptCenterTest.Installer
                 config.MoveAction(new CopyDirAction(), InstallerConfiguration.MoveActionDirection.Up);
                 Assert.Fail("Moving an action that is not contained in the config should throw an exception");
             }
-            catch (ArgumentException e) { }
+            catch (ArgumentException e) 
+            {
+                Assert.IsNotNull(e); //I don't think this will ever fail, but still..
+            }
         }
 
         [TestMethod()]

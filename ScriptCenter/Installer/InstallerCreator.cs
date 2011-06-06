@@ -193,18 +193,7 @@ namespace ScriptCenter.Installer
         }
         */
 
-        public static string GetRelativePath(string absolutePath, string relativeTo)
-        {
-            Uri fileUri = new Uri(absolutePath);
-            Uri rootUri = new Uri(relativeTo);
-            return Uri.UnescapeDataString(rootUri.MakeRelativeUri(fileUri).ToString());
-        }
-
-        public static string GetAbsolutePath(String relativePath, String relativeTo)
-        {
-            Uri absoluteUri = new Uri(relativeTo + relativePath);
-            return Uri.UnescapeDataString(absoluteUri.AbsolutePath);
-        }
+        
     }
 
     [Flags]

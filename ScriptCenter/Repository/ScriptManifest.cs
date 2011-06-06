@@ -29,7 +29,7 @@ namespace ScriptCenter.Repository
     /// </summary>
     public class ScriptManifest : INotifyPropertyChanged
     {
-        public const String DefaultExtension = ".scmanifest";
+        public const String DefaultExtension = ".scmanif";
 
         private String id;
         [JsonProperty("id")]
