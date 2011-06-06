@@ -48,7 +48,8 @@ public class CopyFileAction : InstallerAction
     [Category("1. Action Properties")]
     [DisplayName("Source File")]
     [Description("The file to be included in the package and to copy from.")]
-    [Editor(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
+    //[Editor(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
+    [Editor(typeof(ScriptCenter.Controls.CopyFileActionSourceEditor), typeof(System.Drawing.Design.UITypeEditor))]
     public String Source { get; set; }
 
     /// <summary>

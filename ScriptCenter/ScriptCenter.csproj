@@ -56,12 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CopyFileActionSourceEditor.cs" />
+    <Compile Include="Controls\VersionScriptPathEditor.cs" />
     <Compile Include="DevCenter\Forms\PackageRootPathWarning.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DevCenter\Forms\PackageRootPathWarning.Designer.cs">
       <DependentUpon>PackageRootPathWarning.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repository\ScriptPacker.cs" />
     <Compile Include="SCResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

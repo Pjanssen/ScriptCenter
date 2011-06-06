@@ -40,10 +40,13 @@ namespace ScriptCenter.Installer
             this.installerActions = new List<InstallerAction>();
         }
 
+        [JsonIgnore]
+        public ScriptPackage Package { get; set; }
+
+
         [JsonProperty("manifest_uri")]
         public String ManifestUri { get; set; }
 
-        [JsonIgnore]
         private List<InstallerAction> _installerActions;
         [JsonProperty("installer_actions")]
         private List<InstallerAction> installerActions 

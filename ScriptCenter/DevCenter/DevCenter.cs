@@ -77,6 +77,16 @@ public partial class DevCenter : Form
         tn.ImageKey = tn.SelectedImageKey = "package";
         tn.Tag = new TreeNodeData(package, typeof(PackageForm));
 
+        TreeNode manifestTn = new TreeNode("Manifest");
+        manifestTn.ImageKey = manifestTn.SelectedImageKey = "manifest";
+        manifestTn.Tag = new TreeNodeData(package.Manifest, typeof(ManifestForm));
+        tn.Nodes.Add(manifestTn);
+
+        TreeNode metadataTn = new TreeNode("Metadata");
+        metadataTn.ImageKey = metadataTn.SelectedImageKey = "manifest_metadata";
+        metadataTn.Tag = new TreeNodeData(package.Manifest, typeof(ManifestMetadataForm));
+        manifestTn.Nodes.Add(metadataTn);
+
         TreeNode actionsTn = new TreeNode("Installer Actions");
         actionsTn.ImageKey = actionsTn.SelectedImageKey = "action";
         actionsTn.Tag = new TreeNodeData(package, typeof(InstallerActionsForm));
@@ -156,17 +166,17 @@ public partial class DevCenter : Form
         {
             if (data.Data is ScriptManifest)
             {
-                saveFileDialog.FileName = ((ScriptManifest)data.Data).Name.ToLower();
+                saveFileDialog.FileName = ((ScriptManifest)data.Data).Name.ToLower().Replace(' ', '_');
                 saveFileDialog.Filter = "Script Manifest (*.scmanif)|*.scmanif";
             }
             else if (data.Data is ScriptPackage)
             {
-                saveFileDialog.FileName = ((ScriptPackage)data.Data).Name.ToLower();
+                saveFileDialog.FileName = ((ScriptPackage)data.Data).Name.ToLower().Replace(' ', '_');
                 saveFileDialog.Filter = "Script Package (*.scpack)|*.scpack";
             }
             else if (data.Data is ScriptRepository)
             {
-                saveFileDialog.FileName = ((ScriptRepository)data.Data).Name.ToLower();
+                saveFileDialog.FileName = ((ScriptRepository)data.Data).Name.ToLower().Replace(' ', '_');
                 saveFileDialog.Filter = "Script Repository (*.screpo)|*.screpo";
             }
 

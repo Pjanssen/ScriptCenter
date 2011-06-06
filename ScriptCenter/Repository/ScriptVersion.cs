@@ -19,8 +19,10 @@ namespace ScriptCenter.Repository
 
 
         [JsonProperty("uri")]
-        [DisplayName("Script Path")]
-        [Description("The path to the script or package for this version. Make sure this reflects the deployment situation! This can be an absolute path or be relative to the manifest's path.")]
+        [DisplayName("Script/Package File")]
+        [Description("The path to the script or package for this version. Make sure this reflects the situation on your (web)host!")]
+        //[Editor(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ScriptCenter.Controls.VersionScriptPathEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public String ScriptPath { get; set; }
 
 
