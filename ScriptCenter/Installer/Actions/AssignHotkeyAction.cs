@@ -72,6 +72,16 @@ public class AssignHotkeyAction : InstallerAction
 
 
     /// <summary>
+    /// The category of the macroscript.
+    /// </summary>
+    [JsonProperty("macro_category")]
+    [Category("1. Action Properties")]
+    [DisplayName("Macroscript Category")]
+    [Description("The category of the macroscript that will be assigned to the hotkey.")]
+    public String MacroCategory { get; set; }
+
+
+    /// <summary>
     /// The name of the macroscript.
     /// </summary>
     [JsonProperty("macro_name")]
@@ -80,14 +90,6 @@ public class AssignHotkeyAction : InstallerAction
     [Description("The name of the macroscript that will be assigned to the hotkey.")]
     public String MacroName { get; set; }
 
-    /// <summary>
-    /// The category of the macroscript.
-    /// </summary>
-    [JsonProperty("macro_category")]
-    [Category("1. Action Properties")]
-    [DisplayName("Macroscript Category")]
-    [Description("The category of the macroscript that will be assigned to the hotkey.")]
-    public String MacroCategory { get; set; }
 
     //TODO: test in 3dsmax.
 

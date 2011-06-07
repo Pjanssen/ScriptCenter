@@ -49,6 +49,7 @@ namespace ScriptCenterTest.Utils
         [TestMethod]
         public void GetAbsolutePathTest()
         {
+            //TODO test identical paths.
             String basePath = "C:/test/";
             String relPath = "";
             Assert.AreEqual("C:/test/", PathHelperMethods.GetAbsolutePath(relPath, basePath), "Test1");
@@ -85,6 +86,8 @@ namespace ScriptCenterTest.Utils
         [TestMethod]
         public void GetRelativePathTest()
         {
+            //TODO test identical paths.
+
             String basePath = "C:/";
             String convertPath = "C:/test/";
             Assert.AreEqual("test/", PathHelperMethods.GetRelativePath(convertPath, basePath), "Test1");

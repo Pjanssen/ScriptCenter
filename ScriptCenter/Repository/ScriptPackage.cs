@@ -20,6 +20,12 @@ namespace ScriptCenter.Repository
             this.Name = name;
             this.InstallerConfiguration = new InstallerConfiguration();
             this.Manifest = new ScriptManifest();
+
+            this.RootPath = new BasePath("");
+            this.SourcePath = new RelativePath("", this.RootPath);
+            this.OutputPath = new RelativePath("", this.RootPath);
+            this.PackageFile = new RelativePath(ScriptManifestTokens.Name_Token + "_" + ScriptManifestTokens.Version_Underscores_Token + ".mzp", this.OutputPath);
+            this.ManifestFile = new RelativePath(ScriptManifestTokens.Name_Token + ScriptManifest.DefaultExtension, this.OutputPath);
         }
 
 
@@ -37,79 +43,54 @@ namespace ScriptCenter.Repository
         private String _name;
 
         [JsonProperty("root_path")]
-        [DefaultValue("")]
-        public String RootPath 
+        [JsonConverter(typeof(BasePathJsonConverter))]
+        public BasePath RootPath 
         {
             get { return _rootPath; }
             set
             {
-                _rootPath = value;
-                if (value != "" && !value.EndsWith("/") && !value.EndsWith("\\"))
-                    _rootPath += "/";
+                if (this.SourcePath != null && this.SourcePath.RelativeTo == _rootPath)
+                    SourcePath.RelativeTo = value;
+                if (this.OutputPath != null && this.OutputPath.RelativeTo == _rootPath) 
+                    OutputPath.RelativeTo = value;
 
+                _rootPath = value;
                 this.OnPropertyChanged(new PropertyChangedEventArgs("RootPath"));
             }
         }
-        private String _rootPath;
-
+        private BasePath _rootPath;
 
         [JsonProperty("source_path")]
-        [DefaultValue("")]
-        public String SourcePathRelative 
-        {
-            get { return _sourcePath; }
-            set
-            {
-                _sourcePath = value;
-                this.OnPropertyChanged(new PropertyChangedEventArgs("SourcePathRelative"));
-            }
-        }
-        private String _sourcePath;
-        [JsonIgnore]
-        public String SourcePathAbsolute 
-        {
-            get { return PathHelperMethods.GetAbsolutePath(ScriptManifestTokens.Replace(this.SourcePathRelative, this.Manifest), this.RootPath); }
-            set { this.SourcePathRelative = PathHelperMethods.GetRelativePath(value, this.RootPath); }
-        }
+        [JsonConverter(typeof(BasePathJsonConverter))]
+        public RelativePath SourcePath { get; set; }
 
         [JsonProperty("output_path")]
-        [DefaultValue("")]
-        public String OutputPathRelative 
+        [JsonConverter(typeof(BasePathJsonConverter))]
+        public RelativePath OutputPath 
         {
-            get { return _outputPathRelative; }
+            get { return _outputPath; }
             set
             {
-                _outputPathRelative = value;
-                this.OnPropertyChanged(new PropertyChangedEventArgs("OutputPathRelative"));
+                if (this.ManifestFile != null && this.ManifestFile.RelativeTo == _rootPath)
+                    ManifestFile.RelativeTo = value;
+                if (this.PackageFile != null && this.PackageFile.RelativeTo == _rootPath)
+                    PackageFile.RelativeTo = value;
+
+                _outputPath = value;
             }
         }
-        private String _outputPathRelative;
-        [JsonIgnore]
-        public String OutputPathAbsolute 
-        {
-            get { return PathHelperMethods.GetAbsolutePath(ScriptManifestTokens.Replace(this.OutputPathRelative, this.Manifest), this.RootPath); }
-            set { this.OutputPathRelative = PathHelperMethods.GetRelativePath(value, this.RootPath); }
-        }
+        private RelativePath _outputPath;
 
-        [JsonProperty("output_file")]
-        [DefaultValue(ScriptManifestTokens.Name_Token + "_" + ScriptManifestTokens.Version_Underscores_Token + ".mzp")]
-        public String OutputFileRelative 
-        {
-            get { return _outputFileRelative; }
-            set
-            {
-                _outputFileRelative = value;
-                this.OnPropertyChanged(new PropertyChangedEventArgs("OutputFile"));
-            }
-        }
-        private String _outputFileRelative;
-        [JsonIgnore]
-        public String OutputFileAbsolute 
-        {
-            get { return PathHelperMethods.GetAbsolutePath(ScriptManifestTokens.Replace(this.OutputFileRelative, this.Manifest), this.OutputPathAbsolute); }
-            set { this.OutputFileRelative = PathHelperMethods.GetRelativePath(value, this.OutputPathAbsolute); }
-        }
+        [JsonProperty("manifest_file")]
+        [JsonConverter(typeof(BasePathJsonConverter))]
+        public RelativePath ManifestFile { get; set; }
 
+        [JsonProperty("package_file")]
+        [JsonConverter(typeof(BasePathJsonConverter))]
+        public RelativePath PackageFile { get; set; }
+
+
+        
         [JsonProperty("manifest_version")]
         [DefaultValue("-use latest-")]
         public String ManifestVersion 
@@ -123,34 +104,12 @@ namespace ScriptCenter.Repository
         }
         private String _manifestVersion;
 
-        
-
-        /// <summary>
-        /// Reroutes all paths in the package to be relative to the new root path.
-        /// </summary>
-        /// <param name="newRootPath">The new path all others should be made relative to.</param>
-        /// <param name="setRootPath">If true, the supplied new root path will be set as the root path of the package.</param>
-        public void ReroutePaths(String newRootPath, Boolean setRootPath) 
-        {
-            //TODO: verify that this does not overwrite manifest tokens!
-            if (this.SourcePathRelative != String.Empty)
-                this.SourcePathRelative = PathHelperMethods.GetRelativePath(this.SourcePathAbsolute, newRootPath);
-
-            if (this.OutputPathRelative != String.Empty)
-                this.OutputPathRelative = PathHelperMethods.GetRelativePath(this.OutputPathAbsolute, newRootPath);
-
-            if (this.OutputFileRelative != String.Empty)
-                this.OutputFileRelative = PathHelperMethods.GetRelativePath(this.OutputFileAbsolute, PathHelperMethods.GetAbsolutePath(this.OutputPathRelative, newRootPath));
-
-            if (setRootPath)
-                this.RootPath = newRootPath;
-        }
 
         [JsonProperty("manifest")]
         public ScriptManifest Manifest { get; set; }
 
         [JsonProperty("installer_configuration")]
-        public InstallerConfiguration InstallerConfiguration 
+        public InstallerConfiguration InstallerConfiguration
         {
             get { return _installerConfiguration; }
             set

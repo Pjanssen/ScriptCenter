@@ -1,3 +1,4 @@
 ﻿- Refactor installer log to take any stream instead of always writing to file? 
 - Consider changing Do/Undo methods on InstallerAction to Install/Uninstall/Update.
-- Refactor absolute/relative path properties in scriptpackage into "Path" object.
+- Refactor CuiFile, KbdFile and perhaps JsonFileHandler to take Stream arguments to make the class more flexible and testable.
+- BUG: CopyDir/CopyFile action grows exclude property when loading/saving.

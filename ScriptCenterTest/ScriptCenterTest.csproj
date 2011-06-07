@@ -77,6 +77,7 @@
     <Compile Include="Repository\ScriptVersionNumberTest.cs" />
     <Compile Include="TestHelperMethods.cs" />
     <Compile Include="Utils\PathHelperMethodsTest.cs" />
+    <Compile Include="Utils\PathTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScriptCenter\ScriptCenter.csproj">

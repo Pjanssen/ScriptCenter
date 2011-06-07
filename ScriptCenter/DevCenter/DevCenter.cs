@@ -166,17 +166,17 @@ public partial class DevCenter : Form
         {
             if (data.Data is ScriptManifest)
             {
-                saveFileDialog.FileName = ((ScriptManifest)data.Data).Name.ToLower().Replace(' ', '_');
+                saveFileDialog.FileName = ((ScriptManifest)data.Data).Name.Replace(' ', '_');
                 saveFileDialog.Filter = "Script Manifest (*.scmanif)|*.scmanif";
             }
             else if (data.Data is ScriptPackage)
             {
-                saveFileDialog.FileName = ((ScriptPackage)data.Data).Name.ToLower().Replace(' ', '_');
+                saveFileDialog.FileName = ((ScriptPackage)data.Data).Name.Replace(' ', '_');
                 saveFileDialog.Filter = "Script Package (*.scpack)|*.scpack";
             }
             else if (data.Data is ScriptRepository)
             {
-                saveFileDialog.FileName = ((ScriptRepository)data.Data).Name.ToLower().Replace(' ', '_');
+                saveFileDialog.FileName = ((ScriptRepository)data.Data).Name.Replace(' ', '_');
                 saveFileDialog.Filter = "Script Repository (*.screpo)|*.screpo";
             }
 
@@ -324,6 +324,19 @@ public partial class DevCenter : Form
         foreach (Control c in ((Control)sender).Controls)
         {
             e.Graphics.DrawRectangle(SystemPens.ControlDark, new Rectangle(c.Location.X - 1, c.Location.Y - 1, c.Width + 1, c.Height + 1));
+        }
+    }
+
+    private void exportButton_Click(object sender, EventArgs e)
+    {
+        TreeNode selNode = this.filesTree.SelectedNode;
+        TreeNode rootNode = selNode;
+        while (rootNode != null && rootNode.Parent != null)
+            rootNode = rootNode.Parent;
+        if (rootNode != null && rootNode.Tag is TreeNodeData && ((TreeNodeData)rootNode.Tag).Data is ScriptPackage)
+        {
+            if (ScriptPacker.Pack((ScriptPackage)((TreeNodeData)rootNode.Tag).Data))
+                MessageBox.Show("Package export successful.", "Package Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

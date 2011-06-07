@@ -40,9 +40,8 @@ namespace ScriptCenter.Controls
             {
                 if (action.Configuration != null && action.Configuration.Package != null)
                 {
-                    String path = PathHelperMethods.GetAbsolutePath((string)value, action.Configuration.Package.SourcePathAbsolute);
-                    path = path.Replace('/', '\\');
-                    this.folderBrowserDialog.SelectedPath = path;
+                    RelativePath path = new RelativePath((string)value, action.Configuration.Package.SourcePath);
+                    this.folderBrowserDialog.SelectedPath = path.Path.Replace('/', '\\');
                 }
                 else
                     this.folderBrowserDialog.SelectedPath = (string)value;
@@ -51,7 +50,7 @@ namespace ScriptCenter.Controls
             if (this.folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 if (action.Configuration != null && action.Configuration.Package != null)
-                    value = PathHelperMethods.GetRelativePath(this.folderBrowserDialog.SelectedPath + "\\", action.Configuration.Package.SourcePathAbsolute);
+                    value = PathHelperMethods.GetRelativePath(this.folderBrowserDialog.SelectedPath + "\\", action.Configuration.Package.SourcePath.Path);
                 else
                     value = (new System.IO.DirectoryInfo(this.folderBrowserDialog.SelectedPath)).Name;
             }

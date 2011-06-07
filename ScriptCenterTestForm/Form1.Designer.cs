@@ -28,24 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.browsePage1 = new ScriptCenter.Controls.BrowsePage();
             this.SuspendLayout();
-            // 
-            // browsePage1
-            // 
-            this.browsePage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browsePage1.Location = new System.Drawing.Point(0, 0);
-            this.browsePage1.Name = "browsePage1";
-            this.browsePage1.Padding = new System.Windows.Forms.Padding(3);
-            this.browsePage1.Size = new System.Drawing.Size(439, 369);
-            this.browsePage1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(439, 369);
-            this.Controls.Add(this.browsePage1);
             this.Name = "Form1";
             this.Text = "Script Center";
             this.ResumeLayout(false);
@@ -54,7 +43,7 @@
 
         #endregion
 
-        private ScriptCenter.Controls.BrowsePage browsePage1;
+
     }
 }
 

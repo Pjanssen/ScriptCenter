@@ -41,16 +41,15 @@ namespace ScriptCenter.Controls
             {
                 if (action.Configuration != null && action.Configuration.Package != null)
                 {
-                    String path = PathHelperMethods.GetAbsolutePath((string)value, action.Configuration.Package.SourcePathAbsolute);
-                    path = path.Replace('/', '\\');
-                    if (PathHelperMethods.IsFilePath(path))
+                    RelativePath path = new RelativePath((string)value, action.Configuration.Package.SourcePath);
+                    if (PathHelperMethods.IsFilePath(path.Path))
                     {
-                        this.openFileDialog.FileName = path;
+                        this.openFileDialog.FileName = path.Path.Replace('/', '\\');
                     }
                     else
                     {
                         this.openFileDialog.FileName = "";
-                        this.openFileDialog.InitialDirectory = path;
+                        this.openFileDialog.InitialDirectory = path.Path.Replace('/', '\\');
                     }
                 }
                 else
@@ -60,7 +59,7 @@ namespace ScriptCenter.Controls
             if (this.openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 if (action.Configuration != null && action.Configuration.Package != null)
-                    value = PathHelperMethods.GetRelativePath(this.openFileDialog.FileName, action.Configuration.Package.SourcePathAbsolute);
+                    value = PathHelperMethods.GetRelativePath(this.openFileDialog.FileName, action.Configuration.Package.SourcePath.Path);
                 else
                     value = (new System.IO.FileInfo(this.openFileDialog.FileName)).Name;
             }

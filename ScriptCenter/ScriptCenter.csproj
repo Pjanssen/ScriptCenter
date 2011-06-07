@@ -132,6 +132,8 @@
     <Compile Include="Controls\Wizard.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Utils\BasePath.cs" />
+    <Compile Include="Utils\BasePathJsonConverter.cs" />
     <Compile Include="Utils\Defaults.cs" />
     <Compile Include="Installer\Actions\AssignHotkeyAction.cs" />
     <Compile Include="Installer\Actions\CopyDirAction.cs" />
@@ -208,6 +210,7 @@
     <Compile Include="Repository\ScriptManifestTokens.cs" />
     <Compile Include="Utils\ObjectSetDefaultValuesExtension.cs" />
     <Compile Include="Utils\PathHelperMethods.cs" />
+    <Compile Include="Utils\RelativePath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\ScriptCenter.Installer.ScriptProjectData.datasource" />
@@ -250,6 +253,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\mzp.run" />
     <EmbeddedResource Include="Resources\install.ms" />
+    <None Include="Properties\DataSources\ScriptCenter.Utils.BasePath.datasource" />
+    <None Include="Properties\DataSources\ScriptCenter.Utils.RelativePath.datasource" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\BrowsePage.resx">

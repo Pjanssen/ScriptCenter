@@ -29,15 +29,30 @@ namespace ScriptCenter.DevCenter.Forms
             this.devCenter = devCenter;
             this.scriptPackageBindingSource.Add(package);
             this.package.PropertyChanged += new PropertyChangedEventHandler(package_PropertyChanged);
+            this.package.RootPath.PropertyChanged += new PropertyChangedEventHandler(RootPath_PropertyChanged);
+            this.rootPathBindingSource.Add(package.RootPath);
+            this.sourcePathBindingSource.Add(package.SourcePath);
+            this.outputPathBindingSource.Add(package.OutputPath);
+            this.packageFileBindingSource.Add(package.PackageFile);
+            this.manifestFileBindingSource.Add(package.ManifestFile);
 
             this.setHelpLabelText();
+            this.enableControls();
+        }
+
+        void RootPath_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
             this.enableControls();
         }
 
         void package_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "RootPath")
+            {
+                this.rootPathBindingSource.Clear();
+                this.rootPathBindingSource.Add(package.RootPath);
                 this.enableControls();
+            }
             else if (e.PropertyName == "Name")
             {
                 if (package.Manifest.Name == "")
@@ -59,57 +74,58 @@ namespace ScriptCenter.DevCenter.Forms
         }
         private void enableControls() 
         {
-            Boolean enable = package.RootPath != String.Empty;
+            Boolean enable = package.RootPath.Path != String.Empty;
 
             this.sourceTextBox.Enabled = this.browseSourceButton.Enabled = enable;
-            this.outputTextBox.Enabled = this.browseOutputFolder.Enabled = enable;
+            this.outputTextBox.Enabled = this.browseOutputButton.Enabled = enable;
             this.packageTextBox.Enabled = this.browsePackageButton.Enabled = enable;
+            this.manifestTextBox.Enabled = this.browseManifestButton.Enabled = enable;
         }
 
-        private void browseRootButton_Click(object sender, EventArgs e)
+        private void browseRootButton_Click(object sender, EventArgs e) 
         {
-            folderBrowserDialog.SelectedPath = package.RootPath.Replace('/', '\\');
+            folderBrowserDialog.SelectedPath = package.RootPath.Path.Replace('/', '\\');
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                String path = folderBrowserDialog.SelectedPath.Replace('\\', '/');
-                Boolean reroute = false;
-                if (package.RootPath != String.Empty)
-                {
-                    String message = "Do you want to reroute the paths to the new root path?\r\nE.g. when changing the root path from \"C:\\code\\\" to \"C:\\\", a source path \"source\\\" will become \"code\\source\\\".";
-                    reroute = MessageBox.Show(message, "Reroute paths", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-                }
-                if (reroute)
-                    package.ReroutePaths(path, true);
-                else
-                    package.RootPath = path;
+                String path = folderBrowserDialog.SelectedPath.Replace('\\', '/') + "/";
+                package.RootPath = new BasePath(path);
             }
         }
-        private void browseSourceButton_Click(object sender, EventArgs e)
+        private void browseSourceButton_Click(object sender, EventArgs e) 
         {
-            folderBrowserDialog.SelectedPath = package.SourcePathAbsolute.Replace('/', '\\');
+            folderBrowserDialog.SelectedPath = package.SourcePath.Path.Replace('/', '\\');
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                package.SourcePathAbsolute = folderBrowserDialog.SelectedPath + "\\";
+                package.SourcePath.Path = folderBrowserDialog.SelectedPath + "\\";
             }
         }
-        private void browseOutputButton_Click(object sender, EventArgs e)
+        private void browseOutputButton_Click(object sender, EventArgs e) 
         {
-            folderBrowserDialog.SelectedPath = package.OutputPathAbsolute.Replace('/', '\\');
+            folderBrowserDialog.SelectedPath = package.OutputPath.Path.Replace('/', '\\');
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                package.OutputPathAbsolute = folderBrowserDialog.SelectedPath + "\\";
+                package.OutputPath.Path = folderBrowserDialog.SelectedPath + "\\";
             }
         }
-        private void browsePackageFileButton_Click(object sender, EventArgs e)
+        private void browsePackageFileButton_Click(object sender, EventArgs e) 
         {
-            savePackageFileDialog.FileName = package.OutputFileAbsolute.Replace('/', '\\');
+            savePackageFileDialog.FileName = package.PackageFile.Path.Replace('/', '\\');
             DialogResult result = savePackageFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                package.OutputFileAbsolute = savePackageFileDialog.FileName;
+                package.PackageFile.Path = savePackageFileDialog.FileName;
+            }
+        }
+        private void browseManifestButton_Click(object sender, EventArgs e) 
+        {
+            savePackageFileDialog.FileName = package.ManifestFile.Path.Replace('/', '\\');
+            DialogResult result = savePackageFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                package.ManifestFile.Path = savePackageFileDialog.FileName;
             }
         }
     }
