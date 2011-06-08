@@ -30,10 +30,13 @@ namespace ScriptCenter.Max
         public const String KeyWindowCount = "WindowCount";
         public const String KeyItemCount = "ItemCount";
 
-        public CuiFile(String file)
+        public CuiFile()
+        {
+            this.Sections = new List<CuiSection>();
+        }
+        public CuiFile(String file) : this()
         {
             this.File = file;
-            this.Sections = new List<CuiSection>();
         }
 
         /// <summary>
@@ -318,23 +321,33 @@ namespace ScriptCenter.Max
             return itemRemoved;
         }
 
-
         /// <summary>
-        /// Reads and parses the cui file.
+        /// Reads and parses a CUI File.
         /// </summary>
-        public Boolean Read()
+        /// <returns></returns>
+        public Boolean Read() 
         {
             if (!System.IO.File.Exists(this.File))
-               return false;
+                return false;
 
+            using (FileStream stream = new FileStream(File, FileMode.Open))
+            {
+                return this.Read(stream);
+            }
+        }
+        /// <summary>
+        /// Reads and parses a CUI File from a Stream.
+        /// </summary>
+        public Boolean Read(Stream stream)
+        {
             this.Sections.Clear();
 
-            using (StreamReader r = new StreamReader(this.File))
+            using (StreamReader reader = new StreamReader(stream))
             {
                 CuiSection section = null;
-                while (!r.EndOfStream)
+                while (!reader.EndOfStream)
                 {
-                    String line = r.ReadLine();
+                    String line = reader.ReadLine();
                     if (line == String.Empty)
                         continue;
 
@@ -357,13 +370,16 @@ namespace ScriptCenter.Max
                     }
                 }
             }
+            
 
             return true;
         }
+
         /// <summary>
-        /// Writes the cui file to disk.
+        /// Writes the CUI File.
         /// </summary>
-        public Boolean Write()
+        /// <returns></returns>
+        public Boolean Write() 
         {
             try
             {
@@ -376,22 +392,12 @@ namespace ScriptCenter.Max
                 if (System.IO.File.Exists(this.File))
                     System.IO.File.Copy(this.File, this.File + ".bak", true);
 
-                using (StreamWriter w = new StreamWriter(this.File, false))
+                using (FileStream stream = new FileStream(this.File, FileMode.OpenOrCreate))
                 {
-                    foreach (CuiSection section in this.Sections)
-                    {
-                        //Write section start.
-                        w.WriteLine("[{0}]", section.Name);
-
-                        //Write items.
-                        foreach (CuiItem item in section.Items)
-                        {
-                            w.WriteLine("{0}={1}", item.Key, item.Value);
-                        }
-                    }
+                    return this.Write(stream);
                 }
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 //Restore backup.
                 if (System.IO.File.Exists(this.File + ".bak"))
@@ -399,6 +405,26 @@ namespace ScriptCenter.Max
 
                 Console.WriteLine(e.Message);
                 return false;
+            }
+        }
+        /// <summary>
+        /// Writes the CUI File to a Stream.
+        /// </summary>
+        public Boolean Write(Stream stream)
+        {
+            using (StreamWriter writer = new StreamWriter(stream))
+            {
+                foreach (CuiSection section in this.Sections)
+                {
+                    //Write section start.
+                    writer.WriteLine("[{0}]", section.Name);
+
+                    //Write items.
+                    foreach (CuiItem item in section.Items)
+                    {
+                        writer.WriteLine("{0}={1}", item.Key, item.Value);
+                    }
+                }
             }
 
             return true;

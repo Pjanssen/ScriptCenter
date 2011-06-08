@@ -40,10 +40,13 @@ internal class KeyboardAction
 }
 internal class KbdFile
 {
-    public KbdFile(String file)
+    public KbdFile()
+    {
+        this.Actions = new List<KeyboardAction>();
+    }
+    public KbdFile(String file) : this()
     {
         this.File = file;
-        this.Actions = new List<KeyboardAction>();
     }
 
     public const Int32 MainTableId = 0;
@@ -194,11 +197,22 @@ internal class KbdFile
         if (!System.IO.File.Exists(this.File))
             return false;
 
-        using (StreamReader r = new StreamReader(this.File))
+        using (FileStream stream = new FileStream(this.File, FileMode.Open))
+        {
+            return this.Read(stream);
+        }
+    }
+    /// <summary>
+    /// Reads and parses a KBD file from a stream.
+    /// </summary>
+    /// <returns>True when successful.</returns>
+    public Boolean Read(Stream stream)
+    {
+        using (StreamReader reader = new StreamReader(stream))
         {
             this.Actions.Clear();
 
-            while(!r.EndOfStream)
+            while(!reader.EndOfStream)
             {
                 try
                 {
@@ -208,7 +222,7 @@ internal class KbdFile
                     //9=3 82 SmartScale`Tools 647394
                     //index=modkeycode keycode macroname`macrocategory table_id
 
-                    String line = r.ReadLine();
+                    String line = reader.ReadLine();
                     List<String> line_split = new List<string>();
                     String[] split = line.Split('=');
                     line_split.Add(split[0]);
@@ -271,32 +285,9 @@ internal class KbdFile
             if (System.IO.File.Exists(this.File))
                 System.IO.File.Copy(this.File, this.File + ".bak", true);
 
-            using (StreamWriter w = new StreamWriter(this.File, false))
+            using (FileStream stream = new FileStream(this.File, FileMode.OpenOrCreate))
             {
-                Int32 table_index = 0;
-                Int32 prevTableId = 0;
-                foreach(KeyboardAction action in this.Actions)
-                {
-                    if (action.TableId != prevTableId)
-                        table_index = 0;
-
-                    Int32 modKeyCode = keysToModKeycode(action.Keys);
-                    Int32 keyCode = (Int32)(action.Keys & Keys.KeyCode);
-                    String macro;
-                    if (action.PersistentId == 0 && !action.MacroName.Equals(String.Empty))
-                    {
-                        macro = action.MacroName;
-                        if (!action.MacroCategory.Equals(String.Empty))
-                            macro += "`" + action.MacroCategory;
-                    }
-                    else
-                        macro = action.PersistentId.ToString();
-
-                    w.WriteLine("{0}={1} {2} {3} {4}", table_index, modKeyCode, keyCode, macro, action.TableId);
-                    
-                    table_index++;
-                    prevTableId = action.TableId;
-                }
+                return this.Write(stream);
             }
         }
         catch (Exception e)
@@ -308,9 +299,42 @@ internal class KbdFile
             Console.WriteLine(e.Message);
             return false;
         }
+    }
+    /// <summary>
+    /// Writes all the KBD file to a stream.
+    /// </summary>
+    /// <returns>True upon success.</returns>
+    public Boolean Write(Stream stream)
+    {
+        using (StreamWriter w = new StreamWriter(stream))
+        {
+            Int32 table_index = 0;
+            Int32 prevTableId = 0;
+            foreach (KeyboardAction action in this.Actions)
+            {
+                if (action.TableId != prevTableId)
+                    table_index = 0;
+
+                Int32 modKeyCode = keysToModKeycode(action.Keys);
+                Int32 keyCode = (Int32)(action.Keys & Keys.KeyCode);
+                String macro;
+                if (action.PersistentId == 0 && !action.MacroName.Equals(String.Empty))
+                {
+                    macro = action.MacroName;
+                    if (!action.MacroCategory.Equals(String.Empty))
+                        macro += "`" + action.MacroCategory;
+                }
+                else
+                    macro = action.PersistentId.ToString();
+
+                w.WriteLine("{0}={1} {2} {3} {4}", table_index, modKeyCode, keyCode, macro, action.TableId);
+
+                table_index++;
+                prevTableId = action.TableId;
+            }
+        }
 
         return true;
     }
-
 }
 }
