@@ -34,6 +34,7 @@
             System.Windows.Forms.Label label10;
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.packageNameTextBox = new System.Windows.Forms.TextBox();
+            this.scriptPackageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.savePackageFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.browseManifestDialog = new System.Windows.Forms.OpenFileDialog();
@@ -42,8 +43,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.browseOutputButton = new System.Windows.Forms.Button();
             this.outputTextBox = new System.Windows.Forms.TextBox();
+            this.outputPathBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sourceTextBox = new System.Windows.Forms.TextBox();
+            this.sourcePathBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.rootPathBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.browseSourceButton = new System.Windows.Forms.Button();
             this.browseRootButton = new System.Windows.Forms.Button();
@@ -51,31 +55,27 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.browseManifestButton = new System.Windows.Forms.Button();
             this.manifestTextBox = new System.Windows.Forms.TextBox();
+            this.manifestFileBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.helpLabel = new System.Windows.Forms.Label();
             this.packageTextBox = new System.Windows.Forms.TextBox();
+            this.packageFileBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label12 = new System.Windows.Forms.Label();
             this.browsePackageButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.sourcePathBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rootPathBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.scriptPackageBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.outputPathBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.packageFileBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.manifestFileBindingSource = new System.Windows.Forms.BindingSource(this.components);
             label1 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scriptPackageBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.outputPathBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sourcePathBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rootPathBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptPackageBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.outputPathBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.packageFileBindingSource)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.manifestFileBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.packageFileBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -139,6 +139,10 @@
             this.packageNameTextBox.Name = "packageNameTextBox";
             this.packageNameTextBox.Size = new System.Drawing.Size(371, 20);
             this.packageNameTextBox.TabIndex = 51;
+            // 
+            // scriptPackageBindingSource
+            // 
+            this.scriptPackageBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptPackage);
             // 
             // folderBrowserDialog
             // 
@@ -221,6 +225,10 @@
             this.outputTextBox.Size = new System.Drawing.Size(371, 20);
             this.outputTextBox.TabIndex = 48;
             // 
+            // outputPathBindingSource
+            // 
+            this.outputPathBindingSource.DataSource = typeof(ScriptCenter.Utils.RelativePath);
+            // 
             // sourceTextBox
             // 
             this.sourceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sourcePathBindingSource, "RelativePathComponent", true));
@@ -231,6 +239,10 @@
             this.sourceTextBox.Size = new System.Drawing.Size(371, 20);
             this.sourceTextBox.TabIndex = 3;
             // 
+            // sourcePathBindingSource
+            // 
+            this.sourcePathBindingSource.DataSource = typeof(ScriptCenter.Utils.RelativePath);
+            // 
             // textBox4
             // 
             this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.rootPathBindingSource, "Path", true));
@@ -240,6 +252,11 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(371, 20);
             this.textBox4.TabIndex = 1;
+            // 
+            // rootPathBindingSource
+            // 
+            this.rootPathBindingSource.AllowNew = true;
+            this.rootPathBindingSource.DataSource = typeof(ScriptCenter.Utils.BasePath);
             // 
             // label4
             // 
@@ -329,6 +346,10 @@
             this.manifestTextBox.Size = new System.Drawing.Size(371, 20);
             this.manifestTextBox.TabIndex = 48;
             // 
+            // manifestFileBindingSource
+            // 
+            this.manifestFileBindingSource.DataSource = typeof(ScriptCenter.Utils.RelativePath);
+            // 
             // helpLabel
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.helpLabel, 2);
@@ -349,6 +370,10 @@
             this.packageTextBox.Name = "packageTextBox";
             this.packageTextBox.Size = new System.Drawing.Size(371, 20);
             this.packageTextBox.TabIndex = 5;
+            // 
+            // packageFileBindingSource
+            // 
+            this.packageFileBindingSource.DataSource = typeof(ScriptCenter.Utils.RelativePath);
             // 
             // label12
             // 
@@ -381,31 +406,6 @@
             this.label5.TabIndex = 47;
             this.label5.Text = "Manifest File";
             // 
-            // sourcePathBindingSource
-            // 
-            this.sourcePathBindingSource.DataSource = typeof(ScriptCenter.Utils.RelativePath);
-            // 
-            // rootPathBindingSource
-            // 
-            this.rootPathBindingSource.AllowNew = true;
-            this.rootPathBindingSource.DataSource = typeof(ScriptCenter.Utils.BasePath);
-            // 
-            // scriptPackageBindingSource
-            // 
-            this.scriptPackageBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptPackage);
-            // 
-            // outputPathBindingSource
-            // 
-            this.outputPathBindingSource.DataSource = typeof(ScriptCenter.Utils.RelativePath);
-            // 
-            // packageFileBindingSource
-            // 
-            this.packageFileBindingSource.DataSource = typeof(ScriptCenter.Utils.RelativePath);
-            // 
-            // manifestFileBindingSource
-            // 
-            this.manifestFileBindingSource.DataSource = typeof(ScriptCenter.Utils.RelativePath);
-            // 
             // PackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,18 +418,18 @@
             this.Size = new System.Drawing.Size(552, 472);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scriptPackageBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.outputPathBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sourcePathBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rootPathBindingSource)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sourcePathBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rootPathBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scriptPackageBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.outputPathBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.packageFileBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.manifestFileBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.packageFileBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using ScriptCenter.Installer.Actions;
 using ScriptCenter.Utils;
+using ScriptCenter.Repository;
 
 namespace ScriptCenter.Controls
 {
@@ -42,14 +43,15 @@ namespace ScriptCenter.Controls
                 if (action.Configuration != null && action.Configuration.Package != null)
                 {
                     RelativePath path = new RelativePath((string)value, action.Configuration.Package.SourcePath);
-                    if (PathHelperMethods.IsFilePath(path.Path))
+                    String pathStr = ScriptManifestTokens.Replace(path.Path, action.Configuration.Package.Manifest);
+                    if (path.IsFilePath)
                     {
-                        this.openFileDialog.FileName = path.Path.Replace('/', '\\');
+                        this.openFileDialog.FileName = pathStr.Replace('/', '\\');
                     }
                     else
                     {
                         this.openFileDialog.FileName = "";
-                        this.openFileDialog.InitialDirectory = path.Path.Replace('/', '\\');
+                        this.openFileDialog.InitialDirectory = pathStr.Replace('/', '\\');
                     }
                 }
                 else
@@ -59,7 +61,10 @@ namespace ScriptCenter.Controls
             if (this.openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 if (action.Configuration != null && action.Configuration.Package != null)
-                    value = PathHelperMethods.GetRelativePath(this.openFileDialog.FileName, action.Configuration.Package.SourcePath.Path);
+                {
+                    String sourcePath = ScriptManifestTokens.Replace(action.Configuration.Package.SourcePath.Path, action.Configuration.Package.Manifest);
+                    value = PathHelperMethods.GetRelativePath(this.openFileDialog.FileName, sourcePath);
+                }
                 else
                     value = (new System.IO.FileInfo(this.openFileDialog.FileName)).Name;
             }

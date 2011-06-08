@@ -18,7 +18,7 @@ public class ManifestTokensTest
         manifest.Id = "pierjanssen.outliner";
         manifest.Author = "Pier Janssen";
         manifest.Name = "Outliner";
-        manifest.Versions.Add(new ScriptVersion(2, 9, 4));
+        manifest.Versions.Add(new ScriptVersion(2, 9, 4, ScriptReleaseStage.Release));
 
         String origString = ScriptManifestTokens.Id_Token + " something " + ScriptManifestTokens.Name_Token + " " + ScriptManifestTokens.Id_Token;
         String exptectedString = manifest.Id + " something " + manifest.Name + " " + manifest.Id;

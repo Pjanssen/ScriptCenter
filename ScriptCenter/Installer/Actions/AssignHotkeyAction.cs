@@ -138,7 +138,7 @@ public class AssignHotkeyAction : InstallerAction
             String formatStr = String.Empty;
             if (this.Keys != System.Windows.Forms.Keys.None)
             {
-                if (this.MacroName != null & this.MacroCategory != null)
+                if (this.MacroName != String.Empty && this.MacroCategory != String.Empty)
                     formatStr = "{0} -> {1}::{2}";
                 else
                     formatStr = "{0}";

@@ -11,7 +11,7 @@ namespace ScriptCenter.Repository
     /// <summary>
     /// The ScriptVersion class contains the version number, the path to the script and its requirements.
     /// </summary>
-    public class ScriptVersion
+    public class ScriptVersion : ICloneable
     {
         [JsonProperty("version")]
         [DisplayName("Version")]
@@ -40,37 +40,88 @@ namespace ScriptCenter.Repository
         public Int32 Maximum3dsmaxVersion { get; set; }
 
 
-        public ScriptVersion() : this(1, 0, 0) { }
-        public ScriptVersion(Int32 major, Int32 minor, Int32 revision)
+        public ScriptVersion() : this(1, 0, 0, ScriptReleaseStage.Release) { }
+        public ScriptVersion(Int32 major, Int32 minor, Int32 revision, ScriptReleaseStage releaseStahe) 
+            : this(new ScriptVersionNumber(major, minor, revision, releaseStahe)) { }
+        public ScriptVersion(ScriptVersionNumber versionNumber)
         {
-            this.VersionNumber = new ScriptVersionNumber(major, minor, revision);
+            this.VersionNumber = versionNumber;
             this.Minimal3dsmaxVersion = 0;
             this.Maximum3dsmaxVersion = 0;
+        }
+        public ScriptVersion(ScriptVersion source)
+        {
+            this.VersionNumber = new ScriptVersionNumber(source.VersionNumber.Major, source.VersionNumber.Minor, source.VersionNumber.Revision, source.VersionNumber.ReleaseStage);
+            this.ScriptPath = source.ScriptPath;
+            this.Minimal3dsmaxVersion = source.Minimal3dsmaxVersion;
+            this.Maximum3dsmaxVersion = source.Maximum3dsmaxVersion;
+        }
+        
+        public object Clone()
+        {
+            return new ScriptVersion(this);
         }
     }
 
 
 
     [TypeConverter(typeof(ScriptVersionConverter))]
-    public class ScriptVersionNumber : IComparable<ScriptVersionNumber>
+    public class ScriptVersionNumber : INotifyPropertyChanged, IComparable<ScriptVersionNumber>
     {
+        private Int32 _major;
+        private Int32 _minor;
+        private Int32 _revision;
+        private ScriptReleaseStage _releaseStage;
+
         [JsonIgnore()]
         [Description("The major component of the version.")]
-        public Int32 Major { get; set; }
+        public Int32 Major 
+        {
+            get { return _major; }
+            set
+            {
+                _major = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Major"));
+            }
+        }
 
         [JsonIgnore()]
         [Description("The minor component of the version.")]
-        public Int32 Minor { get; set; }
+        public Int32 Minor 
+        {
+            get { return _minor; }
+            set
+            {
+                _minor = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Minor"));
+            }
+        }
 
         [JsonIgnore()]
         [Description("The revision component of the version.")]
-        public Int32 Revision { get; set; }
+        public Int32 Revision 
+        {
+            get { return _revision; }
+            set
+            {
+                _revision = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("Revision"));
+            }
+        }
 
         [JsonIgnore()]
         [DisplayName("Release Stage")]
         [Description("The stage of this version indicating the stability of the script.")]
         [DefaultValue(ScriptReleaseStage.Release)]
-        public ScriptReleaseStage ReleaseStage { get; set; }
+        public ScriptReleaseStage ReleaseStage 
+        {
+            get { return _releaseStage; }
+            set
+            {
+                _releaseStage = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("ReleaseStage"));
+            }
+        }
 
         public ScriptVersionNumber() : this(1, 0, 0, ScriptReleaseStage.Release) { }
         public ScriptVersionNumber(Int32 major, Int32 minor, Int32 revision) : this(major, minor, revision, ScriptReleaseStage.Release) { }
@@ -107,6 +158,13 @@ namespace ScriptCenter.Repository
             {
                 throw new ArgumentException("Version string must be in the format \"Int32.Int32.Int32 ScriptReleaseStage\"", e);
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, e);
         }
 
         public override String ToString()

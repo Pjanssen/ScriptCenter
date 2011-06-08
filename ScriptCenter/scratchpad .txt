@@ -1,4 +1,7 @@
 ﻿- Refactor installer log to take any stream instead of always writing to file? 
 - Consider changing Do/Undo methods on InstallerAction to Install/Uninstall/Update.
 - Refactor CuiFile, KbdFile and perhaps JsonFileHandler to take Stream arguments to make the class more flexible and testable.
-- BUG: CopyDir/CopyFile action grows exclude property when loading/saving.
+- BUG: When selecting C:/, path ends up with // at the end.
+- BUG: Cannot click "export" when manifest in package is selected.
+- Use manifest tokens in scriptversion when using packages.
+- Move manifest tokens replace to basepath?

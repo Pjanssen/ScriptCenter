@@ -31,13 +31,14 @@ namespace ScriptCenter.Repository
 
             if (manifest.Versions.Count != 0)
             {
+                ScriptVersion version = manifest.Versions.OrderByDescending(v => v.VersionNumber).First();
                 //TODO: find a solution for getting the actual version, not just the first one.
-                newString.Replace(Version_Token, manifest.Versions[0].VersionNumber.ToString());
-                newString.Replace(Version_Underscores_Token, manifest.Versions[0].VersionNumber.ToString(true));
-                newString.Replace(VersionMajor_Token, manifest.Versions[0].VersionNumber.Major.ToString());
-                newString.Replace(VersionMinor_Token, manifest.Versions[0].VersionNumber.Minor.ToString());
-                newString.Replace(VersionRevision_Token, manifest.Versions[0].VersionNumber.Revision.ToString());
-                newString.Replace(VersionStage_Token, manifest.Versions[0].VersionNumber.ReleaseStage.ToString().ToLower());
+                newString.Replace(Version_Token, version.VersionNumber.ToString());
+                newString.Replace(Version_Underscores_Token, version.VersionNumber.ToString(true));
+                newString.Replace(VersionMajor_Token, version.VersionNumber.Major.ToString());
+                newString.Replace(VersionMinor_Token, version.VersionNumber.Minor.ToString());
+                newString.Replace(VersionRevision_Token, version.VersionNumber.Revision.ToString());
+                newString.Replace(VersionStage_Token, version.VersionNumber.ReleaseStage.ToString().ToLower());
             }
 
             return newString.ToString();

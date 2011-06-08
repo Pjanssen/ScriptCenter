@@ -83,7 +83,15 @@ namespace ScriptCenter.DevCenter.Forms
 
         private void addVersionButton_Click(object sender, EventArgs e)
         {
-            ScriptVersion version = new ScriptVersion();
+            ScriptVersion version = null;
+            if (manifest.LatestVersion != null)
+            {
+                version = (ScriptVersion)manifest.LatestVersion.Clone();
+                version.VersionNumber.Minor += 1;
+            }
+            else
+                version = new ScriptVersion();
+
             this.manifest.Versions.Add(version);
 
             ListViewItem item = this.addVersionToListView(version);

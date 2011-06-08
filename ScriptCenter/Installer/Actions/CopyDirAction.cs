@@ -34,11 +34,8 @@ public class CopyDirAction : InstallerAction
     public CopyDirAction() : this("", AppPaths.Directory.Scripts) { }
     public CopyDirAction(String source, AppPaths.Directory target) 
     {
-        //TODO: test if omission of SetDefaultValues here has indeed got no consequences (since its called in the baseclass).
         this.Source = source;
         this.Target = target;
-
-        this.ExcludeFiles = new List<string>() { "._*", "Thumbs.db", ".DS_Store", ".svn" };
     }
 
 
@@ -78,13 +75,12 @@ public class CopyDirAction : InstallerAction
     /// <summary>
     /// A semicolon separated list of files to exclude when packing files.
     /// </summary>
-    [JsonProperty("exclude")]
+    [JsonProperty("exclude_files")]
+    [DefaultValue("._*; Thumbs.db; .DS_Store; .svn;")]
     [Category("1. Action Properties")]
     [DisplayName("Exclude files")]
     [Description("A semicolon separated list of files that will be ignored when creating the package.")]
-    [TypeConverter(typeof(StringListConverter))]
-    [Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
-    public List<String> ExcludeFiles { get; set; }
+    public String ExcludeFiles { get; set; }
 
 
     /// <summary>

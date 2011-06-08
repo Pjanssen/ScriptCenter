@@ -209,7 +209,7 @@ namespace ScriptCenter.Controls
             ScriptManifest m = new ScriptManifest();
             m.Id = "nl.threesixty.outliner";
             m.Name = "Outliner";
-            m.Versions.Add(new ScriptVersion(2, 0, 96));
+            m.Versions.Add(new ScriptVersion(2, 0, 96, ScriptReleaseStage.Release));
 
             InstallerConfiguration config = new InstallerConfiguration();
             InstallerUIConfiguration uiConfig = new InstallerUIConfiguration();

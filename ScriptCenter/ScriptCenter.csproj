@@ -78,7 +78,6 @@
     <Compile Include="Controls\ImageBeforeTextLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Installer\Actions\StringListConverter.cs" />
     <Compile Include="Installer\Actions\ToolbarNameConverter.cs" />
     <Compile Include="DevCenter\Forms\InstallerUIForm.cs">
       <SubType>UserControl</SubType>
@@ -91,12 +90,6 @@
     </Compile>
     <Compile Include="DevCenter\Forms\InstallerActionsForm.Designer.cs">
       <DependentUpon>InstallerActionsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DevCenter\Forms\ManifestVersionsForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DevCenter\Forms\ManifestVersionsForm.Designer.cs">
-      <DependentUpon>ManifestVersionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DevCenter\Forms\PackageForm.cs">
       <SubType>UserControl</SubType>
@@ -232,9 +225,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DevCenter\Forms\InstallerActionsForm.resx">
       <DependentUpon>InstallerActionsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DevCenter\Forms\ManifestVersionsForm.resx">
-      <DependentUpon>ManifestVersionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DevCenter\Forms\PackageForm.resx">
       <DependentUpon>PackageForm.cs</DependentUpon>

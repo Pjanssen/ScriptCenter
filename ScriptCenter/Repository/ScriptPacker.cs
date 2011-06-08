@@ -12,7 +12,7 @@ namespace ScriptCenter.Repository
         public static Boolean Pack(ScriptPackage package)
         {
             //Write manifest.
-            if (!ScriptPacker.writeManifest(package.Manifest, package.ManifestFile.Path))
+            if (!ScriptPacker.writeManifest(package.Manifest, ScriptManifestTokens.Replace(package.ManifestFile.Path, package.Manifest)))
                 return false;
 
             //Write mzp.
@@ -51,7 +51,7 @@ namespace ScriptCenter.Repository
             String scAssemblyPath = System.Reflection.Assembly.GetCallingAssembly().Location;
             zip.AddFile(scAssemblyPath, "");
             zip.AddFile(Path.GetDirectoryName(scAssemblyPath) + "\\Newtonsoft.Json.Net35.dll", "");
-            zip.Save(package.PackageFile.Path);
+            zip.Save(ScriptManifestTokens.Replace(package.PackageFile.Path, package.Manifest));
 
             //Remove temp dir
             Directory.Delete(tempPath, true);

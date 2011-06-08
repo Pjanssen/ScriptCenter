@@ -23,9 +23,9 @@ namespace ScriptCenterTest.Repository
             this.manifest.Id = "pierjanssen.outliner";
             this.manifest.Name = "Outliner";
             this.manifest.Author = "Pier Janssen";
-            this.manifest.Versions.Add(new ScriptVersion(2, 0, 96));
-            this.manifest.Versions.Add(new ScriptVersion(2, 0, 95));
-            this.manifest.Versions.Add(new ScriptVersion(2, 0, 94));
+            this.manifest.Versions.Add(new ScriptVersion(2, 0, 96, ScriptReleaseStage.Release));
+            this.manifest.Versions.Add(new ScriptVersion(2, 0, 95, ScriptReleaseStage.Release));
+            this.manifest.Versions.Add(new ScriptVersion(2, 0, 94, ScriptReleaseStage.Release));
             this.manifest.Metadata.Add("description", "descr");
         }
 
@@ -61,6 +61,55 @@ namespace ScriptCenterTest.Repository
             Assert.AreEqual(this.manifest.Versions[0].VersionNumber.Minor, readManifest.Versions[0].VersionNumber.Minor);
             Assert.AreEqual(this.manifest.Versions[0].VersionNumber.Revision, readManifest.Versions[0].VersionNumber.Revision);
             Assert.AreEqual(this.manifest.Metadata["description"], readManifest.Metadata["description"]);
+        }
+
+
+        [TestMethod]
+        public void LatestVersionTest()
+        {
+            ScriptVersionNumber expectedVersion = new ScriptVersionNumber(2, 0, 96, ScriptReleaseStage.Release);
+            Assert.AreEqual(expectedVersion, manifest.LatestVersion.VersionNumber, "Latest version");
+
+            expectedVersion = new ScriptVersionNumber(3, 0, 0);
+            manifest.Versions.Add(new ScriptVersion(expectedVersion));
+            Assert.AreEqual(expectedVersion, manifest.LatestVersion.VersionNumber, "Added latest version");
+
+            expectedVersion.Major = 1;
+            Assert.AreNotEqual(expectedVersion, manifest.LatestVersion, "Changed version so that it no longer is the latest version.");
+
+            ScriptManifest m = new ScriptManifest();
+            Assert.AreEqual(0, m.Versions.Count, "Version count should be 0.");
+            Assert.AreEqual(null, m.LatestVersion, "LatestVersion in empty manifest should be null");
+        }
+
+        [TestMethod]
+        public void LatestStableVersionTest()
+        {
+            ScriptVersionNumber expectedVersion = new ScriptVersionNumber(2, 0, 96, ScriptReleaseStage.Release);
+            Assert.AreEqual(expectedVersion, manifest.LatestStableVersion.VersionNumber, "Latest stable version 1");
+
+            manifest.Versions.Add(new ScriptVersion(new ScriptVersionNumber(3, 0, 0, ScriptReleaseStage.Alpha)));
+            manifest.Versions.Add(new ScriptVersion(new ScriptVersionNumber(3, 0, 0, ScriptReleaseStage.Beta)));
+            Assert.AreEqual(expectedVersion, manifest.LatestStableVersion.VersionNumber, "Latest stable version 2");
+
+            expectedVersion = new ScriptVersionNumber(3, 0, 0, ScriptReleaseStage.Release);
+            manifest.Versions.Add(new ScriptVersion(expectedVersion));
+            Assert.AreEqual(expectedVersion, manifest.LatestStableVersion.VersionNumber, "Latest stable version 3");
+
+            ScriptManifest m = new ScriptManifest();
+            Assert.AreEqual(0, m.Versions.Count, "Version count should be 0.");
+            Assert.AreEqual(null, m.LatestStableVersion, "LatestStableVersion in empty manifest should be null");
+        }
+
+        [TestMethod]
+        public void ScriptVersionCloneTest()
+        {
+            ScriptVersion version = new ScriptVersion(2, 1, 3, ScriptReleaseStage.Alpha);
+            ScriptVersion newVersion = (ScriptVersion)version.Clone();
+            Assert.AreEqual(version.VersionNumber, newVersion.VersionNumber, "Version numbers are equal");
+            Assert.AreEqual(version.Minimal3dsmaxVersion, newVersion.Minimal3dsmaxVersion, "Min 3dsmax are equal");
+            Assert.AreEqual(version.Maximum3dsmaxVersion, newVersion.Maximum3dsmaxVersion, "Max 3dsmax are equal");
+            Assert.AreEqual(version.ScriptPath, newVersion.ScriptPath, "Scriptpaths are equal");
         }
     }
 }

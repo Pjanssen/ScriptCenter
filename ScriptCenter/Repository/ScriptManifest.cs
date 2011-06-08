@@ -70,6 +70,28 @@ namespace ScriptCenter.Repository
         [JsonProperty("versions")]
         public List<ScriptVersion> Versions { get; set; }
 
+        [JsonIgnore]
+        public ScriptVersion LatestVersion
+        {
+            get 
+            {
+                if (this.Versions == null || this.Versions.Count == 0)
+                    return null;
+                return this.Versions.OrderByDescending(v => v.VersionNumber).First(); 
+            }
+        }
+
+        [JsonIgnore]
+        public ScriptVersion LatestStableVersion
+        {
+            get
+            {
+                if (this.Versions == null || this.Versions.Count == 0)
+                    return null;
+                return this.Versions.OrderByDescending(v => v.VersionNumber).First(v => v.VersionNumber.ReleaseStage == ScriptReleaseStage.Release);
+            }
+        }
+
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }
 
