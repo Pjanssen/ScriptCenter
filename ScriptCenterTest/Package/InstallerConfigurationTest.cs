@@ -6,7 +6,7 @@ using ScriptCenter.Package.InstallerActions;
 using System.Collections.Generic;
 using ScriptCenter.Utils;
 
-namespace ScriptCenterTest.Installer
+namespace ScriptCenterTest.Package
 {
     /// <summary>
     ///This is a test class for InstallerConfigurationTest and is intended

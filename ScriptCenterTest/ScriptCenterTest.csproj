@@ -64,11 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Max\CuiFileTest.cs" />
-    <Compile Include="Repository\ScriptPackageTest.cs" />
+    <Compile Include="Package\ScriptPackageTest.cs" />
     <Compile Include="Repository\ScriptManifestTokensTest.cs" />
     <Compile Include="Utils\ObjectSetDefaultValuesTest.cs" />
     <Compile Include="Utils\JsonFileHandlerTest.cs" />
-    <Compile Include="Installer\InstallerConfigurationTest.cs" />
+    <Compile Include="Package\InstallerConfigurationTest.cs" />
     <Compile Include="Max\KbdFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ScriptManifestTest.cs" />

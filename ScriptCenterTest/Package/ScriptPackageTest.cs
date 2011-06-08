@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScriptCenter.Package;
 
-namespace ScriptCenterTest.Repository
+namespace ScriptCenterTest.Package
 {
     [TestClass]
     public class ScriptPackageTest
