@@ -1,4 +1,4 @@
-﻿using ScriptCenter.Installer.Actions;
+﻿using ScriptCenter.Package.InstallerActions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;

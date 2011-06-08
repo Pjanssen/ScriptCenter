@@ -1,8 +1,8 @@
-﻿using ScriptCenter.Installer;
+﻿using ScriptCenter.Package;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using ScriptCenter.Repository;
-using ScriptCenter.Installer.Actions;
+using ScriptCenter.Package.InstallerActions;
 using System.Collections.Generic;
 using ScriptCenter.Utils;
 

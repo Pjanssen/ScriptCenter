@@ -65,7 +65,7 @@
     <Compile Include="DevCenter\Forms\PackageRootPathWarning.Designer.cs">
       <DependentUpon>PackageRootPathWarning.cs</DependentUpon>
     </Compile>
-    <Compile Include="Repository\ScriptPacker.cs" />
+    <Compile Include="Package\ScriptPacker.cs" />
     <Compile Include="SCResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,7 +78,7 @@
     <Compile Include="Controls\ImageBeforeTextLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Installer\Actions\ToolbarNameConverter.cs" />
+    <Compile Include="Package\InstallerActions\ToolbarNameConverter.cs" />
     <Compile Include="DevCenter\Forms\InstallerUIForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,7 +103,7 @@
     <Compile Include="DevCenter\Forms\RepositoryForm.Designer.cs">
       <DependentUpon>RepositoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Installer\InstallerResources.Designer.cs">
+    <Compile Include="Package\InstallerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InstallerResources.resx</DependentUpon>
@@ -128,45 +128,45 @@
     <Compile Include="Utils\BasePath.cs" />
     <Compile Include="Utils\BasePathJsonConverter.cs" />
     <Compile Include="Utils\Defaults.cs" />
-    <Compile Include="Installer\Actions\AssignHotkeyAction.cs" />
-    <Compile Include="Installer\Actions\CopyDirAction.cs" />
-    <Compile Include="Installer\Actions\CopyFileAction.cs" />
-    <Compile Include="Installer\Actions\CreateToolbarAction.cs" />
-    <Compile Include="Installer\Actions\CreateToolbarButtonAction.cs" />
-    <Compile Include="Installer\Actions\CreateToolbarSeparatorAction.cs" />
+    <Compile Include="Package\InstallerActions\AssignHotkeyAction.cs" />
+    <Compile Include="Package\InstallerActions\CopyDirAction.cs" />
+    <Compile Include="Package\InstallerActions\CopyFileAction.cs" />
+    <Compile Include="Package\InstallerActions\CreateToolbarAction.cs" />
+    <Compile Include="Package\InstallerActions\CreateToolbarButtonAction.cs" />
+    <Compile Include="Package\InstallerActions\CreateToolbarSeparatorAction.cs" />
     <Compile Include="Max\CuiFile.cs" />
     <Compile Include="Max\KbdFile.cs" />
-    <Compile Include="Installer\Actions\RunMaxscriptAction.cs" />
-    <Compile Include="Installer\Installer.cs" />
-    <Compile Include="Installer\Actions\InstallerAction.cs" />
-    <Compile Include="Installer\UI\InstallerDialog.cs">
+    <Compile Include="Package\InstallerActions\RunMaxscriptAction.cs" />
+    <Compile Include="Package\Installer.cs" />
+    <Compile Include="Package\InstallerActions\InstallerAction.cs" />
+    <Compile Include="Package\InstallerUI\InstallerDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Installer\UI\InstallerDialog.Designer.cs">
+    <Compile Include="Package\InstallerUI\InstallerDialog.Designer.cs">
       <DependentUpon>InstallerDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Installer\InstallerConfiguration.cs" />
-    <Compile Include="Installer\UI\InstallerUIConfiguration.cs" />
-    <Compile Include="Installer\UI\StartPage.cs">
+    <Compile Include="Package\InstallerConfiguration.cs" />
+    <Compile Include="Package\InstallerUI\InstallerUIConfiguration.cs" />
+    <Compile Include="Package\InstallerUI\StartPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Installer\UI\StartPage.Designer.cs">
+    <Compile Include="Package\InstallerUI\StartPage.Designer.cs">
       <DependentUpon>StartPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Installer\UI\InstallPage.cs">
+    <Compile Include="Package\InstallerUI\InstallPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Installer\UI\InstallPage.Designer.cs">
+    <Compile Include="Package\InstallerUI\InstallPage.Designer.cs">
       <DependentUpon>InstallPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Installer\UI\UninstallPage.cs">
+    <Compile Include="Package\InstallerUI\UninstallPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Installer\UI\UninstallPage.Designer.cs">
+    <Compile Include="Package\InstallerUI\UninstallPage.Designer.cs">
       <DependentUpon>UninstallPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Installer\InstallerLog.cs" />
-    <Compile Include="Installer\InstallerCreator.cs" />
+    <Compile Include="Package\InstallerLog.cs" />
+    <Compile Include="Package\InstallerCreator.cs" />
     <Compile Include="DevCenter\Forms\ManifestForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -192,10 +192,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Repository\JsonFileHandler.cs" />
+    <Compile Include="Utils\JsonFileHandler.cs" />
     <Compile Include="Repository\ScriptManifest.cs" />
     <Compile Include="Repository\ScriptManifestReferenceConverter.cs" />
-    <Compile Include="Repository\ScriptPackage.cs" />
+    <Compile Include="Package\ScriptPackage.cs" />
     <Compile Include="Repository\ScriptRepository.cs" />
     <Compile Include="Repository\ScriptRepositoryList.cs" />
     <Compile Include="Repository\ScriptVersion.cs" />
@@ -254,19 +254,19 @@
     <EmbeddedResource Include="Controls\InstalledPage.resx">
       <DependentUpon>InstalledPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\UI\InstallerDialog.resx">
+    <EmbeddedResource Include="Package\InstallerUI\InstallerDialog.resx">
       <DependentUpon>InstallerDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\UI\StartPage.resx">
+    <EmbeddedResource Include="Package\InstallerUI\StartPage.resx">
       <DependentUpon>StartPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\UI\InstallPage.resx">
+    <EmbeddedResource Include="Package\InstallerUI\InstallPage.resx">
       <DependentUpon>InstallPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\UI\UninstallPage.resx">
+    <EmbeddedResource Include="Package\InstallerUI\UninstallPage.resx">
       <DependentUpon>UninstallPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Installer\InstallerResources.resx">
+    <EmbeddedResource Include="Package\InstallerResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>InstallerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

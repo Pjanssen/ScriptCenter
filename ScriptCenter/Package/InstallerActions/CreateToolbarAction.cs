@@ -22,7 +22,7 @@ using Newtonsoft.Json;
 using ScriptCenter.Max;
 using System.ComponentModel;
 
-namespace ScriptCenter.Installer.Actions
+namespace ScriptCenter.Package.InstallerActions
 {
     public class CreateToolbarAction : InstallerAction
     {

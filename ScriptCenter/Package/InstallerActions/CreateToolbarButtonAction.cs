@@ -23,7 +23,7 @@ using System.Xml.Serialization;
 using ScriptCenter.Max;
 using System.ComponentModel;
 
-namespace ScriptCenter.Installer.Actions
+namespace ScriptCenter.Package.InstallerActions
 {
     /// <summary>
     /// Creates an item on a toolbar.

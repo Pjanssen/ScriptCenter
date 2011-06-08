@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace ScriptCenter.Installer
+namespace ScriptCenter.Package
 {
     public class InstallerLog
     {

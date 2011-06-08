@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.ComponentModel;
-using ScriptCenter.Installer;
+using ScriptCenter.Package;
 using ScriptCenter.Utils;
+using ScriptCenter.Repository;
 
-namespace ScriptCenter.Repository
+namespace ScriptCenter.Package
 {
     public class ScriptPackage : INotifyPropertyChanged
     {

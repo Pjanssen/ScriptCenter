@@ -142,7 +142,7 @@
             // 
             // scriptPackageBindingSource
             // 
-            this.scriptPackageBindingSource.DataSource = typeof(ScriptCenter.Repository.ScriptPackage);
+            this.scriptPackageBindingSource.DataSource = typeof(ScriptCenter.Package.ScriptPackage);
             // 
             // folderBrowserDialog
             // 

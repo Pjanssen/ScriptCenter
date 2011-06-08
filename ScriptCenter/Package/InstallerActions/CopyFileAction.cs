@@ -24,7 +24,7 @@ using System.IO;
 using Newtonsoft.Json;
 using ScriptCenter.Utils;
 
-namespace ScriptCenter.Installer.Actions
+namespace ScriptCenter.Package.InstallerActions
 {
 /// <summary>
 /// Copies a single file to the specified target directory.

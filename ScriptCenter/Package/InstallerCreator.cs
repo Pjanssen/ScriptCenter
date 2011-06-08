@@ -21,11 +21,11 @@ using System.Text;
 using Ionic.Zip;
 using System.IO;
 using ScriptCenter.Repository;
-using ScriptCenter.Installer.UI;
+using ScriptCenter.Package.InstallerUI;
 using System.Text.RegularExpressions;
-using ScriptCenter.Installer.Actions;
+using ScriptCenter.Package.InstallerActions;
 
-namespace ScriptCenter.Installer
+namespace ScriptCenter.Package
 {
     public class InstallerCreator
     {

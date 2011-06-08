@@ -1,6 +1,7 @@
 ﻿using ScriptCenter.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using ScriptCenter.Utils;
 
 namespace ScriptCenterTest.Repository
 {

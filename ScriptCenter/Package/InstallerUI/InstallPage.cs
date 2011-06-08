@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using ScriptCenter.Controls;
 using ScriptCenter.Repository;
 
-namespace ScriptCenter.Installer.UI
+namespace ScriptCenter.Package.InstallerUI
 {
     public partial class InstallPage : WizardPage
     {

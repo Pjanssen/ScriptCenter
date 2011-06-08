@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using ScriptCenter.Installer;
+using ScriptCenter.Package;
 using ScriptCenter.Repository;
+using ScriptCenter.Package;
 
 namespace ScriptCenter.DevCenter.Forms
 {

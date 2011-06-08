@@ -24,7 +24,7 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 using ScriptCenter.Utils;
 
-namespace ScriptCenter.Installer.Actions
+namespace ScriptCenter.Package.InstallerActions
 {
 /// <summary>
 /// Copies the contents of a directory to the specified target directory, including all files and subdirectories.

@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
-using ScriptCenter.Installer.Actions;
-using ScriptCenter.Installer;
+using ScriptCenter.Package.InstallerActions;
+using ScriptCenter.Package;
 using ScriptCenter.Repository;
 using ScriptCenter.Controls;
+using ScriptCenter.Package;
 
 namespace ScriptCenter.DevCenter.Forms
 {

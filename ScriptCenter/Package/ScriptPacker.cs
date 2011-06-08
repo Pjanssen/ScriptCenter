@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Ionic.Zip;
+using ScriptCenter.Utils;
+using ScriptCenter.Repository;
 
-namespace ScriptCenter.Repository
+namespace ScriptCenter.Package
 {
     public static class ScriptPacker
     {
@@ -24,10 +26,18 @@ namespace ScriptCenter.Repository
 
         private static Boolean writeManifest(ScriptManifest manifest, String file)
         {
+            //Copy manifest and replace manifest tokens before writing.
+            ScriptManifest manifestCopy = manifest.Copy();
+            foreach (ScriptVersion v in manifestCopy.Versions)
+            {
+                v.ScriptPath = ScriptManifestTokens.Replace(v.ScriptPath, manifestCopy);
+            }
+
+            //Write manifest.
             try
             {
                 JsonFileHandler<ScriptManifest> handler = new JsonFileHandler<ScriptManifest>();
-                handler.Write(file, manifest);
+                handler.Write(file, manifestCopy);
             }
             catch 
             {

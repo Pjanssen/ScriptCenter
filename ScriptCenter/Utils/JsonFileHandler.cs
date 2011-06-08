@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Net;
 
-namespace ScriptCenter.Repository
+namespace ScriptCenter.Utils
 {
     /// <summary>
     /// A generic file handler class to read and write JSON files.

@@ -23,7 +23,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.ComponentModel;
 
-namespace ScriptCenter.Installer.Actions
+namespace ScriptCenter.Package.InstallerActions
 {
     /// <summary>
     /// Runs a maxscript file. The script to run should return true upon success, false upon failure.

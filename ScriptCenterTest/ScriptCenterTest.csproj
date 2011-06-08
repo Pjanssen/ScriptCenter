@@ -67,7 +67,7 @@
     <Compile Include="Repository\ScriptPackageTest.cs" />
     <Compile Include="Repository\ScriptManifestTokensTest.cs" />
     <Compile Include="Utils\ObjectSetDefaultValuesTest.cs" />
-    <Compile Include="Repository\JsonFileHandlerTest.cs" />
+    <Compile Include="Utils\JsonFileHandlerTest.cs" />
     <Compile Include="Installer\InstallerConfigurationTest.cs" />
     <Compile Include="Max\KbdFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

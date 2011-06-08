@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing.Design;
 using System.Windows.Forms;
 using System.ComponentModel;
-using ScriptCenter.Installer.Actions;
+using ScriptCenter.Package.InstallerActions;
 using ScriptCenter.Utils;
 using ScriptCenter.Repository;
 

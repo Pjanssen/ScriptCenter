@@ -19,9 +19,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ScriptCenter.Repository;
-using ScriptCenter.Installer.Actions;
+using ScriptCenter.Package.InstallerActions;
+using ScriptCenter.Utils;
 
-namespace ScriptCenter.Installer
+namespace ScriptCenter.Package
 {
     public class Installer
     {

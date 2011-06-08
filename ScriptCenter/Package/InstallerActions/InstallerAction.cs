@@ -22,7 +22,7 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 using ScriptCenter.Utils;
 
-namespace ScriptCenter.Installer.Actions
+namespace ScriptCenter.Package.InstallerActions
 {
     /// <summary>
     /// Abstract base class for installer actions.

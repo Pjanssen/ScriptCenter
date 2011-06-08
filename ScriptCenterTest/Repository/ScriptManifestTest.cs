@@ -1,6 +1,7 @@
 ﻿using ScriptCenter.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using ScriptCenter.Utils;
 
 namespace ScriptCenterTest.Repository
 {
@@ -102,10 +103,35 @@ namespace ScriptCenterTest.Repository
         }
 
         [TestMethod]
-        public void ScriptVersionCloneTest()
+        public void ManifestCopyTest()
+        {
+            ScriptManifest newManifest = (ScriptManifest)manifest.Copy();
+            Assert.IsNotNull(newManifest, "Cloned manifest should not be null");
+            Assert.AreEqual(manifest.Id, newManifest.Id, "New manifest has same id.");
+            Assert.AreEqual(manifest.Name, newManifest.Name, "New manifest has same name.");
+            Assert.AreEqual(manifest.Author, newManifest.Author, "New manifest has same author.");
+            Assert.AreEqual(manifest.Metadata.Count, newManifest.Metadata.Count, "New manifest has same amount of metadata.");
+            Assert.AreEqual(manifest.Versions.Count, newManifest.Versions.Count, "New manifest has same number of versions.");
+            Assert.AreEqual(manifest.Versions[0].VersionNumber, newManifest.Versions[0].VersionNumber, "New manifest has same version[0].");
+            newManifest.Id = "henk";
+            newManifest.Name = "Test";
+            newManifest.Author = "Jonathan";
+            newManifest.Metadata.Add("test", "value");
+            newManifest.Versions.Add(new ScriptVersion());
+            newManifest.LatestVersion.VersionNumber.Major = 10;
+            Assert.AreNotEqual(newManifest.Id, manifest.Id, "Old manifest should not change when changing new Id.");
+            Assert.AreNotEqual(newManifest.Name, manifest.Name, "Old manifest should not change when changing new Name.");
+            Assert.AreNotEqual(newManifest.Author, manifest.Author, "Old manifest should not change when changing new Author.");
+            Assert.AreNotEqual(newManifest.Metadata.Count, manifest.Metadata.Count, "Old manifest should not change when changing new Metadata.");
+            Assert.AreNotEqual(newManifest.Versions.Count, manifest.Versions.Count, "Old manifest should not change when adding new Version.");
+            Assert.AreNotEqual(newManifest.LatestVersion, manifest.LatestVersion, "Old manifest should not change when changing latestVersion.");
+        }
+
+        [TestMethod]
+        public void ScriptVersionCopyTest()
         {
             ScriptVersion version = new ScriptVersion(2, 1, 3, ScriptReleaseStage.Alpha);
-            ScriptVersion newVersion = (ScriptVersion)version.Clone();
+            ScriptVersion newVersion = (ScriptVersion)version.Copy();
             Assert.AreEqual(version.VersionNumber, newVersion.VersionNumber, "Version numbers are equal");
             Assert.AreEqual(version.Minimal3dsmaxVersion, newVersion.Minimal3dsmaxVersion, "Min 3dsmax are equal");
             Assert.AreEqual(version.Maximum3dsmaxVersion, newVersion.Maximum3dsmaxVersion, "Max 3dsmax are equal");

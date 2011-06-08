@@ -10,7 +10,7 @@ using ScriptCenter.Controls;
 using ScriptCenter.Repository;
 using ScriptCenter.Utils;
 
-namespace ScriptCenter.Installer.UI
+namespace ScriptCenter.Package.InstallerUI
 {
     public partial class StartPage : WizardPage
     {

@@ -5,13 +5,15 @@ using System.Text;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace ScriptCenter.Repository
 {
     /// <summary>
     /// The ScriptVersion class contains the version number, the path to the script and its requirements.
     /// </summary>
-    public class ScriptVersion : ICloneable
+    [Serializable]
+    public class ScriptVersion
     {
         [JsonProperty("version")]
         [DisplayName("Version")]
@@ -49,22 +51,23 @@ namespace ScriptCenter.Repository
             this.Minimal3dsmaxVersion = 0;
             this.Maximum3dsmaxVersion = 0;
         }
-        public ScriptVersion(ScriptVersion source)
-        {
-            this.VersionNumber = new ScriptVersionNumber(source.VersionNumber.Major, source.VersionNumber.Minor, source.VersionNumber.Revision, source.VersionNumber.ReleaseStage);
-            this.ScriptPath = source.ScriptPath;
-            this.Minimal3dsmaxVersion = source.Minimal3dsmaxVersion;
-            this.Maximum3dsmaxVersion = source.Maximum3dsmaxVersion;
-        }
         
-        public object Clone()
+        /// <summary>
+        /// Creates a deep-copy of the ScriptVersion object.
+        /// </summary>
+        public ScriptVersion Copy()
         {
-            return new ScriptVersion(this);
+            BinaryFormatter formatter = new BinaryFormatter();
+            System.IO.MemoryStream memStream = new System.IO.MemoryStream();
+            formatter.Serialize(memStream, this);
+            memStream.Position = 0;
+            return (ScriptVersion)formatter.Deserialize(memStream);
         }
     }
 
 
 
+    [Serializable]
     [TypeConverter(typeof(ScriptVersionConverter))]
     public class ScriptVersionNumber : INotifyPropertyChanged, IComparable<ScriptVersionNumber>
     {

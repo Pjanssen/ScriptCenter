@@ -8,7 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using ScriptCenter.DevCenter.Forms;
 using ScriptCenter.Repository;
-using ScriptCenter.Installer;
+using ScriptCenter.Package;
+using ScriptCenter.Utils;
+using ScriptCenter.Package;
 
 namespace ScriptCenter.DevCenter
 {
@@ -227,7 +229,9 @@ public partial class DevCenter : Form
         this.switchNewButtonImageText(sender, newPackageButton_Click);
 
         ScriptPackage p = new ScriptPackage("New Package");
-        p.Manifest.Versions.Add(new ScriptVersion());
+        ScriptVersion v = new ScriptVersion();
+        v.ScriptPath = p.PackageFile.RelativePathComponent;
+        p.Manifest.Versions.Add(v);
         TreeNode tn = addPackageToTree(p, String.Empty);
         tn.Expand();
         this.filesTree.SelectedNode = tn;

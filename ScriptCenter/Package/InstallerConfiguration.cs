@@ -22,10 +22,11 @@ using System.Xml.Serialization;
 using System.ComponentModel;
 using ScriptCenter.Repository;
 using System.Windows.Forms;
-using ScriptCenter.Installer.Actions;
+using ScriptCenter.Package.InstallerActions;
 using Newtonsoft.Json;
+using ScriptCenter.Package;
 
-namespace ScriptCenter.Installer
+namespace ScriptCenter.Package
 {
     /// <summary>
     /// Container for installer actions.

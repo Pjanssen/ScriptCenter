@@ -6,8 +6,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScriptCenter.Repository;
 using Newtonsoft.Json;
 using System.Threading;
+using ScriptCenter.Utils;
 
-namespace ScriptCenterTest.Repository
+namespace ScriptCenterTest.Utils
 {
     [TestClass]
     public class JsonFileHandlerTest

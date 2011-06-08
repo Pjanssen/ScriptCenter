@@ -86,7 +86,7 @@ namespace ScriptCenter.DevCenter.Forms
             ScriptVersion version = null;
             if (manifest.LatestVersion != null)
             {
-                version = (ScriptVersion)manifest.LatestVersion.Clone();
+                version = manifest.LatestVersion.Copy();
                 version.VersionNumber.Minor += 1;
             }
             else

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScriptCenter.Installer {
+namespace ScriptCenter.Package {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ScriptCenter.Installer {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScriptCenter.Installer.InstallerResources", typeof(InstallerResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScriptCenter.Package.InstallerResources", typeof(InstallerResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -21,48 +21,51 @@ using System.Text;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.ComponentModel;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace ScriptCenter.Repository
 {
     /// <summary>
     /// The ScriptManifest contains information about a script and its versions.
     /// </summary>
+    [Serializable]
     public class ScriptManifest : INotifyPropertyChanged
     {
         public const String DefaultExtension = ".scmanif";
 
-        private String id;
+        private String _id;
+        private String _name;
+        private String _author;
+
         [JsonProperty("id")]
         public String Id 
         {
-            get { return this.id; }
+            get { return this._id; }
             set
             {
-                this.id = value;
+                this._id = value;
                 this.OnPropertyChanged(new PropertyChangedEventArgs("Id"));
             }
         }
 
-        private String name;
         [JsonProperty("name")]
         public String Name 
         {
-            get { return this.name; }
+            get { return this._name; }
             set
             {
-                this.name = value;
+                this._name = value;
                 this.OnPropertyChanged(new PropertyChangedEventArgs("Name"));
             }
         }
-
-        private String author;
+        
         [JsonProperty("author")]
         public String Author 
         {
-            get { return this.author; }
+            get { return this._author; }
             set
             {
-                this.author = value;
+                this._author = value;
                 this.OnPropertyChanged(new PropertyChangedEventArgs("Author"));
             }
         }
@@ -115,5 +118,18 @@ namespace ScriptCenter.Repository
         }
 
         #endregion
+
+        
+        /// <summary>
+        /// Creates a deep-copy of the ScriptManifest object.
+        /// </summary>
+        public ScriptManifest Copy()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            System.IO.MemoryStream memStream = new System.IO.MemoryStream();
+            formatter.Serialize(memStream, this);
+            memStream.Position = 0;
+            return (ScriptManifest)formatter.Deserialize(memStream);
+        }
     }
 }

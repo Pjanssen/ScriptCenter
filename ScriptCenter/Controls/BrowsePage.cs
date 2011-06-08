@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ScriptCenter.Repository;
-using ScriptCenter.Installer;
-using ScriptCenter.Installer.Actions;
-using ScriptCenter.Installer.UI;
+using ScriptCenter.Package;
+using ScriptCenter.Package.InstallerActions;
+using ScriptCenter.Package.InstallerUI;
 using ScriptCenter.Utils;
 
 namespace ScriptCenter.Controls
@@ -193,10 +193,10 @@ namespace ScriptCenter.Controls
             JsonFileHandler<InstallerConfiguration> configHandler = new JsonFileHandler<InstallerConfiguration>();
             InstallerConfiguration config = configHandler.Read("C:/temp/scriptcenter/unpacked_installer/config.installer.xml");
 
-            Installer.Installer installer = new Installer.Installer("C:/temp/scriptcenter/unpacked_installer", manifest, config);
+            Package.Installer installer = new Package.Installer("C:/temp/scriptcenter/unpacked_installer", manifest, config);
             InstallerUIConfiguration uiConfig = new InstallerUIConfiguration();
 
-            ScriptCenter.Installer.UI.InstallerDialog d = new ScriptCenter.Installer.UI.InstallerDialog(installer, uiConfig);
+            ScriptCenter.Package.InstallerUI.InstallerDialog d = new ScriptCenter.Package.InstallerUI.InstallerDialog(installer, uiConfig);
             d.Show();
         }
 
