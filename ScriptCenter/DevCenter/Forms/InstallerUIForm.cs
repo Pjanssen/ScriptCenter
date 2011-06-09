@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.IO;
 using ScriptCenter.Package;
 using ScriptCenter.Repository;
-using ScriptCenter.Package;
 
 namespace ScriptCenter.DevCenter.Forms
 {

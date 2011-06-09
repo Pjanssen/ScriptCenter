@@ -65,6 +65,7 @@
     <Compile Include="DevCenter\Forms\PackageRootPathWarning.Designer.cs">
       <DependentUpon>PackageRootPathWarning.cs</DependentUpon>
     </Compile>
+    <Compile Include="Package\InstallerLog.cs" />
     <Compile Include="Package\ScriptPacker.cs" />
     <Compile Include="SCResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -165,7 +166,6 @@
     <Compile Include="Package\InstallerUI\UninstallPage.Designer.cs">
       <DependentUpon>UninstallPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Package\InstallerLog.cs" />
     <Compile Include="Package\InstallerCreator.cs" />
     <Compile Include="DevCenter\Forms\ManifestForm.cs">
       <SubType>UserControl</SubType>

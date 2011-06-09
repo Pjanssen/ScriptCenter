@@ -22,45 +22,101 @@ using System.IO;
 
 namespace ScriptCenter.Package
 {
-    public class InstallerLog
+    public static class InstallerLog
     {
-        private String logFile;
-        public InstallerLog(String file)
+        public const string DefaultLineFormat = "{0}";
+        public const string TimeStampedLineFormat = "{1} | {0}";
+
+        private static Dictionary<TextWriter, String> _writers = new Dictionary<TextWriter,String>();
+        
+        /// <summary>
+        /// Adds a TextWriter to the log using the default line formatting.
+        /// </summary>
+        /// <param name="writer">The TextWriter to add.</param>
+        public static void AddWriter(TextWriter writer)
         {
-            logFile = file;
+            InstallerLog.AddWriter(writer, InstallerLog.DefaultLineFormat);
+        }
+        /// <summary>
+        /// Adds a TextWriter to the log.
+        /// </summary>
+        /// <param name="stream">The TextWriter to add.</param>
+        /// <param name="lineFormat">The line formatting string to use when writing to the stream.</param>
+        public static void AddWriter(TextWriter writer, String lineFormat)
+        {
+            if (!InstallerLog._writers.ContainsKey(writer))
+                InstallerLog._writers.Add(writer, lineFormat);
         }
 
-        public void Clear()
+        /// <summary>
+        /// Removes a writer from the log and closes it.
+        /// </summary>
+        public static void RemoveWriter(TextWriter writer)
         {
-            try
-            {
-                File.Create(logFile);
-            }
-            catch { }
+            InstallerLog.RemoveWriter(writer, true);
+        }
+        /// <summary>
+        /// Removes a writer from the log.
+        /// </summary>
+        public static void RemoveWriter(TextWriter writer, Boolean close)
+        {
+            if (close)
+                writer.Dispose();
+
+            InstallerLog._writers.Remove(writer);
         }
 
-        public void Append(String message)
+        /// <summary>
+        /// Removes all writers from the log.
+        /// </summary>
+        public static void RemoveAllWriters()
         {
-            try
+            InstallerLog.RemoveAllWriters(true);
+        }
+        /// <summary>
+        /// Removes all writers from the log.
+        /// </summary>
+        public static void RemoveAllWriters(Boolean close)
+        {
+            if (close)
             {
-                File.AppendAllText(logFile, String.Format(("{0} | {1}" + Environment.NewLine), DateTime.Now, message));
+                foreach (KeyValuePair<TextWriter, String> writer in InstallerLog._writers)
+                    writer.Key.Dispose();
             }
-            catch { }
+
+            InstallerLog._writers.Clear();
         }
 
-        public void Append(String message, Int32 numBlankLines)
+        /// <summary>
+        /// Writes an object to all registered output streams.
+        /// </summary>
+        /// <param name="str">The String to write.</param>
+        public static void Write(Object value)
         {
-            try
+            foreach (KeyValuePair<TextWriter, String> writer in InstallerLog._writers)
             {
-                String lines = "";
-                for (int i = 0; i < numBlankLines; i++)
-                    lines += Environment.NewLine;
-
-                File.AppendAllText(logFile, lines);
+                try
+                {
+                    writer.Key.Write(value.ToString());
+                }
+                catch { }
             }
-            catch { }
+        }
 
-            this.Append(message);
+        /// <summary>
+        /// Writes a line to all registered output streams using the associated line formatting.
+        /// </summary>
+        /// <param name="value">The line to write.</param>
+        public static void WriteLine(Object value)
+        {
+            foreach (KeyValuePair<TextWriter, String> writer in InstallerLog._writers)
+            {
+                try
+                {
+                    writer.Key.WriteLine(writer.Value, value.ToString(), DateTime.Now.ToString());
+                }
+                catch { }
+            }
         }
     }
 }

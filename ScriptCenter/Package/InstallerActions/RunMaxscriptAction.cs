@@ -58,14 +58,13 @@ namespace ScriptCenter.Package.InstallerActions
                 {
                     String script = sr.ReadToEnd();
                     Boolean scriptResult = ManagedServices.MaxscriptSDK.ExecuteBooleanMaxscriptQuery(script);
-                    installer.Log.Append("RunMaxscript returned " + scriptResult.ToString());
+                    InstallerLog.WriteLine("RunMaxscript returned " + scriptResult.ToString());
                     return scriptResult;
                 }
             }
             catch (Exception e)
             {
                 installer.InstallerException = e;
-                installer.Log.Append(e.Message);
                 return false;
             }
         }

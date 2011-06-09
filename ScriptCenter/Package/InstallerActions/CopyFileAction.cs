@@ -90,7 +90,7 @@ public class CopyFileAction : InstallerAction
             if (!targetFileInfo.Directory.Exists)
             {
                 targetFileInfo.Directory.Create();
-                installer.Log.Append("Created directory " + targetFileInfo.DirectoryName);
+                InstallerLog.WriteLine("Created directory " + targetFileInfo.DirectoryName);
             }
 
             File.Copy(sourceFile, targetFile, true);
@@ -98,7 +98,7 @@ public class CopyFileAction : InstallerAction
             if (this.Target == AppPaths.Directory.MacroScripts)
                 ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
 
-            installer.Log.Append("Copied file " + targetFile);
+            InstallerLog.WriteLine("Copied file " + targetFile);
         }
         catch (Exception e)
         {

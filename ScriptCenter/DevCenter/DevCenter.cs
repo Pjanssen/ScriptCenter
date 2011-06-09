@@ -10,7 +10,6 @@ using ScriptCenter.DevCenter.Forms;
 using ScriptCenter.Repository;
 using ScriptCenter.Package;
 using ScriptCenter.Utils;
-using ScriptCenter.Package;
 
 namespace ScriptCenter.DevCenter
 {

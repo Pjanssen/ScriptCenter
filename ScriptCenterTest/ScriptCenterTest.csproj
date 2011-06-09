@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Max\CuiFileTest.cs" />
+    <Compile Include="Package\InstallerLogTest.cs" />
     <Compile Include="Package\ScriptPackageTest.cs" />
     <Compile Include="Repository\ScriptManifestTokensTest.cs" />
     <Compile Include="Utils\ObjectSetDefaultValuesTest.cs" />

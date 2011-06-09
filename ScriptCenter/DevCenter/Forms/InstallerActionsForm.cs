@@ -11,7 +11,6 @@ using ScriptCenter.Package.InstallerActions;
 using ScriptCenter.Package;
 using ScriptCenter.Repository;
 using ScriptCenter.Controls;
-using ScriptCenter.Package;
 
 namespace ScriptCenter.DevCenter.Forms
 {

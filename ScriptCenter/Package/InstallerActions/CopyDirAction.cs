@@ -111,12 +111,11 @@ public class CopyDirAction : InstallerAction
                     ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
             }
 
-            installer.Log.Append("Copied directory " + targetPath);
+            InstallerLog.WriteLine("Copied directory " + targetPath);
         }
         catch (Exception e)
         {
             installer.InstallerException = e;
-            installer.Log.Append(e.Message);
             return false;
         }
 
@@ -137,13 +136,12 @@ public class CopyDirAction : InstallerAction
             if (Directory.Exists(targetPath))
             {
                 Directory.Delete(targetPath, true);
-                installer.Log.Append("Deleted directory " + targetPath);
+                InstallerLog.WriteLine("Deleted directory " + targetPath);
             }
         }
         catch (Exception e)
         {
             installer.InstallerException = e;
-            installer.Log.Append(e.Message);
             return false;
         }
 

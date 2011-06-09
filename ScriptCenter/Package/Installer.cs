@@ -21,6 +21,7 @@ using System.Text;
 using ScriptCenter.Repository;
 using ScriptCenter.Package.InstallerActions;
 using ScriptCenter.Utils;
+using System.IO;
 
 namespace ScriptCenter.Package
 {
@@ -28,23 +29,32 @@ namespace ScriptCenter.Package
     {
         public String InstallerDirectory { get; private set; }
         public String ResourcesDirectory { get; private set; }
-        public Exception InstallerException { get; internal set; }
+
+        private Exception installerException;
+        public Exception InstallerException 
+        {
+            get { return this.installerException; }
+            internal set
+            {
+                this.installerException = value;
+                if (installerException != null)
+                    InstallerLog.WriteLine(this.installerException.Message);
+            }
+        }
 
         public ScriptManifest Manifest { get; private set; }
         public InstallerConfiguration Configuration { get; private set; }
-        public InstallerLog Log { get; private set; }
 
-        private Installer() 
-        {
-            this.Log = new InstallerLog("C:/temp/scriptcenter/installer_log.txt"); //TODO: set correct path
-        }
-        public Installer(String installerDirectory, ScriptManifest manifest, InstallerConfiguration config) : this() 
+        private FileStream logStream;
+        private StreamWriter logStreamWriter;
+
+        public Installer(String installerDirectory, ScriptManifest manifest, InstallerConfiguration config)
         {
             this.InstallerDirectory = installerDirectory;
             this.Manifest = manifest;
             this.Configuration = config;
         }
-        public Installer(String installerDirectory, String manifestFile, String configFile) : this() 
+        public Installer(String installerDirectory, String manifestFile, String configFile)
         {
             this.InstallerDirectory = installerDirectory;
             this.ResourcesDirectory = this.InstallerDirectory + "\\resources\\";
@@ -55,6 +65,20 @@ namespace ScriptCenter.Package
             this.Configuration = configHandler.Read(configFile);
         }
 
+        private void addLogStream()
+        {
+            //TODO: set correct log path
+            this.logStream = new FileStream("C:/temp/scriptcenter/installer.log", FileMode.OpenOrCreate);
+            this.logStreamWriter = new StreamWriter(this.logStream);
+            InstallerLog.AddWriter(this.logStreamWriter, InstallerLog.TimeStampedLineFormat);
+        }
+
+        private void removeLogStream()
+        {
+            InstallerLog.RemoveWriter(this.logStreamWriter);
+            this.logStreamWriter.Dispose();
+        }
+
         /// <summary>
         /// Installs the script.
         /// </summary>
@@ -63,7 +87,10 @@ namespace ScriptCenter.Package
         {
             Boolean success = true;
 
-            this.Log.Append("Installing " + this.Manifest.Id, 1);
+            this.addLogStream();
+
+            InstallerLog.WriteLine("Installing " + this.Manifest.Id);
+            InstallerLog.WriteLine("---------------------");
 
             Int32 i = 0;
             float numActions = (float)this.Configuration.Actions.Count; //type is float to avoid having to cast it each time when calculating progress.
@@ -80,16 +107,19 @@ namespace ScriptCenter.Package
                 this.OnProgress(new InstallerProgressEventArgs((int)(i / numActions) * 100));
             }
 
+            InstallerLog.WriteLine("---------------------");
             if (success)
             {
-                this.Log.Append("Finished installing " + this.Manifest.Id);
+                InstallerLog.WriteLine("Installation successful");
                 this.OnCompleted(new EventArgs());
             }
             else
             {
-                this.Log.Append("Failed to install " + this.Manifest.Id);
+                InstallerLog.WriteLine("Installation failed");
                 this.OnFailed(new EventArgs());
             }
+            InstallerLog.WriteLine("");
+            this.removeLogStream();
 
             return success;
         }
@@ -103,7 +133,9 @@ namespace ScriptCenter.Package
         {
             Boolean success = true;
 
-            this.Log.Append("Uninstalling " + this.Manifest.Id, 1);
+            this.addLogStream();
+            InstallerLog.WriteLine("Installing " + this.Manifest.Id);
+            InstallerLog.WriteLine("---------------------");
 
             Int32 i = 0;
             float numActions = (float)this.Configuration.Actions.Count; //type is float to avoid having to cast it each time when calculating progress.
@@ -119,16 +151,19 @@ namespace ScriptCenter.Package
                 this.OnProgress(new InstallerProgressEventArgs((int)(i / numActions) * 100));
             }
 
+            InstallerLog.WriteLine("---------------------");
             if (success)
             {
-                this.Log.Append("Finished uninstalling " + this.Manifest.Id);
+                InstallerLog.WriteLine("Uninstallation successful");
                 this.OnCompleted(new EventArgs());
             }
             else
             {
-                this.Log.Append("Failed to uninstall " + this.Manifest.Id);
+                InstallerLog.WriteLine("Uninstallation failed");
                 this.OnFailed(new EventArgs());
             }
+            InstallerLog.WriteLine("");
+            this.removeLogStream();
 
             return success;
         }
