@@ -88,7 +88,9 @@ namespace ScriptCenter.DevCenter.Forms
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                String path = folderBrowserDialog.SelectedPath.Replace('\\', '/') + "/";
+                String path = folderBrowserDialog.SelectedPath.Replace('\\', '/');
+                if (!path.EndsWith("/"))
+                    path += "/";
                 package.RootPath = new BasePath(path);
             }
         }
