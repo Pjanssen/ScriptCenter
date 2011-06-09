@@ -63,6 +63,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\TextBoxStreamWriterTest.cs" />
     <Compile Include="Max\CuiFileTest.cs" />
     <Compile Include="Package\InstallerLogTest.cs" />
     <Compile Include="Package\ScriptPackageTest.cs" />
