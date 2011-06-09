@@ -1,7 +1,7 @@
 ﻿- Consider changing Do/Undo methods on InstallerAction to Install/Uninstall/Update.
 - BUG: When selecting C:/, path ends up with // at the end.
-- BUG: Cannot click "export" when manifest in package is selected.
 - Move manifest tokens replace to basepath?
+- Add SCVersion to manifest, repo, etc.
 
 - Refactoring CuiFile and KbdFile unit tests to use streams.
 - Check if CuiFile, KbdFile should flush buffers

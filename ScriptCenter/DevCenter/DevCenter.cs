@@ -39,9 +39,20 @@ public partial class DevCenter : Form
 
         this.setSectionPanel(e.Node.Text, e.Node.ImageKey, form);
 
-        this.exportButton.Enabled = data.Data is ScriptPackage;
+        TreeNode rootNode = this.getRootNode(e.Node);
+        this.exportButton.Enabled = (rootNode != null && rootNode.Tag is TreeNodeData && ((TreeNodeData)rootNode.Tag).Data is ScriptPackage);
     }
+    private TreeNode getRootNode(TreeNode treeNode)
+    {
+        if (treeNode == null)
+            return null;
 
+        TreeNode rootNode = treeNode;
+        while (rootNode.Parent != null)
+            rootNode = rootNode.Parent;
+
+        return rootNode;
+    }
 
     private void setSectionPanel(String title, String imageKey, Control c)
     {
@@ -194,7 +205,15 @@ public partial class DevCenter : Form
         else if (data.Data is ScriptRepository)
             this.writeRepository(filePath, (ScriptRepository)data.Data);
     }
-
+    private void exportButton_Click(object sender, EventArgs e)
+    {
+        TreeNode rootNode = this.getRootNode(this.filesTree.SelectedNode);
+        if (rootNode != null && rootNode.Tag is TreeNodeData && ((TreeNodeData)rootNode.Tag).Data is ScriptPackage)
+        {
+            if (ScriptPacker.Pack((ScriptPackage)((TreeNodeData)rootNode.Tag).Data))
+                MessageBox.Show("Package export successful.", "Package Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    }
 
     private void switchNewButtonImageText(object sender, ClickHandler handler)
     {
@@ -329,18 +348,7 @@ public partial class DevCenter : Form
             e.Graphics.DrawRectangle(SystemPens.ControlDark, new Rectangle(c.Location.X - 1, c.Location.Y - 1, c.Width + 1, c.Height + 1));
         }
     }
-
-    private void exportButton_Click(object sender, EventArgs e)
-    {
-        TreeNode selNode = this.filesTree.SelectedNode;
-        TreeNode rootNode = selNode;
-        while (rootNode != null && rootNode.Parent != null)
-            rootNode = rootNode.Parent;
-        if (rootNode != null && rootNode.Tag is TreeNodeData && ((TreeNodeData)rootNode.Tag).Data is ScriptPackage)
-        {
-            if (ScriptPacker.Pack((ScriptPackage)((TreeNodeData)rootNode.Tag).Data))
-                MessageBox.Show("Package export successful.", "Package Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-    }
+    
+    
 }
 }
