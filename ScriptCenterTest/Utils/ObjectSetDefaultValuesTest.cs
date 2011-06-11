@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel;
 using ScriptCenter.Utils;
+using System.Reflection;
 
 namespace ScriptCenterTest.Utils
 {
@@ -33,11 +34,14 @@ namespace ScriptCenterTest.Utils
         [TestMethod]
         public void SetDefaultValuesTest()
         {
+            Type extensionType = typeof(ObjectSetDefaultValuesExtension);
+            MethodInfo setDefaultValuesMethod = extensionType.GetMethod("_setDefaultValues", BindingFlags.NonPublic | BindingFlags.Static);
+
             TestClass t = new TestClass();
             Assert.AreEqual(default(Int32), t.anInteger);
             Assert.IsNull(t.aString);
             Assert.IsNull(t.APrivatePropertyAccessor);
-            t.SetDefaultValues();
+            setDefaultValuesMethod.Invoke(null, new object[] { t });
             Assert.AreEqual(2, t.anInteger);
             Assert.AreEqual("StringValue", t.aString);
             Assert.AreEqual("test", t.APrivatePropertyAccessor);

@@ -10,13 +10,14 @@ using ScriptCenter.Utils;
 
 namespace ScriptCenter.Package.InstallerUI
 {
+    //OLD class
     public class InstallerUIConfiguration
     {
         public const String DefaultExtension = ".scinstallerui";
 
         public InstallerUIConfiguration()
         {
-            this.SetDefaultValues();
+            
         }
 
         public static InstallerUIConfiguration FromFile(String file)

@@ -9,7 +9,18 @@ namespace ScriptCenter.Utils
 {
     public static class ObjectSetDefaultValuesExtension
     {
-        public static void SetDefaultValues(this Object obj)
+        public static void SetDefaultValues(this ScriptCenter.Package.ScriptPackage package)
+        {
+            _setDefaultValues(package);
+        }
+
+        public static void SetDefaultValues(this ScriptCenter.Package.InstallerActions.InstallerAction installerAction)
+        {
+            _setDefaultValues(installerAction);
+        }
+
+
+        private static void _setDefaultValues(Object obj)
         {
             Type t = obj.GetType();
             BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
