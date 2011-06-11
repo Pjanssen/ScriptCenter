@@ -107,7 +107,6 @@ namespace ScriptCenter.Package.InstallerActions
             return true;
         }
 
-
         /// <summary>
         /// Remove a button from a toolbar.
         /// </summary>
@@ -128,6 +127,10 @@ namespace ScriptCenter.Package.InstallerActions
             return true;
         }
 
+        public override void PackResources(Ionic.Zip.ZipFile zip, String archiveTargetPath, ScriptCenter.Utils.IPath sourcePath) 
+        {
+            //No resources to pack for this action.
+        }
 
         public override string ActionName { get { return "Create Toolbar Button"; } }
         public override string ActionImageKey { get { return "toolbar_button"; } }

@@ -7,6 +7,9 @@ namespace ScriptCenter.Utils
 {
     internal static class PathHelperMethods
     {
+        public const char SeparatorChar = '/';
+        internal const char ReplaceSeparatorChar = '\\';
+
         /// <summary>
         /// Returns true if the given path is an absolute path (e.g. C:/, or http://).
         /// </summary>
@@ -22,7 +25,6 @@ namespace ScriptCenter.Utils
             else
                 return splitPath[0][splitPath[0].Length - 1] == ':';
         }
-
 
         /// <summary>
         /// Returns true if the given path is a path to a file, otherwise false.
@@ -92,7 +94,6 @@ namespace ScriptCenter.Utils
 
             return newPath.ToString();
         }
-
 
         /// <summary>
         /// Converts a relative path to an absolute path.

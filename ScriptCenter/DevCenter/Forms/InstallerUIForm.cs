@@ -27,7 +27,7 @@ namespace ScriptCenter.DevCenter.Forms
 
             this.package = package;
 
-            if (package.RootPath.Path == String.Empty)
+            if (package.RootPath.AbsolutePath == String.Empty)
             {
                 PackageRootPathWarning w = new PackageRootPathWarning();
                 w.Dock = DockStyle.Fill;

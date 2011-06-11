@@ -6,7 +6,7 @@ using ScriptCenter.Repository;
 
 namespace ScriptCenter.Repository
 {
-    public class ScriptManifestTokens
+    internal static class ScriptManifestTokens
     {
         internal const String Id_Token = "{id}";
         internal const String Name_Token = "{name}";
@@ -18,9 +18,16 @@ namespace ScriptCenter.Repository
         internal const String VersionRevision_Token = "{version_rev}";
         internal const String VersionStage_Token = "{version_stage}";
 
-        internal static String Replace(String str, ScriptManifest manifest)
+        /// <summary>
+        /// Replaces any tokens in the string with values taken from the manifest.
+        /// </summary>
+        /// <param name="str">The string to replace tokens in.</param>
+        /// <param name="manifest">The manifest to take values from.</param>
+        /// <param name="version">The version to use for version-related tokens.</param>
+        /// <returns>Returns the new string.</returns>
+        internal static String Replace(String str, ScriptManifest manifest, ScriptVersion version)
         {
-            if (str == null || manifest == null)
+            if (str == null || manifest == null || version == null)
                 return String.Empty;
 
             StringBuilder newString = new StringBuilder(str);
@@ -28,18 +35,12 @@ namespace ScriptCenter.Repository
             newString.Replace(Id_Token, manifest.Id);
             newString.Replace(Name_Token, manifest.Name);
             newString.Replace(Author_Token, manifest.Author);
-
-            if (manifest.Versions.Count != 0)
-            {
-                ScriptVersion version = manifest.Versions.OrderByDescending(v => v.VersionNumber).First();
-                //TODO: find a solution for getting the actual version, not just the first one.
-                newString.Replace(Version_Token, version.VersionNumber.ToString());
-                newString.Replace(Version_Underscores_Token, version.VersionNumber.ToString(true));
-                newString.Replace(VersionMajor_Token, version.VersionNumber.Major.ToString());
-                newString.Replace(VersionMinor_Token, version.VersionNumber.Minor.ToString());
-                newString.Replace(VersionRevision_Token, version.VersionNumber.Revision.ToString());
-                newString.Replace(VersionStage_Token, version.VersionNumber.ReleaseStage.ToString().ToLower());
-            }
+            newString.Replace(Version_Token, version.VersionNumber.ToString());
+            newString.Replace(Version_Underscores_Token, version.VersionNumber.ToString(true));
+            newString.Replace(VersionMajor_Token, version.VersionNumber.Major.ToString());
+            newString.Replace(VersionMinor_Token, version.VersionNumber.Minor.ToString());
+            newString.Replace(VersionRevision_Token, version.VersionNumber.Revision.ToString());
+            newString.Replace(VersionStage_Token, version.VersionNumber.ReleaseStage.ToString().ToLower());
 
             return newString.ToString();
         }

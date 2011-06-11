@@ -8,6 +8,7 @@ using System.ComponentModel;
 using ScriptCenter.Package.InstallerActions;
 using ScriptCenter.Utils;
 using ScriptCenter.Repository;
+using ScriptCenter.Package;
 
 namespace ScriptCenter.Controls
 {
@@ -17,7 +18,7 @@ namespace ScriptCenter.Controls
         protected virtual void InitializeDialog()
         {
             this.openFileDialog = new OpenFileDialog();
-            this.openFileDialog.Filter = "Maxscript Files (*.ms; *.mcr)|*.ms;*.mcr|All Files (*.*)|*.*";
+            this.openFileDialog.Filter = "Maxscript Files (*.ms; *.mcr; *.mse)|*.ms;*.mcr;*.mse|All Files (*.*)|*.*";
             this.openFileDialog.Title = "Select the file to copy";
         }
 
@@ -32,6 +33,8 @@ namespace ScriptCenter.Controls
                 return value;
 
             InstallerAction action = (InstallerAction)context.Instance;
+            ScriptPackage package = action.Configuration.Package;
+            ScriptManifest manifest = package.Manifest;
 
             if (this.openFileDialog == null)
             {
@@ -42,8 +45,8 @@ namespace ScriptCenter.Controls
             {
                 if (action.Configuration != null && action.Configuration.Package != null)
                 {
-                    RelativePath path = new RelativePath((string)value, action.Configuration.Package.SourcePath);
-                    String pathStr = ScriptManifestTokens.Replace(path.Path, action.Configuration.Package.Manifest);
+                    RelativePath path = new RelativePath((string)value, package.SourcePath);
+                    String pathStr = ScriptManifestTokens.Replace(path.AbsolutePath, manifest, manifest.LatestVersion);
                     if (path.IsFilePath)
                     {
                         this.openFileDialog.FileName = pathStr.Replace('/', '\\');
@@ -62,7 +65,7 @@ namespace ScriptCenter.Controls
             {
                 if (action.Configuration != null && action.Configuration.Package != null)
                 {
-                    String sourcePath = ScriptManifestTokens.Replace(action.Configuration.Package.SourcePath.Path, action.Configuration.Package.Manifest);
+                    String sourcePath = ScriptManifestTokens.Replace(package.SourcePath.AbsolutePath, manifest, manifest.LatestVersion);
                     value = PathHelperMethods.GetRelativePath(this.openFileDialog.FileName, sourcePath);
                 }
                 else

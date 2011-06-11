@@ -152,7 +152,8 @@ namespace ScriptCenterTest.Utils
             SimpleTestObject obj = new SimpleTestObject() { Name = SimpleTestObject.DefaultName, Id = SimpleTestObject.DefaultId };
             try
             {
-                handler.Write(null, obj);
+                String filePath = null;
+                handler.Write(filePath, obj);
                 Assert.Fail("Write null did not throw exception as expected");
             }
             catch (ArgumentNullException e) 

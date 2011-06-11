@@ -129,6 +129,11 @@ public class AssignHotkeyAction : InstallerAction
         return true;
     }
 
+    public override void PackResources(Ionic.Zip.ZipFile zip, String archiveTargetPath, ScriptCenter.Utils.IPath sourcePath)
+    {
+        //No resources to pack for this action.
+    }
+
     public override string ActionName { get { return "Assign Hotkey"; } }
     public override string ActionImageKey { get { return "hotkey"; } }
     public override string ActionDetails

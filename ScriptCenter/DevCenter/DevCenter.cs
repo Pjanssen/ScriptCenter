@@ -172,7 +172,11 @@ public partial class DevCenter : Form
         if (this.filesTree.SelectedNode == null || !(this.filesTree.SelectedNode.Tag is TreeNodeData))
             return;
 
-        TreeNodeData data = (TreeNodeData)this.filesTree.SelectedNode.Tag;
+        TreeNode rootNode = this.getRootNode(this.filesTree.SelectedNode);
+        if (rootNode == null)
+            return;
+
+        TreeNodeData data = (TreeNodeData)rootNode.Tag;
         String filePath = this.Files[data.Data];
         if (filePath == String.Empty)
         {
@@ -270,7 +274,8 @@ public partial class DevCenter : Form
         try
         {
             ScriptManifest manif = handler.Read(file);
-            this.addManifestToTree(manif, file);
+            TreeNode tn = this.addManifestToTree(manif, file);
+            filesTree.SelectedNode = tn;
         }
         catch (Exception exc)
         {
@@ -283,7 +288,8 @@ public partial class DevCenter : Form
         try
         {
             ScriptPackage pack = handler.Read(file);
-            this.addPackageToTree(pack, file);
+            TreeNode tn = this.addPackageToTree(pack, file);
+            filesTree.SelectedNode = tn;
         }
         catch (Exception exc)
         {
@@ -296,7 +302,8 @@ public partial class DevCenter : Form
         try
         {
             ScriptRepository repo = handler.Read(file);
-            this.addRepositoryToTree(repo, file);
+            TreeNode tn = this.addRepositoryToTree(repo, file);
+            filesTree.SelectedNode = tn;
         }
         catch (Exception exc)
         {

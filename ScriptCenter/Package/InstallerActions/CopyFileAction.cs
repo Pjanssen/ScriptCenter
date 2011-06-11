@@ -118,6 +118,11 @@ public class CopyFileAction : InstallerAction
         throw new NotImplementedException();
     }
 
+    public override void PackResources(Ionic.Zip.ZipFile zip, String archiveTargetPath, IPath sourcePath) 
+    {
+        RelativePath path = new RelativePath(this.Source, sourcePath);
+        zip.AddFile(path.AbsolutePath, archiveTargetPath);
+    }
 
     public override string ActionName { get { return "Copy File"; } }
     public override string ActionImageKey { get { return "copy_file"; } }

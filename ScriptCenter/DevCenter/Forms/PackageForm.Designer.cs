@@ -32,6 +32,10 @@
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label6;
             System.Windows.Forms.Label label10;
+            System.Windows.Forms.Label label4;
+            System.Windows.Forms.Label label12;
+            System.Windows.Forms.Label label5;
+            System.Windows.Forms.Label label3;
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.packageNameTextBox = new System.Windows.Forms.TextBox();
             this.scriptPackageBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -48,7 +52,6 @@
             this.sourcePathBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.rootPathBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label4 = new System.Windows.Forms.Label();
             this.browseSourceButton = new System.Windows.Forms.Button();
             this.browseRootButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -59,12 +62,15 @@
             this.helpLabel = new System.Windows.Forms.Label();
             this.packageTextBox = new System.Windows.Forms.TextBox();
             this.packageFileBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label12 = new System.Windows.Forms.Label();
             this.browsePackageButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.exportOptionComboBox = new System.Windows.Forms.ComboBox();
             label1 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label12 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scriptPackageBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -107,6 +113,46 @@
             label10.Size = new System.Drawing.Size(71, 13);
             label10.TabIndex = 47;
             label10.Text = "Output Folder";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(3, 6);
+            label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(62, 13);
+            label4.TabIndex = 3;
+            label4.Text = "Root Folder";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(3, 35);
+            label12.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(69, 13);
+            label12.TabIndex = 21;
+            label12.Text = "Package File";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(3, 64);
+            label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(66, 13);
+            label5.TabIndex = 47;
+            label5.Text = "Manifest File";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(3, 6);
+            label3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(80, 13);
+            label3.TabIndex = 50;
+            label3.Text = "Export Versions";
             // 
             // tableLayoutPanel2
             // 
@@ -179,7 +225,7 @@
             this.tableLayoutPanel1.Controls.Add(this.outputTextBox, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.sourceTextBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBox4, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(label4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(label6, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.browseSourceButton, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.browseRootButton, 2, 0);
@@ -245,7 +291,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.rootPathBindingSource, "Path", true));
+            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.rootPathBindingSource, "AbsolutePath", true));
             this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox4.Location = new System.Drawing.Point(91, 4);
             this.textBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
@@ -257,16 +303,6 @@
             // 
             this.rootPathBindingSource.AllowNew = true;
             this.rootPathBindingSource.DataSource = typeof(ScriptCenter.Utils.BasePath);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 6);
-            this.label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Root Folder";
             // 
             // browseSourceButton
             // 
@@ -297,7 +333,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(3, 169);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(546, 131);
+            this.groupBox2.Size = new System.Drawing.Size(546, 167);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Output";
@@ -308,27 +344,30 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-            this.tableLayoutPanel3.Controls.Add(this.browseManifestButton, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.manifestTextBox, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.helpLabel, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.packageTextBox, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label12, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.browsePackageButton, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label5, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.browseManifestButton, 2, 2);
+            this.tableLayoutPanel3.Controls.Add(this.manifestTextBox, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.helpLabel, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.packageTextBox, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(label12, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.browsePackageButton, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(label5, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(label3, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.exportOptionComboBox, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowCount = 4;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(540, 112);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(540, 148);
             this.tableLayoutPanel3.TabIndex = 5;
             // 
             // browseManifestButton
             // 
             this.browseManifestButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browseManifestButton.Location = new System.Drawing.Point(470, 32);
+            this.browseManifestButton.Location = new System.Drawing.Point(470, 61);
             this.browseManifestButton.Name = "browseManifestButton";
             this.browseManifestButton.Size = new System.Drawing.Size(67, 22);
             this.browseManifestButton.TabIndex = 49;
@@ -340,7 +379,7 @@
             // 
             this.manifestTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.manifestFileBindingSource, "RelativePathComponent", true));
             this.manifestTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.manifestTextBox.Location = new System.Drawing.Point(91, 33);
+            this.manifestTextBox.Location = new System.Drawing.Point(91, 62);
             this.manifestTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.manifestTextBox.Name = "manifestTextBox";
             this.manifestTextBox.Size = new System.Drawing.Size(371, 20);
@@ -354,10 +393,10 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.helpLabel, 2);
             this.helpLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.helpLabel.Location = new System.Drawing.Point(91, 61);
+            this.helpLabel.Location = new System.Drawing.Point(91, 90);
             this.helpLabel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.helpLabel.Name = "helpLabel";
-            this.helpLabel.Size = new System.Drawing.Size(446, 51);
+            this.helpLabel.Size = new System.Drawing.Size(446, 58);
             this.helpLabel.TabIndex = 46;
             this.helpLabel.Text = "Include dynamic manifest information in paths and files using:\r\n";
             // 
@@ -365,7 +404,7 @@
             // 
             this.packageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.packageFileBindingSource, "RelativePathComponent", true));
             this.packageTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.packageTextBox.Location = new System.Drawing.Point(91, 4);
+            this.packageTextBox.Location = new System.Drawing.Point(91, 33);
             this.packageTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.packageTextBox.Name = "packageTextBox";
             this.packageTextBox.Size = new System.Drawing.Size(371, 20);
@@ -375,20 +414,10 @@
             // 
             this.packageFileBindingSource.DataSource = typeof(ScriptCenter.Utils.RelativePath);
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 6);
-            this.label12.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(69, 13);
-            this.label12.TabIndex = 21;
-            this.label12.Text = "Package File";
-            // 
             // browsePackageButton
             // 
             this.browsePackageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browsePackageButton.Location = new System.Drawing.Point(470, 3);
+            this.browsePackageButton.Location = new System.Drawing.Point(470, 32);
             this.browsePackageButton.Name = "browsePackageButton";
             this.browsePackageButton.Size = new System.Drawing.Size(67, 22);
             this.browsePackageButton.TabIndex = 6;
@@ -396,15 +425,17 @@
             this.browsePackageButton.UseVisualStyleBackColor = true;
             this.browsePackageButton.Click += new System.EventHandler(this.browsePackageFileButton_Click);
             // 
-            // label5
+            // exportOptionComboBox
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 35);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 13);
-            this.label5.TabIndex = 47;
-            this.label5.Text = "Manifest File";
+            this.exportOptionComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.scriptPackageBindingSource, "ExportOption", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.exportOptionComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.exportOptionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.exportOptionComboBox.FormattingEnabled = true;
+            this.exportOptionComboBox.Location = new System.Drawing.Point(91, 3);
+            this.exportOptionComboBox.Name = "exportOptionComboBox";
+            this.exportOptionComboBox.Size = new System.Drawing.Size(371, 21);
+            this.exportOptionComboBox.TabIndex = 51;
+            this.exportOptionComboBox.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.exportOptionComboBox_Format);
             // 
             // PackageForm
             // 
@@ -450,22 +481,20 @@
         private System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.TextBox sourceTextBox;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button browseSourceButton;
         private System.Windows.Forms.Button browseRootButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label helpLabel;
         private System.Windows.Forms.TextBox packageTextBox;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button browsePackageButton;
         private System.Windows.Forms.Button browseManifestButton;
         private System.Windows.Forms.TextBox manifestTextBox;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.BindingSource rootPathBindingSource;
         private System.Windows.Forms.BindingSource sourcePathBindingSource;
         private System.Windows.Forms.BindingSource outputPathBindingSource;
         private System.Windows.Forms.BindingSource manifestFileBindingSource;
         private System.Windows.Forms.BindingSource packageFileBindingSource;
+        private System.Windows.Forms.ComboBox exportOptionComboBox;
     }
 }

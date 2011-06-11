@@ -1,5 +1,5 @@
 name "{id}"
-version {version_major}.{version_minor}{version_revision}
+version {version_major}.{version_minor}{version_rev}
 
 extract to "$temp/{id}"
 

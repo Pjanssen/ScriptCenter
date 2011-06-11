@@ -119,7 +119,7 @@ namespace ScriptCenterTest.Package
             Assert.AreEqual(line, reader.ReadLine(), "DefaultLineFormat should only write the line itself.");
 
             memStream.Position = 0;
-            InstallerLog.RemoveAllWriters(false);
+            InstallerLog.RemoveWriter(writer, false);
             InstallerLog.AddWriter(writer, InstallerLog.TimeStampedLineFormat);
             InstallerLog.WriteLine(line);
 

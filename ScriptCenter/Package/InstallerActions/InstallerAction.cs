@@ -21,6 +21,7 @@ using System.Text;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using ScriptCenter.Utils;
+using Ionic.Zip;
 
 namespace ScriptCenter.Package.InstallerActions
 {
@@ -40,6 +41,7 @@ namespace ScriptCenter.Package.InstallerActions
 
         public abstract Boolean Do(Installer installer);
         public abstract Boolean Undo(Installer installer);
+        public abstract void PackResources(ZipFile zip, String archiveTargetPath, IPath sourcePath);
 
         [JsonProperty("run_at_install")]
         [DefaultValue(true)]

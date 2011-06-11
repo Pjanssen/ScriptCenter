@@ -6,8 +6,10 @@ using System.ComponentModel;
 
 namespace ScriptCenter.Utils
 {
-    public class BasePath : INotifyPropertyChanged
+    public class BasePath : IPath, INotifyPropertyChanged
     {
+        
+
         protected String _path;
 
         protected BasePath() { }
@@ -18,13 +20,13 @@ namespace ScriptCenter.Utils
         /// <param name="path">Path to a file or directory.</param>
         public BasePath(String path)
         {
-            this.Path = path;
+            this.AbsolutePath = path;
         }
 
         /// <summary>
         /// The absolute path to the file or directory.
         /// </summary>
-        public virtual String Path
+        public String AbsolutePath
         {
             get { return _path; }
             set 
@@ -32,9 +34,14 @@ namespace ScriptCenter.Utils
                 if (value == null)
                     throw new ArgumentNullException("Cannot set Path to null.");
 
-                _path = value;
+                _path = value.Replace(PathHelperMethods.ReplaceSeparatorChar, PathHelperMethods.SeparatorChar);
                 this.OnPropertyChanged(new PropertyChangedEventArgs("Path"));
             }
+        }
+
+        public IList<String> PathComponents
+        {
+            get { return _path.Split(new char[] { PathHelperMethods.SeparatorChar }, StringSplitOptions.RemoveEmptyEntries).ToList().AsReadOnly(); }
         }
 
         /// <summary>

@@ -67,7 +67,6 @@ namespace ScriptCenter.Package.InstallerActions
             return true;
         }
 
-
         /// <summary>
         /// This action cannot be undone.
         /// </summary>
@@ -76,6 +75,10 @@ namespace ScriptCenter.Package.InstallerActions
             return true;
         }
 
+        public override void PackResources(Ionic.Zip.ZipFile zip, String archiveTargetPath, ScriptCenter.Utils.IPath sourcePath) 
+        {
+            //No resources to pack for this action.
+        }
 
         public override string ActionName { get { return "Create Toolbar Separator"; } }
         public override string ActionImageKey { get { return "toolbar_separator"; } }

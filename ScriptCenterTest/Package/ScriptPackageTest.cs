@@ -14,22 +14,22 @@ namespace ScriptCenterTest.Package
         public void RelativePathTest()
         {
             ScriptPackage package = new ScriptPackage("test_package");
-            package.RootPath.Path = "C:/code/test/";
-            package.OutputPath.Path = "C:/code/test/test.mzp";
+            package.RootPath.AbsolutePath = "C:/code/test/";
+            package.OutputPath.AbsolutePath = "C:/code/test/test.mzp";
             Assert.AreEqual("test.mzp", package.OutputPath.RelativePathComponent);
-            Assert.AreEqual("C:/code/test/test.mzp", package.OutputPath.Path);
+            Assert.AreEqual("C:/code/test/test.mzp", package.OutputPath.AbsolutePath);
             
-            package.SourcePath.Path = "C:/code/test/source/";
+            package.SourcePath.AbsolutePath = "C:/code/test/source/";
             Assert.AreEqual("source/", package.SourcePath.RelativePathComponent);
-            Assert.AreEqual("C:/code/test/source/", package.SourcePath.Path);
+            Assert.AreEqual("C:/code/test/source/", package.SourcePath.AbsolutePath);
 
-            package.OutputPath.Path = "C:/code/output/";
+            package.OutputPath.AbsolutePath = "C:/code/output/";
             Assert.AreEqual("../output/", package.OutputPath.RelativePathComponent);
-            Assert.AreEqual("C:/code/output/", package.OutputPath.Path);
+            Assert.AreEqual("C:/code/output/", package.OutputPath.AbsolutePath);
 
-            package.PackageFile.Path = "C:/code/output/test.mzp";
+            package.PackageFile.AbsolutePath = "C:/code/output/test.mzp";
             Assert.AreEqual("test.mzp", package.PackageFile.RelativePathComponent);
-            Assert.AreEqual("C:/code/output/test.mzp", package.PackageFile.Path);
+            Assert.AreEqual("C:/code/output/test.mzp", package.PackageFile.AbsolutePath);
         }
     }
 }

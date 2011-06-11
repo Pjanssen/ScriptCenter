@@ -37,7 +37,7 @@ namespace ScriptCenter.Utils
             String path = null;
 
             if (value.GetType() == typeof(BasePath))
-                path = ((BasePath)value).Path;
+                path = ((BasePath)value).AbsolutePath;
 
             if (value.GetType() == typeof(RelativePath))
                 path = ((RelativePath)value).RelativePathComponent;

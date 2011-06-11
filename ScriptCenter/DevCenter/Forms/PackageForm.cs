@@ -25,6 +25,11 @@ namespace ScriptCenter.DevCenter.Forms
             if (package == null)
                 throw new ArgumentNullException("Package argument cannot be null.");
 
+            foreach (ScriptPackage.ExportOptions o in Enum.GetValues(typeof(ScriptPackage.ExportOptions)))
+            {
+                this.exportOptionComboBox.Items.Add(o);
+            }
+
             this.package = package;
             this.devCenter = devCenter;
             this.scriptPackageBindingSource.Add(package);
@@ -74,61 +79,76 @@ namespace ScriptCenter.DevCenter.Forms
         }
         private void enableControls() 
         {
-            Boolean enable = package.RootPath.Path != String.Empty;
+            Boolean enable = package.RootPath.AbsolutePath != String.Empty;
 
             this.sourceTextBox.Enabled = this.browseSourceButton.Enabled = enable;
             this.outputTextBox.Enabled = this.browseOutputButton.Enabled = enable;
+            this.exportOptionComboBox.Enabled = enable;
             this.packageTextBox.Enabled = this.browsePackageButton.Enabled = enable;
             this.manifestTextBox.Enabled = this.browseManifestButton.Enabled = enable;
         }
 
         private void browseRootButton_Click(object sender, EventArgs e) 
         {
-            folderBrowserDialog.SelectedPath = package.RootPath.Path.Replace('/', '\\');
+            folderBrowserDialog.SelectedPath = package.RootPath.AbsolutePath.Replace('/', '\\');
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 String path = folderBrowserDialog.SelectedPath.Replace('\\', '/');
                 if (!path.EndsWith("/"))
                     path += "/";
-                package.RootPath = new BasePath(path);
+                package.RootPath.AbsolutePath = path;
             }
         }
         private void browseSourceButton_Click(object sender, EventArgs e) 
         {
-            folderBrowserDialog.SelectedPath = package.SourcePath.Path.Replace('/', '\\');
+            folderBrowserDialog.SelectedPath = package.SourcePath.AbsolutePath.Replace('/', '\\');
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                package.SourcePath.Path = folderBrowserDialog.SelectedPath + "\\";
+                package.SourcePath.AbsolutePath = folderBrowserDialog.SelectedPath + "\\";
             }
         }
         private void browseOutputButton_Click(object sender, EventArgs e) 
         {
-            folderBrowserDialog.SelectedPath = package.OutputPath.Path.Replace('/', '\\');
+            folderBrowserDialog.SelectedPath = package.OutputPath.AbsolutePath.Replace('/', '\\');
             DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                package.OutputPath.Path = folderBrowserDialog.SelectedPath + "\\";
+                package.OutputPath.AbsolutePath = folderBrowserDialog.SelectedPath + "\\";
             }
         }
         private void browsePackageFileButton_Click(object sender, EventArgs e) 
         {
-            savePackageFileDialog.FileName = package.PackageFile.Path.Replace('/', '\\');
+            savePackageFileDialog.FileName = package.PackageFile.AbsolutePath.Replace('/', '\\');
             DialogResult result = savePackageFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                package.PackageFile.Path = savePackageFileDialog.FileName;
+                package.PackageFile.AbsolutePath = savePackageFileDialog.FileName;
             }
         }
         private void browseManifestButton_Click(object sender, EventArgs e) 
         {
-            savePackageFileDialog.FileName = package.ManifestFile.Path.Replace('/', '\\');
+            savePackageFileDialog.FileName = package.ManifestFile.AbsolutePath.Replace('/', '\\');
             DialogResult result = savePackageFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                package.ManifestFile.Path = savePackageFileDialog.FileName;
+                package.ManifestFile.AbsolutePath = savePackageFileDialog.FileName;
             }
+        }
+
+        private void exportOptionComboBox_Format(object sender, ListControlConvertEventArgs e)
+        {
+            StringBuilder formattedString = new StringBuilder();
+            String item = e.ListItem.ToString();
+            for (Int32 i = 0; i < item.Length; i++)
+            {
+                if (i > 0 && Char.IsUpper(item[i]))
+                    formattedString.Append(' ');
+
+                formattedString.Append(item[i]);
+            }
+            e.Value = formattedString.ToString();
         }
     }
 }

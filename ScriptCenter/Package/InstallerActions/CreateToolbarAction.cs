@@ -83,6 +83,11 @@ namespace ScriptCenter.Package.InstallerActions
             return true;
         }
 
+        public override void PackResources(Ionic.Zip.ZipFile zip, String archiveTargetPath, ScriptCenter.Utils.IPath sourcePath) 
+        {
+            //No resources to pack for this action.
+        }
+
         public override string ActionName { get { return "Create Toolbar"; } }
         public override string ActionImageKey { get { return "toolbar"; } }
         public override string ActionDetails { get { return this.ToolbarName; } }

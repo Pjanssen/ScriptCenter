@@ -105,10 +105,10 @@
     <Compile Include="DevCenter\Forms\RepositoryForm.Designer.cs">
       <DependentUpon>RepositoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Package\InstallerResources.Designer.cs">
+    <Compile Include="Package\PackageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InstallerResources.resx</DependentUpon>
+      <DependentUpon>PackageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Max\AppPaths3dsmax.cs" />
     <Compile Include="Utils\AppPathsDebug.cs" />
@@ -167,7 +167,6 @@
     <Compile Include="Package\InstallerUI\UninstallPage.Designer.cs">
       <DependentUpon>UninstallPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Package\InstallerCreator.cs" />
     <Compile Include="DevCenter\Forms\ManifestForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -193,6 +192,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\IPath.cs" />
     <Compile Include="Utils\JsonFileHandler.cs" />
     <Compile Include="Repository\ScriptManifest.cs" />
     <Compile Include="Repository\ScriptManifestReferenceConverter.cs" />
@@ -267,9 +267,9 @@
     <EmbeddedResource Include="Package\InstallerUI\UninstallPage.resx">
       <DependentUpon>UninstallPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Package\InstallerResources.resx">
+    <EmbeddedResource Include="Package\PackageResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>InstallerResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>PackageResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -308,7 +308,6 @@
     <EmbeddedResource Include="Resources\icons\toolbar.png" />
     <EmbeddedResource Include="Resources\icons\toolbar_button.png" />
     <EmbeddedResource Include="Resources\icons\toolbar_separator.png" />
-    <EmbeddedResource Include="Resources\icons\project.png" />
     <Content Include="scratchpad .txt" />
   </ItemGroup>
   <ItemGroup />

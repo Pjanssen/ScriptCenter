@@ -148,6 +148,29 @@ public class CopyDirAction : InstallerAction
         return true;
     }
 
+    public override void PackResources(Ionic.Zip.ZipFile zip, String archiveTargetPath, IPath sourcePath)
+    {
+        //Create selection criteria string from ExcludeFiles property.
+        StringBuilder selectionCriteria = new StringBuilder();
+        String[] splitExcludeFiles = this.ExcludeFiles.Replace(" ", "").Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (String exludeFile in splitExcludeFiles)
+        {
+            if (selectionCriteria.Length > 0)
+                selectionCriteria.Append(" AND ");
+            selectionCriteria.Append("name != '");
+            selectionCriteria.Append(exludeFile);
+            selectionCriteria.Append("'");
+        }
+
+        //Create source path and archive path.
+        RelativePath path = new RelativePath(this.Source, sourcePath);
+        if (!archiveTargetPath.EndsWith("\\"))
+            archiveTargetPath += "\\";
+        archiveTargetPath += path.PathComponents[path.PathComponents.Count - 1];
+
+        //Add files to zip.
+        zip.AddSelectedFiles(selectionCriteria.ToString(), path.AbsolutePath.Replace('/', '\\'), archiveTargetPath, true);
+    }
 
     public override string ActionName { get { return "Copy Directory"; } }
     public override string ActionImageKey { get { return "copy_dir"; } }

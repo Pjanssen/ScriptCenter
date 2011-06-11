@@ -14,6 +14,11 @@ namespace ScriptCenter.Package
     {
         public const String DefaultExtension = ".scpack";
 
+        private String _name;
+        private BasePath _rootPath;
+        private RelativePath _outputPath;
+        private ExportOptions _exportOption;
+
         public ScriptPackage() : this("") { }
         public ScriptPackage(String name) 
         {
@@ -41,7 +46,7 @@ namespace ScriptCenter.Package
                 this.OnPropertyChanged(new PropertyChangedEventArgs("Name"));
             }
         }
-        private String _name;
+        
 
         [JsonProperty("root_path")]
         [JsonConverter(typeof(BasePathJsonConverter))]
@@ -59,7 +64,7 @@ namespace ScriptCenter.Package
                 this.OnPropertyChanged(new PropertyChangedEventArgs("RootPath"));
             }
         }
-        private BasePath _rootPath;
+        
 
         [JsonProperty("source_path")]
         [JsonConverter(typeof(BasePathJsonConverter))]
@@ -80,7 +85,7 @@ namespace ScriptCenter.Package
                 _outputPath = value;
             }
         }
-        private RelativePath _outputPath;
+        
 
         [JsonProperty("manifest_file")]
         [JsonConverter(typeof(BasePathJsonConverter))]
@@ -91,19 +96,26 @@ namespace ScriptCenter.Package
         public RelativePath PackageFile { get; set; }
 
 
-        
-        [JsonProperty("manifest_version")]
-        [DefaultValue("-use latest-")]
-        public String ManifestVersion 
+        public enum ExportOptions
         {
-            get { return _manifestVersion; }
+            All,
+            LatestOnly,
+            LatestAndNonExisting
+        }
+
+        [JsonProperty("export_option")]
+        [DefaultValue(ExportOptions.LatestAndNonExisting)]
+        public ExportOptions ExportOption
+        {
+            get { return _exportOption; }
             set
             {
-                this._manifestVersion = value;
-                this.OnPropertyChanged(new PropertyChangedEventArgs("ManifestVersion"));
+                _exportOption = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("ExportOption"));
             }
         }
-        private String _manifestVersion;
+        
+
 
 
         [JsonProperty("manifest")]

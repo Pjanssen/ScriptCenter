@@ -57,7 +57,7 @@ namespace ScriptCenter.Utils
         public T Read(String path)
         {
             T data = default(T);
-
+            
             using (StreamReader sr = new StreamReader(path))
             using (JsonTextReader jr = new JsonTextReader(sr))
             {
@@ -119,11 +119,21 @@ namespace ScriptCenter.Utils
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            using (StreamWriter sw = new StreamWriter(path))
-            using (JsonTextWriter jw = new JsonTextWriter(sw))
+            using (StreamWriter streamWriter = new StreamWriter(path))
             {
-                jw.Formatting = Formatting.Indented;
-                this.serializer.Serialize(jw, obj);
+                this.Write(streamWriter, obj);
+            }
+        }
+
+        public void Write(TextWriter writer, T obj)
+        {
+            if (obj == null)
+                throw new ArgumentNullException("Object to serialize cannot be null.");
+
+            using (JsonTextWriter jsonWriter = new JsonTextWriter(writer))
+            {
+                jsonWriter.Formatting = Formatting.Indented;
+                this.serializer.Serialize(jsonWriter, obj);
             }
         }
     }

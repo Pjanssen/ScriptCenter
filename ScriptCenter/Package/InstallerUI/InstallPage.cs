@@ -13,6 +13,8 @@ namespace ScriptCenter.Package.InstallerUI
 {
     public partial class InstallPage : WizardPage
     {
+        private TextBoxStreamWriter logStreamWriter;
+
         public InstallPage()
         {
             InitializeComponent();
@@ -24,6 +26,9 @@ namespace ScriptCenter.Package.InstallerUI
 
             if (this.Wizard is InstallerDialog)
             {
+                this.logStreamWriter = new TextBoxStreamWriter(this.logTextBox);
+                InstallerLog.AddWriter(this.logStreamWriter);
+                    
                 ((InstallerDialog)this.Wizard).Installer.Progress += new InstallerProgressEventHandler(Installer_Progress);
                 ((InstallerDialog)this.Wizard).Installer.Completed += new EventHandler(Installer_Completed);
                 ((InstallerDialog)this.Wizard).Installer.Failed += new EventHandler(Installer_Failed);

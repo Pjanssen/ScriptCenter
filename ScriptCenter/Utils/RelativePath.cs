@@ -6,18 +6,19 @@ using System.ComponentModel;
 
 namespace ScriptCenter.Utils
 {
-    public class RelativePath : BasePath
+    public class RelativePath : IPath, INotifyPropertyChanged
     {
-        protected BasePath _relativeTo;
+        protected String _path;
+        protected IPath _relativeTo;
 
         /// <summary>
         /// Creates a new RelativePath instance.
         /// </summary>
-        /// <param name="relativePath">The relative path to a file or directory.</param>
+        /// <param name="path">The relative path to a file or directory.</param>
         /// <param name="relativeTo">The path this path is relative to.</param>
-        public RelativePath(String relativePath, BasePath relativeTo)
+        public RelativePath(String path, IPath relativeTo)
         {
-            if (relativePath == null)
+            if (path == null)
                 throw new ArgumentNullException("RelativePath parameter cannot be null.");
 
             if (relativeTo == null)
@@ -26,20 +27,32 @@ namespace ScriptCenter.Utils
             if (relativeTo.IsFilePath)
                 throw new ArgumentException("Cannot create a path relative to a file path.");
 
-            _path = relativePath;
             _relativeTo = relativeTo;
+
+            if (PathHelperMethods.IsAbsolutePath(path))
+                this.AbsolutePath = path;
+            else
+                this.RelativePathComponent = path;
         }
 
         /// <summary>
         /// The absolute path to the file or directory.
         /// </summary>
-        public override String Path
+        public String AbsolutePath
         {
-            get { return PathHelperMethods.GetAbsolutePath(_path, _relativeTo.Path); }
+            get { return PathHelperMethods.GetAbsolutePath(_path, _relativeTo.AbsolutePath); }
             set 
             {
-                _path = PathHelperMethods.GetRelativePath(value, _relativeTo.Path);
+                _path = PathHelperMethods.GetRelativePath(value, _relativeTo.AbsolutePath);
                 this.OnPropertyChanged(new PropertyChangedEventArgs("Path"));
+            }
+        }
+
+        public IList<String> PathComponents
+        {
+            get 
+            {
+                return this.AbsolutePath.Split(new char[] {PathHelperMethods.SeparatorChar }, StringSplitOptions.RemoveEmptyEntries).ToList().AsReadOnly();
             }
         }
 
@@ -62,7 +75,7 @@ namespace ScriptCenter.Utils
         /// <summary>
         /// The path instance this path is relative to.
         /// </summary>
-        public BasePath RelativeTo
+        public IPath RelativeTo
         {
             get { return _relativeTo; }
             set 
@@ -73,6 +86,29 @@ namespace ScriptCenter.Utils
                 _relativeTo = value;
                 this.OnPropertyChanged(new PropertyChangedEventArgs("RelativeTo"));
             }
+        }
+
+        /// <summary>
+        /// True if the path is a path to a file.
+        /// </summary>
+        public Boolean IsFilePath
+        {
+            get { return PathHelperMethods.IsFilePath(_path); }
+        }
+
+        /// <summary>
+        /// True if the path is a path to a directory.
+        /// </summary>
+        public Boolean IsDirectoryPath
+        {
+            get { return !PathHelperMethods.IsFilePath(_path); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, e);
         }
     }
 }

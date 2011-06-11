@@ -186,13 +186,6 @@ namespace ScriptCenter {
             }
         }
         
-        internal static System.Drawing.Bitmap project {
-            get {
-                object obj = ResourceManager.GetObject("project", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap repository {
             get {
                 object obj = ResourceManager.GetObject("repository", resourceCulture);

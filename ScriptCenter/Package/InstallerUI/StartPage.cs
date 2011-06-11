@@ -28,8 +28,8 @@ namespace ScriptCenter.Package.InstallerUI
                 ScriptManifest manifest = ((InstallerDialog)this.Wizard).Installer.Manifest;
                 InstallerUIConfiguration uiConfig = ((InstallerDialog)this.Wizard).UIConfig;
 
-                this.titleTxt.Text = ScriptManifestTokens.Replace(uiConfig.Title, manifest);
-                this.mainTxt.Text = ScriptManifestTokens.Replace(uiConfig.StartPageText, manifest);
+                this.titleTxt.Text = ScriptManifestTokens.Replace(uiConfig.Title, manifest, manifest.LatestVersion);
+                this.mainTxt.Text = ScriptManifestTokens.Replace(uiConfig.StartPageText, manifest, manifest.LatestVersion);
 
             }
         }
