@@ -1,7 +1,5 @@
 ﻿- Consider changing Do/Undo methods on InstallerAction to Install/Uninstall/Update.
-- Move manifest tokens replace to basepath?
 - Add SCVersion to manifest, repo, etc.
 
 - Refactoring CuiFile and KbdFile unit tests to use streams.
 - Review Installer class. Add cleanUp method to close logstream, reset exception, etc
-- Refactor paths a little (use interface) + move pathhelpermethods to relativepath

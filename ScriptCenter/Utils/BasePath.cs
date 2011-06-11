@@ -8,8 +8,6 @@ namespace ScriptCenter.Utils
 {
     public class BasePath : IPath, INotifyPropertyChanged
     {
-        
-
         protected String _path;
 
         protected BasePath() { }

@@ -7,14 +7,14 @@ namespace ScriptCenter.Utils
 {
     internal static class PathHelperMethods
     {
-        public const char SeparatorChar = '/';
+        internal const char SeparatorChar = '/';
         internal const char ReplaceSeparatorChar = '\\';
 
         /// <summary>
         /// Returns true if the given path is an absolute path (e.g. C:/, or http://).
         /// </summary>
         /// <param name="path">The path to test.</param>
-        public static bool IsAbsolutePath(String path)
+        internal static bool IsAbsolutePath(String path)
         {
             if (path == null || path == String.Empty)
                 return false;
@@ -30,7 +30,7 @@ namespace ScriptCenter.Utils
         /// Returns true if the given path is a path to a file, otherwise false.
         /// </summary>
         /// <param name="path">The path to test.</param>
-        public static bool IsFilePath(String path)
+        internal static bool IsFilePath(String path)
         {
             if (path == null)
                 return false;
@@ -48,7 +48,7 @@ namespace ScriptCenter.Utils
         /// </summary>
         /// <param name="absolutePath">The absolute path to convert.</param>
         /// <param name="basePath">The base path the new path should be relative to.</param>
-        public static string GetRelativePath(String absolutePath, String basePath)
+        internal static string GetRelativePath(String absolutePath, String basePath)
         {
             StringBuilder newPath = new StringBuilder();
 
@@ -100,7 +100,7 @@ namespace ScriptCenter.Utils
         /// </summary>
         /// <param name="relativePath">The relative path to convert.</param>
         /// <param name="relativeTo">The base path the first path is relative to.</param>
-        public static string GetAbsolutePath(String relativePath, String basePath)
+        internal static string GetAbsolutePath(String relativePath, String basePath)
         {
             if (PathHelperMethods.IsAbsolutePath(relativePath))
                 return relativePath;
