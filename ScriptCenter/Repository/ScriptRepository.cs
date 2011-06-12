@@ -105,7 +105,7 @@ namespace ScriptCenter.Repository
     }
 
 
-    [JsonConverter(typeof(JsonStringConverter))]
+    [JsonConverter(typeof(StringJsonConverter))]
     public class ScriptManifestReference
     {
         public String Id { get; set; }

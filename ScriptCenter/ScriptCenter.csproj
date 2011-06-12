@@ -130,7 +130,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utils\BasePath.cs" />
-    <Compile Include="Utils\BasePathJsonConverter.cs" />
+    <Compile Include="Utils\IPathJsonConverter.cs" />
     <Compile Include="Utils\Defaults.cs" />
     <Compile Include="Package\InstallerActions\AssignHotkeyAction.cs" />
     <Compile Include="Package\InstallerActions\CopyDirAction.cs" />
@@ -203,7 +203,7 @@
     <Compile Include="Repository\ScriptVersion.cs" />
     <Compile Include="Repository\ScriptVersionConverter.cs" />
     <Compile Include="Repository\ScriptManifestTokens.cs" />
-    <Compile Include="Utils\JsonStringConverter.cs" />
+    <Compile Include="Utils\StringJsonConverter.cs" />
     <Compile Include="Utils\ObjectSetDefaultValuesExtension.cs" />
     <Compile Include="Utils\PathHelperMethods.cs" />
     <Compile Include="Utils\RelativePath.cs" />

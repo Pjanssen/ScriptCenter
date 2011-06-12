@@ -49,7 +49,7 @@ namespace ScriptCenter.Package
         
 
         [JsonProperty("root_path")]
-        [JsonConverter(typeof(BasePathJsonConverter))]
+        [JsonConverter(typeof(IPathJsonConverter))]
         public BasePath RootPath 
         {
             get { return _rootPath; }
@@ -67,11 +67,11 @@ namespace ScriptCenter.Package
         
 
         [JsonProperty("source_path")]
-        [JsonConverter(typeof(BasePathJsonConverter))]
+        [JsonConverter(typeof(IPathJsonConverter))]
         public RelativePath SourcePath { get; set; }
 
         [JsonProperty("output_path")]
-        [JsonConverter(typeof(BasePathJsonConverter))]
+        [JsonConverter(typeof(IPathJsonConverter))]
         public RelativePath OutputPath 
         {
             get { return _outputPath; }
@@ -88,11 +88,11 @@ namespace ScriptCenter.Package
         
 
         [JsonProperty("manifest_file")]
-        [JsonConverter(typeof(BasePathJsonConverter))]
+        [JsonConverter(typeof(IPathJsonConverter))]
         public RelativePath ManifestFile { get; set; }
 
         [JsonProperty("package_file")]
-        [JsonConverter(typeof(BasePathJsonConverter))]
+        [JsonConverter(typeof(IPathJsonConverter))]
         public RelativePath PackageFile { get; set; }
 
 

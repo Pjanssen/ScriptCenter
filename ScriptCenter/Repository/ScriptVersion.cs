@@ -70,7 +70,7 @@ namespace ScriptCenter.Repository
 
     [Serializable]
     [TypeConverter(typeof(ScriptVersionConverter))]
-    [JsonConverter(typeof(JsonStringConverter))]
+    [JsonConverter(typeof(StringJsonConverter))]
     public class ScriptVersionNumber : INotifyPropertyChanged, IComparable<ScriptVersionNumber>
     {
         private Int32 _major;

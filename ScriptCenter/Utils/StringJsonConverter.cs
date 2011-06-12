@@ -10,7 +10,7 @@ namespace ScriptCenter.Utils
     /// <summary>
     /// A general purpose JsonConverter to convert an object from and to a String, using the ToString method and ctor(String).
     /// </summary>
-    public class JsonStringConverter : JsonConverter
+    public class StringJsonConverter : JsonConverter
     {
         private ConstructorInfo _constructor;
 

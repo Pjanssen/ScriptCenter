@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace ScriptCenter.Repository
 {
     [Serializable]
-    [JsonConverter(typeof(ScriptCenter.Utils.JsonStringConverter))]
+    [JsonConverter(typeof(ScriptCenter.Utils.StringJsonConverter))]
     public class ScriptId
     {
         public static readonly ScriptId Empty = new ScriptId(String.Empty);

@@ -6,14 +6,11 @@ using Newtonsoft.Json;
 
 namespace ScriptCenter.Utils
 {
-    public class BasePathJsonConverter : JsonConverter
+    public class IPathJsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
-            if (objectType == typeof(BasePath))
-                return true;
-
-            if (objectType == typeof(RelativePath))
+            if (typeof(IPath).IsAssignableFrom(objectType))
                 return true;
 
             return false;
