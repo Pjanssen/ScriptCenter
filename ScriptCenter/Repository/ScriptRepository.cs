@@ -21,6 +21,7 @@ using System.Text;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.ComponentModel;
+using ScriptCenter.Utils;
 
 namespace ScriptCenter.Repository
 {
@@ -103,9 +104,11 @@ namespace ScriptCenter.Repository
         }
     }
 
-    [JsonConverter(typeof(ScriptManifestReferenceConverter))]
+
+    [JsonConverter(typeof(JsonStringConverter))]
     public class ScriptManifestReference
     {
+        public String Id { get; set; }
         public String Uri { get; set; }
 
         public ScriptManifestReference() : this("") { }

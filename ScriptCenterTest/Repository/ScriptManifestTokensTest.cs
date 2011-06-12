@@ -15,13 +15,13 @@ public class ManifestTokensTest
     public void ReplaceTokensTest()
     {
         ScriptManifest manifest = new ScriptManifest();
-        manifest.Id = "pierjanssen.outliner";
         manifest.Author = "Pier Janssen";
         manifest.Name = "Outliner";
+        manifest.Id = new ScriptId(manifest.Name, manifest.Author);
         manifest.Versions.Add(new ScriptVersion(2, 9, 4, ScriptReleaseStage.Release));
 
         String origString = ScriptManifestTokens.Id_Token + " something " + ScriptManifestTokens.Name_Token + " " + ScriptManifestTokens.Id_Token;
-        String exptectedString = manifest.Id + " something " + manifest.Name + " " + manifest.Id;
+        String exptectedString = manifest.Id.ToString() + " something " + manifest.Name + " " + manifest.Id.ToString();
         Assert.AreEqual(exptectedString, ScriptManifestTokens.Replace(origString, manifest, manifest.LatestVersion));
 
         origString = ScriptManifestTokens.Version_Token + " something " + ScriptManifestTokens.Author_Token;

@@ -68,11 +68,13 @@
     </Compile>
     <Compile Include="Package\InstallerLog.cs" />
     <Compile Include="Package\ScriptPacker.cs" />
+    <Compile Include="Repository\ScriptId.cs" />
     <Compile Include="SCResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SCResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ScriptCenterCore.cs" />
     <Compile Include="Utils\AppPaths.cs" />
     <Compile Include="Controls\CustomPropertyGrid.cs">
       <SubType>Component</SubType>
@@ -195,13 +197,13 @@
     <Compile Include="Utils\IPath.cs" />
     <Compile Include="Utils\JsonFileHandler.cs" />
     <Compile Include="Repository\ScriptManifest.cs" />
-    <Compile Include="Repository\ScriptManifestReferenceConverter.cs" />
     <Compile Include="Package\ScriptPackage.cs" />
     <Compile Include="Repository\ScriptRepository.cs" />
     <Compile Include="Repository\ScriptRepositoryList.cs" />
     <Compile Include="Repository\ScriptVersion.cs" />
     <Compile Include="Repository\ScriptVersionConverter.cs" />
     <Compile Include="Repository\ScriptManifestTokens.cs" />
+    <Compile Include="Utils\JsonStringConverter.cs" />
     <Compile Include="Utils\ObjectSetDefaultValuesExtension.cs" />
     <Compile Include="Utils\PathHelperMethods.cs" />
     <Compile Include="Utils\RelativePath.cs" />

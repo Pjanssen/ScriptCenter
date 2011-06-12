@@ -47,14 +47,10 @@ namespace ScriptCenter.DevCenter.Forms
 
         private void setDefaultID()
         {
-            if (this.scriptName.Text == String.Empty || this.scriptAuthor.Text == String.Empty || (this.manifest.Id != null && this.manifest.Id != String.Empty))
+            if (this.scriptName.Text == String.Empty || this.scriptAuthor.Text == String.Empty || (this.manifest.Id != null && this.manifest.Id != ScriptId.Empty))
                 return;
 
-            String defaultId = System.Text.RegularExpressions.Regex.Replace(this.scriptAuthor.Text.ToLower(), @"\s", "");
-            defaultId += ".";
-            defaultId += System.Text.RegularExpressions.Regex.Replace(this.scriptName.Text.ToLower(), @"\s", "");
-            
-            this.manifest.Id = defaultId;
+            this.manifest.Id = new ScriptId(this.scriptName.Text, this.scriptAuthor.Text);
         }
 
 

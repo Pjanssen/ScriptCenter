@@ -67,7 +67,9 @@
     <Compile Include="Max\CuiFileTest.cs" />
     <Compile Include="Package\InstallerLogTest.cs" />
     <Compile Include="Package\ScriptPackageTest.cs" />
+    <Compile Include="Repository\ScriptIdTest.cs" />
     <Compile Include="Repository\ScriptManifestTokensTest.cs" />
+    <Compile Include="ScriptCenterCoreTest.cs" />
     <Compile Include="Utils\ObjectSetDefaultValuesTest.cs" />
     <Compile Include="Utils\JsonFileHandlerTest.cs" />
     <Compile Include="Package\InstallerConfigurationTest.cs" />

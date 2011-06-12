@@ -32,7 +32,7 @@ namespace ScriptCenter.Repository
 
             StringBuilder newString = new StringBuilder(str);
 
-            newString.Replace(Id_Token, manifest.Id);
+            newString.Replace(Id_Token, manifest.Id.ToString());
             newString.Replace(Name_Token, manifest.Name);
             newString.Replace(Author_Token, manifest.Author);
             newString.Replace(Version_Token, version.VersionNumber.ToString());

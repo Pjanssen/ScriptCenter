@@ -6,6 +6,7 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.Runtime.Serialization.Formatters.Binary;
+using ScriptCenter.Utils;
 
 namespace ScriptCenter.Repository
 {
@@ -43,8 +44,8 @@ namespace ScriptCenter.Repository
 
 
         public ScriptVersion() : this(1, 0, 0, ScriptReleaseStage.Release) { }
-        public ScriptVersion(Int32 major, Int32 minor, Int32 revision, ScriptReleaseStage releaseStahe) 
-            : this(new ScriptVersionNumber(major, minor, revision, releaseStahe)) { }
+        public ScriptVersion(Int32 major, Int32 minor, Int32 revision, ScriptReleaseStage releaseStage) 
+            : this(new ScriptVersionNumber(major, minor, revision, releaseStage)) { }
         public ScriptVersion(ScriptVersionNumber versionNumber)
         {
             this.VersionNumber = versionNumber;
@@ -69,6 +70,7 @@ namespace ScriptCenter.Repository
 
     [Serializable]
     [TypeConverter(typeof(ScriptVersionConverter))]
+    [JsonConverter(typeof(JsonStringConverter))]
     public class ScriptVersionNumber : INotifyPropertyChanged, IComparable<ScriptVersionNumber>
     {
         private Int32 _major;
@@ -76,7 +78,6 @@ namespace ScriptCenter.Repository
         private Int32 _revision;
         private ScriptReleaseStage _releaseStage;
 
-        [JsonIgnore()]
         [Description("The major component of the version.")]
         public Int32 Major 
         {
@@ -88,7 +89,6 @@ namespace ScriptCenter.Repository
             }
         }
 
-        [JsonIgnore()]
         [Description("The minor component of the version.")]
         public Int32 Minor 
         {
@@ -100,7 +100,6 @@ namespace ScriptCenter.Repository
             }
         }
 
-        [JsonIgnore()]
         [Description("The revision component of the version.")]
         public Int32 Revision 
         {
@@ -112,7 +111,6 @@ namespace ScriptCenter.Repository
             }
         }
 
-        [JsonIgnore()]
         [DisplayName("Release Stage")]
         [Description("The stage of this version indicating the stability of the script.")]
         [DefaultValue(ScriptReleaseStage.Release)]

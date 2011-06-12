@@ -67,7 +67,7 @@ namespace ScriptCenter.Controls
         }
         void manifest_handler_LoadComplete(object sender, ReadCompleteEventArgs<ScriptManifest> args)
         {
-            String id = args.Data.Id;
+            String id = args.Data.Id.ToString();
             
             //TODO fix icon uri
             String imgKey = "default";
@@ -207,7 +207,7 @@ namespace ScriptCenter.Controls
             w.Show();
              */
             ScriptManifest m = new ScriptManifest();
-            m.Id = "nl.threesixty.outliner";
+            m.Id = new ScriptId("nl.threesixty.outliner");
             m.Name = "Outliner";
             m.Versions.Add(new ScriptVersion(2, 0, 96, ScriptReleaseStage.Release));
 

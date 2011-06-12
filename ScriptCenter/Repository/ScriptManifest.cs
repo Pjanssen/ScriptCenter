@@ -33,12 +33,12 @@ namespace ScriptCenter.Repository
     {
         public const String DefaultExtension = ".scmanif";
 
-        private String _id;
+        private ScriptId _id;
         private String _name;
         private String _author;
 
         [JsonProperty("id")]
-        public String Id 
+        public ScriptId Id 
         {
             get { return this._id; }
             set
@@ -101,7 +101,7 @@ namespace ScriptCenter.Repository
 
         public ScriptManifest() 
         {
-            this.Id = String.Empty;
+            this.Id = ScriptId.Empty;
             this.Name = String.Empty;
             this.Versions = new List<ScriptVersion>();
             this.Metadata = new Dictionary<String, String>();

@@ -21,9 +21,9 @@ namespace ScriptCenterTest.Repository
             this.outputFile = TestHelperMethods.GetOutputDirectory() + "/outliner" + ScriptManifest.DefaultExtension;
 
             this.manifest = new ScriptManifest();
-            this.manifest.Id = "pierjanssen.outliner";
             this.manifest.Name = "Outliner";
             this.manifest.Author = "Pier Janssen";
+            this.manifest.Id = new ScriptId(this.manifest.Name, this.manifest.Author);
             this.manifest.Versions.Add(new ScriptVersion(2, 0, 96, ScriptReleaseStage.Release));
             this.manifest.Versions.Add(new ScriptVersion(2, 0, 95, ScriptReleaseStage.Release));
             this.manifest.Versions.Add(new ScriptVersion(2, 0, 94, ScriptReleaseStage.Release));
@@ -113,9 +113,9 @@ namespace ScriptCenterTest.Repository
             Assert.AreEqual(manifest.Metadata.Count, newManifest.Metadata.Count, "New manifest has same amount of metadata.");
             Assert.AreEqual(manifest.Versions.Count, newManifest.Versions.Count, "New manifest has same number of versions.");
             Assert.AreEqual(manifest.Versions[0].VersionNumber, newManifest.Versions[0].VersionNumber, "New manifest has same version[0].");
-            newManifest.Id = "henk";
             newManifest.Name = "Test";
             newManifest.Author = "Jonathan";
+            newManifest.Id = new ScriptId(newManifest.Name, newManifest.Author);
             newManifest.Metadata.Add("test", "value");
             newManifest.Versions.Add(new ScriptVersion());
             newManifest.LatestVersion.VersionNumber.Major = 10;
