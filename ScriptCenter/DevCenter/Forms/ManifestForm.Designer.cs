@@ -119,6 +119,7 @@ namespace ScriptCenter.DevCenter.Forms
             this.versionPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.versionPropertyGrid.Location = new System.Drawing.Point(78, 221);
             this.versionPropertyGrid.Name = "versionPropertyGrid";
+            this.versionPropertyGrid.PropertyNameColumnWidth = 160;
             this.versionPropertyGrid.PropertySort = System.Windows.Forms.PropertySort.NoSort;
             this.versionPropertyGrid.Size = new System.Drawing.Size(309, 149);
             this.versionPropertyGrid.TabIndex = 23;

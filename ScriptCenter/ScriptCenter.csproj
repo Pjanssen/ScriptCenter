@@ -58,7 +58,14 @@
   <ItemGroup>
     <Compile Include="Controls\CopyDirActionSourceEditor.cs" />
     <Compile Include="Controls\CopyFileActionSourceEditor.cs" />
+    <Compile Include="Controls\SupportedMaxVersionsEditor.cs" />
     <Compile Include="Controls\TextBoxStreamWriter.cs" />
+    <Compile Include="Controls\SupportedMaxVersionsEditorUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SupportedMaxVersionsEditorUI.Designer.cs">
+      <DependentUpon>SupportedMaxVersionsEditorUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\VersionScriptPathEditor.cs" />
     <Compile Include="DevCenter\Forms\PackageRootPathWarning.cs">
       <SubType>UserControl</SubType>
@@ -69,6 +76,7 @@
     <Compile Include="Package\InstallerLog.cs" />
     <Compile Include="Package\ScriptPacker.cs" />
     <Compile Include="Repository\ScriptId.cs" />
+    <Compile Include="Repository\SupportedMaxVersions.cs" />
     <Compile Include="SCResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -216,6 +224,9 @@
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptRepository.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptRequirements.datasource" />
     <None Include="Properties\DataSources\ScriptCenter.Repository.ScriptVersion.datasource" />
+    <EmbeddedResource Include="Controls\SupportedMaxVersionsEditorUI.resx">
+      <DependentUpon>SupportedMaxVersionsEditorUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DevCenter\Forms\PackageRootPathWarning.resx">
       <DependentUpon>PackageRootPathWarning.cs</DependentUpon>
     </EmbeddedResource>
@@ -310,7 +321,7 @@
     <EmbeddedResource Include="Resources\icons\toolbar.png" />
     <EmbeddedResource Include="Resources\icons\toolbar_button.png" />
     <EmbeddedResource Include="Resources\icons\toolbar_separator.png" />
-    <Content Include="scratchpad .txt" />
+    <Content Include="scratchpad.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

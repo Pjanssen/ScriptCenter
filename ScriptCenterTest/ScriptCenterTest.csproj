@@ -69,6 +69,7 @@
     <Compile Include="Package\ScriptPackageTest.cs" />
     <Compile Include="Repository\ScriptIdTest.cs" />
     <Compile Include="Repository\ScriptManifestTokensTest.cs" />
+    <Compile Include="Repository\SupportedMaxVersionsTest.cs" />
     <Compile Include="ScriptCenterCoreTest.cs" />
     <Compile Include="Utils\ObjectSetDefaultValuesTest.cs" />
     <Compile Include="Utils\JsonFileHandlerTest.cs" />

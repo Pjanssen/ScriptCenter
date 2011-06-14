@@ -21,27 +21,19 @@ namespace ScriptCenter.Repository
         public ScriptVersionNumber VersionNumber { get; set; }
 
 
+        [JsonProperty("supported_max_versions")]
+        [DisplayName("Supported 3dsmax Versions")]
+        [Editor(typeof(ScriptCenter.Controls.SupportedMaxVersionsEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        public SupportedMaxVersions SupportedMaxVersions { get; set; }
+
+
         [JsonProperty("uri")]
         [DisplayName("Script/Package File")]
         [Description("The path to the script or package for this version. Make sure this reflects the situation on your (web)host!")]
         [Editor(typeof(ScriptCenter.Controls.VersionScriptPathEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public String ScriptPath { get; set; }
 
-
-        [JsonProperty("min_3dsmax")]
-        [DisplayName("Minimal 3dsmax version")]
-        [Description("The 3dsmax version required to install the script. Set to 0 for all versions.")]
-        [DefaultValue(0)]
-        [TypeConverter(typeof(RequiredMaxVersionConverter))]
-        public Int32 Minimal3dsmaxVersion { get; set; }
-
-        [JsonProperty("max_3dsmax")]
-        [DisplayName("Maximum 3dsmax version")]
-        [Description("Use this property to limit the script up to a specific 3dsmax version. Set to 0 for all versions.")]
-        [DefaultValue(0)]
-        [TypeConverter(typeof(RequiredMaxVersionConverter))]
-        public Int32 Maximum3dsmaxVersion { get; set; }
-
+        
 
         public ScriptVersion() : this(1, 0, 0, ScriptReleaseStage.Release) { }
         public ScriptVersion(Int32 major, Int32 minor, Int32 revision, ScriptReleaseStage releaseStage) 
@@ -49,8 +41,7 @@ namespace ScriptCenter.Repository
         public ScriptVersion(ScriptVersionNumber versionNumber)
         {
             this.VersionNumber = versionNumber;
-            this.Minimal3dsmaxVersion = 0;
-            this.Maximum3dsmaxVersion = 0;
+            this.SupportedMaxVersions = SupportedMaxVersions.All;
         }
         
         /// <summary>
@@ -78,6 +69,7 @@ namespace ScriptCenter.Repository
         private Int32 _revision;
         private ScriptReleaseStage _releaseStage;
 
+        [DefaultValue(1)]
         [Description("The major component of the version.")]
         public Int32 Major 
         {
@@ -89,6 +81,7 @@ namespace ScriptCenter.Repository
             }
         }
 
+        [DefaultValue(0)]
         [Description("The minor component of the version.")]
         public Int32 Minor 
         {
@@ -100,6 +93,7 @@ namespace ScriptCenter.Repository
             }
         }
 
+        [DefaultValue(0)]
         [Description("The revision component of the version.")]
         public Int32 Revision 
         {

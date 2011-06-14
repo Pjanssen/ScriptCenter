@@ -26,26 +26,4 @@ namespace ScriptCenter.Repository
             return base.ConvertFrom(context, culture, value);
         }
     }
-
-    public class RequiredMaxVersionConverter : Int32Converter
-    {
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
-        {
-            return true;
-        }
-
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
-        {
-            return true;
-        }
-
-        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
-        {
-            List<Int32> versions = new List<Int32>() { 0 };
-            for (int i = 2008; i < DateTime.Today.Year + 2; i++)
-                versions.Add(i);
-
-            return new StandardValuesCollection(versions);
-        }
-    }
 }

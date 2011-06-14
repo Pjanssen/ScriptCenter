@@ -1,0 +1,4 @@
+﻿- Review Installer class. Add cleanUp method to close logstream, reset exception, etc
+- Consider changing Do/Undo methods on InstallerAction to Install/Uninstall/Update.
+- Add SCVersion to manifest, repo, etc.
+- Refactoring CuiFile and KbdFile unit tests to use streams.

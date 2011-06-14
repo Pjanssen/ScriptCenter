@@ -133,8 +133,7 @@ namespace ScriptCenterTest.Repository
             ScriptVersion version = new ScriptVersion(2, 1, 3, ScriptReleaseStage.Alpha);
             ScriptVersion newVersion = (ScriptVersion)version.Copy();
             Assert.AreEqual(version.VersionNumber, newVersion.VersionNumber, "Version numbers are equal");
-            Assert.AreEqual(version.Minimal3dsmaxVersion, newVersion.Minimal3dsmaxVersion, "Min 3dsmax are equal");
-            Assert.AreEqual(version.Maximum3dsmaxVersion, newVersion.Maximum3dsmaxVersion, "Max 3dsmax are equal");
+            Assert.AreEqual(version.SupportedMaxVersions, newVersion.SupportedMaxVersions, "SupportedMaxVersions are equal.");
             Assert.AreEqual(version.ScriptPath, newVersion.ScriptPath, "Scriptpaths are equal");
         }
     }
