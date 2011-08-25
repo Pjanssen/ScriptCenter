@@ -54,11 +54,11 @@ namespace ScriptCenter.Utils
         /// Reads and parses a file to an object.
         /// </summary>
         /// <param name="path">The file to read.</param>
-        public T Read(String path)
+        public T Read(IPath path)
         {
             T data = default(T);
-            
-            using (StreamReader sr = new StreamReader(path))
+
+            using (StreamReader sr = new StreamReader(path.AbsolutePath))
             using (JsonTextReader jr = new JsonTextReader(sr))
             {
                 data = this.serializer.Deserialize<T>(jr);
@@ -71,13 +71,13 @@ namespace ScriptCenter.Utils
         /// Reads and parses a file asynchronously.
         /// </summary>
         /// <param name="path">The file to read.</param>
-        public void ReadAsync(String path)
+        public void ReadAsync(IPath path)
         {
             WebClient client = new WebClient();
             client.DownloadStringCompleted += this.client_DownloadStringCompleted;
             try
             {
-                client.DownloadStringAsync(new Uri(path));
+                client.DownloadStringAsync(path.ToUri());
             }
             catch (Exception e)
             {
@@ -110,16 +110,16 @@ namespace ScriptCenter.Utils
         /// </summary>
         /// <param name="path">The file to write to.</param>
         /// <param name="obj">The object to serialize and write.</param>
-        public void Write(String path, T obj)
+        public void Write(IPath path, T obj)
         {
             if (obj == null)
                 throw new ArgumentNullException("Object to serialize cannot be null.");
 
-            String dir = new FileInfo(path).DirectoryName;
+            String dir = new FileInfo(path.AbsolutePath).DirectoryName;
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            using (StreamWriter streamWriter = new StreamWriter(path))
+            using (StreamWriter streamWriter = new StreamWriter(path.AbsolutePath))
             {
                 this.Write(streamWriter, obj);
             }

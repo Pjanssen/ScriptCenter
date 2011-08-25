@@ -88,36 +88,28 @@ public class CopyDirAction : InstallerAction
     /// </summary>
     public override bool Do(Installer installer)
     {
-        try
+        String sourcePath = installer.ResourcesDirectory + this.Source;
+        String targetPath = AppPaths.GetApplicationPaths().GetPath(this.Target).AbsolutePath;
+        if (this.UseScriptId)
+            targetPath += "/" + installer.Manifest.Id;
+        String[] files = Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories);
+
+        foreach (String file in files)
         {
-            String sourcePath = installer.ResourcesDirectory + this.Source;
-            String targetPath = AppPaths.GetApplicationPaths().GetPath(this.Target);
-            if (this.UseScriptId)
-                targetPath += "/" + installer.Manifest.Id;
-            String[] files = Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories);
-
-            foreach (String file in files)
+            String targetFile = targetPath + "/" + file.Substring(sourcePath.Length);
+            FileInfo fileInfo = new FileInfo(targetFile);
+            if (!fileInfo.Directory.Exists)
             {
-                String targetFile = targetPath + "/" + file.Substring(sourcePath.Length);
-                FileInfo fileInfo = new FileInfo(targetFile);
-                if (!fileInfo.Directory.Exists)
-                {
-                    fileInfo.Directory.Create();
-                }
-
-                File.Copy(file, targetFile, true);
-
-                if (this.Target == AppPaths.Directory.MacroScripts)
-                    ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
+                fileInfo.Directory.Create();
             }
 
-            InstallerLog.WriteLine("Copied directory " + targetPath);
+            File.Copy(file, targetFile, true);
+
+            if (this.Target == AppPaths.Directory.MacroScripts)
+                ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
         }
-        catch (Exception e)
-        {
-            installer.InstallerException = e;
-            return false;
-        }
+
+        InstallerLog.WriteLine("Copied directory " + targetPath);
 
         return true;
     }
@@ -127,22 +119,14 @@ public class CopyDirAction : InstallerAction
     /// </summary>
     public override bool Undo(Installer installer)
     {
-        try
-        {
-            String scriptPath = AppPaths.GetApplicationPaths().GetPath(AppPaths.Directory.Scripts);
-            //TODO add check for UseScriptId
-            String targetPath = scriptPath + "/" + installer.Manifest.Id;
+        String scriptPath = AppPaths.GetApplicationPaths().GetPath(AppPaths.Directory.Scripts).AbsolutePath;
+        //TODO add check for UseScriptId
+        String targetPath = scriptPath + "/" + installer.Manifest.Id;
 
-            if (Directory.Exists(targetPath))
-            {
-                Directory.Delete(targetPath, true);
-                InstallerLog.WriteLine("Deleted directory " + targetPath);
-            }
-        }
-        catch (Exception e)
+        if (Directory.Exists(targetPath))
         {
-            installer.InstallerException = e;
-            return false;
+            Directory.Delete(targetPath, true);
+            InstallerLog.WriteLine("Deleted directory " + targetPath);
         }
 
         return true;

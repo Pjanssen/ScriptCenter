@@ -13,7 +13,7 @@ namespace ScriptCenter.Controls
 {
     public partial class InstalledPage : UserControl
     {
-        private String installedScriptsFile = "C:/temp/scriptcenter/" + Defaults.InstalledScriptsRepository;
+        private IPath installedScriptsFile = new BasePath("C:/temp/scriptcenter/" + Defaults.InstalledScriptsRepository);
         private ScriptRepository installedScripts;
 
 
@@ -50,14 +50,14 @@ namespace ScriptCenter.Controls
 
 
 
-        private void LoadManifest(String address)
+        private void LoadManifest(IPath path)
         {
             JsonFileHandler<ScriptManifest> h = new JsonFileHandler<ScriptManifest>();
-            ScriptManifest m = h.Read(address);
+            ScriptManifest m = h.Read(path);
 
             ListViewItem i = new ListViewItem();
             if (m == null)
-                i.Text = "Error loading manifest " + address;
+                i.Text = "Error loading manifest " + path.AbsolutePath;
             else
             {
                 i.Text = m.Name;

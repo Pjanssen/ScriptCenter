@@ -100,9 +100,10 @@ namespace ScriptCenterTest.Package
         public void WriteTest()
         {
             JsonFileHandler<InstallerConfiguration> handler = new JsonFileHandler<InstallerConfiguration>();
+            IPath path = new BasePath(TestHelperMethods.GetOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension);
             try
             {
-                handler.Write(TestHelperMethods.GetOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension, this.config);
+                handler.Write(path, this.config);
             }
             catch (Exception e)
             {
@@ -118,7 +119,8 @@ namespace ScriptCenterTest.Package
 
             // Read and compare manifest
             JsonFileHandler<InstallerConfiguration> handler = new JsonFileHandler<InstallerConfiguration>();
-            InstallerConfiguration readConfig = handler.Read(TestHelperMethods.GetOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension);
+            IPath path = new BasePath(TestHelperMethods.GetOutputDirectory() + "/myscript" + InstallerConfiguration.DefaultExtension);
+            InstallerConfiguration readConfig = handler.Read(path);
             Assert.IsNotNull(readConfig);
             Assert.AreEqual(config.Actions.Count, readConfig.Actions.Count);
             Assert.AreEqual(config, config.Actions[0].Configuration);

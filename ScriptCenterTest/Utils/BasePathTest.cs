@@ -68,5 +68,25 @@ namespace ScriptCenterTest.Utils
             Assert.IsTrue(path.IsFilePath, "File path IsFilePath");
             Assert.IsFalse(path.IsDirectoryPath, "File path IsDirectoryPath");
         }
+
+        [TestMethod]
+        public void ToUriTest()
+        {
+            BasePath path = new BasePath("C:/code/test/");
+            Uri expected = new Uri("C:/code/test/");
+            Assert.AreEqual(expected, path.ToUri(), "ToUri conversion.");
+        }
+
+        [TestMethod]
+        public void CombineTest()
+        {
+            BasePath path = new BasePath("C:/code/");
+            IPath newPath = path.Combine("test/");
+            Assert.AreEqual("C:/code/", path.AbsolutePath, "Original path object should not change.");
+            Assert.AreEqual(path.AbsolutePath + "test/", newPath.AbsolutePath, "New path should include concatenated directory.");
+
+            newPath = path.Combine("../test/");
+            Assert.AreEqual("C:/test/", newPath.AbsolutePath, "New path should be able to handle relative path concatenation.");
+        }
     }
 }

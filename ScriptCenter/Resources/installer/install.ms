@@ -23,12 +23,14 @@
 	(
 		try
 		(
-			local tempDir = (GetDir #temp) + "/{id}";
-			dotnet.loadassembly (tempDir + "/scriptcenter.dll");
-			local installer = dotNetObject "ScriptCenter.Installer.Installer" tempDir (tempDir + "/script.scmanifest") (tempDir + "/script.scinstaller");
-			local uiConfig = (dotNetClass "ScriptCenter.Installer.UI.InstallerUIConfiguration").FromFile (tempDir + "/script.scinstallerui");
-			local installerDialog = dotNetObject "ScriptCenter.Installer.UI.InstallerDialog" installer uiConfig;
-			installerDialog.ShowDialog();
+			local tempDir = (GetDir #temp) + "/{id}/";
+			local installerDir = tempDir + "installer/";
+			dotnet.loadassembly (installerDir + "scriptcenter.dll");
+			local installer = dotNetObject "ScriptCenter.Package.Installer" tempDir (installerDir + "script.scmanifest") (installerDir + "script.scinstaller");
+			--local uiConfig = (dotNetClass "ScriptCenter.Package.InstallerUI.InstallerUIConfiguration").FromFile (tempDir + "/script.scinstallerui");
+			--local installerDialog = dotNetObject "ScriptCenter.Package.InstallerUI.InstallerDialog" installer uiConfig;
+			--installerDialog.ShowDialog();
+			installer.Install();
 		)
 		catch
 		(

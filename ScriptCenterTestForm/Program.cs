@@ -17,6 +17,7 @@ namespace ScriptCenterTestForm
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
             Application.Run(new ScriptCenter.DevCenter.DevCenter());
+            //Application.Run(new ScriptCenter.Test());
         }
     }
 }

@@ -31,7 +31,8 @@ namespace ScriptCenterTest.Utils
         public void ReadTest()
         {
             //Read a simple test object file and check the results.
-            SimpleTestObject readObj = handler.Read(TestHelperMethods.GetTestFilesDirectory() + "SimpleTestObject.json");
+            IPath path = new BasePath(TestHelperMethods.GetTestFilesDirectory() + "SimpleTestObject.json");
+            SimpleTestObject readObj = handler.Read(path);
             Assert.IsNotNull(readObj, "Read object is null");
             Assert.IsNotNull(readObj.Name, "Read object's name is null");
             Assert.AreEqual(SimpleTestObject.DefaultName, readObj.Name, "Read object's name incorrect");
@@ -43,9 +44,10 @@ namespace ScriptCenterTest.Utils
         {
             //Read a simple test object file that is not formed correctly and check the results.
             SimpleTestObject readObj = null;
+            IPath path = new BasePath(TestHelperMethods.GetTestFilesDirectory() + "SimpleBrokenTestObject.json");
             try
             {
-                readObj = handler.Read(TestHelperMethods.GetTestFilesDirectory() + "SimpleBrokenTestObject.json");
+                readObj = handler.Read(path);
                 Assert.Fail("Read broken file did not throw an exception as expected");
             }
             catch (JsonReaderException e) 
@@ -60,7 +62,7 @@ namespace ScriptCenterTest.Utils
             SimpleTestObject readObj = null;
             try
             {
-                readObj = handler.Read("C:/nonexistingfile.json");
+                readObj = handler.Read(new BasePath("C:/nonexistingfile.json"));
                 Assert.Fail("Read non-existing file did not throw exception");
             }
             catch (System.IO.FileNotFoundException e) 
@@ -78,7 +80,7 @@ namespace ScriptCenterTest.Utils
                 readObj = handler.Read(null);
                 Assert.Fail("Read null did not throw exception");
             }
-            catch (ArgumentNullException e) 
+            catch (Exception e) 
             {
                 Assert.IsNotNull(e); //I don't think this will ever fail, but still..
             }
@@ -90,7 +92,7 @@ namespace ScriptCenterTest.Utils
             SimpleTestObject readObj = null;
             try
             {
-                readObj = handler.Read(":non&existing^%$file.json");
+                readObj = handler.Read(new BasePath(":non&existing^%$file.json"));
                 Assert.Fail("Read incorrect uri did not throw exception");
             }
             catch (ArgumentException e) 
@@ -103,9 +105,10 @@ namespace ScriptCenterTest.Utils
         public void ReadOnlineFileTest()
         {
             SimpleTestObject readObj = null;
+            IPath path = new BasePath(TestHelperMethods.GetOnlineTestFilesDirectory() + "SimpleTestObject.json");
             try
             {
-                readObj = handler.Read(TestHelperMethods.GetOnlineTestFilesDirectory() + "SimpleTestObject.json");
+                readObj = handler.Read(path);
                 Assert.Fail("Read online uri did not throw exception");
             }
             catch (ArgumentException e) 
@@ -119,15 +122,15 @@ namespace ScriptCenterTest.Utils
         [TestMethod]
         public void WriteTest()
         {
-            String outputFile = TestHelperMethods.GetOutputDirectory() + "SimpleTestObject.json";
+            IPath outputFile = new BasePath(TestHelperMethods.GetOutputDirectory() + "SimpleTestObject.json");
             SimpleTestObject obj = new SimpleTestObject() { Name = SimpleTestObject.DefaultName, Id = SimpleTestObject.DefaultId };
 
             //Remove the file if it already exists, so we test that it actually writes a file.
-            if (System.IO.File.Exists(outputFile))
-                System.IO.File.Delete(outputFile);
+            if (System.IO.File.Exists(outputFile.AbsolutePath))
+                System.IO.File.Delete(outputFile.AbsolutePath);
 
             handler.Write(outputFile, obj);
-            Assert.IsTrue(System.IO.File.Exists(outputFile));
+            Assert.IsTrue(System.IO.File.Exists(outputFile.AbsolutePath));
 
             obj = handler.Read(outputFile);
             Assert.AreEqual(SimpleTestObject.DefaultName, obj.Name);
@@ -137,26 +140,26 @@ namespace ScriptCenterTest.Utils
         [TestMethod]
         public void WriteNullTest()
         {
-            String outputFile = TestHelperMethods.GetOutputDirectory() + "FileHandlerWriteNullTest.json";
+            IPath outputFile = new BasePath(TestHelperMethods.GetOutputDirectory() + "FileHandlerWriteNullTest.json");
             try
             {
                 handler.Write(outputFile, null);
                 Assert.Fail("Write null did not throw exception as expected");
             }
-            catch (ArgumentNullException e) 
+            catch (Exception e) 
             {
                 Assert.IsNotNull(e); //I don't think this will ever fail, but still..
             }
-            Assert.IsFalse(System.IO.File.Exists(outputFile));
+            Assert.IsFalse(System.IO.File.Exists(outputFile.AbsolutePath));
 
             SimpleTestObject obj = new SimpleTestObject() { Name = SimpleTestObject.DefaultName, Id = SimpleTestObject.DefaultId };
             try
             {
-                String filePath = null;
-                handler.Write(filePath, obj);
+                IPath path = null;
+                handler.Write(path, obj);
                 Assert.Fail("Write null did not throw exception as expected");
             }
-            catch (ArgumentNullException e) 
+            catch (Exception e) 
             {
                 Assert.IsNotNull(e); //I don't think this will ever fail, but still..
             }
@@ -164,7 +167,7 @@ namespace ScriptCenterTest.Utils
         [TestMethod]
         public void WriteIncorrectPathTest()
         {
-            String outputFile = ":non&existing^%$file.json";
+            IPath outputFile = new BasePath(":non&existing^%$file.json");
             SimpleTestObject obj = new SimpleTestObject() { Name = SimpleTestObject.DefaultName, Id = SimpleTestObject.DefaultId };
             try
             {
@@ -175,14 +178,14 @@ namespace ScriptCenterTest.Utils
             {
                 Assert.IsNotNull(e); //I don't think this will ever fail, but still..
             }
-            Assert.IsFalse(System.IO.File.Exists(outputFile));
+            Assert.IsFalse(System.IO.File.Exists(outputFile.AbsolutePath));
         }
 
 
         [TestMethod]
         public void ReadAsyncTest()
         {
-            String path = TestHelperMethods.GetTestFilesDirectory() + "SimpleTestObject.json";
+            IPath path = new BasePath(TestHelperMethods.GetTestFilesDirectory() + "SimpleTestObject.json");
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             SimpleTestObject obj = null;
@@ -200,7 +203,7 @@ namespace ScriptCenterTest.Utils
         [TestMethod]
         public void ReadOnlineFileAsyncTest()
         {
-            String path = TestHelperMethods.GetOnlineTestFilesDirectory() + "SimpleTestObject.json";
+            IPath path = new BasePath(TestHelperMethods.GetOnlineTestFilesDirectory() + "SimpleTestObject.json");
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             SimpleTestObject obj = null;
@@ -209,8 +212,13 @@ namespace ScriptCenterTest.Utils
                 obj = e.Data;
                 manualEvent.Set();
             };
+            handler.ReadError += delegate(object sender, ErrorEventArgs e)
+            {
+                manualEvent.Set();
+            };
+            //TODO make sure this really doesn't block the calling thread. The timeout of 15s regardless of waitone seems to suggest that it does..
             handler.ReadAsync(path);
-            manualEvent.WaitOne(5000, false);
+            manualEvent.WaitOne(1000, false);
             Assert.IsNotNull(obj);
             Assert.AreEqual(SimpleTestObject.DefaultName, obj.Name);
             Assert.AreEqual(SimpleTestObject.DefaultId, obj.Id);
@@ -219,7 +227,7 @@ namespace ScriptCenterTest.Utils
         [TestMethod]
         public void ReadBrokenFileAsyncTest()
         {
-            String path = TestHelperMethods.GetTestFilesDirectory() + "SimpleBrokenTestObject.json";
+            IPath path = new BasePath(TestHelperMethods.GetTestFilesDirectory() + "SimpleBrokenTestObject.json");
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             Exception exception = null;
@@ -239,7 +247,7 @@ namespace ScriptCenterTest.Utils
         [TestMethod]
         public void ReadNonExistingFileAsyncTest()
         {
-            String path = "C:/nonexistingfile.json";
+            IPath path = new BasePath("C:/nonexistingfile.json");
             ManualResetEvent manualEvent = new ManualResetEvent(false);
 
             Exception exception = null;
@@ -290,7 +298,7 @@ namespace ScriptCenterTest.Utils
                 exception = e.Exception;
                 manualEvent.Set();
             };
-            handler.ReadAsync(":non&existing^%$file.json");
+            handler.ReadAsync(new BasePath(":non&existing^%$file.json"));
             manualEvent.WaitOne(5000, false);
             Assert.IsNotNull(exception);
         }

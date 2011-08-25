@@ -2,3 +2,9 @@
 - Consider changing Do/Undo methods on InstallerAction to Install/Uninstall/Update.
 - Add SCVersion to manifest, repo, etc.
 - Refactoring CuiFile and KbdFile unit tests to use streams.
+- Implement install package Installer Action.
+- Think about whether the WriteManifest method should be part of the PackageBuilder class.
+
+- BUG script id in manifest form not working
+- BUG toolbar name in button action not working properly (after moving/adding action?)
+- BUG add toolbar should take into account that max doesn't clean up after itself

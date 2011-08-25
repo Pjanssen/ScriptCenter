@@ -77,34 +77,26 @@ public class CopyFileAction : InstallerAction
     /// </summary>
     public override bool Do(Installer installer)
     {
-        try
+        String sourceFile = installer.ResourcesDirectory + this.Source;
+        String targetFile = AppPaths.GetApplicationPaths().GetPath(this.Target).AbsolutePath;
+        if (this.UseScriptId)
+            targetFile += "/" + installer.Manifest.Id;
+
+        FileInfo sourceFileInfo = new FileInfo(sourceFile);
+        targetFile += "/" + sourceFileInfo.Name;
+        FileInfo targetFileInfo = new FileInfo(targetFile);
+        if (!targetFileInfo.Directory.Exists)
         {
-            String sourceFile = installer.ResourcesDirectory + this.Source;
-            String targetFile = AppPaths.GetApplicationPaths().GetPath(this.Target);
-            if (this.UseScriptId)
-                targetFile += "/" + installer.Manifest.Id;
-
-            FileInfo sourceFileInfo = new FileInfo(sourceFile);
-            targetFile += "/" + sourceFileInfo.Name;
-            FileInfo targetFileInfo = new FileInfo(targetFile);
-            if (!targetFileInfo.Directory.Exists)
-            {
-                targetFileInfo.Directory.Create();
-                InstallerLog.WriteLine("Created directory " + targetFileInfo.DirectoryName);
-            }
-
-            File.Copy(sourceFile, targetFile, true);
-
-            if (this.Target == AppPaths.Directory.MacroScripts)
-                ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
-
-            InstallerLog.WriteLine("Copied file " + targetFile);
+            targetFileInfo.Directory.Create();
+            InstallerLog.WriteLine("Created directory " + targetFileInfo.DirectoryName);
         }
-        catch (Exception e)
-        {
-            installer.InstallerException = e;
-            return false;
-        }
+
+        File.Copy(sourceFile, targetFile, true);
+
+        if (this.Target == AppPaths.Directory.MacroScripts)
+            ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("fileIn " + targetFile);
+
+        InstallerLog.WriteLine("Copied file " + targetFile);
 
         return true;
     }

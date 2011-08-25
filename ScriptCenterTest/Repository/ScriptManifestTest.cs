@@ -13,12 +13,12 @@ namespace ScriptCenterTest.Repository
     public class ScriptManifestTest
     {
         private ScriptManifest manifest;
-        private String outputFile;
+        private IPath outputFile;
 
         [TestInitialize()]
         public void testInitialize()
         {
-            this.outputFile = TestHelperMethods.GetOutputDirectory() + "/outliner" + ScriptManifest.DefaultExtension;
+            this.outputFile = new BasePath(TestHelperMethods.GetOutputDirectory() + "/outliner" + ScriptManifest.DefaultExtension);
 
             this.manifest = new ScriptManifest();
             this.manifest.Name = "Outliner";
@@ -36,12 +36,12 @@ namespace ScriptCenterTest.Repository
             JsonFileHandler<ScriptManifest> handler = new JsonFileHandler<ScriptManifest>();
 
             //Remove the file if it already exists, so we test that it actually writes a file.
-            if (System.IO.File.Exists(outputFile))
-                System.IO.File.Delete(outputFile);
+            if (System.IO.File.Exists(outputFile.AbsolutePath))
+                System.IO.File.Delete(outputFile.AbsolutePath);
 
-            handler.Write(outputFile, this.manifest);
+            handler.Write(new BasePath(outputFile.AbsolutePath), this.manifest);
 
-            Assert.IsTrue(System.IO.File.Exists(outputFile));
+            Assert.IsTrue(System.IO.File.Exists(outputFile.AbsolutePath));
         }
 
         [TestMethod()]

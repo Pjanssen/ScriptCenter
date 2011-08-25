@@ -25,7 +25,7 @@ namespace ScriptCenter.DevCenter.Forms
             if (package == null)
                 throw new ArgumentNullException("Package argument cannot be null.");
 
-            foreach (ScriptPackage.ExportOptions o in Enum.GetValues(typeof(ScriptPackage.ExportOptions)))
+            foreach (PackageExportOptions o in Enum.GetValues(typeof(PackageExportOptions)))
             {
                 this.exportOptionComboBox.Items.Add(o);
             }
@@ -67,15 +67,30 @@ namespace ScriptCenter.DevCenter.Forms
 
         private void setHelpLabelText() 
         {
-            this.helpLabel.Text += ScriptManifestTokens.Id_Token + ", ";
-            this.helpLabel.Text += ScriptManifestTokens.Name_Token + ", ";
-            this.helpLabel.Text += ScriptManifestTokens.Author_Token + ", ";
-            this.helpLabel.Text += ScriptManifestTokens.Version_Token + ", ";
-            this.helpLabel.Text += ScriptManifestTokens.Version_Underscores_Token + ",\r\n";
-            this.helpLabel.Text += ScriptManifestTokens.VersionMajor_Token + ", ";
-            this.helpLabel.Text += ScriptManifestTokens.VersionMinor_Token + ", ";
-            this.helpLabel.Text += ScriptManifestTokens.VersionRevision_Token + ", ";
-            this.helpLabel.Text += ScriptManifestTokens.VersionStage_Token;
+            StringBuilder b = new StringBuilder(this.helpLabel.Text);
+
+            b.Append(ScriptManifestTokens.Date_Token);
+            b.Append(", ");
+            b.Append(ScriptManifestTokens.Id_Token);
+            b.Append(", ");
+            b.Append(ScriptManifestTokens.Name_Token);
+            b.Append(", ");
+            b.Append(ScriptManifestTokens.Author_Token);
+            b.Append(", ");
+            b.Append(ScriptManifestTokens.Version_Token);
+            b.Append(", ");
+            b.Append(ScriptManifestTokens.Version_Underscores_Token);
+            b.Append(", ");
+            b.Append(Environment.NewLine);
+            b.Append(ScriptManifestTokens.VersionMajor_Token);
+            b.Append(", ");
+            b.Append(ScriptManifestTokens.VersionMinor_Token);
+            b.Append(", ");
+            b.Append(ScriptManifestTokens.VersionRevision_Token);
+            b.Append(", ");
+            b.Append(ScriptManifestTokens.VersionStage_Token);
+
+            this.helpLabel.Text = b.ToString();
         }
         private void enableControls() 
         {

@@ -23,6 +23,21 @@ public partial class DevCenter : Form
 
         this.Files = new Dictionary<Object, String>();
 
+        StringBuilder openFileFilter = new StringBuilder();
+        openFileFilter.Append("ScriptCenter Files (*");
+        openFileFilter.Append(ScriptManifest.DefaultExtension);
+        openFileFilter.Append(", *");
+        openFileFilter.Append(ScriptPackage.DefaultExtension);
+        openFileFilter.Append(", *");
+        openFileFilter.Append(ScriptRepository.DefaultExtension);
+        openFileFilter.Append(")|*");
+        openFileFilter.Append(ScriptManifest.DefaultExtension);
+        openFileFilter.Append(";*");
+        openFileFilter.Append(ScriptPackage.DefaultExtension);
+        openFileFilter.Append(";*");
+        openFileFilter.Append(ScriptRepository.DefaultExtension);
+        openFileDialog.Filter = openFileFilter.ToString();
+
         this.titlePanel.Visible = false;
 
         this.filesTree.AfterSelect += new TreeViewEventHandler(filesTree_AfterSelect);
@@ -165,6 +180,8 @@ public partial class DevCenter : Form
                 this.readPackage(selFile);
             else if (selFile.EndsWith(ScriptRepository.DefaultExtension))
                 this.readRepository(selFile);
+            else
+                MessageBox.Show("Unknown file type.");
         }
     }
     private void saveButton_Click(object sender, EventArgs e)
@@ -203,19 +220,23 @@ public partial class DevCenter : Form
         }
 
         if (data.Data is ScriptManifest)
-            this.writeManifest(filePath, (ScriptManifest)data.Data);
+            this.writeManifest(new BasePath(filePath), (ScriptManifest)data.Data);
         else if (data.Data is ScriptPackage)
-            this.writePackage(filePath, (ScriptPackage)data.Data);
+            this.writePackage(new BasePath(filePath), (ScriptPackage)data.Data);
         else if (data.Data is ScriptRepository)
-            this.writeRepository(filePath, (ScriptRepository)data.Data);
+            this.writeRepository(new BasePath(filePath), (ScriptRepository)data.Data);
     }
     private void exportButton_Click(object sender, EventArgs e)
     {
         TreeNode rootNode = this.getRootNode(this.filesTree.SelectedNode);
         if (rootNode != null && rootNode.Tag is TreeNodeData && ((TreeNodeData)rootNode.Tag).Data is ScriptPackage)
         {
-            if (ScriptPacker.Pack((ScriptPackage)((TreeNodeData)rootNode.Tag).Data))
+            ScriptPackage package = (ScriptPackage)((TreeNodeData)rootNode.Tag).Data;
+            PackageBuilder builder = new PackageBuilder();
+            if (builder.WriteManifest(package.Manifest, package.ManifestFile) && builder.BuildAndWritePackage(package, package.ExportOption))
                 MessageBox.Show("Package export successful.", "Package Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Package export failed.", "Package Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -273,7 +294,7 @@ public partial class DevCenter : Form
         JsonFileHandler<ScriptManifest> handler = new JsonFileHandler<ScriptManifest>();
         try
         {
-            ScriptManifest manif = handler.Read(file);
+            ScriptManifest manif = handler.Read(new BasePath(file));
             TreeNode tn = this.addManifestToTree(manif, file);
             filesTree.SelectedNode = tn;
         }
@@ -287,7 +308,7 @@ public partial class DevCenter : Form
         JsonFileHandler<ScriptPackage> handler = new JsonFileHandler<ScriptPackage>();
         try
         {
-            ScriptPackage pack = handler.Read(file);
+            ScriptPackage pack = handler.Read(new BasePath(file));
             TreeNode tn = this.addPackageToTree(pack, file);
             filesTree.SelectedNode = tn;
         }
@@ -301,7 +322,7 @@ public partial class DevCenter : Form
         JsonFileHandler<ScriptRepository> handler = new JsonFileHandler<ScriptRepository>();
         try
         {
-            ScriptRepository repo = handler.Read(file);
+            ScriptRepository repo = handler.Read(new BasePath(file));
             TreeNode tn = this.addRepositoryToTree(repo, file);
             filesTree.SelectedNode = tn;
         }
@@ -311,36 +332,36 @@ public partial class DevCenter : Form
         }
     }
 
-    private void writeManifest(String filePath, ScriptManifest manifest)
+    private void writeManifest(IPath path, ScriptManifest manifest)
     {
         JsonFileHandler<ScriptManifest> handler = new JsonFileHandler<ScriptManifest>();
         try
         {
-            handler.Write(filePath, manifest);
+            handler.Write(path, manifest);
         }
         catch (Exception exc)
         {
             MessageBox.Show(exc.Message);
         }
     }
-    private void writePackage(String filePath, ScriptPackage package)
+    private void writePackage(IPath path, ScriptPackage package)
     {
         JsonFileHandler<ScriptPackage> handler = new JsonFileHandler<ScriptPackage>();
         try
         {
-            handler.Write(filePath, package);
+            handler.Write(path, package);
         }
         catch (Exception exc)
         {
             MessageBox.Show(exc.Message);
         }
     }
-    private void writeRepository(String filePath, ScriptRepository repository)
+    private void writeRepository(IPath path, ScriptRepository repository)
     {
         JsonFileHandler<ScriptRepository> handler = new JsonFileHandler<ScriptRepository>();
         try
         {
-            handler.Write(filePath, repository);
+            handler.Write(path, repository);
         }
         catch (Exception exc)
         {

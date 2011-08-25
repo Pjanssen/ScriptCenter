@@ -1,0 +1,7 @@
+name "{id}"
+version {version_major}.{version_minor}{version_rev}
+
+extract to "$temp/{id}"
+
+run "installer/install.ms"
+drop "installer/install.ms"

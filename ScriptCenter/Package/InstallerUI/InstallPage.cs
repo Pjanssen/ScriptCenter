@@ -31,7 +31,7 @@ namespace ScriptCenter.Package.InstallerUI
                     
                 ((InstallerDialog)this.Wizard).Installer.Progress += new InstallerProgressEventHandler(Installer_Progress);
                 ((InstallerDialog)this.Wizard).Installer.Completed += new EventHandler(Installer_Completed);
-                ((InstallerDialog)this.Wizard).Installer.Failed += new EventHandler(Installer_Failed);
+                ((InstallerDialog)this.Wizard).Installer.Failed += new InstallerFailedEventHandler(Installer_Failed);
             }
         }
 

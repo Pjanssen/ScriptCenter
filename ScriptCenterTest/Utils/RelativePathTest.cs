@@ -151,5 +151,13 @@ namespace ScriptCenterTest.Utils
             Assert.AreEqual("code", path.PathComponents[1], "Second PathComponent.");
             Assert.AreEqual("test", path.PathComponents[2], "Third PathComponent.");
         }
+
+        [TestMethod]
+        public void CombineTest()
+        {
+            RelativePath path = new RelativePath("code/", new BasePath("C:/"));
+            IPath newPath = path.Combine("../test/");
+            Assert.AreEqual("C:/test/", newPath.AbsolutePath, "New path should include concatenated directory");
+        }
     }
 }

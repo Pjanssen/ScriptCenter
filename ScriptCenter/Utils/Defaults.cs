@@ -18,13 +18,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ScriptCenter.Repository;
 
 namespace ScriptCenter.Utils
 {
     public class Defaults
     {
         public const String RepositoryList = "repositories.json";
-        public const String InstalledScriptsRepository = "installed_scripts.repository";
-        public const String Repository = "scripts.repository";
+        public const String InstalledScriptsRepository = "installed_scripts" + ScriptRepository.DefaultExtension;
+        public const String Repository = "scripts" + ScriptRepository.DefaultExtension;
     }
 }

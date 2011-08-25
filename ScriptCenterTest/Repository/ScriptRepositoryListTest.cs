@@ -31,9 +31,10 @@ namespace ScriptCenterTest.Repository
         public void WriteRepositoryListTest()
         {
             JsonFileHandler<ScriptRepositoryList> handler = new JsonFileHandler<ScriptRepositoryList>();
+            IPath path = new BasePath(this.getOutputDirectory() + "repositoryList.json");
             try
             {
-                handler.Write(this.getOutputDirectory() + "repositoryList.json", this.repoList);
+                handler.Write(path, this.repoList);
             }
             catch (Exception e)
             {
@@ -47,7 +48,8 @@ namespace ScriptCenterTest.Repository
             this.WriteRepositoryListTest();
 
             JsonFileHandler<ScriptRepositoryList> handler = new JsonFileHandler<ScriptRepositoryList>();
-            ScriptRepositoryList readList = handler.Read(this.getOutputDirectory() + "repositoryList.json");
+            IPath path = new BasePath(TestHelperMethods.GetOutputDirectory() + "repositoryList.json");
+            ScriptRepositoryList readList = handler.Read(path);
             Assert.IsNotNull(readList);
             Assert.IsNotNull(readList.Repositories);
             Assert.AreEqual(this.repoList.Repositories.Count, readList.Repositories.Count);

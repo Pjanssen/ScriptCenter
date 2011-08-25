@@ -31,7 +31,10 @@ namespace ScriptCenter.Repository
     [Serializable]
     public class ScriptManifest : INotifyPropertyChanged
     {
-        public const String DefaultExtension = ".scmanif";
+        public const String DefaultExtension = ".scmanifest";
+
+        //[JsonProperty("scversion")]
+        //public Int32 SCVersion { get; private set; }
 
         private ScriptId _id;
         private String _name;

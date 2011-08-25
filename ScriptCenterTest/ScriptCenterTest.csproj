@@ -66,6 +66,7 @@
     <Compile Include="Controls\TextBoxStreamWriterTest.cs" />
     <Compile Include="Max\CuiFileTest.cs" />
     <Compile Include="Package\InstallerLogTest.cs" />
+    <Compile Include="Package\InstallerTest.cs" />
     <Compile Include="Package\ScriptPackageTest.cs" />
     <Compile Include="Repository\ScriptIdTest.cs" />
     <Compile Include="Repository\ScriptManifestTokensTest.cs" />

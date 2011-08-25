@@ -12,12 +12,15 @@ namespace ScriptCenter.Package
 {
     public class ScriptPackage : INotifyPropertyChanged
     {
-        public const String DefaultExtension = ".scpack";
+        public const String DefaultExtension = ".scpackage";
+
+        //[JsonProperty("scversion")]
+        //public Int32 SCVersion { get; private set; }
 
         private String _name;
         private BasePath _rootPath;
         private RelativePath _outputPath;
-        private ExportOptions _exportOption;
+        private PackageExportOptions _exportOption;
 
         public ScriptPackage() : this("") { }
         public ScriptPackage(String name) 
@@ -96,16 +99,10 @@ namespace ScriptCenter.Package
         public RelativePath PackageFile { get; set; }
 
 
-        public enum ExportOptions
-        {
-            All,
-            LatestOnly,
-            LatestAndNonExisting
-        }
 
         [JsonProperty("export_option")]
-        [DefaultValue(ExportOptions.LatestAndNonExisting)]
-        public ExportOptions ExportOption
+        [DefaultValue(PackageExportOptions.LatestAndNonExisting)]
+        public PackageExportOptions ExportOption
         {
             get { return _exportOption; }
             set

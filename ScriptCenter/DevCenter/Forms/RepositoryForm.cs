@@ -48,7 +48,7 @@ namespace ScriptCenter.DevCenter.Forms
         }
         private TreeNode addScriptToTreeView(ScriptManifestReference script, TreeNodeCollection parentNodeCollection)
         {
-            TreeNode tn = new TreeNode(script.Uri);
+            TreeNode tn = new TreeNode(script.ToString());
             tn.ImageKey = tn.SelectedImageKey = "manifest_link";
             tn.Tag = script;
             parentNodeCollection.Add(tn);
@@ -150,7 +150,7 @@ namespace ScriptCenter.DevCenter.Forms
             if (e.Node.Tag is ScriptRepositoryCategory)
                 ((ScriptRepositoryCategory)e.Node.Tag).Name = e.Label;
             else if (e.Node.Tag is ScriptManifestReference)
-                ((ScriptManifestReference)e.Node.Tag).Uri = e.Label;
+                ((ScriptManifestReference)e.Node.Tag).Uri.AbsolutePath = e.Label;
         }
 
 

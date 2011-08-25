@@ -53,25 +53,17 @@ public class RunMaxscriptAction : InstallerAction
     /// </summary>
     public override bool Do(Installer installer)
     {
-        try
+        using (StreamReader sr = new StreamReader(this.Source))
         {
-            using (StreamReader sr = new StreamReader(this.Source))
-            {
-                String script = sr.ReadToEnd();
-                Boolean scriptResult = ManagedServices.MaxscriptSDK.ExecuteBooleanMaxscriptQuery(script);
-                InstallerLog.WriteLine("RunMaxscript returned " + scriptResult.ToString());
-                return scriptResult;
-            }
-        }
-        catch (Exception e)
-        {
-            installer.InstallerException = e;
-            return false;
+            String script = sr.ReadToEnd();
+            Boolean scriptResult = ManagedServices.MaxscriptSDK.ExecuteBooleanMaxscriptQuery(script);
+            InstallerLog.WriteLine("RunMaxscript " + this.Source + " returned " + scriptResult.ToString());
+            return scriptResult;
         }
     }
 
     /// <summary>
-    /// Not implemented for this action.
+    /// Runs the Do method so it can be used as an uninstall action.
     /// </summary>
     public override bool Undo(Installer installer) { return Do(installer); }
 

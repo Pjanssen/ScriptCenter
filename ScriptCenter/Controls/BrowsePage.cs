@@ -50,11 +50,11 @@ namespace ScriptCenter.Controls
 
 
         private ScriptRepositoryList repositoryList;
-        private String repositoryListFile = "C:/temp/scriptcenter/" + Defaults.RepositoryList;
+        private IPath repositoryListFile = new BasePath("C:/temp/scriptcenter/" + Defaults.RepositoryList);
         private List<ScriptRepository> repositories;
 
 
-        private void LoadManifest(String address)
+        private void LoadManifest(IPath address)
         {
             JsonFileHandler<ScriptManifest> manifest_handler = new JsonFileHandler<ScriptManifest>();
             manifest_handler.ReadComplete += manifest_handler_LoadComplete;
@@ -104,15 +104,15 @@ namespace ScriptCenter.Controls
             listView1.Items.Add(i);
         }
 
-        private void LoadRepository(String address)
+        private void LoadRepository(IPath address)
         {
-            if (address.EndsWith(".manifest"))
+            if (address.AbsolutePath.EndsWith(".manifest"))
             {
                 LoadManifest(address);
                 return;
             }
-            if (!address.EndsWith(".repository"))
-                address += "/" + Defaults.Repository;
+            if (!address.AbsolutePath.EndsWith(".repository"))
+                address = address.Combine("/" + Defaults.Repository);
 
             JsonFileHandler<ScriptRepository> repository_handler = new JsonFileHandler<ScriptRepository>();
             repository_handler.ReadComplete += repository_handler_LoadComplete;
@@ -149,7 +149,7 @@ namespace ScriptCenter.Controls
                 this.repositoryList.Repositories.Add(rep);
                 JsonFileHandler<ScriptRepositoryList> h = new JsonFileHandler<ScriptRepositoryList>();
                 h.Write(this.repositoryListFile, this.repositoryList);
-                this.LoadRepository(rep.URI);
+                this.LoadRepository(new BasePath(rep.URI));
             }
         }
 
@@ -188,10 +188,10 @@ namespace ScriptCenter.Controls
         {
 
             JsonFileHandler<ScriptManifest> handler = new JsonFileHandler<ScriptManifest>();
-            ScriptManifest manifest = handler.Read("C:/temp/scriptcenter/unpacked_installer/outliner.manifest.xml");
+            ScriptManifest manifest = handler.Read(new BasePath("C:/temp/scriptcenter/unpacked_installer/outliner.manifest.xml"));
             
             JsonFileHandler<InstallerConfiguration> configHandler = new JsonFileHandler<InstallerConfiguration>();
-            InstallerConfiguration config = configHandler.Read("C:/temp/scriptcenter/unpacked_installer/config.installer.xml");
+            InstallerConfiguration config = configHandler.Read(new BasePath("C:/temp/scriptcenter/unpacked_installer/config.installer.xml"));
 
             Package.Installer installer = new Package.Installer("C:/temp/scriptcenter/unpacked_installer", manifest, config);
             InstallerUIConfiguration uiConfig = new InstallerUIConfiguration();
@@ -223,7 +223,7 @@ namespace ScriptCenter.Controls
             config.AddAction(new AssignHotkeyAction(Keys.H | Keys.Alt, "", ""));
 
             JsonFileHandler<InstallerConfiguration> handler = new JsonFileHandler<InstallerConfiguration>();
-            handler.Write("C:/temp/scriptcenter/config.installer", config);
+            handler.Write(new BasePath("C:/temp/scriptcenter/config.installer"), config);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace ScriptCenter.Utils
 {
     public abstract class AppPaths
     {
-        public abstract String GetPath(Directory dir);
+        public abstract IPath GetPath(Directory dir);
 
         public static AppPaths GetApplicationPaths()
         {

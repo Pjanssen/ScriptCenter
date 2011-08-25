@@ -84,16 +84,29 @@ namespace ScriptCenter.Package {
         
         /// <summary>
         ///   Looks up a localized string similar to name &quot;{id}&quot;
-        ///version {version_major}.{version_minor}{version_revision}
+        ///version {version_major}.{version_minor}{version_rev}
         ///
         ///extract to &quot;$temp/{id}&quot;
         ///
-        ///run &quot;install.ms&quot;
-        ///drop &quot;install.ms&quot;.
+        ///run &quot;installer/install.ms&quot;
+        ///drop &quot;installer/install.ms&quot;.
         /// </summary>
         internal static string mzp {
             get {
                 return ResourceManager.GetString("mzp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {name} installer
+        ///
+        ///This package was created using ScriptCenter.
+        ///It should be started either through ScriptCenter plugin or as a standalone installer (by dropping it onto 
+        ///a 3dsmax viewport, or using the menu MaxScript -&gt; Run Script)..
+        /// </summary>
+        internal static string README {
+            get {
+                return ResourceManager.GetString("README", resourceCulture);
             }
         }
     }

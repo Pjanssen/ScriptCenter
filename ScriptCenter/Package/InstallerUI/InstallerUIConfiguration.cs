@@ -20,12 +20,6 @@ namespace ScriptCenter.Package.InstallerUI
             
         }
 
-        public static InstallerUIConfiguration FromFile(String file)
-        {
-            JsonFileHandler<InstallerUIConfiguration> handler = new JsonFileHandler<InstallerUIConfiguration>();
-            return handler.Read(file);
-        }
-
         [JsonProperty("title")]
         [DefaultValue(ScriptManifestTokens.Name_Token + " " + ScriptManifestTokens.Version_Token)]
         public String Title { get; set; }

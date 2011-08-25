@@ -104,6 +104,22 @@ namespace ScriptCenter.Utils
             get { return !PathHelperMethods.IsFilePath(_path); }
         }
 
+        /// <summary>
+        /// Returns a new IPath instance that is a combination of this IPath object and the supplied path String.
+        /// </summary>
+        public IPath Combine(String path)
+        {
+            return new RelativePath(path, this);
+        }
+
+        /// <summary>
+        /// Converts the path to a Uri.
+        /// </summary>
+        public Uri ToUri()
+        {
+            return new Uri(this.AbsolutePath);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {

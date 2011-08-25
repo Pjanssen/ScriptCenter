@@ -9,7 +9,11 @@ namespace ScriptCenter.Utils
     {
         String AbsolutePath { get; set; }
         IList<String> PathComponents { get; }
+
         Boolean IsFilePath { get; }
         Boolean IsDirectoryPath { get; }
+
+        IPath Combine(String path);
+        Uri ToUri();
     }
 }

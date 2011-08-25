@@ -23,7 +23,7 @@ namespace ScriptCenter.Utils
 {
     public class AppPathsDebug : AppPaths
     {
-        public override string GetPath(AppPaths.Directory dir)
+        public override IPath GetPath(AppPaths.Directory dir)
         {
             String path;
             switch (dir)
@@ -48,7 +48,7 @@ namespace ScriptCenter.Utils
                     break;
             }
 
-            return path;
+            return new BasePath(path);
         }
     }
 }

@@ -29,6 +29,9 @@ namespace ScriptCenter.Repository
     {
         public const String DefaultExtension = ".screpo";
 
+        [JsonProperty("scversion")]
+        public Int32 SCVersion { get; set; }
+
         private String _name;
         [JsonProperty("name")]
         public String Name 
@@ -108,21 +111,17 @@ namespace ScriptCenter.Repository
     [JsonConverter(typeof(StringJsonConverter))]
     public class ScriptManifestReference
     {
-        public String Id { get; set; }
-        public String Uri { get; set; }
+        public IPath Uri { get; set; }
 
         public ScriptManifestReference() : this("") { }
         public ScriptManifestReference(String uri)
         {
-            this.Uri = uri;
+            this.Uri = new BasePath(uri);
         }
 
         public override string ToString()
         {
-            return this.Uri;
+            return this.Uri.AbsolutePath;
         }
     }
-
-    //TMP description of script manifest reference.
-    //The path to the script manifest. This can be either a full url (for example http://domain/example.scmanifest), or a uri relative to the repository location."
 }

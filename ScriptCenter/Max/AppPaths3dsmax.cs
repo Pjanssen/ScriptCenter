@@ -24,7 +24,7 @@ namespace ScriptCenter.Max
 {
     public class AppPaths3dsmax : AppPaths
     {
-        public override string GetPath(AppPaths.Directory dir)
+        public override IPath GetPath(AppPaths.Directory dir)
         {
             ManagedServices.PathSDK.DirectoryID dirId;
             switch (dir)
@@ -49,7 +49,7 @@ namespace ScriptCenter.Max
                     break;
             }
 
-            return ManagedServices.PathSDK.GetDirectoryPath(dirId);
+            return new BasePath(ManagedServices.PathSDK.GetDirectoryPath(dirId));
         }
     }
 }

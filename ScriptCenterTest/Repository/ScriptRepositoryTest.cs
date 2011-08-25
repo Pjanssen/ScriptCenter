@@ -53,24 +53,24 @@ namespace ScriptCenterTest.Repository
         [TestMethod]
         public void WriteTest()
         {
-            String outputFile = TestHelperMethods.GetOutputDirectory() + "repo" + ScriptRepository.DefaultExtension;
-            if (File.Exists(outputFile))
-                File.Delete(outputFile);
+            IPath outputFile = new BasePath(TestHelperMethods.GetOutputDirectory() + "repo" + ScriptRepository.DefaultExtension);
+            if (File.Exists(outputFile.AbsolutePath))
+                File.Delete(outputFile.AbsolutePath);
 
             JsonFileHandler<ScriptRepository> handler = new JsonFileHandler<ScriptRepository>();
             handler.Write(outputFile, repo);
 
-            Assert.IsTrue(File.Exists(outputFile));
+            Assert.IsTrue(File.Exists(outputFile.AbsolutePath));
         }
 
         [TestMethod]
         public void ReadTest()
         {
-            String inputFile = TestHelperMethods.GetOutputDirectory() + "repo" + ScriptRepository.DefaultExtension;
-            if (!File.Exists(inputFile))
+            IPath inputFile = new BasePath(TestHelperMethods.GetOutputDirectory() + "repo" + ScriptRepository.DefaultExtension);
+            if (!File.Exists(inputFile.AbsolutePath))
                 this.WriteTest();
 
-            Assert.IsTrue(File.Exists(inputFile), "File to read does not exist");
+            Assert.IsTrue(File.Exists(inputFile.AbsolutePath), "File to read does not exist");
 
             JsonFileHandler<ScriptRepository> handler = new JsonFileHandler<ScriptRepository>();
             ScriptRepository readRepo = handler.Read(inputFile);

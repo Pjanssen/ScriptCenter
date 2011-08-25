@@ -68,7 +68,7 @@ namespace ScriptCenter.Max
         {
             try
             {
-                ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("cui.loadConfig " + this.File);
+                ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("cui.loadConfig @\"" + this.File + "\"");
             }
             catch (Exception e)
             {
@@ -201,7 +201,11 @@ namespace ScriptCenter.Max
         {
             //Button item format
             //Item0=2|0|0|31|3|647394|createOutlinerInstaller`Outliner Dev|0|0|"Create Outliner Installer"|"Create Outliner Installer"|-1|
-                // item type ?
+                // item type
+                    // #define MB_TYPE_KBD                 1
+                    // #define MB_TYPE_SCRIPT              2
+                    // #define MB_TYPE_ACTION              3
+                    // #define MB_TYPE_ACTION_CUSTOM       4
                 // width (where 0 is auto-size?)
                 // height (where 0 is auto-size?)
                 // ?
@@ -252,12 +256,30 @@ namespace ScriptCenter.Max
         /// </summary>
         public Boolean AddToolbarFlyOffItem(String toolbarName)
         {
-            //FlyOffCt2=4|0|300|3
-            //Fly0200=-1|-1|-1|1|Maintoolbar|52
-            //Fly0201=-1|-1|-1|1|Maintoolbar|54
-            //Fly0202=-1|-1|-1|1|Maintoolbar|84
-            //Fly0203=-1|-1|-1|1|Maintoolbar|99
             throw new NotImplementedException();
+            /*
+             * This is what I've been able to figure out about the flyoffs. 
+             * I fear that it might not be possible to use them with macroscripts.
+             * 
+             * Item2=0|0|0|50031|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|70
+             * FlyOffCt2=4|0|300|3
+               * number of subitems
+               * ?
+               * timeout (time in ms it takes before the flyoff opens)
+               * ?
+               * 
+            * Fly0200=-1|-1|-1|1|Maintoolbar|52
+               * SDK Doc: These four data members are indices into the image list. 
+               * They indicate which images to use for each of the four possible button states:
+               * int iOutEn;
+               * int iInEn;
+               * int iOutDis;
+               * int iInDis;    
+               * MaxBmpFileIcon* mpIcon;
+               * MaxBmpFileIcon* mpInIcon;
+               * 
+               * note: it seems that these Fly items don't specify what the button will do, merely set the image of the button.
+            */
         }
 
         private void RemoveItem(CuiSection toolbar, CuiItem item)
@@ -402,7 +424,7 @@ namespace ScriptCenter.Max
                 //Restore backup.
                 if (System.IO.File.Exists(this.File + ".bak"))
                     System.IO.File.Copy(this.File + ".bak", this.File, true);
-
+                
                 Console.WriteLine(e.Message);
                 return false;
             }

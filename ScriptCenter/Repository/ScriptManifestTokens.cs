@@ -17,6 +17,7 @@ namespace ScriptCenter.Repository
         internal const String VersionMinor_Token = "{version_minor}";
         internal const String VersionRevision_Token = "{version_rev}";
         internal const String VersionStage_Token = "{version_stage}";
+        internal const String Date_Token = "{date}";
 
         /// <summary>
         /// Replaces any tokens in the string with values taken from the manifest.
@@ -41,6 +42,7 @@ namespace ScriptCenter.Repository
             newString.Replace(VersionMinor_Token, version.VersionNumber.Minor.ToString());
             newString.Replace(VersionRevision_Token, version.VersionNumber.Revision.ToString());
             newString.Replace(VersionStage_Token, version.VersionNumber.ReleaseStage.ToString().ToLower());
+            newString.Replace(Date_Token, DateTime.Today.ToString("yyyy'-'MM'-'dd"));
 
             return newString.ToString();
         }

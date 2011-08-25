@@ -33,7 +33,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sectionPanel = new System.Windows.Forms.Panel();
             this.titlePanel = new System.Windows.Forms.Panel();
-            this.sectionTitle = new ScriptCenter.Controls.ImageBeforeTextLabel();
             this.icons = new System.Windows.Forms.ImageList(this.components);
             this.horizontalLine = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -53,6 +52,7 @@
             this.exportButton = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.sectionTitle = new ScriptCenter.Controls.ImageBeforeTextLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.titlePanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -97,21 +97,6 @@
             this.titlePanel.Name = "titlePanel";
             this.titlePanel.Size = new System.Drawing.Size(495, 30);
             this.titlePanel.TabIndex = 4;
-            // 
-            // sectionTitle
-            // 
-            this.sectionTitle.AutoSize = true;
-            this.sectionTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sectionTitle.Image = ((System.Drawing.Image)(resources.GetObject("sectionTitle.Image")));
-            this.sectionTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.sectionTitle.ImageKey = "manifest";
-            this.sectionTitle.ImageList = this.icons;
-            this.sectionTitle.Location = new System.Drawing.Point(4, 3);
-            this.sectionTitle.Name = "sectionTitle";
-            this.sectionTitle.Size = new System.Drawing.Size(130, 20);
-            this.sectionTitle.TabIndex = 4;
-            this.sectionTitle.Text = "{section_title}";
-            this.sectionTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // icons
             // 
@@ -290,13 +275,24 @@
             this.exportButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exportButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 2);
             this.exportButton.Name = "exportButton";
-            this.exportButton.Size = new System.Drawing.Size(23, 20);
+            this.exportButton.Size = new System.Drawing.Size(23, 23);
             this.exportButton.Text = "Export Package";
             this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
             // 
-            // openFileDialog
+            // sectionTitle
             // 
-            this.openFileDialog.Filter = "ScriptCenter files (*.scmanif, *.scpack, *.screpo)|*.scmanif;*.scpack;*.screpo";
+            this.sectionTitle.AutoSize = true;
+            this.sectionTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sectionTitle.Image = ((System.Drawing.Image)(resources.GetObject("sectionTitle.Image")));
+            this.sectionTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sectionTitle.ImageKey = "manifest";
+            this.sectionTitle.ImageList = this.icons;
+            this.sectionTitle.Location = new System.Drawing.Point(4, 3);
+            this.sectionTitle.Name = "sectionTitle";
+            this.sectionTitle.Size = new System.Drawing.Size(130, 20);
+            this.sectionTitle.TabIndex = 4;
+            this.sectionTitle.Text = "{section_title}";
+            this.sectionTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // DevCenter
             // 
