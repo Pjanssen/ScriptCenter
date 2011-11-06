@@ -164,7 +164,8 @@ namespace ScriptCenter.Max
                itemToRemove = item;
                continue;
             }
-            else
+            
+            if (itemToRemove != null)
             {
                String newKey = "F";
                Int32 index = Int32.Parse(Regex.Replace(item.Key, "F", ""));
@@ -424,7 +425,7 @@ namespace ScriptCenter.Max
             if (System.IO.File.Exists(this.File))
                System.IO.File.Copy(this.File, this.File + ".bak", true);
 
-            using (FileStream stream = new FileStream(this.File, FileMode.OpenOrCreate))
+            using (FileStream stream = new FileStream(this.File, FileMode.Create))
             {
                return this.Write(stream);
             }
