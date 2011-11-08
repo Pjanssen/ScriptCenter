@@ -142,15 +142,16 @@ internal class KbdFile
     /// <summary>
     /// Tells 3dsmax to load the keyboard actions file.
     /// </summary>
-    public void MaxLoadKbdFile() 
+    public Boolean MaxLoadKbdFile() 
     {
         try
         {
-            ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("actionMan.loadKeyboardFile " + this.File);
+            return ManagedServices.MaxscriptSDK.ExecuteBooleanMaxscriptQuery("actionMan.loadKeyboardFile @\"" + this.File + "\"");
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
+            return false;
         }
     }
 

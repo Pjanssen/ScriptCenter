@@ -467,15 +467,16 @@ namespace ScriptCenter.Max
       /// <summary>
       /// Signals 3dsmax to load the cui file.
       /// </summary>
-      public void MaxLoadCuiFile()
+      public Boolean MaxLoadCuiFile()
       {
          try
          {
-            ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("cui.loadConfig @\"" + this.File + "\"");
+            return ManagedServices.MaxscriptSDK.ExecuteBooleanMaxscriptQuery("cui.loadConfig @\"" + this.File + "\"");
          }
          catch (Exception e)
          {
             Console.WriteLine(e.Message);
+            return false;
          }
       }
 
