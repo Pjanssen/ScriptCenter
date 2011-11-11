@@ -39,7 +39,8 @@
       <HintPath>..\include\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="ManagedServices">
-      <HintPath>C:\Program Files\Autodesk\3ds Max 2010\ManagedServices.dll</HintPath>
+      <HintPath>ManagedServices.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json.Net35">
       <HintPath>..\include\Newtonsoft.Json.Net35.dll</HintPath>
