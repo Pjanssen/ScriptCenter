@@ -36,14 +36,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip">
-      <HintPath>..\Ionic.Zip.dll</HintPath>
+      <HintPath>..\include\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="ManagedServices">
-      <HintPath>..\..\..\Program Files\Autodesk\3ds Max 2010\ManagedServices.dll</HintPath>
+      <HintPath>C:\Program Files\Autodesk\3ds Max 2010\ManagedServices.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json.Net35, Version=4.0.2.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Newtonsoft.Json.Net35.dll</HintPath>
+    <Reference Include="Newtonsoft.Json.Net35">
+      <HintPath>..\include\Newtonsoft.Json.Net35.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,6 +75,7 @@
     <Compile Include="DevCenter\Forms\PackageRootPathWarning.Designer.cs">
       <DependentUpon>PackageRootPathWarning.cs</DependentUpon>
     </Compile>
+    <Compile Include="Max\CuiSection.cs" />
     <Compile Include="Max\GenClassID.cs" />
     <Compile Include="Package\InstallerActions\CreateMenuAction.cs" />
     <Compile Include="Package\InstallerActions\InstallPackageAction.cs" />

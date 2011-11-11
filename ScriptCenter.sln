@@ -5,10 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenter", "ScriptCente
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFB06F19-F0D4-42AC-8EFB-7015F65D313E}"
 	ProjectSection(SolutionItems) = preProject
-		COPYING.txt = COPYING.txt
-		Ionic.Zip.dll = Ionic.Zip.dll
 		Local.testsettings = Local.testsettings
-		Newtonsoft.Json.Net35.dll = Newtonsoft.Json.Net35.dll
 		ScriptCenter.vsmdi = ScriptCenter.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
