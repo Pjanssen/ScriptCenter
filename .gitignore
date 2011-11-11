@@ -7,6 +7,9 @@ Thumbs.db
 # Visual studio user files #
 ############################
 *.suo
+*.user
+*.vsmdi
+*.testsettings
 
 # Compiled files #
 ##################
