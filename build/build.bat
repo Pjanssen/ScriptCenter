@@ -26,6 +26,3 @@ goto :eof
 :error
 PAUSE
 EXIT /B %ERRORLEVEL%
-
-
-::C:\Program Files\Autodesk\3ds Max 2010\
