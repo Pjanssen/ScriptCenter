@@ -15,14 +15,6 @@ Building using build.bat
 3. Run build.bat
 4. The compiled files are located in build/deploy/
 
-Building using buildandtest.bat
--------------------------------
-To both compile and automatically run all unit tests in the project, follow the steps above.  
-However, instead of step 3, do:  
-
-1. Edit build/buildandtest.bat, so that MSTest reflects the correct path to MSTest.exe
-2. Run buildandtest.bat
-
 Building using Visual Studio
 ----------------------------
 1. Fork the project, or download the source from 
