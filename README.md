@@ -3,9 +3,9 @@ ScriptCenter
 
 Requirements
 ------------
-* .NET Framework v3.5 or above
 * 3dsmax 2010 or above
-* Visual Studio 2010 SP1 (optional, to open .sln and .csproj)
+* .NET Framework v3.5 (v4.0 to run the unit tests)
+* Visual Studio 2010 SP1 (optional, to open projects and run unit tests)
 
 Building using build.bat
 ------------------------
