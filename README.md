@@ -1,3 +1,5 @@
+#ScriptCenter
+
 ##Requirements
 * .NET Framework v3.5 or above
 * 3dsmax 2010 or above
@@ -6,7 +8,7 @@
 ##Building using build.bat
 1. Fork the project, or download the source from 
     `https://github.com/Pjanssen/ScriptCenter/zipball/master`
-2. Adjust the build/build.bat to reflect correct ManagedServices.dll path
+2. Adjust MaxDir in build/build.bat to reflect the correct path to ManagedServices.dll
 3. Run build.bat
 4. The compiled files are located in build/deploy/
 
@@ -19,7 +21,7 @@
 5. Build Solution.
 
 ##Contributors
-Pier Janssen, www.threesixty.nl
+Pier Janssen, www.threesixty.nl  
 Jonathan de Blok, www.jdbgraphics.nl
 
 ##License
