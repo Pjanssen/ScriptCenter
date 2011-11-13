@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenterTest", "ScriptC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenterTestForm", "ScriptCenterTestForm\ScriptCenterTestForm.csproj", "{07108F67-BC71-40E3-924E-31CFCE27D9D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCenter.Max", "ScriptCenter\ScriptCenter.Max.csproj", "{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -53,6 +55,16 @@ Global
 		{07108F67-BC71-40E3-924E-31CFCE27D9D8}.Release|Mixed Platforms.Build.0 = Release|x86
 		{07108F67-BC71-40E3-924E-31CFCE27D9D8}.Release|x86.ActiveCfg = Release|x86
 		{07108F67-BC71-40E3-924E-31CFCE27D9D8}.Release|x86.Build.0 = Release|x86
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{81596FE1-7D8E-43D3-84C9-1C62FD0423F5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

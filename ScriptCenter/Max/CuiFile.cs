@@ -4,482 +4,352 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Drawing;
 
 namespace ScriptCenter.Max
 {
-   internal class CuiFile
+class CuiFile
+{
+   internal const String CuiDataSectionName    = "CUIData";
+   internal const String WindowCountItemName   = "WindowCount";
+   internal const String CuiWindowsSectionName = "CUIWindows";
+
+   internal static Regex sectionMatchPattern   = new Regex(@"^\[[\w ]+\]$", RegexOptions.Compiled); //Matches "[section title]"
+   internal static Regex sectionReplacePattern = new Regex(@"[\[\]\r\n]", RegexOptions.Compiled);
+   internal static Regex toolbarEntryPattern   = new Regex(@"^F\d{3}=(T|S):([\w ]+)$", RegexOptions.Compiled); //Matches "F000=T:Anything"
+   internal static Regex propertyPattern       = new Regex(@"^(\w+)=(.+)$", RegexOptions.Compiled); //Matches "anything=anything else"
+   internal static Regex itemCountPattern      = new Regex(@"^ItemCount=(\d+)$", RegexOptions.Compiled); //Matches "ItemCount=10"
+   internal static Regex itemPattern           = new Regex(@"^Item\d+=(.+)$", RegexOptions.Compiled); //Matches "Item1=anything"
+   internal static Regex flyOffPattern         = new Regex(@"(^FlyOffCt\d+=.+$)|(^Fly\d+=.+$)", RegexOptions.Compiled);
+
+   public String File { get; set; }
+   private List<CuiToolbar> toolbars;
+   private List<CuiSection> otherSections;
+
+   /// <summary>
+   /// All toolbars in the CuiFile.
+   /// </summary>
+   public IList<CuiToolbar> Toolbars 
    {
-      public const String SectionCuiData    = "CUIData";
-      public const String SectionCuiWindows = "CUIWindows";
-      public const String KeyWindowCount    = "WindowCount";
-      public const String KeyItemCount      = "ItemCount";
-
-      public const Int32 ToolbarBaseWidth = 16;
-      public const Int32 ToolbarBaseHeight = 69;
-      public const Int32 ButtonWidth = 32;
-      public const Int32 SeparatorWidth = 6;
-
-      /// <summary>
-      /// Gets the currently active cui file from 3dsmax.
-      /// </summary>
-      public static String MaxGetActiveCuiFile()
-      {
-         try
-         {
-            return ManagedServices.MaxscriptSDK.ExecuteStringMaxscriptQuery("cui.getConfigFile()");
-         }
-         catch (Exception e)
-         {
-            Console.WriteLine(e.Message);
-            return String.Empty;
-         }
-      }
-
-      /// <summary>
-      /// The Cui file to read/write.
-      /// </summary>
-      public String File { get; set; }
-
-      public List<CuiSection> Sections { get; set; }
-
-
-      public CuiFile()
-      {
-         this.Sections = new List<CuiSection>();
-      }
-
-      public CuiFile(String file)
-         : this()
-      {
-         this.File = file;
-         this.Read();
-      }
-
-
-
-
-      /// <summary>
-      /// Adds an empty toolbar to the cui file using the specified name.
-      /// A default size of 5 buttons in a single row is used.
-      /// </summary>
-      /// <returns>True if the toolbar was added succesfully, false if it failed or already existed.</returns>
-      public Boolean AddToolbar(String name)
-      {
-         return AddToolbar(name, 5, 0);
-      }
-
-      /// <summary>
-      /// Adds an empty toolbar to the cui file using the name. 
-      /// The size of the toolbar is adjusted to the specified number of buttons and separators.
-      /// </summary>
-      /// <returns>True if the toolbar was added succesfully, false if it failed or already existed.</returns>
-      public Boolean AddToolbar(String name, Int32 numButtons, Int32 numSeparators)
-      {
-         Int32 toolbarWidth = ToolbarBaseWidth + numButtons * ButtonWidth + numSeparators * SeparatorWidth;
-         return this.AddToolbar(name, new Rectangle(100, 100, toolbarWidth, ToolbarBaseHeight));
-      }
-
-      /// <summary>
-      /// Adds an empty toolbar to the cui file using the specified name and bounds.
-      /// </summary>
-      /// <returns>True if the toolbar was added succesfully, false if it failed or already existed.</returns>
-      public Boolean AddToolbar(String name, Rectangle bounds)
-      {
-         if (this.Sections.Exists(s => s.Name.Equals(name)))
-            return false;
-
-         //Increment the WindowCount property in CUIData section.
-         CuiSection cuiDataSection = this.Sections.Find(s => s.Name == SectionCuiData);
-         if (cuiDataSection == null)
-            return false;
-         CuiItem windowCountItem = cuiDataSection.Items.Find(i => i.Key == KeyWindowCount);
-         if (windowCountItem.Key == null)
-            return false;
-         Int32 windowCount = Int32.Parse(windowCountItem.Value) + 1;
-         windowCountItem.Value = windowCount.ToString();
-
-         //Add the window to the CUIWindows section.
-         CuiSection cuiWindowsSection = this.Sections.Find(s => s.Name == SectionCuiWindows);
-         if (cuiWindowsSection == null)
-            return false;
-         String cuiWindowsKey = "F" + (windowCount - 1).ToString("D3");
-         String cuiWindowsValue = "T:" + name;
-         cuiWindowsSection.AddItem(cuiWindowsKey, cuiWindowsValue);
-
-         //Add the toolbar section.
-         Rectangle maxRect = new Rectangle(Int32.MaxValue, Int32.MaxValue, Int32.MinValue, Int32.MinValue);
-         CuiSection tbSection = new CuiSection(name);
-         tbSection.AddItem("Rank", "6");
-         tbSection.AddItem("SubRank", "0"); //Order when docked
-         tbSection.AddItem("Hidden", "0");
-         tbSection.AddItem(new RectItem("FRect", maxRect));
-         tbSection.AddItem(new RectItem("DRect", maxRect));
-         tbSection.AddItem(new RectItem("DRectPref", maxRect));
-         tbSection.AddItem("DPanel", "1");
-         tbSection.AddItem("Tabbed", "0");
-         tbSection.AddItem("TabCt", "0");
-         tbSection.AddItem("CurTab", "-1");
-         tbSection.AddItem(new CurPosItem(CurPosItem.DockFlags.Float, bounds));
-         tbSection.AddItem("CType", "1");
-         tbSection.AddItem("ToolbarRows", "1");
-         tbSection.AddItem("ToolbarType", "16"); //3 for docked horizontal, 12 vertical, 16 for floating?
-         tbSection.AddItem("ItemCount", "0");
-
-         this.Sections.Add(tbSection);
-
-         return true;
-      }
-
-
-      /// <summary>
-      /// Removes the specified toolbar.
-      /// </summary>
-      public Boolean RemoveToolbar(String name)
-      {
-         if (!this.Sections.Exists(s => s.Name.Equals(name)))
-            return false;
-
-         //Decrement the WindowCount property in CUIData section.
-         CuiSection cuiDataSection = this.Sections.Find(s => s.Name == SectionCuiData);
-         if (cuiDataSection == null)
-            return false;
-         CuiItem windowCountItem = cuiDataSection.Items.Find(i => i.Key == KeyWindowCount);
-         if (windowCountItem.Key == null)
-            return false;
-         Int32 windowCount = Int32.Parse(windowCountItem.Value) - 1;
-         windowCountItem.Value = windowCount.ToString();
-
-         //Remove the window from the CUIWindows section.
-         CuiSection cuiWindowsSection = this.Sections.Find(s => s.Name == SectionCuiWindows);
-         if (cuiWindowsSection == null)
-            return false;
-         String windowValueName = "T:" + name;
-         CuiItem itemToRemove = null;
-         for (int i = 0; i < cuiWindowsSection.Items.Count; i++)
-         {
-            CuiItem item = cuiWindowsSection.Items[i];
-            if (itemToRemove == null && item.Value == windowValueName)
-            {
-               itemToRemove = item;
-               continue;
-            }
-            
-            if (itemToRemove != null)
-            {
-               String newKey = "F";
-               Int32 index = Int32.Parse(Regex.Replace(item.Key, "F", ""));
-               newKey += (index - 1).ToString("D3");
-               item.Key = newKey;
-            }
-         }
-         if (itemToRemove != null)
-            cuiWindowsSection.Items.Remove(itemToRemove);
-
-         //Remove the toolbar section
-         this.Sections.RemoveAll(s => s.Name == name);
-
-         return true;
-      }
-
-
-      private Boolean AddItem(CuiSection toolbar, String value)
-      {
-         CuiItem itemCountProp = toolbar.Items.Find(p => p.Key == KeyItemCount);
-         if (itemCountProp == null)
-            return false;
-
-         Int32 itemCount = Int32.Parse(itemCountProp.Value) + 1;
-         itemCountProp.Value = itemCount.ToString();
-
-         String itemKey = "Item" + (itemCount - 1).ToString();
-         toolbar.AddItem(itemKey, value);
-
-         return true;
-      }
-      /// <summary>
-      /// Adds an item to a toolbar.
-      /// </summary>
-      /// <param name="toolbarName">The name of the toolbar to add the item to.</param>
-      /// <param name="macroName">The name of the macroscript for this item.</param>
-      /// <param name="macroCategory">The cateogry of the macroscript for this item.</param>
-      /// <param name="itemText">The text to show on the item.</param>
-      /// <returns>True if an item was added, false if it failed or already exists.</returns>
-      public Boolean AddToolbarButton(String toolbarName, String macroName, String macroCategory,
-                                                          String itemText, String tooltipText)
-      {
-         //Button item format
-         //Item0=2|0|0|31|3|647394|createOutlinerInstaller`Outliner Dev|0|0|"Create Outliner Installer"|"Create Outliner Installer"|-1|
-         // item type
-         // #define MB_TYPE_KBD                 1
-         // #define MB_TYPE_SCRIPT              2
-         // #define MB_TYPE_ACTION              3
-         // #define MB_TYPE_ACTION_CUSTOM       4
-         // width (where 0 is auto-size?)
-         // height (where 0 is auto-size?)
-         // ?
-         // ?
-         // action_table_id
-         // macro_name`macro_category
-         // ?
-         // ?
-         // tooltip_text
-         // button_label (empty if not set)
-         // icon_index (-1 if using label)
-         // icon_set (empty if not set)
-
-         CuiSection toolbarSection = this.Sections.Find(s => s.Name == toolbarName);
-         if (toolbarSection == null)
-            return false;
-
-         String buttonFormat = "2|0|0|31|3|647394|{0}`{1}|0|0|\"{2}\"|\"{3}\"|-1|";
-         String itemValue = String.Format(buttonFormat, macroName, macroCategory, tooltipText, itemText);
-
-         if (toolbarSection.Items.Exists(i => i.Value == itemValue))
-            return false;
-
-         return this.AddItem(toolbarSection, itemValue);
-      }
-      /// <summary>
-      /// Adds a separator to the toolbar.
-      /// </summary>
-      /// <param name="toolbarName">The name of the toolbar to add the separator to.</param>
-      public Boolean AddToolbarSeparator(String toolbarName)
-      {
-         //Separator item format
-         //Item5=3|6|16|31|1
-         // item type ?
-         // width
-         // height
-         // ?
-         // ?
-
-         CuiSection toolbarSection = this.Sections.Find(s => s.Name == toolbarName);
-         if (toolbarSection == null)
-            return false;
-
-         return this.AddItem(toolbarSection, "3|6|16|31|1");
-      }
-      /// <summary>
-      /// Not implemented yet.
-      /// </summary>
-      public Boolean AddToolbarFlyOffItem(String toolbarName)
-      {
-         throw new NotImplementedException();
-         /*
-          * This is what I've been able to figure out about the flyoffs. 
-          * I fear that it might not be possible to use them with macroscripts.
-          * 
-          * Item2=0|0|0|50031|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|70
-          * FlyOffCt2=4|0|300|3
-            * number of subitems
-            * ?
-            * timeout (time in ms it takes before the flyoff opens)
-            * ?
-            * 
-         * Fly0200=-1|-1|-1|1|Maintoolbar|52
-            * SDK Doc: These four data members are indices into the image list. 
-            * They indicate which images to use for each of the four possible button states:
-            * int iOutEn;
-            * int iInEn;
-            * int iOutDis;
-            * int iInDis;    
-            * MaxBmpFileIcon* mpIcon;
-            * MaxBmpFileIcon* mpInIcon;
-            * 
-            * note: it seems that these Fly items don't specify what the button will do, merely set the image of the button.
-         */
-      }
-
-      private void RemoveItem(CuiSection toolbar, CuiItem item)
-      {
-         CuiItem itemCountProp = toolbar.Items.Find(p => p.Key == KeyItemCount);
-         if (itemCountProp == null)
-            return;
-
-         Int32 itemCount = Int32.Parse(itemCountProp.Value) - 1;
-         itemCountProp.Value = itemCount.ToString();
-
-         Int32 itemIndex = Int32.Parse(Regex.Replace(item.Key, "^Item", ""));
-
-         foreach (CuiItem i in toolbar.Items)
-         {
-            if (Regex.IsMatch(i.Key, @"^Item\d+"))
-            {
-               Int32 iIndex = Int32.Parse(Regex.Replace(i.Key, "^Item", ""));
-               if (iIndex > itemIndex)
-                  i.Key = "Item" + (iIndex - 1).ToString();
-            }
-         }
-         toolbar.Items.Remove(item);
-      }
-      /// <summary>
-      /// Removes any item assigned to the given macroscript from the given toolbar.
-      /// </summary>
-      public Boolean RemoveItem(String toolbarName, String macroName, String macroCategory)
-      {
-         CuiSection toolbarSection = this.Sections.Find(s => s.Name == toolbarName);
-         if (toolbarSection == null)
-            return false;
-
-         Boolean itemRemoved = false;
-         List<CuiItem> itemsToRemove = new List<CuiItem>();
-         foreach (CuiItem item in toolbarSection.Items)
-         {
-            if (Regex.IsMatch(item.Value, (macroName + "`" + macroCategory)))
-            {
-               itemRemoved = true;
-               itemsToRemove.Add(item);
-            }
-         }
-
-         foreach (CuiItem item in itemsToRemove)
-            this.RemoveItem(toolbarSection, item);
-
-         return itemRemoved;
-      }
-      /// <summary>
-      /// Removes any item assigned to the given macroscript from any toolbar.
-      /// </summary>
-      public Boolean RemoveItem(String macroName, String macroCategory)
-      {
-         Boolean itemRemoved = false;
-         foreach (CuiSection section in this.Sections)
-         {
-            if (this.RemoveItem(section.Name, macroName, macroCategory))
-               itemRemoved = true;
-         }
-         return itemRemoved;
-      }
-
-
-
-      /// <summary>
-      /// Reads and parses a CUI File.
-      /// </summary>
-      /// <returns></returns>
-      public Boolean Read()
-      {
-         if (!System.IO.File.Exists(this.File))
-            return false;
-
-         using (FileStream stream = new FileStream(File, FileMode.Open))
-         {
-            return this.Read(stream);
-         }
-      }
-      /// <summary>
-      /// Reads and parses a CUI File from a Stream.
-      /// </summary>
-      public Boolean Read(Stream stream)
-      {
-         this.Sections.Clear();
-
-         using (StreamReader reader = new StreamReader(stream))
-         {
-            CuiSection section = null;
-            while (!reader.EndOfStream)
-            {
-               String line = reader.ReadLine();
-               if (line == String.Empty)
-                  continue;
-
-               // Check if line is a new section "[section title]"
-               if (Regex.IsMatch(line, @"^\[[\w ]+\]"))
-               {
-                  section = new CuiSection();
-                  section.Name = Regex.Replace(line, @"[\[\]\r\n]", "");
-                  this.Sections.Add(section);
-               }
-               else
-               {
-                  if (section == null)
-                     return false;
-
-                  CuiItem prop = new CuiItem();
-                  prop.Key = Regex.Replace(line, @"=.*", "");
-                  prop.Value = Regex.Replace(line, @".*=", "");
-                  section.Items.Add(prop);
-               }
-            }
-         }
-
-
-         return true;
-      }
-
-      /// <summary>
-      /// Writes the CUI File.
-      /// </summary>
-      /// <returns></returns>
-      public Boolean Write()
-      {
-         try
-         {
-            //Create directory for output.
-            String dir = new FileInfo(this.File).DirectoryName;
-            if (!Directory.Exists(dir))
-               Directory.CreateDirectory(dir);
-
-            //Create backup.
-            if (System.IO.File.Exists(this.File))
-               System.IO.File.Copy(this.File, this.File + ".bak", true);
-
-            using (FileStream stream = new FileStream(this.File, FileMode.Create))
-            {
-               return this.Write(stream);
-            }
-         }
-         catch (Exception e)
-         {
-            //Restore backup.
-            if (System.IO.File.Exists(this.File + ".bak"))
-               System.IO.File.Copy(this.File + ".bak", this.File, true);
-
-            Console.WriteLine(e.Message);
-            return false;
-         }
-      }
-      /// <summary>
-      /// Writes the CUI File to a Stream.
-      /// </summary>
-      public Boolean Write(Stream stream)
-      {
-         using (StreamWriter writer = new StreamWriter(stream))
-         {
-            foreach (CuiSection section in this.Sections)
-            {
-               //Write section start.
-               writer.WriteLine("[{0}]", section.Name);
-
-               //Write items.
-               foreach (CuiItem item in section.Items)
-               {
-                  writer.WriteLine("{0}={1}", item.Key, item.Value);
-               }
-            }
-         }
-
-         return true;
-      }
-
-
-      /// <summary>
-      /// Signals 3dsmax to load the cui file.
-      /// </summary>
-      public Boolean MaxLoadCuiFile()
-      {
-         try
-         {
-            return ManagedServices.MaxscriptSDK.ExecuteBooleanMaxscriptQuery("cui.loadConfig @\"" + this.File + "\"");
-         }
-         catch (Exception e)
-         {
-            Console.WriteLine(e.Message);
-            return false;
-         }
-      }
-
+      get { return this.toolbars.AsReadOnly(); }
    }
 
+   /// <summary>
+   /// All non-toolbar sections in the CuiFile.
+   /// </summary>
+   public IList<CuiSection> OtherSections
+   {
+      get { return this.otherSections.AsReadOnly(); }
+   }
+
+   public CuiFile() 
+   {
+      this.File          = String.Empty;
+      this.toolbars      = new List<CuiToolbar>();
+      this.otherSections = new List<CuiSection>();
+   }
+   public CuiFile(String file) : this()
+   {
+      this.File = file;
+      this.Read();
+   }
+
+   /// <summary>
+   /// Returns true if the CuiFile contains a toolbar definition with the given name.
+   /// </summary>
+   public Boolean ContainsToolbar(String name)
+   {
+      return this.toolbars.Exists(t => t.Name == name);
+   }
+
+   /// <summary>
+   /// Returns the toolbar object with the given name, null if it isn't present in the CuiFile.
+   /// </summary>
+   public CuiToolbar GetToolbar(String name)
+   {
+      return this.toolbars.Find(t => t.Name == name);
+   }
+
+   /// <summary>
+   /// Adds the toolbar to the CuiFile and returns true if it was added, false if a toolbar with the same name already exists.
+   /// </summary>
+   public Boolean AddToolbar(CuiToolbar toolbar)
+   {
+      if (this.toolbars.Exists(t => t.Name == toolbar.Name))
+         return false;
+         
+      this.toolbars.Add(toolbar);
+      return true;
+   }
+
+   /// <summary>
+   /// Adds a new toolbar to the CuiFile and returns the CuiToolbar object.
+   /// </summary>
+   /// <param name="name">The name of the toolbar to create.</param>
+   /// <param name="numButtons">The number of (image) buttons to allocate size for.</param>
+   /// <param name="numSeparators">The number of separators to allocate size for.</param>
+   public CuiToolbar AddToolbar(String name, Int32 numButtons, Int32 numSeparators)
+   {
+      CuiToolbar toolbar = new CuiToolbar(name, numButtons, numSeparators);
+      if (this.AddToolbar(toolbar))
+         return toolbar;
+      else
+         return null;
+   }
+
+   /// <summary>
+   /// Removes the toolbar object from the CuiFile and returns true anything was removed.
+   /// </summary>
+   public Boolean RemoveToolbar(CuiToolbar toolbar)
+   {
+      return this.toolbars.Remove(toolbar);
+   }
+
+   /// <summary>
+   /// If a toolbar with the given name exists in the CuiFile, removes it and returns true.
+   /// Returns false if no toolbar with that name exists.
+   /// </summary>
+   public Boolean RemoveToolbar(String name)
+   {
+      return this.RemoveToolbar(this.GetToolbar(name));
+   }
+
+   /// <summary>
+   /// Reads and parses the CuiFile.
+   /// </summary>
+   public Boolean Read() 
+   {
+      if (!System.IO.File.Exists(this.File))
+         return false;
+
+      using (FileStream stream = new FileStream(File, FileMode.Open))
+      {
+         return this.Read(stream);
+      }
+   }
+
+   internal Boolean Read(Stream stream) 
+   {
+      StreamReader reader = new StreamReader(stream);
+      while (!reader.EndOfStream)
+      {
+         String line = reader.ReadLine();
+
+         //Skip to next line if it's not a section heading.
+         if (sectionMatchPattern.IsMatch(line))
+         {
+            String sectionName = sectionReplacePattern.Replace(line, "");
+            if (sectionName == CuiDataSectionName)
+               continue; //Skip CuiData section.
+            else if (sectionName == CuiWindowsSectionName)
+               readCuiWindowsSection(reader);
+            else if (this.GetToolbar(sectionName) != null)
+               readCuiToolbarSection(reader, sectionName);
+            else
+               readCuiSection(reader, sectionName);
+         }
+      }
+
+      return true;
+   }
+
+   private void readCuiWindowsSection(StreamReader reader)
+   {
+      while (!reader.EndOfStream)
+      {
+         if (reader.Peek() == '[')
+            break;
+
+         String line = reader.ReadLine();
+
+         //Check if the line matches F000=T: or F000=S:
+         if (toolbarEntryPattern.IsMatch(line))
+         {
+            String[] splitLine = toolbarEntryPattern.Split(line);
+            CuiToolbar tb = new CuiToolbar();
+            tb.Name = splitLine[2];
+            tb.EntryType = splitLine[1];
+            this.toolbars.Add(tb);
+         }
+      }
+   }
+
+   private void readCuiSection(StreamReader reader, String sectionName)
+   {
+      CuiSection section = new CuiSection();
+      section.Name = sectionName;
+
+      while (!reader.EndOfStream)
+      {
+         if (reader.Peek() == '[')
+            break;
+            
+         String line = reader.ReadLine();
+         if (propertyPattern.IsMatch(line))
+         {
+            String[] propSplit = propertyPattern.Split(line);
+            section.SetProperty(propSplit[1], propSplit[2]);
+         }
+      }
+      this.otherSections.Add(section);
+   }
+
+   private void readCuiToolbarSection(StreamReader reader, String sectionName)
+   {
+      CuiToolbar tb = this.GetToolbar(sectionName);
+      while (!reader.EndOfStream)
+      {
+         if (reader.Peek() == '[')
+            break;
+
+         String line = reader.ReadLine();
+         if (itemCountPattern.IsMatch(line))
+            continue;
+         else if (itemPattern.IsMatch(line))
+            tb.Items.Add(CuiToolbarItem.NewItemFromValue(itemPattern.Split(line)[1]));
+         else if (flyOffPattern.IsMatch(line))
+            tb.Items[tb.Items.Count - 1].FlyOffItems.Add(line);
+         else if (propertyPattern.IsMatch(line))
+         {
+            String[] propSplit = propertyPattern.Split(line);
+            tb.SetProperty(propSplit[1], propSplit[2]);
+         }
+      }
+   }
+
+
+   /// <summary>
+   /// Writes the CuiFile object to a file.
+   /// </summary>
+   public Boolean Write() 
+   {
+      Boolean result = false;
+      try
+      {
+         //Create directory for output.
+         String dir = new FileInfo(this.File).DirectoryName;
+         if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
+         //Create backup.
+         if (System.IO.File.Exists(this.File))
+            System.IO.File.Copy(this.File, this.File + ".bak", true);
+
+         using (FileStream stream = new FileStream(this.File, FileMode.Create))
+         {
+            result = this.Write(stream);
+         }
+      }
+      catch (Exception e)
+      {
+         //Restore backup.
+         if (System.IO.File.Exists(this.File + ".bak"))
+            System.IO.File.Copy(this.File + ".bak", this.File, true);
+
+         Console.WriteLine(e.Message);
+      }
+      return result;
+   }
+
+
+   internal Boolean Write(Stream stream) 
+   {
+      StreamWriter writer = new StreamWriter(stream);
+            
+      //Write CUIData section.
+      writer.WriteLine("[{0}]", CuiDataSectionName);
+      writer.WriteLine("{0}={1}", WindowCountItemName, this.toolbars.Count.ToString());
+            
+      //Write CuiWindows section.
+      writer.WriteLine("[{0}]", CuiWindowsSectionName);
+      for (int i = 0; i < this.toolbars.Count; i++)
+         writer.WriteLine("F{0}={1}:{2}", i.ToString("D3"), this.toolbars[i].EntryType, this.toolbars[i].Name);
+
+      //Write toolbar sections.
+      foreach (CuiToolbar toolbar in this.toolbars)
+         this.writeToolbar(writer, toolbar);
+
+      //Write other sections.
+      foreach (CuiSection section in this.otherSections)
+         this.writeSection(writer, section);
+
+      writer.Flush();
+
+      return true;
+   }
+
+   private void writeSection(StreamWriter writer, CuiSection section)
+   {
+      writer.WriteLine("[{0}]", section.Name);
+      //Write properties
+      foreach (KeyValuePair<String, String> prop in section.Properties)
+         writer.WriteLine("{0}={1}", prop.Key, prop.Value);
+   }
+
+   private void writeToolbar(StreamWriter writer, CuiToolbar toolbar)
+   {
+      this.writeSection(writer, toolbar);
+
+      //Write items.
+      if (toolbar.Items.Count > 0)
+      {
+         writer.WriteLine("ItemCount={0}", toolbar.Items.Count.ToString());
+         for (int i = 0; i < toolbar.Items.Count; i++)
+         {
+            writer.WriteLine("Item{0}={1}", i.ToString(), toolbar.Items[i].Value);
+            foreach (String flyoff in toolbar.Items[i].FlyOffItems)
+               writer.WriteLine(flyoff);
+         }
+      }
+   }
+
+
+
+   /// <summary>
+   /// Gets the currently active cui file from 3dsmax.
+   /// </summary>
+   public static String MaxGetActiveCuiFile()
+   {
+      try
+      {
+         return ManagedServices.MaxscriptSDK.ExecuteStringMaxscriptQuery("cui.getConfigFile()");
+      }
+      catch (Exception e)
+      {
+         Console.WriteLine(e.Message);
+         return String.Empty;
+      }
+   }
+
+   /// <summary>
+   /// Saves the current Cui config in the supplied file.
+   /// </summary>
+   public static void MaxBackupCuiFile(String file)
+   {
+      try
+      {
+         ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("cui.saveConfigAs @\"" + file + "\"");
+      }
+      catch (Exception e)
+      {
+         Console.WriteLine(e.Message);
+      }
+   }
+
+   /// <summary>
+   /// Signals 3dsmax to load the cui file.
+   /// </summary>
+   public void MaxLoadCuiFile()
+   {
+      try
+      {
+         ManagedServices.MaxscriptSDK.ExecuteMaxscriptCommand("cui.loadConfig @\"" + this.File + "\"");
+      }
+      catch (Exception e)
+      {
+         Console.WriteLine(e.Message);
+      }
+   }
+}
+
+   
 }
