@@ -92,16 +92,19 @@ namespace ScriptCenter.Package.InstallerActions
         /// </summary>
         public override bool Do(Installer installer)
         {
+           //TODO: save config before reading (to catch modifications made in current session).
             CuiFile cui = new CuiFile(CuiFile.MaxGetActiveCuiFile());
             if (!cui.Read())
                 return false;
 
-            if (cui.AddToolbarButton(this.ToolbarName, this.MacroName, this.MacroCategory, this.ButtonText, this.TooltipText))
+            CuiToolbar toolbar = cui.GetToolbar(this.ToolbarName);
+            if (toolbar != null)
             {
-                if (!cui.Write())
-                    return false;
-                else
-                    cui.MaxLoadCuiFile();
+               toolbar.AddButton(this.MacroName, this.MacroCategory, this.TooltipText, this.ButtonText);
+               if (cui.Write())
+                  cui.MaxLoadCuiFile();
+               else
+                  return false;
             }
 
             return true;
@@ -116,12 +119,18 @@ namespace ScriptCenter.Package.InstallerActions
             if (!cui.Read())
                 return false;
 
-            if (cui.RemoveItem(this.MacroName, this.MacroCategory))
+            Int32 numRemoved = 0;
+            foreach (CuiToolbar toolbar in cui.Toolbars)
             {
-                if (!cui.Write())
-                    return false;
-                else
-                    cui.MaxLoadCuiFile();
+               numRemoved += toolbar.RemoveButton(this.MacroName, this.MacroCategory);
+            }
+
+            if (numRemoved > 0)
+            {
+               if (!cui.Write())
+                  return false;
+               else
+                  cui.MaxLoadCuiFile();
             }
 
             return true;

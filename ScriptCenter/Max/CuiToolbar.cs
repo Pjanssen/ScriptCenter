@@ -113,11 +113,11 @@ namespace ScriptCenter.Max
          this.Items.Add(new CuiToolbarSeparator());
       }
 
-      public void RemoveButton(String macroName, String macroCategory)
+      public Int32 RemoveButton(String macroName, String macroCategory)
       {
-         this.Items.RemoveAll(b => b is CuiToolbarMacroButton &&
-                                   ((CuiToolbarMacroButton)b).MacroName == macroName &&
-                                   ((CuiToolbarMacroButton)b).MacroCategory == macroCategory);
+         return this.Items.RemoveAll(b => b is CuiToolbarMacroButton &&
+                                          ((CuiToolbarMacroButton)b).MacroName == macroName &&
+                                          ((CuiToolbarMacroButton)b).MacroCategory == macroCategory);
       }
    }
 

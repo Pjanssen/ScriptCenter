@@ -48,16 +48,19 @@ namespace ScriptCenter.Package.InstallerActions
         /// </summary>
         public override bool Do(Installer installer)
         {
+           //TODO: save config before reading (to catch modifications made in current session).
             CuiFile cui = new CuiFile(CuiFile.MaxGetActiveCuiFile());
             if (!cui.Read())
                 return false;
 
-            if (cui.AddToolbar(this.ToolbarName))
+            if (!cui.ContainsToolbar(this.ToolbarName))
             {
-                if (!cui.Write())
-                    return false;
-                else
-                    cui.MaxLoadCuiFile();
+               cui.AddToolbar(this.ToolbarName, 5, 0); //TODO: Store size somewhere in action?
+
+               if (!cui.Write())
+                  return false;
+               else
+                  cui.MaxLoadCuiFile();
             }
 
             return true;

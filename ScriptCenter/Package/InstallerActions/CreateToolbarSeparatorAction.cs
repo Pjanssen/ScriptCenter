@@ -52,16 +52,19 @@ namespace ScriptCenter.Package.InstallerActions
         /// </summary>
         public override bool Do(Installer installer)
         {
+           //TODO: save config before reading (to catch modifications made in current session).
             CuiFile cui = new CuiFile(CuiFile.MaxGetActiveCuiFile());
             if (!cui.Read())
                 return false;
 
-            if (cui.AddToolbarSeparator(this.ToolbarName))
+            CuiToolbar toolbar = cui.GetToolbar(this.ToolbarName);
+            if (toolbar != null)
             {
-                if (!cui.Write())
-                    return false;
-                else
-                    cui.MaxLoadCuiFile();
+               toolbar.AddSeparator();
+               if (cui.Write())
+                  cui.MaxLoadCuiFile();  //TODO: Find way to not have to hard-reload for every action. (Post-install event?)
+               else
+                  return false;
             }
 
             return true;
