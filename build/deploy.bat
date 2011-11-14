@@ -1,16 +1,4 @@
-ECHO.
-ECHO Deploying compiled files...
+@ECHO OFF
 
-SET deployDir=%1..\..\..\build\deploy
-
-IF EXIST %deployDir% ( rmdir %deployDir% /S /Q || goto :error )
-mkdir %deployDir% || goto :error
-
-copy %1*.dll %deployDir%\ || goto :error
-
-goto :eof
-
-:error
-ECHO Deploy failed.
-PAUSE
-EXIT /B %ERRORLEVEL%
+::Currently all deployment is handled as a Visual Studio post-build step.
+::In future this batch will handle creating a mzp installation package.
