@@ -42,7 +42,6 @@ CType=1
 ToolbarRows=1
 ToolbarType=3
 ItemCount=42
-
 Item0=3|6|16|31|1
 Item1=1|0|0|50010|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|4
 FlyOffCt1=0|-1|0|3
@@ -50,7 +49,6 @@ Item2=0|0|0|50011|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|6
 FlyOffCt2=0|-1|0|3
 Item3=1|0|0|50036|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|8
 FlyOffCt3=0|-1|0|3
-
 Item4=3|6|16|31|1
 Item5=5|70|280|30100|0|19|2|1342177795|ComboBox|All
 Item6=1|0|0|50027|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|10
@@ -66,7 +64,6 @@ Fly0803=-1|-1|-1|1|Maintoolbar|96
 Fly0804=-1|-1|-1|1|Maintoolbar|97
 Item9=1|0|0|202|0|31|-1|4|-1|-1|0|0|0||SnapsControls|6
 FlyOffCt9=0|-1|0|3
-
 Item10=3|6|16|31|1
 Item11=1|0|0|50001|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|20
 FlyOffCt11=0|-1|0|3
@@ -85,7 +82,6 @@ Fly1501=-1|-1|-1|1|Maintoolbar|32
 Fly1502=-1|-1|-1|1|Maintoolbar|34
 Item16=3|6|16|31|1
 Item17=2|0|0|31|3|0|59225|0|0|||-1|
-
 Item18=1|0|0|30761|0|31|-1|-1|-1|-1|0|0|0||SnapsControls|29
 Item19=3|6|16|31|1
 FlyOffCt19=3|2|300|3
@@ -98,7 +94,6 @@ Item21=1|0|0|40074|0|31|-1|-1|-1|-1|0|0|0||SnapsControls|22
 FlyOffCt21=0|-1|0|3
 Item22=1|0|0|40223|0|31|-1|-1|-1|-1|0|0|0||SnapsControls|24
 FlyOffCt22=0|-1|0|3
-
 Item23=1|0|0|280|0|31|-1|-1|-1|-1|0|0|0||SnapsControls|26
 Item24=3|6|16|31|1
 Item25=2|0|0|31|4|647394|namedSelSets`Edit|0|0|"Edit Named Selection Sets"||0|enss_maintoolbar
@@ -113,7 +108,6 @@ Fly2802=-1|-1|-1|1|Maintoolbar|58
 Fly2803=-1|-1|-1|1|Maintoolbar|60
 Fly2804=-1|-1|-1|1|Maintoolbar|73
 Fly2805=-1|-1|-1|1|Maintoolbar|75
-
 Item29=1|0|0|50012|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|56
 Item30=3|6|16|31|1
 Item31=2|0|0|31|3|647394|LayerManager`Layers|0|0|"Layer Manager..."|"Layer Manager..."|-1|
@@ -123,7 +117,6 @@ FlyOffCt33=0|-1|0|3
 Item34=2|0|0|31|4|647394|LaunchFCurveEditor`Track View|0|0|"Curve Editor (Open)"||62|Maintoolbar
 Item35=0|0|0|50061|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|92
 FlyOffCt35=0|-1|0|3
-
 Item36=3|6|16|31|1
 Item37=0|0|0|50048|0|31|-1|-1|-1|-1|0|0|0||Maintoolbar|64
 FlyOffCt37=0|-1|0|3
@@ -347,11 +340,6 @@ Item7=3|6|16|31|1
 Item8=2|0|0|31|3|0|40905|0|0|"Snaps To Frozen Objects Toggle"|"Snaps To Frozen Objects Toggle"|-1|
 Item9=2|0|0|31|3|0|40904|0|0|"Snaps Use Axis Constraints Toggle"|"Snaps Use Axis Constraints Toggle"|-1|
 
-
-[Colors]
-GridIntensity=115
-WhiteOrigin=0
-UseGridColor=1
 [Animation Layers]
 Rank=0
 SubRank=0

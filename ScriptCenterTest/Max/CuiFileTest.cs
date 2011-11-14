@@ -80,8 +80,11 @@ namespace ScriptCenterTest.Max
             if (CuiFile.sectionMatchPattern.IsMatch(line))
             {
                sectionName = CuiFile.sectionReplacePattern.Replace(line, "");
-               propCount.Add(sectionName, 0);
-               itemCount.Add(sectionName, 0);
+               if (!propCount.ContainsKey(sectionName))
+               {
+                  propCount.Add(sectionName, 0);
+                  itemCount.Add(sectionName, 0);
+               }
             }
             else
             {
@@ -236,8 +239,8 @@ namespace ScriptCenterTest.Max
       public void BoundsTestMethod()
       {
          CuiToolbar tb = new CuiToolbar("Test");
-         Assert.AreEqual("16 100 300 200 363", tb.Properties["CurPos"]);
-         Assert.AreEqual(new Rectangle(100, 300, 100, 63), tb.Bounds);
+         Assert.AreEqual("16 100 150 200 213", tb.Properties["CurPos"]);
+         Assert.AreEqual(new Rectangle(100, 150, 100, 63), tb.Bounds);
 
          tb.Bounds = new Rectangle(50, 60, 200, 70);
          Assert.AreEqual(new Rectangle(50, 60, 200, 70), tb.Bounds);
