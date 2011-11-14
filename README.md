@@ -13,7 +13,7 @@ Building using build.bat
     `https://github.com/Pjanssen/ScriptCenter/zipball/master`
 2. Adjust MaxDir in build/build.bat to reflect the correct path to ManagedServices.dll
 3. Run build.bat
-4. The compiled files are located in build/deploy/
+4. The compiled files are located in the directory /deploy.
 
 Building using Visual Studio
 ----------------------------
