@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ScriptCenter.Max
 {
-class CuiFile
+public class CuiFile
 {
    internal const String CuiDataSectionName    = "CUIData";
    internal const String WindowCountItemName   = "WindowCount";
