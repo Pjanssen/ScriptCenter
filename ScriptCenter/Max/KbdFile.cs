@@ -4,16 +4,20 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
+using ManagedServices;
 
 namespace ScriptCenter.Max
 {
-internal class KeyboardAction
+public class KeyboardAction
 {
+    public const UInt32 MainTableId = 0;
+    public const UInt32 MacroTableId = 647394;
+
     public String MacroName;
     public String MacroCategory;
     public Keys Keys;
-    public Int32 TableId;
-    public Int32 PersistentId;
+    public UInt32 TableId;
+    public UInt32 PersistentId;
 
     public KeyboardAction()
     {
@@ -22,7 +26,7 @@ internal class KeyboardAction
         this.Keys = System.Windows.Forms.Keys.None;
     }
 }
-internal class KbdFile
+public class KbdFile
 {
     public KbdFile()
     {
@@ -48,6 +52,35 @@ internal class KbdFile
     /// </summary>
     public List<KeyboardAction> Actions { get; set; }
 
+
+    public Boolean ContainsAction(Keys k)
+    {
+       return this.Actions.Exists(a => (a.TableId == KeyboardAction.MainTableId ||
+                                        a.TableId == KeyboardAction.MacroTableId) &&
+                                       a.Keys == k);
+    }
+
+    public Boolean ContainsAction(String macroName, String macroCategory)
+    {
+       return this.Actions.Exists(a => a.MacroName == macroName && a.MacroCategory == macroCategory);
+    }
+
+    public Boolean ContainsAction(String macroName, String macroCategory, Keys k)
+    {
+       return this.Actions.Exists(a => (a.TableId == KeyboardAction.MainTableId ||
+                                        a.TableId == KeyboardAction.MacroTableId) &&
+                                       a.MacroName == macroName && 
+                                       a.MacroCategory == macroCategory &&
+                                       a.Keys == k);
+    }
+
+    public KeyboardAction GetAction(Keys k) 
+    {
+       return this.Actions.FirstOrDefault(a => (a.TableId == KeyboardAction.MainTableId ||
+                                                a.TableId == KeyboardAction.MacroTableId) &&
+                                               a.Keys == k);
+    }
+  
     /// <summary>
     /// Adds a hotkey assignment to the kbd file.
     /// </summary>
@@ -58,7 +91,7 @@ internal class KbdFile
     /// <returns>True if the hotkey assignment was added, false if the exact assignment already existed or if it should not be replaced.</returns>
     public Boolean AddAction(String macroName, String macroCategory, Keys keys, Boolean replace)
     {
-        KeyboardAction existingAction = this.Actions.Find(a => a.TableId == MacroTableId && a.Keys == keys);
+        KeyboardAction existingAction = this.Actions.Find(a => (a.TableId == MainTableId || a.TableId == MacroTableId) && a.Keys == keys);
         if (existingAction != null)
         {
             if (!replace || (existingAction.MacroName == macroName && existingAction.MacroCategory == macroCategory))
@@ -96,6 +129,21 @@ internal class KbdFile
         else
             return 0;
     }
+
+    public Int32 RemoveAction(String macroCategory)
+    {
+       Boolean removedAction = true;
+       Int32 numActionsRemoved = 0;
+       while (removedAction)
+       {
+          KeyboardAction action = this.Actions.Find(a => a.MacroCategory.Equals(macroCategory));
+          if (removedAction = (this.RemoveAction(action) == 1))
+             numActionsRemoved++;
+       }
+
+       return numActionsRemoved;
+    }
+
     public Int32 RemoveAction(String macroName, String macroCategory)
     {
         Boolean removedAction = true;
@@ -146,13 +194,30 @@ internal class KbdFile
     {
         try
         {
-            return ManagedServices.MaxscriptSDK.ExecuteBooleanMaxscriptQuery("actionMan.loadKeyboardFile @\"" + this.File + "\"");
+            return MaxscriptSDK.ExecuteBooleanMaxscriptQuery("actionMan.loadKeyboardFile @\"" + this.File + "\"");
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
             return false;
         }
+    }
+
+
+    public void MaxExecuteAction(Keys k)
+    {
+       KeyboardAction action = this.GetAction(k);
+       if (action != null)
+       {
+          MaxActionItem actionItem = null;
+          if (action.MacroName != String.Empty && action.MacroCategory != String.Empty)
+             actionItem = MaxActionItemResolver.ResolveMacroItem(action.MacroName, action.MacroCategory);
+          else if (action.PersistentId != 0)
+             actionItem = MaxActionItemResolver.ResolveNativeItem(action.PersistentId, action.TableId);
+
+          if (actionItem != null && actionItem.IsEnabled())
+             actionItem.Execute();
+       }
     }
 
 
@@ -219,9 +284,9 @@ internal class KbdFile
 
                     KeyboardAction action = new KeyboardAction();
                     action.Keys = modKeycodeToKeys(Int32.Parse(line_split[1])) | (Keys)Enum.Parse(typeof(Keys), line_split[2]);
-                    action.TableId = Int32.Parse(line_split[line_split.Count - 1]);
+                    action.TableId = UInt32.Parse(line_split[line_split.Count - 1]);
 
-                    if (line_split.Count > 5 || !Int32.TryParse(line_split[3], out action.PersistentId))
+                    if (line_split.Count > 5 || !UInt32.TryParse(line_split[3], out action.PersistentId))
                     {
                         String macro = line_split[3];
                         for (int i = 4; i < (line_split.Count - 1); i++)
@@ -295,7 +360,7 @@ internal class KbdFile
         using (StreamWriter w = new StreamWriter(stream))
         {
             Int32 table_index = 0;
-            Int32 prevTableId = 0;
+            UInt32 prevTableId = 0;
             foreach (KeyboardAction action in this.Actions)
             {
                 if (action.TableId != prevTableId)
